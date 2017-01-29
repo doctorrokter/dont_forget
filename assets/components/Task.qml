@@ -134,7 +134,7 @@ Container {
                 Container {
                     rightPadding: ui.du(1)
                     leftPadding: ui.du(1)
-                    maxWidth: ui.du(37)
+                    maxWidth: ui.du(40)
                     verticalAlignment: VerticalAlignment.Center
                     Label {
                         opacity: task.closed ? 0.5 : 1.0
@@ -267,7 +267,11 @@ Container {
     }
     
     onDeadlineChanged: {
-        deadlineLabel.text = Qt.formatDateTime(new Date(task.deadline * 1000), "dd.MM.yyyy HH:mm");
+        if (deadline !== 0) {
+            deadlineLabel.text = Qt.formatDateTime(new Date(task.deadline * 1000), "dd.MM.yyyy HH:mm");
+        } else {
+            deadlineLabel.text = "";
+        }
     }
     
     onCreationCompleted: {

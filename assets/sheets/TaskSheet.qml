@@ -159,6 +159,18 @@ Sheet {
         }
     }
     
+    function adjustDeadline() {
+        if (taskSheet.mode === taskSheet.modes.CREATE) {
+            deadlineDateTimePicker.value = currDatePlus2Hourse();
+        } else {
+           if (_tasksService.activeTask.deadline !== 0) {
+               deadlineDateTimePicker.value = new Date(_tasksService.activeTask.deadline * 1000);
+           } else {
+               deadlineDateTimePicker.value = currDatePlus2Hourse();
+           }
+        }
+    }
+    
     function currDatePlus2Hourse() {
         return new Date(new Date().getTime() + 7200000);
     }
@@ -177,7 +189,6 @@ Sheet {
         if (taskSheet.mode === taskSheet.modes.UPDATE) {
             importantToggleButton.checked = _tasksService.activeTask.important;
             deadLineToggleButton.checked = _tasksService.activeTask.deadline !== 0;
-            deadlineDateTimePicker.value = new Date(_tasksService.activeTask.deadline * 1000);
             folderOption.selected = _tasksService.activeTask.type === folderOption.value;
             taskOption.selected = _tasksService.activeTask.type === taskOption.value;
             taskName.text = _tasksService.activeTask.name;
@@ -186,6 +197,7 @@ Sheet {
             initialState();
         }
         adjustCreateInRemember();
+        adjustDeadline();
     }
     
     onClosed: {
