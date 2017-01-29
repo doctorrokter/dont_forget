@@ -252,6 +252,16 @@ Container {
         taskRoot.add(childTask);
     }
     
+    function changeViewMode(viewMode) {
+        if (viewMode === "SHOW_ALL") {
+            task.visible = true;
+        } else {
+            if (task.closed) {
+                task.visible = false;
+            }
+        }
+    }
+    
     onParentIdChanged: {
         divider.visible = parentId === "";
     }
@@ -265,6 +275,7 @@ Container {
         _tasksService.taskUpdated.connect(task.updateTask);
         _tasksService.allTasksExpanded.connect(task.expand);
         _tasksService.allTasksUnexpanded.connect(task.unexpand);
+        _tasksService.viewModeChanged.connect(task.changeViewMode);
     }
     
     onClosedChanged: {

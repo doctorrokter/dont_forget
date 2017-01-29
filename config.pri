@@ -37,6 +37,7 @@ simulator {
 config_pri_assets {
     OTHER_FILES += \
         $$quote($$BASEDIR/assets/components/CustomTitleBar.qml) \
+        $$quote($$BASEDIR/assets/components/ExpandableButton.qml) \
         $$quote($$BASEDIR/assets/components/Task.qml) \
         $$quote($$BASEDIR/assets/components/ToggleBlock.qml) \
         $$quote($$BASEDIR/assets/images/folder.png) \
@@ -46,6 +47,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/ic_delete.png) \
         $$quote($$BASEDIR/assets/images/ic_deselect.png) \
         $$quote($$BASEDIR/assets/images/ic_done.png) \
+        $$quote($$BASEDIR/assets/images/ic_done_all.png) \
         $$quote($$BASEDIR/assets/images/ic_folder.png) \
         $$quote($$BASEDIR/assets/images/ic_minus.png) \
         $$quote($$BASEDIR/assets/images/ic_plus.png) \

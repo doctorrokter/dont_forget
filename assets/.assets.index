@@ -1,6 +1,7 @@
 1
-19
+21
 components/CustomTitleBar.qml
+components/ExpandableButton.qml
 components/Task.qml
 components/ToggleBlock.qml
 images/folder.png
@@ -10,6 +11,7 @@ images/ic_compose.png
 images/ic_delete.png
 images/ic_deselect.png
 images/ic_done.png
+images/ic_done_all.png
 images/ic_folder.png
 images/ic_minus.png
 images/ic_plus.png

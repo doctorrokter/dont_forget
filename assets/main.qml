@@ -34,6 +34,13 @@ NavigationPane {
     Page {
         id: main
         
+        property variant viewModes: {
+            SHOW_ALL: "SHOW_ALL",
+            HIDE_CLOSED: "HIDE_CLOSED"
+        }
+        property string viewMode: viewModes.SHOW_ALL
+        
+        
         titleBar: CustomTitleBar {
             id: titleBar
             title: qsTr("All Tasks") + Retranslate.onLocaleOrLanguageChanged
@@ -123,6 +130,24 @@ NavigationPane {
                     _tasksService.deleteTask();
                     deleteTask(id, tasksContainer);
                 }
+            },
+            
+            ActionItem {
+                title: {
+                    if (main.viewMode === main.viewModes.SHOW_ALL) {
+                        return qsTr("Hide closed") + Retranslate.onLocaleOrLanguageChanged;
+                    }
+                    return qsTr("Show all") + Retranslate.onLocaleOrLanguageChanged;
+                }
+                imageSource: "asset:///images/ic_done_all.png"
+                
+                onTriggered: {
+                    if (main.viewMode === main.viewModes.SHOW_ALL) {
+                        _tasksService.changeViewMode(main.viewModes.HIDE_CLOSED);
+                    } else {
+                        _tasksService.changeViewMode(main.viewModes.SHOW_ALL);
+                    }
+                }
             }
         ]
         
@@ -153,8 +178,13 @@ NavigationPane {
             }
         }
         
+        function changeViewMode(viewMode) {
+            main.viewMode = viewMode;
+        }
+        
         onCreationCompleted: {
             _tasksService.activeTaskChanged.connect(main.updateTitleBar);
+            _tasksService.viewModeChanged.connect(main.changeViewMode);
         }
     }
     
@@ -241,7 +271,6 @@ NavigationPane {
 
         roots.forEach(function(t) {
             addTask(tasksContainer, t);
-//            tasksContainer.add(divider.createObject(this));
         });
     }
     

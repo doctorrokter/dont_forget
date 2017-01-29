@@ -219,6 +219,10 @@ void TasksService::unexpandAll() {
     emit activeTaskChanged(m_pActiveTask);
 }
 
+void TasksService::changeViewMode(const QString& viewMode) {
+    emit viewModeChanged(viewMode);
+}
+
 void TasksService::flushActiveTask() {
     delete m_pActiveTask;
     m_pActiveTask = NULL;

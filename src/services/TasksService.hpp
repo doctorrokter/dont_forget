@@ -48,12 +48,15 @@ public:
     Q_INVOKABLE void expandAll();
     Q_INVOKABLE void unexpandAll();
 
+    Q_INVOKABLE void changeViewMode(const QString& viewMode);
+
 Q_SIGNALS:
     void activeTaskChanged(Task* newActiveTask);
     void taskCreated(QVariantMap newTask);
     void taskUpdated(QVariantMap updatedTask);
     void allTasksExpanded();
     void allTasksUnexpanded();
+    void viewModeChanged(const QString& viewMode);
 
 private:
     QSqlDatabase m_database;
