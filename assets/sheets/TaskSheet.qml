@@ -36,7 +36,10 @@ Sheet {
                     var createInRemember = rememberToggleButton.checked ? 1 : 0;
                     
                     if (taskSheet.mode === taskSheet.modes.CREATE) {
-                        _tasksService.createTask(taskName.text, description.text, taskType.selectedValue, deadline, important, createInRemember);
+                        var names = taskName.text.split(";;");
+                        names.forEach(function(name) {
+                            _tasksService.createTask(name.trim(), description.text.trim(), taskType.selectedValue, deadline, important, createInRemember);
+                        });
                     } else {
                         _tasksService.updateTask(taskName.text, description.text, taskType.selectedValue, deadline, important, createInRemember);
                     }
