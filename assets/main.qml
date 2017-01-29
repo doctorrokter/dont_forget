@@ -1,0 +1,252 @@
+/*
+ * Copyright (c) 2011-2015 BlackBerry Limited.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import bb.cascades 1.4
+import "../components"
+import "../pages"
+import "../sheets"
+
+NavigationPane {
+    id: navigation
+    
+    Menu.definition: MenuDefinition {
+        settingsAction: SettingsActionItem {
+            onTriggered: {
+                var sp = settingsPage.createObject(this);
+                navigation.push(sp);
+            }
+        }
+    }
+    
+    Page {
+        id: main
+        
+        titleBar: CustomTitleBar {
+            id: titleBar
+            title: qsTr("All Tasks") + Retranslate.onLocaleOrLanguageChanged
+            clearable: _tasksService.activeTask !== null && _tasksService.activeTask !== undefined;
+        }
+        
+        actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
+        actionBarVisibility: ChromeVisibility.Overlay
+        
+        ScrollView {
+            id: scrollView
+            
+            property double pinchDistance: 0
+            
+            horizontalAlignment: HorizontalAlignment.Fill
+            verticalAlignment: VerticalAlignment.Fill
+            
+            scrollRole: ScrollRole.Main
+            
+            Container {
+                horizontalAlignment: HorizontalAlignment.Fill
+                verticalAlignment: VerticalAlignment.Fill
+                
+                Container {
+                    id: tasksContainer
+                    objectName: "tasks_container"
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    verticalAlignment: VerticalAlignment.Fill
+                }
+                
+                Container {
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    minHeight: ui.du(12)
+                }
+            }
+            
+            gestureHandlers: [
+                PinchHandler {
+                    onPinchStarted: {
+                        scrollView.pinchDistance = event.distance;
+                    }
+                    
+                    onPinchEnded: {
+                        if (event.distance < scrollView.pinchDistance) {
+                            _tasksService.unexpandAll();
+                        } else {
+                            _tasksService.expandAll();
+                        }
+                        scrollView.pinchDistance = 0;
+                    }
+                }
+            ]
+        }
+        
+        actions: [
+            ActionItem {
+                title: qsTr("Create") + Retranslate.onLocaleOrLanguageChanged
+                imageSource: "asset:///images/ic_add.png"
+                ActionBar.placement: ActionBarPlacement.Signature
+                
+                onTriggered: {
+                    taskSheet.mode = taskSheet.modes.CREATE;
+                    taskSheet.open();
+                }
+            },
+            
+            ActionItem {
+                enabled: _tasksService.activeTask !== null;
+                title: qsTr("Edit") + Retranslate.onLocaleOrLanguageChanged
+                imageSource: "asset:///images/ic_compose.png"
+                ActionBar.placement: ActionBarPlacement.OnBar
+                
+                onTriggered: {
+                    taskSheet.mode = taskSheet.modes.UPDATE;
+                    taskSheet.open();
+                }
+            },
+                        
+            ActionItem {
+                enabled: _tasksService.activeTask !== null;
+                title: qsTr("Delete") + Retranslate.onLocaleOrLanguageChanged
+                imageSource: "asset:///images/ic_delete.png"
+                ActionBar.placement: ActionBarPlacement.OnBar
+                
+                onTriggered: {
+                    var id = _tasksService.activeTask.id;
+                    _tasksService.deleteTask();
+                    deleteTask(id, tasksContainer);
+                }
+            }
+        ]
+        
+        attachedObjects: [
+            ComponentDefinition {
+                id: settingsPage
+                SettingsPage {}
+            },
+            
+            ComponentDefinition {
+                id: taskComponent
+                Task {}    
+            },
+            ComponentDefinition {
+                id: divider
+                Divider {}
+            },
+            TaskSheet {
+                id: taskSheet
+            }
+        ]
+        
+        function updateTitleBar() {
+            if (_tasksService.activeTask && _tasksService.activeTask !== null) {
+                titleBar.title = _tasksService.activeTask.name;
+            } else {
+                titleBar.title = qsTr("All Tasks") + Retranslate.onLocaleOrLanguageChanged;
+            }
+        }
+        
+        onCreationCompleted: {
+            _tasksService.activeTaskChanged.connect(main.updateTitleBar);
+        }
+    }
+    
+    function onTaskCreated(newTask) {
+        newTask.children = [];
+        createTask(newTask, tasksContainer);
+    }   
+    
+    function createTask(newTask, parent) {
+        if (newTask.parent_id === "" || newTask.parent_id === "NULL") {
+            addTask(parent, newTask);
+        } else {
+            if (parent.objectName === "task_" + newTask.parent_id) {
+                addTask(parent, newTask);
+            } else {
+                if (parent.controls) {
+                    for (var i = 0; i < parent.controls.length; i++) {
+                        createTask(newTask, parent.controls[i]);
+                    }
+                }
+            }
+        }
+    }
+    
+    function deleteTask(id, parent) {
+        if (parent.objectName === "task_" + id) {
+            parent.parent.remove(parent);
+        } else {
+            if (parent.controls) {
+                for (var i = 0; i < parent.controls.length; i++) {
+                    deleteTask(id, parent.controls[i]);
+                }
+            }
+        }
+    }
+    
+    function addTask(parent, t) {
+        var newTask = taskComponent.createObject(parent);
+        newTask.objectName = "task_" + t.id;
+        newTask.name = t.name;
+        newTask.type = t.type;
+        newTask.taskId = t.id;
+        newTask.expandable = (t.children.length !== 0) || t.type === "FOLDER";
+        newTask.expanded = t.expanded;
+        newTask.closed = t.closed;
+        newTask.important = t.important;
+        newTask.deadline = t.deadline;
+        newTask.rememberId = t.remember_id;
+        newTask.parentId = t.parent_id;
+        
+        if (parent.objectName === "tasks_container") {
+            parent.add(newTask);
+        } else {
+            parent.addChildTask(newTask);
+        }
+        
+        
+        t.children.forEach(function(t1) {
+            addTask(newTask, t1);
+        });
+    }
+    
+    function children(allTasks, root) {
+        var r = root;
+        root.children = allTasks.filter(function(task) {
+            return task.parent_id === root.id;
+        });
+        if (root.children.length !== 0) {
+            root.children.forEach(function (task) {
+                children(allTasks, task);
+            });
+        }
+    }
+    
+    function renderTree() {
+        var allTasks = _tasksService.findAll();
+        var roots = allTasks.filter(function(task) {
+                return task.parent_id === "" || task.parent_id === "NULL";     
+        });
+    
+        roots.forEach(function(root) {
+            children(allTasks, root);  
+        });
+
+        roots.forEach(function(t) {
+            addTask(tasksContainer, t);
+//            tasksContainer.add(divider.createObject(this));
+        });
+    }
+    
+    onCreationCompleted: {
+        renderTree();
+        _tasksService.taskCreated.connect(navigation.onTaskCreated);
+    }
+}
