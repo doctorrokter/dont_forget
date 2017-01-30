@@ -89,7 +89,7 @@ TitleBar {
             Container {
                 horizontalAlignment: HorizontalAlignment.Center
                 verticalAlignment: VerticalAlignment.Center
-                maxWidth: ui.du(50)
+                maxWidth: ui.du(40)
                 Label {
                     text: title
                     textStyle.base: SystemDefaults.TextStyles.TitleText

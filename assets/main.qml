@@ -241,7 +241,6 @@ NavigationPane {
     
     function addTask(parent, t) {
         var newTask = taskComponent.createObject(parent);
-        newTask.objectName = "task_" + t.id;
         newTask.name = t.name;
         newTask.type = t.type;
         newTask.taskId = t.id;

@@ -20,6 +20,8 @@ Container {
         TASK: "TASK"
     }
     
+    objectName: "task_" + taskId
+    
     function getTaskIcon() {
         if (task.type === taskType.FOLDER) {
             return "asset:///images/ic_folder.png";
@@ -84,6 +86,7 @@ Container {
         
         Container {
             id: taskBody
+            objectName: "taskBody"
             
             horizontalAlignment: HorizontalAlignment.Fill
             layout: StackLayout {
@@ -210,6 +213,7 @@ Container {
                             onTapped: {
                                 console.debug('checked');
                                 task.closed = !task.closed;
+                                _tasksService.changeClosed(task.taskId, task.closed);
                             }
                         }
                     ]             
@@ -249,7 +253,18 @@ Container {
             task.rememberId = updatedTask.remember_id;
             task.type = updatedTask.type;
             task.name = updatedTask.name;
+            task.expandable = isExpandable() || updatedTask.type === "FOLDER";
         }
+    }
+    
+    function isExpandable() {
+        var exp = false;
+        for (var i = 0; i < taskRoot.controls.length; i++) {
+            if (taskRoot.controls[i].objectName.indexOf('task_') !== -1) {
+                exp = true;
+            }
+        }
+        return exp;
     }
     
     function select() {
@@ -296,9 +311,5 @@ Container {
         _tasksService.allTasksExpanded.connect(task.expand);
         _tasksService.allTasksUnexpanded.connect(task.unexpand);
         _tasksService.viewModeChanged.connect(task.changeViewMode);
-    }
-    
-    onClosedChanged: {
-        _tasksService.changeClosed(task.taskId, task.closed);
     }
 }
