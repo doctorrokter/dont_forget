@@ -163,7 +163,7 @@ Container {
                     }
                     
                     Label {
-                        opacity: task.closed ? 0.5 : 1.0
+                        opacity: task.closed ? 0.7 : 1.0
                         text: getTaskName();
                         textFormat: TextFormat.Html
                         textStyle.base: SystemDefaults.TextStyles.BodyText

@@ -27,6 +27,7 @@ NavigationPane {
             onTriggered: {
                 var sp = settingsPage.createObject(this);
                 navigation.push(sp);
+                Application.menuEnabled = false;
             }
         }
         
@@ -34,8 +35,13 @@ NavigationPane {
             onTriggered: {
                 var hp = helpPage.createObject(this);
                 navigation.push(hp);
+                Application.menuEnabled = false;
             }
         }
+    }
+    
+    onPopTransitionEnded: {
+        Application.menuEnabled = true;
     }
     
     Page {
