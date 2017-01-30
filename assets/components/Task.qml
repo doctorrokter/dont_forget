@@ -51,10 +51,18 @@ Container {
     }
     
     function getTaskName() {
+        var name = "<html>";
         if (task.closed) {
-            return "<html><span style=\"text-decoration: line-through;\">" + task.name +"</span></html>";
+            name += "<span style=\"text-decoration: line-through;\">" + task.name +"</span>";
+        } else {
+            name += task.name;
         }
-        return task.name;
+        
+        if (task.important) {
+            name += "<span style=\"color: #FF3333; font-size: 1em;\"> !</span>";
+        }
+        name += "</html>";
+        return name;
     }
     
     horizontalAlignment: HorizontalAlignment.Fill
@@ -78,19 +86,28 @@ Container {
             id: taskBody
             
             horizontalAlignment: HorizontalAlignment.Fill
-            layout: DockLayout {}
+            layout: StackLayout {
+                orientation: LayoutOrientation.LeftToRight
+            }
             
             Container {
-                horizontalAlignment: HorizontalAlignment.Left
                 background: selected ? ui.palette.plainBase : ui.palette.background
                 
                 layout: StackLayout {
                     orientation: LayoutOrientation.LeftToRight
                 }
                 
+                layoutProperties: StackLayoutProperties {
+                    spaceQuota: 1
+                }
+                
                 Container {
                     visible: task.expandable
                     verticalAlignment: VerticalAlignment.Center
+                    
+                    layoutProperties: StackLayoutProperties {
+                        spaceQuota: -1
+                    }
                     
                     leftPadding: ui.du(1)
                     topPadding: ui.du(1)
@@ -98,8 +115,8 @@ Container {
                     
                     ImageView {
                         imageSource: task.expanded ? "asset:///images/ic_minus.png" : "asset:///images/ic_plus.png"
-                        maxWidth: ui.du(2.5)
-                        maxHeight: ui.du(2.5)
+                        maxWidth: ui.du(3)
+                        maxHeight: ui.du(3)
                         filterColor: ui.palette.textOnPlain
                     }
                     
@@ -122,6 +139,11 @@ Container {
                 Container {
                     leftPadding: task.expandable ? ui.du(1.5) : ui.du(3.5)
                     verticalAlignment: VerticalAlignment.Center
+                    
+                    layoutProperties: StackLayoutProperties {
+                        spaceQuota: -1
+                    }
+                    
                     ImageView {
                         imageSource: getTaskIcon();
                         filterColor: getTaskIconColor();
@@ -134,8 +156,12 @@ Container {
                 Container {
                     rightPadding: ui.du(1)
                     leftPadding: ui.du(1)
-                    maxWidth: ui.du(40)
                     verticalAlignment: VerticalAlignment.Center
+                    
+                    layoutProperties: StackLayoutProperties {
+                        spaceQuota: 1
+                    }
+                    
                     Label {
                         opacity: task.closed ? 0.5 : 1.0
                         text: getTaskName();
@@ -143,19 +169,6 @@ Container {
                         textStyle.base: SystemDefaults.TextStyles.BodyText
                         verticalAlignment: VerticalAlignment.Center
                         multiline: true
-                    }
-                }
-                
-                Container {
-                    visible: task.important
-                    verticalAlignment: VerticalAlignment.Center
-                    Label {
-                        text: "!"
-                        textStyle {
-                            base: SystemDefaults.TextStyles.TitleText
-                            fontWeight: FontWeight.Bold
-                            color: Color.create("#FF3333")
-                        }
                     }
                 }
             }
@@ -168,13 +181,16 @@ Container {
                 layout: StackLayout {
                     orientation: LayoutOrientation.LeftToRight
                 }
+                layoutProperties: StackLayoutProperties {
+                    spaceQuota: -1
+                }
                 
                 Container {
                     visible: task.deadline !== 0
                     verticalAlignment: VerticalAlignment.Center
                     Label {
                         id: deadlineLabel
-                        text: ""
+                        text: Qt.formatDateTime(new Date(task.deadline * 1000), "dd.MM.yyyy HH:mm")
                         textStyle.base: SystemDefaults.TextStyles.SmallText
                         textStyle.color: {
                             if ((task.deadline * 1000) < new Date().getTime()) {

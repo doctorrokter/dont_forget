@@ -1,5 +1,5 @@
 1
-21
+22
 components/CustomTitleBar.qml
 components/ExpandableButton.qml
 components/Task.qml
@@ -19,5 +19,6 @@ images/minus.png
 images/plus.png
 images/yellow_pellet.png
 main.qml
+pages/HelpPage.qml
 pages/SettingsPage.qml
 sheets/TaskSheet.qml

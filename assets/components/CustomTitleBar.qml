@@ -49,14 +49,15 @@ TitleBar {
                 Container {
                     id: cancelContainerButton
                     
-                    leftPadding: ui.du(2.5)
+                    leftPadding: ui.du(1)
                     topPadding: ui.du(2.5)
-                    rightPadding: ui.du(2.5)
+                    rightPadding: ui.du(1)
                     bottomPadding: ui.du(2.5)
                     
                     Label {
                         id: cancelContainerText
                         textStyle.color: ui.palette.textOnPrimary
+                        horizontalAlignment: HorizontalAlignment.Center
                     }
                     
                     onTouch: {
@@ -116,13 +117,16 @@ TitleBar {
                 Container {
                     id: submitContainerButton
                     
-                    leftPadding: ui.du(2.5)
+                    leftPadding: ui.du(1)
                     topPadding: ui.du(2.5)
-                    rightPadding: ui.du(2.5)
+                    rightPadding: ui.du(1)
                     bottomPadding: ui.du(2.5)
+                    
+                    maxWidth: ui.du(15)
                     
                     Label {
                         id: submitContainerText
+                        horizontalAlignment: HorizontalAlignment.Center
                         textStyle.color: ui.palette.textOnPrimary
                     }
                     

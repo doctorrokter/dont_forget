@@ -29,6 +29,13 @@ NavigationPane {
                 navigation.push(sp);
             }
         }
+        
+        helpAction: HelpActionItem {
+            onTriggered: {
+                var hp = helpPage.createObject(this);
+                navigation.push(hp);
+            }
+        }
     }
     
     Page {
@@ -155,6 +162,11 @@ NavigationPane {
             ComponentDefinition {
                 id: settingsPage
                 SettingsPage {}
+            },
+            
+            ComponentDefinition {
+                id: helpPage
+                HelpPage {}
             },
             
             ComponentDefinition {

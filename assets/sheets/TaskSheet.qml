@@ -61,7 +61,7 @@ Sheet {
                         leftPadding: ui.du(2.5)
                         topPadding: ui.du(2.5)
                         Label {
-                            text: qsTr("Name") + "*" + Retranslate.onLocaleOrLanguageChanged
+                            text: qsTr("Name") + Retranslate.onLocaleOrLanguageChanged
                         }
                     }
                     
