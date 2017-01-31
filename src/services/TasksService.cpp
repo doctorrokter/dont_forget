@@ -79,6 +79,10 @@ QVariantMap TasksService::findById(const int id) {
     return m_pSda->execute(QString::fromLatin1("SELECT * FROM tasks WHERE id = %1").arg(id)).toList().at(0).toMap();
 }
 
+QVariantList TasksService::findByType(const QString& type) {
+    return m_pSda->execute(QString::fromLatin1("SELECT * FROM tasks WHERE type = '%1'").arg(type)).toList();
+}
+
 void TasksService::changeClosed(const int id, const bool closed) {
     int state = closed ? 1 : 0;
     QString query = QString::fromLatin1("UPDATE tasks SET closed = %1 WHERE id = %2").arg(state).arg(id);
@@ -148,6 +152,9 @@ void TasksService::createTask(const QString name, const QString description, con
 
     m_pSda->execute(query, values);
     QVariantMap taskMap = m_pSda->execute("SELECT * FROM tasks WHERE id = last_insert_rowid()").toList().at(0).toMap();
+
+    cout << "Tasks count" << m_pSda->execute("SELECT COUNT(*) as count FROM tasks").toList().at(0).toMap().value("count").toInt() << endl;
+
     emit taskCreated(taskMap);
 }
 
@@ -201,10 +208,22 @@ void TasksService::deleteTask() {
     QString query = QString::fromLatin1("DELETE FROM tasks WHERE id = %1").arg(m_pActiveTask->getId());
 
     cout << query.toStdString() << endl;
+    m_pSda->execute("PRAGMA foreign_keys = ON");
     m_pSda->execute(query);
+
+    cout << "Tasks count" << m_pSda->execute("SELECT COUNT(*) as count FROM tasks").toList().at(0).toMap().value("count").toInt() << endl;
 
     flushActiveTask();
     emit activeTaskChanged(m_pActiveTask);
+}
+
+void TasksService::moveTask(const int parentId) {
+    QString query = QString::fromLatin1("UPDATE tasks SET parent_id = %1 WHERE id = %2").arg(parentId).arg(m_pActiveTask->getId());
+
+    cout << query.toStdString() << endl;
+    m_pSda->execute(query);
+
+    emit taskMoved();
 }
 
 void TasksService::expandAll() {

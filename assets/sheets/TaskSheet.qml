@@ -28,7 +28,7 @@ Sheet {
             }
             
             submitAction: ActionItem {
-                title: qsTr("Save") + Retranslate.onLocaleOrLanguageChanged
+                title: qsTr("OK") + Retranslate.onLocaleOrLanguageChanged
                 
                 onTriggered: {
                     var deadline = deadLineToggleButton.checked ? new Date(deadlineDateTimePicker.value).getTime() / 1000 : 0;

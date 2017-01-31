@@ -80,9 +80,13 @@
         <translation type="unfinished">Отмена</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="31"/>
         <source>Save</source>
-        <translation type="unfinished">Сохранить</translation>
+        <translation type="obsolete">ОК</translation>
+    </message>
+    <message>
+        <location filename="../assets/sheets/TaskSheet.qml" line="31"/>
+        <source>OK</source>
+        <translation type="unfinished">OK</translation>
     </message>
     <message>
         <location filename="../assets/sheets/TaskSheet.qml" line="64"/>
@@ -134,7 +138,7 @@
     <name>main</name>
     <message>
         <location filename="../assets/main.qml" line="59"/>
-        <location filename="../assets/main.qml" line="195"/>
+        <location filename="../assets/main.qml" line="215"/>
         <source>All Tasks</source>
         <translation type="unfinished">Все задачи</translation>
     </message>
@@ -162,6 +166,11 @@
         <location filename="../assets/main.qml" line="153"/>
         <source>Show all</source>
         <translation type="unfinished">Показать все</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="167"/>
+        <source>Move</source>
+        <translation type="unfinished">Переместить</translation>
     </message>
 </context>
 </TS>

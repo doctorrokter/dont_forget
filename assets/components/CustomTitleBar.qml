@@ -89,7 +89,7 @@ TitleBar {
             Container {
                 horizontalAlignment: HorizontalAlignment.Center
                 verticalAlignment: VerticalAlignment.Center
-                maxWidth: ui.du(40)
+                maxWidth: ui.du(50)
                 Label {
                     text: title
                     textStyle.base: SystemDefaults.TextStyles.TitleText
@@ -102,6 +102,7 @@ TitleBar {
                 visible: false
                 horizontalAlignment: HorizontalAlignment.Right
                 verticalAlignment: VerticalAlignment.Center
+                minWidth: ui.du(12)
                 
                 layout: StackLayout {
                     orientation: LayoutOrientation.LeftToRight
@@ -116,6 +117,7 @@ TitleBar {
                 
                 Container {
                     id: submitContainerButton
+                    horizontalAlignment: HorizontalAlignment.Fill
                     
                     leftPadding: ui.du(1)
                     topPadding: ui.du(2.5)
@@ -123,6 +125,7 @@ TitleBar {
                     bottomPadding: ui.du(2.5)
                     
                     maxWidth: ui.du(15)
+                    minWidth: ui.du(15)
                     
                     Label {
                         id: submitContainerText

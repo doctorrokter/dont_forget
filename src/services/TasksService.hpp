@@ -34,6 +34,7 @@ public:
 
     Q_INVOKABLE QVariantList findAll() const;
     Q_INVOKABLE QVariantMap findById(const int id);
+    Q_INVOKABLE QVariantList findByType(const QString& type);
 
     Q_INVOKABLE void changeClosed(const int id, const bool closed);
     Q_INVOKABLE void changeExpanded(const int id, const bool expanded);
@@ -44,6 +45,7 @@ public:
     Q_INVOKABLE void createTask(const QString name, const QString description = "", const QString type = "FOLDER", const int deadline = 0, const int important = 0, const int createInRemember = 0);
     Q_INVOKABLE void updateTask(const QString name, const QString description = "", const QString type = "FOLDER", const int deadline = 0, const int important = 0, const int createInRemember = 0);
     Q_INVOKABLE void deleteTask();
+    Q_INVOKABLE void moveTask(const int parentId);
 
     Q_INVOKABLE void expandAll();
     Q_INVOKABLE void unexpandAll();
@@ -57,6 +59,7 @@ Q_SIGNALS:
     void allTasksExpanded();
     void allTasksUnexpanded();
     void viewModeChanged(const QString& viewMode);
+    void taskMoved();
 
 private:
     QSqlDatabase m_database;

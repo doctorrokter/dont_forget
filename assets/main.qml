@@ -161,6 +161,17 @@ NavigationPane {
                         _tasksService.changeViewMode(main.viewModes.SHOW_ALL);
                     }
                 }
+            },
+            
+            ActionItem {
+                title: qsTr("Move") + Retranslate.onLocaleOrLanguageChanged
+                imageSource: "asset:///images/ic_forward.png"
+                enabled: _tasksService.activeTask !== null;
+                
+                onTriggered: {
+                    var mtp = moveTaskPage.createObject(this);
+                    navigation.push(mtp);
+                }
             }
         ]
         
@@ -173,6 +184,15 @@ NavigationPane {
             ComponentDefinition {
                 id: helpPage
                 HelpPage {}
+            },
+            
+            ComponentDefinition {
+                id: moveTaskPage
+                MoveTaskPage {
+                    onTaskMove: {
+                        navigation.pop();                        
+                    }
+                }
             },
             
             ComponentDefinition {
@@ -277,6 +297,7 @@ NavigationPane {
     }
     
     function renderTree() {
+        tasksContainer.removeAll();
         var allTasks = _tasksService.findAll();
         var roots = allTasks.filter(function(task) {
                 return task.parent_id === "" || task.parent_id === "NULL";     
@@ -294,5 +315,6 @@ NavigationPane {
     onCreationCompleted: {
         renderTree();
         _tasksService.taskCreated.connect(navigation.onTaskCreated);
+        _tasksService.taskMoved.connect(navigation.renderTree);
     }
 }
