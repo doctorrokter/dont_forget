@@ -140,7 +140,7 @@ NavigationPane {
                 
                 onTriggered: {
                     var id = _tasksService.activeTask.id;
-                    _tasksService.deleteTask();
+                    _tasksService.deleteTask(id);
                     deleteTask(id, tasksContainer);
                 }
             },
@@ -259,6 +259,12 @@ NavigationPane {
         }
     }
     
+    function deleteAllTasks() {
+        while(tasksContainer.controls.length !== 0) {
+            tasksContainer.remove(tasksContainer.controls[tasksContainer.controls.length - 1]);
+        }
+    }
+    
     function addTask(parent, t) {
         var newTask = taskComponent.createObject(parent);
         newTask.name = t.name;
@@ -297,7 +303,8 @@ NavigationPane {
     }
     
     function renderTree() {
-        tasksContainer.removeAll();
+        deleteAllTasks();
+        
         var allTasks = _tasksService.findAll();
         var roots = allTasks.filter(function(task) {
                 return task.parent_id === "" || task.parent_id === "NULL";     

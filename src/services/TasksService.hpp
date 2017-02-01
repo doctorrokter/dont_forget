@@ -44,8 +44,8 @@ public:
 
     Q_INVOKABLE void createTask(const QString name, const QString description = "", const QString type = "FOLDER", const int deadline = 0, const int important = 0, const int createInRemember = 0);
     Q_INVOKABLE void updateTask(const QString name, const QString description = "", const QString type = "FOLDER", const int deadline = 0, const int important = 0, const int createInRemember = 0);
-    Q_INVOKABLE void deleteTask();
-    Q_INVOKABLE void moveTask(const int parentId);
+    Q_INVOKABLE void deleteTask(const int id);
+    Q_INVOKABLE void moveTask(const int parentId = 0);
 
     Q_INVOKABLE void expandAll();
     Q_INVOKABLE void unexpandAll();

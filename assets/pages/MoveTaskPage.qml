@@ -9,7 +9,7 @@ Page {
     property variant tasks: []
     
     titleBar: CustomTitleBar {
-        title: _tasksService.activeTask.name
+        title: qsTr("Move task") + Retranslate.onLocaleOrLanguageChanged
     }
     
     
@@ -59,7 +59,9 @@ Page {
             
             onTriggered: {
                 var data = tasksDataModel.data(indexPath);
-                _tasksService.moveTask(data.id);
+                if (_tasksService.activeTask.parentId !== data.id) {
+                    _tasksService.moveTask(data.id);
+                } 
                 taskMove();
             }
         }
@@ -71,6 +73,8 @@ Page {
             var parent = findById(tasksArray, task.parent_id);
             if (parent) {
                 return parent.name + " > " + task.name;
+            } else {
+                return "No parent, but has parent_id > " + task.name;
             }
         }
         return task.name;
@@ -85,7 +89,10 @@ Page {
     onCreationCompleted: {
         tasksDataModel.clear();
         var tasksArray = _tasksService.findByType("FOLDER");
-        tasksArray.forEach(function(t) {
+        
+        tasksArray.filter(function(t) {
+            return t.id !== _tasksService.activeTask.id;
+        }).forEach(function(t) {
             t.title = getTitle(tasksArray, t.id);
         });
         tasks = tasksArray;
@@ -93,6 +100,9 @@ Page {
     
     onTasksChanged: {
         tasksDataModel.clear();
+        if (_tasksService.activeTask.parentId) {
+            tasksDataModel.append({id: 0, title: qsTr("Root") + Retranslate.onLocaleOrLanguageChanged});
+        }
         tasksDataModel.append(tasks);
     }
 }

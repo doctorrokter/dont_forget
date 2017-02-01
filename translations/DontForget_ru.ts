@@ -35,6 +35,23 @@
     </message>
 </context>
 <context>
+    <name>MoveTaskPage</name>
+    <message>
+        <source>Delete</source>
+        <translation type="obsolete">Удалить</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/MoveTaskPage.qml" line="12"/>
+        <source>Move task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/MoveTaskPage.qml" line="104"/>
+        <source>Root</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SettingsPage</name>
     <message>
         <location filename="../assets/pages/SettingsPage.qml" line="10"/>

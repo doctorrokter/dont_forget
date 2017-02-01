@@ -29,6 +29,17 @@
     </message>
 </context>
 <context>
+    <name>MoveTaskPage</name>
+    <message>
+        <source>Move task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Root</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SettingsPage</name>
     <message>
         <source>Settings</source>

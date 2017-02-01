@@ -153,8 +153,6 @@ void TasksService::createTask(const QString name, const QString description, con
     m_pSda->execute(query, values);
     QVariantMap taskMap = m_pSda->execute("SELECT * FROM tasks WHERE id = last_insert_rowid()").toList().at(0).toMap();
 
-    cout << "Tasks count" << m_pSda->execute("SELECT COUNT(*) as count FROM tasks").toList().at(0).toMap().value("count").toInt() << endl;
-
     emit taskCreated(taskMap);
 }
 
@@ -200,28 +198,47 @@ void TasksService::updateTask(const QString name, const QString description, con
     emit activeTaskChanged(m_pActiveTask);
 }
 
-void TasksService::deleteTask() {
-    if (!m_pActiveTask->getRememberId().isEmpty()) {
-        deleteNotebookEntry(m_pActiveTask->getRememberId());
+void TasksService::deleteTask(const int id) {
+    QString query = QString::fromLatin1("DELETE FROM tasks WHERE id = %1");
+
+    if (id == m_pActiveTask->getId()) {
+        if (!m_pActiveTask->getRememberId().isEmpty()) {
+                deleteNotebookEntry(m_pActiveTask->getRememberId());
+            }
+
+            query = query.arg(m_pActiveTask->getId());
+
+            cout << query.toStdString() << endl;
+
+            m_pSda->execute("PRAGMA foreign_keys = ON");
+            m_pSda->execute(query);
+
+            flushActiveTask();
+            emit activeTaskChanged(m_pActiveTask);
+    } else {
+        m_pSda->execute("PRAGMA foreign_keys = ON");
+        query = query.arg(id);
+        m_pSda->execute(query);
+
+        cout << query.toStdString() << endl;
     }
 
-    QString query = QString::fromLatin1("DELETE FROM tasks WHERE id = %1").arg(m_pActiveTask->getId());
-
-    cout << query.toStdString() << endl;
-    m_pSda->execute("PRAGMA foreign_keys = ON");
-    m_pSda->execute(query);
-
-    cout << "Tasks count" << m_pSda->execute("SELECT COUNT(*) as count FROM tasks").toList().at(0).toMap().value("count").toInt() << endl;
-
-    flushActiveTask();
-    emit activeTaskChanged(m_pActiveTask);
 }
 
 void TasksService::moveTask(const int parentId) {
-    QString query = QString::fromLatin1("UPDATE tasks SET parent_id = %1 WHERE id = %2").arg(parentId).arg(m_pActiveTask->getId());
+    QString parent = NULL;
+    if (parentId != 0) {
+        parent = QString::number(parentId);
+    }
 
-    cout << query.toStdString() << endl;
-    m_pSda->execute(query);
+    QString query = "UPDATE tasks SET parent_id = ? WHERE id = ?";
+    QVariantList values;
+    values.append(parent);
+    values.append(m_pActiveTask->getId());
+
+    qDebug() << query << values << endl;
+
+    m_pSda->execute(query, values);
 
     emit taskMoved();
 }
