@@ -77,16 +77,32 @@ NavigationPane {
                 horizontalAlignment: HorizontalAlignment.Fill
                 verticalAlignment: VerticalAlignment.Fill
                 
+                layout: DockLayout {
+                    
+                }
+                
                 Container {
                     id: tasksContainer
                     objectName: "tasks_container"
                     horizontalAlignment: HorizontalAlignment.Fill
-                    verticalAlignment: VerticalAlignment.Fill
+                    verticalAlignment: VerticalAlignment.Top
+                }
+                
+                Container {
+                    id: noTasksContainer
+                    visible: false
+                    horizontalAlignment: HorizontalAlignment.Center
+                    verticalAlignment: VerticalAlignment.Center
+                    Label {
+                        text: qsTr("You have no tasks yet. It's time to create one!") + Retranslate.onLocaleOrLanguageChanged
+                        multiline: true
+                    }
                 }
                 
                 Container {
                     horizontalAlignment: HorizontalAlignment.Fill
                     minHeight: ui.du(12)
+                    verticalAlignment: VerticalAlignment.Bottom
                 }
             }
             
@@ -228,6 +244,7 @@ NavigationPane {
     
     function onTaskCreated(newTask) {
         newTask.children = [];
+        noTasksContainer.visible = false;
         createTask(newTask, tasksContainer);
     }   
     
@@ -306,17 +323,22 @@ NavigationPane {
         deleteAllTasks();
         
         var allTasks = _tasksService.findAll();
-        var roots = allTasks.filter(function(task) {
-                return task.parent_id === "" || task.parent_id === "NULL";     
-        });
+        if (allTasks.length === 0) {
+            noTasksContainer.visible = true;
+        } else {
+            noTasksContainer.visible = false;
+            var roots = allTasks.filter(function(task) {
+                    return task.parent_id === "" || task.parent_id === "NULL";     
+            });
+        
+            roots.forEach(function(root) {
+                children(allTasks, root);  
+            });
     
-        roots.forEach(function(root) {
-            children(allTasks, root);  
-        });
-
-        roots.forEach(function(t) {
-            addTask(tasksContainer, t);
-        });
+            roots.forEach(function(t) {
+                addTask(tasksContainer, t);
+            });
+        }
     }
     
     onCreationCompleted: {
