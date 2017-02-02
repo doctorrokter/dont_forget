@@ -15,6 +15,7 @@
  */
 
 import bb.cascades 1.4
+import bb.system 1.2
 import "../components"
 import "../pages"
 import "../sheets"
@@ -38,6 +39,17 @@ NavigationPane {
                 Application.menuEnabled = false;
             }
         }
+        
+        actions: [
+            ActionItem {
+                title: qsTr("Send feedback") + Retranslate.onLocaleOrLanguageChanged
+                imageSource: "asset:///images/ic_feedback.png"
+                
+                onTriggered: {
+                    invoke.trigger(invoke.query.invokeActionId);
+                }
+            }
+        ]
     }
     
     onPopTransitionEnded: {
@@ -221,7 +233,16 @@ NavigationPane {
             },
             TaskSheet {
                 id: taskSheet
-            }
+            },
+            
+            Invocation {
+                id: invoke
+                query {
+                    uri: "mailto:dontforget.bbapp@gmail.com?subject=Don't%20Forget:%20Feedback"
+                    invokeActionId: "bb.action.SENDEMAIL"
+                    invokeTargetId: "sys.pim.uib.email.hybridcomposer"
+                }
+            }    
         ]
         
         function updateTitleBar() {

@@ -34,6 +34,7 @@ TasksService::TasksService(QObject* parent) : QObject(parent), m_pNotebookServic
     m_database.open();
     m_pSda = new SqlDataAccess(dbpath);
 
+    m_pSda->execute("PRAGMA encoding = \"UTF-8\"");
     if (newDb) {
         cout << "Create DB from scratch" << endl;
 
@@ -61,6 +62,7 @@ TasksService::TasksService(QObject* parent) : QObject(parent), m_pNotebookServic
         cout << "DB already exists. Use one." << endl;
         sync();
     }
+//    m_pSda->execute("DELETE FROM tasks");
 }
 
 TasksService::~TasksService() {

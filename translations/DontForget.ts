@@ -53,14 +53,6 @@
         <source>Look and Feel</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Behavior</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create tasks in Remember</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>TaskSheet</name>
@@ -149,6 +141,10 @@
     </message>
     <message>
         <source>You have no tasks yet. It&apos;s time to create one!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send feedback</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

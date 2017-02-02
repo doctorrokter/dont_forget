@@ -40,7 +40,6 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/components/ExpandableButton.qml) \
         $$quote($$BASEDIR/assets/components/Task.qml) \
         $$quote($$BASEDIR/assets/components/ToggleBlock.qml) \
-        $$quote($$BASEDIR/assets/images/folder.png) \
         $$quote($$BASEDIR/assets/images/ic_add.png) \
         $$quote($$BASEDIR/assets/images/ic_clear.png) \
         $$quote($$BASEDIR/assets/images/ic_compose.png) \
@@ -48,12 +47,11 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/ic_deselect.png) \
         $$quote($$BASEDIR/assets/images/ic_done.png) \
         $$quote($$BASEDIR/assets/images/ic_done_all.png) \
+        $$quote($$BASEDIR/assets/images/ic_feedback.png) \
         $$quote($$BASEDIR/assets/images/ic_folder.png) \
         $$quote($$BASEDIR/assets/images/ic_forward.png) \
         $$quote($$BASEDIR/assets/images/ic_minus.png) \
         $$quote($$BASEDIR/assets/images/ic_plus.png) \
-        $$quote($$BASEDIR/assets/images/minus.png) \
-        $$quote($$BASEDIR/assets/images/plus.png) \
         $$quote($$BASEDIR/assets/images/yellow_pellet.png) \
         $$quote($$BASEDIR/assets/main.qml) \
         $$quote($$BASEDIR/assets/pages/HelpPage.qml) \

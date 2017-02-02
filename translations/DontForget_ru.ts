@@ -43,10 +43,10 @@
     <message>
         <location filename="../assets/pages/MoveTaskPage.qml" line="12"/>
         <source>Move task</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Переместить задачу</translation>
     </message>
     <message>
-        <location filename="../assets/pages/MoveTaskPage.qml" line="104"/>
+        <location filename="../assets/pages/MoveTaskPage.qml" line="145"/>
         <source>Root</source>
         <translation type="unfinished">Сделать корневой задачей</translation>
     </message>
@@ -69,14 +69,12 @@
         <translation type="unfinished">Тёмная тема</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="58"/>
         <source>Behavior</source>
-        <translation type="unfinished">Поведение</translation>
+        <translation type="obsolete">Поведение</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="69"/>
         <source>Create tasks in Remember</source>
-        <translation type="unfinished">Создавать задачи в Remember</translation>
+        <translation type="obsolete">Создавать задачи в Remember</translation>
     </message>
 </context>
 <context>
@@ -154,43 +152,48 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../assets/main.qml" line="59"/>
-        <location filename="../assets/main.qml" line="231"/>
+        <location filename="../assets/main.qml" line="45"/>
+        <source>Send feedback</source>
+        <translation type="unfinished">Обратная связь</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="71"/>
+        <location filename="../assets/main.qml" line="252"/>
         <source>All Tasks</source>
         <translation type="unfinished">Все задачи</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="97"/>
+        <location filename="../assets/main.qml" line="109"/>
         <source>You have no tasks yet. It&apos;s time to create one!</source>
         <translation type="unfinished">У вас пока нет ни одной задачи. Самое время создать!</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="129"/>
+        <location filename="../assets/main.qml" line="141"/>
         <source>Create</source>
         <translation type="unfinished">Создать</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="141"/>
+        <location filename="../assets/main.qml" line="153"/>
         <source>Edit</source>
         <translation type="unfinished">Изменить</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="153"/>
+        <location filename="../assets/main.qml" line="165"/>
         <source>Delete</source>
         <translation type="unfinished">Удалить</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="167"/>
+        <location filename="../assets/main.qml" line="179"/>
         <source>Hide closed</source>
         <translation type="unfinished">Не показывать закрытые</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="169"/>
+        <location filename="../assets/main.qml" line="181"/>
         <source>Show all</source>
         <translation type="unfinished">Показать все</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="183"/>
+        <location filename="../assets/main.qml" line="195"/>
         <source>Move</source>
         <translation type="unfinished">Переместить</translation>
     </message>

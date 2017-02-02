@@ -12,6 +12,8 @@ Page {
         title: qsTr("Move task") + Retranslate.onLocaleOrLanguageChanged
     }
     
+    actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
+    actionBarVisibility: ChromeVisibility.Overlay
     
     Container {
         horizontalAlignment: HorizontalAlignment.Fill
@@ -29,6 +31,7 @@ Page {
                     CustomListItem {
                         horizontalAlignment: HorizontalAlignment.Fill
                         verticalAlignment: VerticalAlignment.Fill
+                        visible: ListItemData.visible
                         
                         Container {
                             verticalAlignment: VerticalAlignment.Center
@@ -59,9 +62,11 @@ Page {
             
             onTriggered: {
                 var data = tasksDataModel.data(indexPath);
-                if (_tasksService.activeTask.parentId !== data.id) {
-                    _tasksService.moveTask(data.id);
-                } 
+                if (!root.isNewParentAlreadyChildOfActiveTask(data.id)) {
+                    if (_tasksService.activeTask.parentId !== data.id) {
+                        _tasksService.moveTask(data.id);
+                    }
+                }
                 taskMove();
             }
         }
@@ -86,16 +91,52 @@ Page {
         })[0];
     }
     
+    function children(allTasks, root) {
+        var r = root;
+        root.children = allTasks.filter(function(task) {
+            return task.parent_id === root.id;
+        });
+        if (root.children.length !== 0) {
+            root.children.forEach(function (task) {
+                children(allTasks, task);
+            });
+        }
+    }
+    
+    function isNewParentAlreadyChildOfActiveTask(newParentId) {
+        var currentTask = findById(root.tasks, _tasksService.activeTask.id);
+        if (currentTask.children.length === 0) {
+            return false;
+        } else {
+            return hasChildWithId(currentTask, newParentId); 
+        }
+    }
+    
+    function hasChildWithId(task, id) {
+        return task.children.some(function(t) {
+            if (t.children.length === 0) {
+                return t.id === id;
+            } else {
+                return hasChildWithId(t, id);
+            }
+        });
+    }
+    
     onCreationCompleted: {
         tasksDataModel.clear();
         var tasksArray = _tasksService.findByType("FOLDER");
         
-        tasksArray.filter(function(t) {
-            return t.id !== _tasksService.activeTask.id;
-        }).forEach(function(t) {
+        tasksArray = tasksArray.map(function(t) {
             t.title = getTitle(tasksArray, t.id);
+            t.visible = t.id !== _tasksService.activeTask.id;
+            return t;
         });
-        tasks = tasksArray;
+        
+        tasksArray.forEach(function(t) {
+            children(tasksArray, t);  
+        });
+        
+        root.tasks = tasksArray;
     }
     
     onTasksChanged: {
