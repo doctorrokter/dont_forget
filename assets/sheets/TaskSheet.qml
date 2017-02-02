@@ -185,18 +185,17 @@ Sheet {
         folderOption.selected = true;
         taskOption.selected = false;
         taskName.resetText();
-        description.text = "";
+        description.resetText();
     }
     
     onOpened: {
         if (taskSheet.mode === taskSheet.modes.UPDATE) {
-            var desc = _tasksService.activeTask.description;
             importantToggleButton.checked = _tasksService.activeTask.important;
             deadLineToggleButton.checked = _tasksService.activeTask.deadline !== 0;
             folderOption.selected = _tasksService.activeTask.type === folderOption.value;
             taskOption.selected = _tasksService.activeTask.type === taskOption.value;
             taskName.text = _tasksService.activeTask.name;
-            description.text = desc;
+            description.text = _tasksService.activeTask.description;
         } else {
             initialState();
         }
