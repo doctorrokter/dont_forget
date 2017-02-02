@@ -164,7 +164,7 @@
     </message>
     <message>
         <location filename="../assets/main.qml" line="109"/>
-        <source>You have no tasks yet. It&apos;s time to create one!</source>
+        <source>You have no tasks yet. It&apos;s time to create new one!</source>
         <translation type="unfinished">У вас пока нет ни одной задачи. Самое время создать!</translation>
     </message>
     <message>

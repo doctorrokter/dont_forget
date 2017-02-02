@@ -106,7 +106,7 @@ NavigationPane {
                     horizontalAlignment: HorizontalAlignment.Center
                     verticalAlignment: VerticalAlignment.Center
                     Label {
-                        text: qsTr("You have no tasks yet. It's time to create one!") + Retranslate.onLocaleOrLanguageChanged
+                        text: qsTr("You have no tasks yet. It's time to create new one!") + Retranslate.onLocaleOrLanguageChanged
                         multiline: true
                     }
                 }

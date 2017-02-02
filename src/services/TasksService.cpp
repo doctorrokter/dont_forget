@@ -327,11 +327,12 @@ void TasksService::sync() {
             QVariantMap taskMap = rememberTasks.at(i).toMap();
             NotebookEntry note = findNotebookEntry(taskMap.value("remember_id").toString());
             if (note.isValid()) {
-                QString query = "UPDATE tasks SET name = ?, description = ?, deadline = ? WHERE id = ?";
+                QString query = "UPDATE tasks SET name = ?, description = ?, deadline = ?, closed = ? WHERE id = ?";
                 QVariantList values;
                 values.append(note.title());
                 values.append(note.description().text());
                 values.append(note.reminderTime().toTime_t());
+                values.append(note.status() == NotebookEntryStatus::Completed ? 1 : 0);
                 values.append(taskMap.value("id").toInt());
 
                 cout << query.toStdString() << endl;

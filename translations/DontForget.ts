@@ -140,11 +140,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You have no tasks yet. It&apos;s time to create one!</source>
+        <source>Send feedback</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Send feedback</source>
+        <source>You have no tasks yet. It&apos;s time to create new one!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
