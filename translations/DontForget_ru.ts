@@ -46,7 +46,7 @@
         <translation type="unfinished">Переместить задачу</translation>
     </message>
     <message>
-        <location filename="../assets/pages/MoveTaskPage.qml" line="145"/>
+        <location filename="../assets/pages/MoveTaskPage.qml" line="136"/>
         <source>Root</source>
         <translation type="unfinished">Сделать корневой задачей</translation>
     </message>

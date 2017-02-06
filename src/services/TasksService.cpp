@@ -72,7 +72,7 @@ TasksService::~TasksService() {
 }
 
 QVariantList TasksService::findAll() const {
-    QVariantList tasks = m_pSda->execute("SELECT * FROM tasks ORDER BY parent_id").toList();
+    QVariantList tasks = m_pSda->execute("SELECT * FROM tasks ORDER BY parent_id, type, name").toList();
 
     for (int i = 0; i < tasks.size(); i++) {
         QVariantMap taskMap = tasks.at(i).toMap();

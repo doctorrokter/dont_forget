@@ -62,10 +62,8 @@ Page {
             
             onTriggered: {
                 var data = tasksDataModel.data(indexPath);
-                if (!root.isNewParentAlreadyChildOfActiveTask(data.id)) {
-                    if (_tasksService.activeTask.parentId !== data.id) {
-                        _tasksService.moveTask(data.id);
-                    }
+                if (_tasksService.activeTask.parentId !== data.id) {
+                    _tasksService.moveTask(data.id);
                 }
                 taskMove();
             }
@@ -103,32 +101,24 @@ Page {
         }
     }
     
-    function isNewParentAlreadyChildOfActiveTask(newParentId) {
-        var currentTask = findById(root.tasks, _tasksService.activeTask.id);
-        if (currentTask.children.length === 0) {
-            return false;
-        } else {
-            return hasChildWithId(currentTask, newParentId); 
-        }
-    }
-    
-    function hasChildWithId(task, id) {
-        return task.children.some(function(t) {
-            if (t.children.length === 0) {
-                return t.id === id;
-            } else {
-                return hasChildWithId(t, id);
-            }
+    function removeChildrenFromArray(tasksArray, task) {
+        root.tasks = tasksArray.filter(function(t) {
+            return t.id !== task.id;
         });
+        if (task.children.length !== 0) {
+            task.children.forEach(function(t) {
+                removeChildrenFromArray(root.tasks, t);
+            });
+        }
     }
     
     onCreationCompleted: {
         tasksDataModel.clear();
-        var tasksArray = _tasksService.findByType("FOLDER");
+        var tasksArray = _tasksService.findAll();
         
         tasksArray = tasksArray.map(function(t) {
             t.title = getTitle(tasksArray, t.id);
-            t.visible = t.id !== _tasksService.activeTask.id;
+            t.visible = (t.id !== _tasksService.activeTask.id) && (t.type === "FOLDER");
             return t;
         });
         
@@ -136,7 +126,8 @@ Page {
             children(tasksArray, t);  
         });
         
-        root.tasks = tasksArray;
+        var currTask = findById(tasksArray, _tasksService.activeTask.id);
+        removeChildrenFromArray(tasksArray, currTask);
     }
     
     onTasksChanged: {

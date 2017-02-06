@@ -22,13 +22,19 @@
 #include <bb/cascades/LocaleHandler>
 #include <bb/cascades/VisualStyle>
 #include <bb/cascades/ThemeSupport>
+#include <bb/network/PushPayload>
 #include <QVariantList>
+
+#include <bb/system/SystemToast>
+#include <bb/system/SystemUiPosition>
 
 #include "config/AppConfig.hpp"
 #include "models/Task.hpp"
 #include "services/TasksService.hpp"
 
 using namespace bb::cascades;
+using namespace bb::network;
+using namespace bb::system;
 
 ApplicationUI::ApplicationUI() :
         QObject()
@@ -40,6 +46,10 @@ ApplicationUI::ApplicationUI() :
     QCoreApplication::setOrganizationName("mikhail.chachkouski");
     QCoreApplication::setApplicationName("DontForget");
 
+//    m_pInvokeManager = new InvokeManager(this);
+//    connect(m_pInvokeManager, SIGNAL(invoked(const InvokeRequest&)), SLOT(onInvoked(const InvokeRequest&)));
+
+
     AppConfig* p_appConfig = new AppConfig(this);
     QString theme = p_appConfig->get("theme").toString();
     if (theme.compare("") != 0) {
@@ -49,6 +59,9 @@ ApplicationUI::ApplicationUI() :
             Application::instance()->themeSupport()->setVisualStyle(VisualStyle::Bright);
         }
     }
+
+//    m_pPushService = new PushNotificationService(this);
+//    m_pPushService->initPushService();
 
     TasksService* p_tasksService = new TasksService(this);
 
@@ -87,5 +100,24 @@ void ApplicationUI::onSystemLanguageChanged()
     QString file_name = QString("DontForget_%1").arg(locale_string);
     if (m_pTranslator->load(file_name, "app/native/qm")) {
         QCoreApplication::instance()->installTranslator(m_pTranslator);
+    }
+}
+
+void ApplicationUI::onInvoked(const InvokeRequest& request) {
+    if (request.action().compare("bb.action.PUSH") != 0) {
+        qDebug() << "Not a PUSH invocation" << endl;
+        return;
+    }
+
+    PushPayload payload(request);
+    if (payload.isValid()) {
+        qDebug() << "Payload is valid. Processing now." << endl;
+        if (payload.isAckRequired()) {
+            qDebug() << "ACK required. Sending..." << endl;
+            m_pPushService->getPushService()->acceptPush(payload.id());
+        }
+
+        QString data = payload.data();
+        qDebug() << data << endl;
     }
 }

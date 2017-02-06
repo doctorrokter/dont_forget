@@ -18,6 +18,9 @@
 #define ApplicationUI_HPP_
 
 #include <QObject>
+#include <bb/system/InvokeManager>
+#include <bb/system/InvokeRequest>
+#include "services/PushNotificationService.hpp"
 
 namespace bb
 {
@@ -26,6 +29,7 @@ namespace bb
         class LocaleHandler;
     }
 }
+using namespace bb::system;
 
 class QTranslator;
 
@@ -42,9 +46,14 @@ public:
     virtual ~ApplicationUI() {}
 private slots:
     void onSystemLanguageChanged();
+
+private Q_SLOTS:
+    void onInvoked(const InvokeRequest& request);
 private:
     QTranslator* m_pTranslator;
     bb::cascades::LocaleHandler* m_pLocaleHandler;
+    InvokeManager* m_pInvokeManager;
+    PushNotificationService* m_pPushService;
 };
 
 #endif /* ApplicationUI_HPP_ */

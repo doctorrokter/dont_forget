@@ -66,12 +66,14 @@ config_pri_source_group1 {
         $$quote($$BASEDIR/src/config/AppConfig.cpp) \
         $$quote($$BASEDIR/src/main.cpp) \
         $$quote($$BASEDIR/src/models/Task.cpp) \
+        $$quote($$BASEDIR/src/services/PushNotificationService.cpp) \
         $$quote($$BASEDIR/src/services/TasksService.cpp)
 
     HEADERS += \
         $$quote($$BASEDIR/src/applicationui.hpp) \
         $$quote($$BASEDIR/src/config/AppConfig.hpp) \
         $$quote($$BASEDIR/src/models/Task.hpp) \
+        $$quote($$BASEDIR/src/services/PushNotificationService.hpp) \
         $$quote($$BASEDIR/src/services/TasksService.hpp)
 }
 
