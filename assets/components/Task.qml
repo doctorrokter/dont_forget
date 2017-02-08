@@ -211,7 +211,10 @@ Container {
                     gestureHandlers: [
                         TapHandler {
                             onTapped: {
-                                console.debug('checked');
+                                if (!task.selected) {
+                                    _tasksService.setActiveTask(task.taskId);
+                                }
+                                
                                 task.closed = !task.closed;
                                 _tasksService.changeClosed(task.taskId, task.closed);
                             }
