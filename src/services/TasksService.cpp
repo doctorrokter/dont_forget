@@ -6,6 +6,7 @@
  */
 
 #include "TasksService.hpp"
+#include "../config/AppConfig.hpp"
 #include <QVariantMap>
 #include <iostream>
 #include <QDateTime>
@@ -16,6 +17,7 @@
 //QString TasksService::DB_PATH = "./data/dont_forget.db";
 QString TasksService::DB_PATH = "./shared/misc/dont_forget";
 QString TasksService::DB_NAME = "dont_forget.db";
+QString TasksService::COPY_DB_NAME = "dont_forget_copy.db";
 
 using namespace std;
 
@@ -24,6 +26,7 @@ TasksService::TasksService(QObject* parent) : QObject(parent), m_pSda(NULL),  m_
 TasksService::~TasksService() {
     delete m_pSda;
     m_pSda = NULL;
+    m_database.close();
     flushActiveTask();
 }
 
@@ -33,9 +36,28 @@ void TasksService::init() {
 
         if (newDb) {
             dbdir.mkpath(TasksService::DB_PATH);
+        } else {
+            if (AppConfig::getStatic("first_run").toString().isEmpty()) {
+                AppConfig::setStatic("first_run", "false");
+                QFile dbfile(TasksService::DB_PATH + "/" + TasksService::DB_NAME);
+
+                bool copied = dbfile.copy(TasksService::DB_PATH + "/" + TasksService::DB_NAME, TasksService::DB_PATH + "/" + TasksService::COPY_DB_NAME);
+                qDebug() << "DB copied successfully: " << copied << endl;
+
+                if (copied) {
+                    bool removed = dbfile.remove();
+                    qDebug() << "Old db file removed successfully: " << removed << endl;
+
+                    if(removed) {
+                        QFile newDbfile(TasksService::DB_PATH + "/" + TasksService::COPY_DB_NAME);
+                        bool renamed = newDbfile.rename(TasksService::DB_PATH + "/" + TasksService::COPY_DB_NAME, TasksService::DB_PATH + "/" + TasksService::DB_NAME);
+                        qDebug() << "New DB file renamed successfully: " << renamed << endl;
+                    }
+                }
+            }
         }
 
-        QString dbpath = TasksService::DB_PATH + "/" + DB_NAME;
+        QString dbpath = TasksService::DB_PATH + "/" + TasksService::DB_NAME;
         m_database = QSqlDatabase::addDatabase("QSQLITE");
         m_database.setDatabaseName(dbpath);
         m_database.open();
@@ -133,20 +155,23 @@ void TasksService::createTask(const QString name, const QString description, con
         note = NULL;
     }
 
-    QString query = "INSERT INTO tasks (name, description, type, deadline, closed, expanded, important, parent_id, remember_id) VALUES (?, ?, ?, ?, 0, 1, ?, ?, ?)";
-    QVariantList values;
-    values.append(name);
-    values.append(description);
-    values.append(type);
-    values.append(deadline);
-    values.append(important);
-    values.append(parentId);
-    values.append(rememberId);
+    QString query = "INSERT INTO tasks (name, description, type, deadline, important, parent_id, remember_id, closed, expanded) "
+                    "VALUES (:name, :description, :type, :deadline, :important, :parent_id, :remember_id, :closed, :expanded)";
+    QVariantMap values;
+    values["name"] = name;
+    values["description"] = description;
+    values["type"] = type;
+    values["deadline"] = deadline;
+    values["important"] = important;
+    values["parent_id"] = parentId;
+    values["remember_id"] = rememberId;
+    values["closed"] = 0;
+    values["expanded"] = 1;
 
     cout << query.toStdString() << endl;
 
     m_pSda->execute(query, values);
-    QVariantMap taskMap = m_pSda->execute("SELECT * FROM tasks WHERE id = last_insert_rowid()").toList().at(0).toMap();
+    QVariantMap taskMap = m_pSda->execute("SELECT * FROM tasks ORDER BY id DESC LIMIT 1").toList().at(0).toMap();
 
     emit taskCreated(taskMap);
 }
@@ -173,15 +198,15 @@ void TasksService::updateTask(const QString name, const QString description, con
         }
     }
 
-    QString query = "UPDATE tasks SET name = ?, description = ?, type = ?, deadline = ?, important = ?, remember_id = ? WHERE id = ?";
-    QVariantList values;
-    values.append(name);
-    values.append(description);
-    values.append(type);
-    values.append(deadline);
-    values.append(important);
-    values.append(rememberId);
-    values.append(m_pActiveTask->getId());
+    QString query = "UPDATE tasks SET name = :name, description = :description, type = :type, deadline = :deadline, important = :important, remember_id = :remember_id WHERE id = :id";
+    QVariantMap values;
+    values["name"] = name;
+    values["description"] = description;
+    values["type"] = type;
+    values["deadline"] = deadline;
+    values["important"] = important;
+    values["remember_id"] = rememberId;
+    values["id"] = m_pActiveTask->getId();
 
     qDebug() << query << values << endl;
 
@@ -269,7 +294,7 @@ NotebookEntry* TasksService::createNotebookEntry(const QString& name, const QStr
     note->setTitle(name);
 
     NotebookEntryDescription desc;
-    desc.setText(description);
+    desc.setText(description, NotebookEntryDescription::PLAIN_TEXT);
     note->setDescription(desc);
     note->setStatus(NotebookEntryStatus::NotCompleted);
     if (deadline != 0) {
@@ -286,7 +311,7 @@ NotebookEntry TasksService::updateNotebookEntry(const QString& rememberId, const
         note.setTitle(name);
 
         NotebookEntryDescription desc;
-        desc.setText(description);
+        desc.setText(description, NotebookEntryDescription::PLAIN_TEXT);
         note.setDescription(desc);
 
         if (deadline == 0) {
@@ -315,13 +340,13 @@ void TasksService::sync() {
             QVariantMap taskMap = rememberTasks.at(i).toMap();
             NotebookEntry note = findNotebookEntry(taskMap.value("remember_id").toString());
             if (note.isValid()) {
-                QString query = "UPDATE tasks SET name = ?, description = ?, deadline = ?, closed = ? WHERE id = ?";
-                QVariantList values;
-                values.append(note.title());
-                values.append(note.description().text());
-                values.append(note.reminderTime().toTime_t());
-                values.append(note.status() == NotebookEntryStatus::Completed ? 1 : 0);
-                values.append(taskMap.value("id").toInt());
+                QString query = "UPDATE tasks SET name = :name, description = :description, deadline = :deadline, closed = :closed WHERE id = :id";
+                QVariantMap values;
+                values["name"] = note.title();
+                values["description"] = note.description().plainText();
+                values["deadline"] = note.reminderTime().toTime_t();
+                values["closed"] = note.status() == NotebookEntryStatus::Completed ? 1 : 0;
+                values["id"] = taskMap.value("id").toInt();
 
                 cout << query.toStdString() << endl;
                 m_pSda->execute(query, values);

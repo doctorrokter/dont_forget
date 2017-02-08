@@ -24,9 +24,25 @@
 #include <Qt/qdeclarativedebug.h>
 #include <QList>
 
+#include "vendor/Console.hpp"
+#include <QSettings>
+
 #include "models/Task.hpp"
 
 using namespace bb::cascades;
+
+void myMessageOutput(QtMsgType type, const char* msg) {  // <-- ADD THIS
+    Q_UNUSED(type);
+    fprintf(stdout, "%s\n", msg);
+    fflush(stdout);
+
+    QSettings settings;
+    if (settings.value("sendToConsoleDebug", true).toBool()) {
+        Console* console = new Console();
+        console->sendMessage("ConsoleThis$$" + QString(msg));
+        console->deleteLater();
+    }
+}
 
 Q_DECL_EXPORT int main(int argc, char **argv)
 {
@@ -35,6 +51,8 @@ Q_DECL_EXPORT int main(int argc, char **argv)
     qRegisterMetaType<Task*>("Task*");
 
     Application app(argc, argv);
+
+    qInstallMsgHandler(myMessageOutput);
 
     // Create the Application UI object, this is where the main.qml file
     // is loaded and the application scene is set.

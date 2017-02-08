@@ -138,6 +138,7 @@ NavigationPane {
         
         actions: [
             ActionItem {
+                id: createActionItem
                 title: qsTr("Create") + Retranslate.onLocaleOrLanguageChanged
                 imageSource: "asset:///images/ic_add.png"
                 ActionBar.placement: ActionBarPlacement.Signature
@@ -146,9 +147,20 @@ NavigationPane {
                     taskSheet.mode = taskSheet.modes.CREATE;
                     taskSheet.open();
                 }
+                
+                shortcuts: [
+                    SystemShortcut {
+                        type: SystemShortcuts.CreateNew
+                        
+                        onTriggered: {
+                            createActionItem.triggered();
+                        }
+                    }
+                ]
             },
             
             ActionItem {
+                id: editActionItem
                 enabled: _tasksService.activeTask !== null;
                 title: qsTr("Edit") + Retranslate.onLocaleOrLanguageChanged
                 imageSource: "asset:///images/ic_compose.png"
@@ -158,9 +170,20 @@ NavigationPane {
                     taskSheet.mode = taskSheet.modes.UPDATE;
                     taskSheet.open();
                 }
+                
+                shortcuts: [
+                    SystemShortcut {
+                        type: SystemShortcuts.Edit
+                        
+                        onTriggered: {
+                            editActionItem.triggered();
+                        }
+                    }
+                ]
             },
                         
             ActionItem {
+                id: deleteActionItem
                 enabled: _tasksService.activeTask !== null;
                 title: qsTr("Delete") + Retranslate.onLocaleOrLanguageChanged
                 imageSource: "asset:///images/ic_delete.png"
@@ -171,6 +194,16 @@ NavigationPane {
                     _tasksService.deleteTask(id);
                     deleteTask(id, tasksContainer);
                 }
+                
+                shortcuts: [
+                    Shortcut {
+                        key: "d"
+                        
+                        onTriggered: {
+                            deleteActionItem.triggered();
+                        }
+                    }
+                ]
             },
             
             ActionItem {
@@ -192,6 +225,7 @@ NavigationPane {
             },
             
             ActionItem {
+                id: moveActionItem
                 title: qsTr("Move") + Retranslate.onLocaleOrLanguageChanged
                 imageSource: "asset:///images/ic_forward.png"
                 enabled: _tasksService.activeTask !== null;
@@ -200,6 +234,16 @@ NavigationPane {
                     var mtp = moveTaskPage.createObject(this);
                     navigation.push(mtp);
                 }
+                
+                shortcuts: [
+                    Shortcut {
+                        key: "m"
+                        
+                        onTriggered: {
+                            moveActionItem.triggered();
+                        }
+                    }
+                ]
             }
         ]
         
@@ -257,7 +301,7 @@ NavigationPane {
             SystemDialog {
                 id: permissionDialog
                 title: qsTr("Permission required") + Retranslate.onLocaleOrLanguageChanged
-                body: qsTr("Looks like you not granted permission for shared files. \"Don't Forget\" cannot work without this permission since " +
+                body: qsTr("Looks like you didn't grant permission for shared files. \"Don't Forget\" cannot work without this permission since " +
                            "the app stores own database in external resources. In order to use this app you should grant permissions in Settings, then restart the app.") + Retranslate.onLocaleOrLanguageChanged
                   
                 cancelButton.label: qsTr("Settings") + Retranslate.onLocaleOrLanguageChanged
