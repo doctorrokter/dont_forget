@@ -15,60 +15,48 @@
 
 //QString TasksService::DB_PATH = "./data/dont_forget.db";
 QString TasksService::DB_PATH = "./shared/misc/dont_forget";
+QString TasksService::DB_NAME = "dont_forget.db";
 
 using namespace std;
 
-TasksService::TasksService(QObject* parent) : QObject(parent), m_pNotebookService(new NotebookService(this)) {
-    m_pActiveTask = NULL;
-
-    QDir dbdir(TasksService::DB_PATH);
-    bool newDb = !dbdir.exists();
-
-    if (newDb) {
-        dbdir.mkpath(TasksService::DB_PATH);
-    }
-
-    QString dbpath = TasksService::DB_PATH + "/dont_forget.db";
-    m_database = QSqlDatabase::addDatabase("QSQLITE");
-    m_database.setDatabaseName(dbpath);
-    m_database.open();
-    m_pSda = new SqlDataAccess(dbpath);
-
-    m_pSda->execute("PRAGMA encoding = \"UTF-8\"");
-    if (newDb) {
-        cout << "Create DB from scratch" << endl;
-
-        m_pSda->execute("DROP TABLE IF EXISTS tasks");
-        m_pSda->execute("PRAGMA foreign_keys = ON");
-        m_pSda->execute("CREATE TABLE tasks (id INTEGER PRIMARY KEY, name TEXT DEFAULT NULL, description TEXT DEFAULT NULL, type TEXT, deadline INTEGER DEFAULT 0, closed INTEGER DEFAULT 0, expanded INTEGER DEFAULT 0, important INTEGER DEFAULT 0, remember_id TEXT DEFAULT NULL)");
-        m_pSda->execute("ALTER TABLE tasks ADD COLUMN parent_id INTEGER AFTER type DEFAULT NULL REFERENCES tasks(id) ON DELETE CASCADE ON UPDATE NO ACTION");
-
-//        m_pSda->execute("INSERT INTO tasks (name, type, closed, expanded, important) VALUES ('Projects', 'FOLDER', 0, 1, 0)");
-//        m_pSda->execute("INSERT INTO tasks (name, type, parent_id, closed, expanded, important) VALUES ('Tutty', 'FOLDER', 1, 0, 1, 0)");
-//        m_pSda->execute("INSERT INTO tasks (name, type, parent_id, closed, expanded, important) VALUES ('Bug', 'TASK', 2, 0, 1, 0)");
-//        m_pSda->execute("INSERT INTO tasks (name, type, parent_id, closed, expanded, important) VALUES ('Bug', 'TASK', 2, 0, 1, 0)");
-//
-//        m_pSda->execute("INSERT INTO tasks (name, type, closed, expanded, important) VALUES ('Shopping', 'FOLDER', 0, 1, 0)");
-//        m_pSda->execute("INSERT INTO tasks (name, type, parent_id, closed, expanded, important) VALUES ('EUROOPT', 'FOLDER', 5, 0, 1, 0)");
-//        m_pSda->execute("INSERT INTO tasks (name, type, parent_id, closed, expanded, important) VALUES ('22.01.2017', 'FOLDER', 6, 0, 1, 0)");
-//        m_pSda->execute("INSERT INTO tasks (name, type, parent_id, closed, expanded, important) VALUES ('Toilet paper', 'TASK', 7, 1, 1, 1)");
-//        m_pSda->execute("INSERT INTO tasks (name, type, parent_id, closed, expanded, important) VALUES ('Bread', 'TASK', 7, 1, 1, 1)");
-//
-//        m_pSda->execute("INSERT INTO tasks (name, type, closed, expanded, important) VALUES ('Auto maintance', 'FOLDER', 0, 1, 0)");
-//        m_pSda->execute("INSERT INTO tasks (name, type, parent_id, closed, expanded, important) VALUES ('Change oil', 'TASK', 10, 0, 1, 0)");
-//        m_pSda->execute("INSERT INTO tasks (name, type, parent_id, closed, expanded, important) VALUES ('Clean up', 'TASK', 10, 0, 1, 0)");
-//        m_pSda->execute("INSERT INTO tasks (name, type, parent_id, closed, expanded, important) VALUES ('Check all systems', 'TASK', 10, 0, 1, 0)");
-    } else {
-        cout << "DB already exists. Use one." << endl;
-        sync();
-    }
-//    m_pSda->execute("DELETE FROM tasks");
-}
+TasksService::TasksService(QObject* parent) : QObject(parent), m_pSda(NULL),  m_pActiveTask(NULL), m_pNotebookService(new NotebookService(this)), m_hasSharedFilesPermission(true) {}
 
 TasksService::~TasksService() {
     delete m_pSda;
     m_pSda = NULL;
     flushActiveTask();
+}
+
+void TasksService::init() {
+        QDir dbdir(TasksService::DB_PATH);
+        bool newDb = !dbdir.exists();
+
+        if (newDb) {
+            dbdir.mkpath(TasksService::DB_PATH);
+        }
+
+        QString dbpath = TasksService::DB_PATH + "/" + DB_NAME;
+        m_database = QSqlDatabase::addDatabase("QSQLITE");
+        m_database.setDatabaseName(dbpath);
+        m_database.open();
+
+        if (m_database.isOpenError()) {
+            m_hasSharedFilesPermission = false;
+        }
+
+        m_pSda = new SqlDataAccess(dbpath);
+        m_pSda->execute("PRAGMA encoding = \"UTF-8\"");
+        if (newDb) {
+            cout << "Create DB from scratch" << endl;
+            m_pSda->execute("DROP TABLE IF EXISTS tasks");
+            m_pSda->execute("PRAGMA foreign_keys = ON");
+            m_pSda->execute("CREATE TABLE tasks (id INTEGER PRIMARY KEY, name TEXT DEFAULT NULL, description TEXT DEFAULT NULL, type TEXT, deadline INTEGER DEFAULT 0, closed INTEGER DEFAULT 0, expanded INTEGER DEFAULT 0, important INTEGER DEFAULT 0, remember_id TEXT DEFAULT NULL)");
+            m_pSda->execute("ALTER TABLE tasks ADD COLUMN parent_id INTEGER AFTER type DEFAULT NULL REFERENCES tasks(id) ON DELETE CASCADE ON UPDATE NO ACTION");
+        } else {
+            cout << "DB already exists. Use one." << endl;
+            sync();
+        }
+    //    m_pSda->execute("DELETE FROM tasks");
 }
 
 QVariantList TasksService::findAll() const {
@@ -345,4 +333,6 @@ void TasksService::sync() {
          }
      }
 }
+
+bool TasksService::hasSharedFilesPermission() { return m_hasSharedFilesPermission; }
 

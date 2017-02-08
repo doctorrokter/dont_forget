@@ -242,7 +242,40 @@ NavigationPane {
                     invokeActionId: "bb.action.SENDEMAIL"
                     invokeTargetId: "sys.pim.uib.email.hybridcomposer"
                 }
-            }    
+            },
+            
+            Invocation {
+                id: permissionSettings
+                query {
+                    uri: "settings://permissions"
+                    invokeActionId: "bb.action.OPEN"
+                    invokeTargetId: "sys.settings.target"
+                    mimeType: "settings/view"
+                }
+            },
+            
+            SystemDialog {
+                id: permissionDialog
+                title: qsTr("Permission required") + Retranslate.onLocaleOrLanguageChanged
+                body: qsTr("Looks like you not granted permission for shared files. \"Don't Forget\" cannot work without this permission since " +
+                           "the app stores own database in external resources. In order to use this app you should grant permissions in Settings, then restart the app.") + Retranslate.onLocaleOrLanguageChanged
+                  
+                cancelButton.label: qsTr("Settings") + Retranslate.onLocaleOrLanguageChanged
+                           
+                onFinished: {
+                    if (value === SystemUiResult.ConfirmButtonSelection) {
+                        exit();
+                    } else {
+                        exit();
+                        permissionSettings.trigger(permissionSettings.query.invokeActionId);
+                    }
+                }
+                
+                function exit() {
+                    Application.aboutToQuit();
+                    Application.quit();
+                }
+            }
         ]
         
         function updateTitleBar() {
@@ -258,6 +291,9 @@ NavigationPane {
         }
         
         onCreationCompleted: {
+            if (!_tasksService.hasSharedFilesPermission) {
+                permissionDialog.show();
+            }
             _tasksService.activeTaskChanged.connect(main.updateTitleBar);
             _tasksService.viewModeChanged.connect(main.changeViewMode);
         }

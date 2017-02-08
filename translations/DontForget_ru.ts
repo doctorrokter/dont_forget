@@ -158,7 +158,7 @@
     </message>
     <message>
         <location filename="../assets/main.qml" line="71"/>
-        <location filename="../assets/main.qml" line="252"/>
+        <location filename="../assets/main.qml" line="285"/>
         <source>All Tasks</source>
         <translation type="unfinished">Все задачи</translation>
     </message>
@@ -196,6 +196,21 @@
         <location filename="../assets/main.qml" line="195"/>
         <source>Move</source>
         <translation type="unfinished">Переместить</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="259"/>
+        <source>Permission required</source>
+        <translation type="unfinished">Требуются права</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="260"/>
+        <source>Looks like you not granted permission for shared files. &quot;Don&apos;t Forget&quot; cannot work without this permission since the app stores own database in external resources. In order to use this app you should grant permissions in Settings, then restart the app.</source>
+        <translation type="unfinished">Похоже Вы не дали права на использование общих файлов приложением. &quot;Don&apos;t Forget&quot; не может работать без этих прав, так как хранит собственную базу данных во внешних ресурсах. Для того, чтобы пользоваться этим приложением, Вам необходимо добавить права в Настройках, затем перезапустить приложение.</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="263"/>
+        <source>Settings</source>
+        <translation type="unfinished">Настройки</translation>
     </message>
 </context>
 </TS>

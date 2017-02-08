@@ -25,9 +25,6 @@
 #include <bb/network/PushPayload>
 #include <QVariantList>
 
-#include <bb/system/SystemToast>
-#include <bb/system/SystemUiPosition>
-
 #include "config/AppConfig.hpp"
 #include "models/Task.hpp"
 #include "services/TasksService.hpp"
@@ -59,11 +56,11 @@ ApplicationUI::ApplicationUI() :
             Application::instance()->themeSupport()->setVisualStyle(VisualStyle::Bright);
         }
     }
-
 //    m_pPushService = new PushNotificationService(this);
 //    m_pPushService->initPushService();
 
     TasksService* p_tasksService = new TasksService(this);
+    p_tasksService->init();
 
     bool res = QObject::connect(m_pLocaleHandler, SIGNAL(systemLanguageChanged()), this, SLOT(onSystemLanguageChanged()));
     // This is only available in Debug builds

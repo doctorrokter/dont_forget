@@ -147,5 +147,17 @@
         <source>You have no tasks yet. It&apos;s time to create new one!</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Permission required</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Looks like you not granted permission for shared files. &quot;Don&apos;t Forget&quot; cannot work without this permission since the app stores own database in external resources. In order to use this app you should grant permissions in Settings, then restart the app.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

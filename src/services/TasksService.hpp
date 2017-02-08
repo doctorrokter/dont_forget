@@ -26,11 +26,15 @@ using namespace bb::pim::notebook;
 class TasksService: public QObject {
     Q_OBJECT
     Q_PROPERTY(Task* activeTask READ getActiveTask NOTIFY activeTaskChanged)
+    Q_PROPERTY(bool hasSharedFilesPermission READ hasSharedFilesPermission)
 public:
     static QString DB_PATH;
+    static QString DB_NAME;
 
     TasksService(QObject* parent = 0);
     virtual ~TasksService();
+
+    void init();
 
     Q_INVOKABLE QVariantList findAll() const;
     Q_INVOKABLE QVariantMap findById(const int id);
@@ -52,6 +56,8 @@ public:
 
     Q_INVOKABLE void changeViewMode(const QString& viewMode);
 
+    Q_INVOKABLE bool hasSharedFilesPermission();
+
 Q_SIGNALS:
     void activeTaskChanged(Task* newActiveTask);
     void taskCreated(QVariantMap newTask);
@@ -66,6 +72,7 @@ private:
     SqlDataAccess* m_pSda;
     Task* m_pActiveTask;
     NotebookService* m_pNotebookService;
+    bool m_hasSharedFilesPermission;
 
     void flushActiveTask();
     NotebookEntry findNotebookEntry(const QString& rememberId);
