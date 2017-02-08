@@ -54,39 +54,39 @@ Page {
             }
             Divider {}      
             
-//            Header {
-//                title: qsTr("Behavior") + Retranslate.onLocaleOrLanguageChanged
-//            }
-//            
-//            Container {
-//                layout: DockLayout {}
-//                topPadding: ui.du(2)
-//                bottomPadding: ui.du(0.5)
-//                leftPadding: ui.du(2.5)
-//                rightPadding: ui.du(2.5)
-//                horizontalAlignment: HorizontalAlignment.Fill
-//                Label {
-//                    text: qsTr("Create tasks in Remember") + Retranslate.onLocaleOrLanguageChanged
-//                    verticalAlignment: VerticalAlignment.Center
-//                    horizontalAlignment: HorizontalAlignment.Left
-//                }
-//                
-//                ToggleButton {
-//                    horizontalAlignment: HorizontalAlignment.Right
-//                    checked: {
-//                        var remember = _appConfig.get("auto_create_in_remember");
-//                        return remember && remember === "true";
-//                    }
-//                    
-//                    onCheckedChanged: {
-//                        if (checked) {
-//                            _appConfig.set("auto_create_in_remember", "true");
-//                        } else {
-//                            _appConfig.set("auto_create_in_remember", "false");
-//                        }
-//                    }
-//                }
-//            }  
+            Header {
+                title: qsTr("Behavior") + Retranslate.onLocaleOrLanguageChanged
+            }
+            
+            Container {
+                layout: DockLayout {}
+                topPadding: ui.du(2)
+                bottomPadding: ui.du(0.5)
+                leftPadding: ui.du(2.5)
+                rightPadding: ui.du(2.5)
+                horizontalAlignment: HorizontalAlignment.Fill
+                Label {
+                    text: qsTr("Don't ask before deleting") + Retranslate.onLocaleOrLanguageChanged
+                    verticalAlignment: VerticalAlignment.Center
+                    horizontalAlignment: HorizontalAlignment.Left
+                }
+                
+                ToggleButton {
+                    horizontalAlignment: HorizontalAlignment.Right
+                    checked: {
+                        var doNotAsk = _appConfig.get("do_not_ask_before_deleting");
+                        return doNotAsk && doNotAsk === "true";
+                    }
+                    
+                    onCheckedChanged: {
+                        if (checked) {
+                            _appConfig.set("do_not_ask_before_deleting", "true");
+                        } else {
+                            _appConfig.set("do_not_ask_before_deleting", "false");
+                        }
+                    }
+                }
+            }  
         }
     }
 }

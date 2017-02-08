@@ -190,9 +190,17 @@ NavigationPane {
                 ActionBar.placement: ActionBarPlacement.OnBar
                 
                 onTriggered: {
-                    var id = _tasksService.activeTask.id;
-                    _tasksService.deleteTask(id);
-                    deleteTask(id, tasksContainer);
+//                    var id = _tasksService.activeTask.id;
+//                    _tasksService.deleteTask(id);
+//                    deleteTask(id, tasksContainer);
+                    var doNotAsk = _appConfig.get("do_not_ask_before_deleting");
+                    if (doNotAsk && doNotAsk === "true") {
+                        var id = _tasksService.activeTask.id;
+                        _tasksService.deleteTask(id);
+                        deleteTask(id, tasksContainer);
+                    } else {
+                        deleteTaskDialog.open();
+                    }
                 }
                 
                 shortcuts: [
@@ -318,6 +326,16 @@ NavigationPane {
                 function exit() {
                     Application.aboutToQuit();
                     Application.quit();
+                }
+            },
+            
+            DeleteTaskDialog {
+                id: deleteTaskDialog
+                
+                onConfirm: {
+                    var id = _tasksService.activeTask.id;
+                    _tasksService.deleteTask(id);
+                    deleteTask(id, tasksContainer);
                 }
             }
         ]

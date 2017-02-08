@@ -2,6 +2,34 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="ru_RU">
 <context>
+    <name>DeleteTaskDialog</name>
+    <message>
+        <location filename="../assets/components/DeleteTaskDialog.qml" line="30"/>
+        <source>Confirm the deleting</source>
+        <translation type="unfinished">Подтвердите удаление</translation>
+    </message>
+    <message>
+        <location filename="../assets/components/DeleteTaskDialog.qml" line="44"/>
+        <source>This action cannot be undone. Also, task may contain children. All these will be deleted. Continue?</source>
+        <translation type="unfinished">Это действие не может быть отменено. Задача также может содержать дочерние задачи, все они будут удалены. Продолжаем?</translation>
+    </message>
+    <message>
+        <location filename="../assets/components/DeleteTaskDialog.qml" line="58"/>
+        <source>Don&apos;t ask again</source>
+        <translation type="unfinished">Больше не спрашивать</translation>
+    </message>
+    <message>
+        <location filename="../assets/components/DeleteTaskDialog.qml" line="73"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Отмена</translation>
+    </message>
+    <message>
+        <location filename="../assets/components/DeleteTaskDialog.qml" line="82"/>
+        <source>OK</source>
+        <translation type="unfinished">OK</translation>
+    </message>
+</context>
+<context>
     <name>HelpPage</name>
     <message>
         <location filename="../assets/pages/HelpPage.qml" line="8"/>
@@ -69,8 +97,14 @@
         <translation type="unfinished">Тёмная тема</translation>
     </message>
     <message>
+        <location filename="../assets/pages/SettingsPage.qml" line="58"/>
         <source>Behavior</source>
-        <translation type="obsolete">Поведение</translation>
+        <translation type="unfinished">Поведение</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/SettingsPage.qml" line="69"/>
+        <source>Don&apos;t ask before deleting</source>
+        <translation type="unfinished">Не спрашивать перед удалением</translation>
     </message>
     <message>
         <source>Create tasks in Remember</source>
@@ -158,7 +192,7 @@
     </message>
     <message>
         <location filename="../assets/main.qml" line="71"/>
-        <location filename="../assets/main.qml" line="329"/>
+        <location filename="../assets/main.qml" line="347"/>
         <source>All Tasks</source>
         <translation type="unfinished">Все задачи</translation>
     </message>
@@ -183,32 +217,32 @@
         <translation type="unfinished">Удалить</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="212"/>
+        <location filename="../assets/main.qml" line="220"/>
         <source>Hide closed</source>
         <translation type="unfinished">Не показывать закрытые</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="214"/>
+        <location filename="../assets/main.qml" line="222"/>
         <source>Show all</source>
         <translation type="unfinished">Показать все</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="229"/>
+        <location filename="../assets/main.qml" line="237"/>
         <source>Move</source>
         <translation type="unfinished">Переместить</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="303"/>
+        <location filename="../assets/main.qml" line="311"/>
         <source>Permission required</source>
         <translation type="unfinished">Требуются права</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="304"/>
+        <location filename="../assets/main.qml" line="312"/>
         <source>Looks like you didn&apos;t grant permission for shared files. &quot;Don&apos;t Forget&quot; cannot work without this permission since the app stores own database in external resources. In order to use this app you should grant permissions in Settings, then restart the app.</source>
         <translation type="unfinished">Похоже Вы не дали права на использование общих файлов приложением. &quot;Don&apos;t Forget&quot; не может работать без этих прав, так как хранит собственную базу данных во внешних ресурсах. Для того, чтобы пользоваться этим приложением, Вам необходимо добавить права в Настройках, затем перезапустить приложение.</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="307"/>
+        <location filename="../assets/main.qml" line="315"/>
         <source>Settings</source>
         <translation type="unfinished">Настройки</translation>
     </message>

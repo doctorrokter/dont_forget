@@ -109,8 +109,6 @@
     <permission system="true">run_native</permission>
     <permission>access_pimdomain_notebooks</permission>
     <permission>access_shared</permission>
-    <permission system="true">_sys_use_consumer_push</permission>
-    <permission>post_notification</permission>
     <env var="LD_LIBRARY_PATH" value="app/native/lib:/usr/lib/qt4/lib"/>
     <env var="CASCADES_THEME" value="default?primaryColor=0x0092CC&amp;primaryBase=0x087099"/>
     

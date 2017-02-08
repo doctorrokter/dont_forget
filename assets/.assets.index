@@ -1,6 +1,7 @@
 1
-22
+23
 components/CustomTitleBar.qml
+components/DeleteTaskDialog.qml
 components/ExpandableButton.qml
 components/Task.qml
 components/ToggleBlock.qml

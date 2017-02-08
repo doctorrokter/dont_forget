@@ -37,6 +37,7 @@ simulator {
 config_pri_assets {
     OTHER_FILES += \
         $$quote($$BASEDIR/assets/components/CustomTitleBar.qml) \
+        $$quote($$BASEDIR/assets/components/DeleteTaskDialog.qml) \
         $$quote($$BASEDIR/assets/components/ExpandableButton.qml) \
         $$quote($$BASEDIR/assets/components/Task.qml) \
         $$quote($$BASEDIR/assets/components/ToggleBlock.qml) \
