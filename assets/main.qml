@@ -89,9 +89,7 @@ NavigationPane {
                 horizontalAlignment: HorizontalAlignment.Fill
                 verticalAlignment: VerticalAlignment.Fill
                 
-                layout: DockLayout {
-                    
-                }
+                layout: DockLayout {}
                 
                 Container {
                     id: tasksContainer
@@ -190,9 +188,6 @@ NavigationPane {
                 ActionBar.placement: ActionBarPlacement.OnBar
                 
                 onTriggered: {
-//                    var id = _tasksService.activeTask.id;
-//                    _tasksService.deleteTask(id);
-//                    deleteTask(id, tasksContainer);
                     var doNotAsk = _appConfig.get("do_not_ask_before_deleting");
                     if (doNotAsk && doNotAsk === "true") {
                         var id = _tasksService.activeTask.id;
@@ -258,7 +253,11 @@ NavigationPane {
         attachedObjects: [
             ComponentDefinition {
                 id: settingsPage
-                SettingsPage {}
+                SettingsPage {
+                    onSortByChanged: {
+                        navigation.renderTree();
+                    }
+                }
             },
             
             ComponentDefinition {
