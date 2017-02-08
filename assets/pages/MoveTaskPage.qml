@@ -19,6 +19,15 @@ Page {
         horizontalAlignment: HorizontalAlignment.Fill
         verticalAlignment: VerticalAlignment.Fill
         
+        layout: DockLayout {}
+        
+        ActivityIndicator {
+            id: spinner
+            horizontalAlignment: HorizontalAlignment.Center
+            verticalAlignment: VerticalAlignment.Center
+            preferredWidth: ui.du(10)
+        }
+        
         ListView {
             id: tasksListView
             
@@ -61,11 +70,13 @@ Page {
             ]
             
             onTriggered: {
+                spinner.running = true;
                 var data = tasksDataModel.data(indexPath);
                 if (_tasksService.activeTask.parentId !== data.id) {
                     _tasksService.moveTask(data.id);
                 }
                 taskMove();
+                spinner.running = false;
             }
         }
     }
