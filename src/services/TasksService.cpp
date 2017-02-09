@@ -13,6 +13,7 @@
 #include <bb/pim/notebook/NotebookEntryStatus>
 #include <bb/pim/notebook/NotebookEntryDescription>
 #include <bb/pim/notebook/NotebookEntryId>
+#include <limits>
 
 //QString TasksService::DB_PATH = "./data/dont_forget.db";
 QString TasksService::DB_PATH = "./shared/misc/dont_forget";
@@ -349,7 +350,11 @@ void TasksService::sync() {
                 QVariantMap values;
                 values["name"] = note.title();
                 values["description"] = note.description().plainText();
-                values["deadline"] = note.reminderTime().toTime_t();
+
+                uint maxUint = std::numeric_limits<unsigned int>::max();
+                uint noteDeadline = note.reminderTime().toTime_t();
+                values["deadline"] = maxUint == noteDeadline ? 0 : noteDeadline;
+
                 values["closed"] = note.status() == NotebookEntryStatus::Completed ? 1 : 0;
                 values["id"] = taskMap.value("id").toInt();
 
