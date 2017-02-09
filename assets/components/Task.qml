@@ -112,14 +112,10 @@ Container {
                         spaceQuota: -1
                     }
                     
-                    leftPadding: ui.du(1)
-                    topPadding: ui.du(1)
-                    bottomPadding: ui.du(1)
-                    
                     ImageView {
                         imageSource: task.expanded ? "asset:///images/ic_minus.png" : "asset:///images/ic_plus.png"
-                        maxWidth: ui.du(3)
-                        maxHeight: ui.du(3)
+                        maxWidth: ui.du(4)
+                        maxHeight: ui.du(4)
                         filterColor: ui.palette.textOnPlain
                     }
                     
