@@ -103,7 +103,6 @@ Sheet {
                                 id: folderOption
                                 text: qsTr("Folder") + Retranslate.onLocaleOrLanguageChanged
                                 value: "FOLDER"
-                                selected: true
                             },
                             
                             Option {
@@ -174,6 +173,16 @@ Sheet {
         }
     }
     
+    function adjustFolderOption() {
+        var defaultTaskType = _appConfig.get("default_task_type");
+        folderOption.selected = defaultTaskType === "" || defaultTaskType === folderOption.value;
+    }
+    
+    function adjustTaskOption() {
+        var defaultTaskType = _appConfig.get("default_task_type");
+        taskOption.selected = defaultTaskType === taskOption.value;
+    }
+    
     function currDatePlus2Hourse() {
         return new Date(new Date().getTime() + 7200000);
     }
@@ -182,10 +191,10 @@ Sheet {
         importantToggleButton.checked = false;
         deadLineToggleButton.checked = false;
         deadlineDateTimePicker.value = currDatePlus2Hourse();
-        folderOption.selected = true;
-        taskOption.selected = false;
         taskName.resetText();
         description.resetText();
+        adjustFolderOption();
+        adjustTaskOption();
     }
     
     onOpened: {

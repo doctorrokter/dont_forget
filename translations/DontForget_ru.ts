@@ -82,44 +82,59 @@
 <context>
     <name>SettingsPage</name>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="13"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="14"/>
         <source>Settings</source>
         <translation type="unfinished">Настройки</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="24"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="25"/>
         <source>Look and Feel</source>
         <translation type="unfinished">Внешний вид</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="35"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="36"/>
         <source>Dark theme</source>
         <translation type="unfinished">Тёмная тема</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="60"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="61"/>
         <source>Behavior</source>
         <translation type="unfinished">Поведение</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="71"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="72"/>
         <source>Don&apos;t ask before deleting</source>
         <translation type="unfinished">Не спрашивать перед удалением</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="99"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="100"/>
         <source>Sort by</source>
         <translation type="unfinished">Сортировка по</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="103"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="104"/>
         <source>Name</source>
         <translation type="unfinished">Названию</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="112"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="113"/>
         <source>Creation</source>
         <translation type="unfinished">Созданию</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/SettingsPage.qml" line="135"/>
+        <source>Default task type</source>
+        <translation type="unfinished">Тип задачи по-умолчанию</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/SettingsPage.qml" line="139"/>
+        <source>Folder</source>
+        <translation type="unfinished">Папка</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/SettingsPage.qml" line="148"/>
+        <source>Task</source>
+        <translation type="unfinished">Задача</translation>
     </message>
     <message>
         <source>Create tasks in Remember</source>
@@ -173,27 +188,27 @@
         <translation type="unfinished">Папка</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="111"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="110"/>
         <source>Task</source>
         <translation type="unfinished">Задача</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="121"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="120"/>
         <source>Deadline</source>
         <translation type="unfinished">Срок выполнения</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="134"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="133"/>
         <source>Date</source>
         <translation type="unfinished">Дата</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="145"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="144"/>
         <source>Create in Remember</source>
         <translation type="unfinished">Создать в Remember</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="150"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="149"/>
         <source>Important</source>
         <translation type="unfinished">Важно</translation>
     </message>

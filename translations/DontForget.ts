@@ -96,6 +96,18 @@
         <source>Creation</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Default task type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Task</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TaskSheet</name>

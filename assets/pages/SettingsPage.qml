@@ -5,6 +5,7 @@ Page {
     id: root
     
     signal sortByChanged();
+    signal defaultTaskTypeChanged();
     
     actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
     actionBarVisibility: ChromeVisibility.Overlay
@@ -121,6 +122,41 @@ Page {
                     onSelectedOptionChanged: {
                         _appConfig.set("sort_by", selectedOption.value);
                         root.sortByChanged();
+                    }
+                }
+            }
+            
+            Container {
+                horizontalAlignment: HorizontalAlignment.Fill
+                topPadding: ui.du(2.5)
+                leftPadding: ui.du(2.5)
+                rightPadding: ui.du(2.5)
+                DropDown {
+                    title: qsTr("Default task type") + Retranslate.onLocaleOrLanguageChanged
+                    
+                    options: [
+                        Option {
+                            text: qsTr("Folder") + Retranslate.onLocaleOrLanguageChanged
+                            value: "FOLDER"
+                            selected: {
+                                var defaultTaskType = _appConfig.get("default_task_type");
+                                return defaultTaskType === "" || defaultTaskType === "FOLDER";
+                            } 
+                        },
+                        
+                        Option {
+                            text: qsTr("Task") + Retranslate.onLocaleOrLanguageChanged
+                            value: "TASK"
+                            selected: {
+                                var defaultTaskType = _appConfig.get("default_task_type");
+                                return defaultTaskType === "TASK";
+                            }
+                        }
+                    ]
+                    
+                    onSelectedOptionChanged: {
+                        _appConfig.set("default_task_type", selectedOption.value);
+                        root.defaultTaskTypeChanged();
                     }
                 }
             }
