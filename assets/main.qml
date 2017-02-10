@@ -63,15 +63,11 @@ NavigationPane {
             SHOW_ALL: "SHOW_ALL",
             HIDE_CLOSED: "HIDE_CLOSED"
         }
+        property bool quickTaskMode: false
         property string viewMode: viewModes.SHOW_ALL
         
         
-        titleBar: CustomTitleBar {
-            id: titleBar
-            title: qsTr("All Tasks") + Retranslate.onLocaleOrLanguageChanged
-            clearable: _tasksService.activeTask !== null && _tasksService.activeTask !== undefined;
-        }
-        
+        titleBar: titleBar
         actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
         actionBarVisibility: ChromeVisibility.Overlay
         
@@ -174,7 +170,9 @@ NavigationPane {
                         type: SystemShortcuts.Edit
                         
                         onTriggered: {
-                            editActionItem.triggered();
+                            if (editActionItem.enabled) {
+                                editActionItem.triggered();
+                            }
                         }
                     }
                 ]
@@ -203,7 +201,9 @@ NavigationPane {
                         key: "d"
                         
                         onTriggered: {
-                            deleteActionItem.triggered();
+                            if (deleteActionItem.enabled) {
+                                deleteActionItem.triggered();
+                            }
                         }
                     }
                 ]
@@ -243,7 +243,28 @@ NavigationPane {
                         key: "m"
                         
                         onTriggered: {
-                            moveActionItem.triggered();
+                            if (moveActionItem.enabled) {
+                                moveActionItem.triggered();
+                            }
+                        }
+                    }
+                ]
+            },
+            
+            ActionItem {
+                id: quickTaskModeSwitcher
+                title: qsTr("Quick task") + Retranslate.onLocaleOrLanguageChanged
+                
+                onTriggered: {
+                    main.quickTaskMode = true;
+                }
+                
+                shortcuts: [
+                    Shortcut {
+                        key: "q"
+                        
+                        onTriggered: {
+                            quickTaskModeSwitcher.triggered();
                         }
                     }
                 ]
@@ -251,6 +272,20 @@ NavigationPane {
         ]
         
         attachedObjects: [
+            CustomTitleBar {
+                id: titleBar
+                title: qsTr("All Tasks") + Retranslate.onLocaleOrLanguageChanged
+                clearable: _tasksService.activeTask !== null && _tasksService.activeTask !== undefined;
+            },
+            
+            InputTitleBar {
+                id: inputTitleBar
+                
+                onCancel: {
+                    main.quickTaskMode = false;
+                }
+            },
+            
             ComponentDefinition {
                 id: settingsPage
                 SettingsPage {
@@ -357,6 +392,15 @@ NavigationPane {
             }
             _tasksService.activeTaskChanged.connect(main.updateTitleBar);
             _tasksService.viewModeChanged.connect(main.changeViewMode);
+        }
+        
+        onQuickTaskModeChanged: {
+            if (quickTaskMode) {
+                main.titleBar = inputTitleBar;
+                inputTitleBar.focus();
+            } else {
+                main.titleBar = titleBar;
+            }
         }
     }
     

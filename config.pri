@@ -39,6 +39,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/components/CustomTitleBar.qml) \
         $$quote($$BASEDIR/assets/components/DeleteTaskDialog.qml) \
         $$quote($$BASEDIR/assets/components/ExpandableButton.qml) \
+        $$quote($$BASEDIR/assets/components/InputTitleBar.qml) \
         $$quote($$BASEDIR/assets/components/Task.qml) \
         $$quote($$BASEDIR/assets/components/ToggleBlock.qml) \
         $$quote($$BASEDIR/assets/images/ic_add.png) \

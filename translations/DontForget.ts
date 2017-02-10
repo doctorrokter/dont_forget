@@ -52,6 +52,13 @@
     </message>
 </context>
 <context>
+    <name>InputTitleBar</name>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MoveTaskPage</name>
     <message>
         <source>Move task</source>
@@ -212,6 +219,10 @@
     </message>
     <message>
         <source>Looks like you didn&apos;t grant permission for shared files. &quot;Don&apos;t Forget&quot; cannot work without this permission since the app stores own database in external resources. In order to use this app you should grant permissions in Settings, then restart the app.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quick task</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

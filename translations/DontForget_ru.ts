@@ -63,6 +63,14 @@
     </message>
 </context>
 <context>
+    <name>InputTitleBar</name>
+    <message>
+        <location filename="../assets/components/InputTitleBar.qml" line="48"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Отмена</translation>
+    </message>
+</context>
+<context>
     <name>MoveTaskPage</name>
     <message>
         <source>Delete</source>
@@ -221,28 +229,28 @@
         <translation type="unfinished">Обратная связь</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="71"/>
-        <location filename="../assets/main.qml" line="346"/>
+        <location filename="../assets/main.qml" line="277"/>
+        <location filename="../assets/main.qml" line="381"/>
         <source>All Tasks</source>
         <translation type="unfinished">Все задачи</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="107"/>
+        <location filename="../assets/main.qml" line="103"/>
         <source>You have no tasks yet. It&apos;s time to create new one!</source>
         <translation type="unfinished">У вас пока нет ни одной задачи. Самое время создать!</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="140"/>
+        <location filename="../assets/main.qml" line="136"/>
         <source>Create</source>
         <translation type="unfinished">Создать</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="163"/>
+        <location filename="../assets/main.qml" line="159"/>
         <source>Edit</source>
         <translation type="unfinished">Изменить</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="186"/>
+        <location filename="../assets/main.qml" line="184"/>
         <source>Delete</source>
         <translation type="unfinished">Удалить</translation>
     </message>
@@ -262,17 +270,22 @@
         <translation type="unfinished">Переместить</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="310"/>
+        <location filename="../assets/main.qml" line="256"/>
+        <source>Quick task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="345"/>
         <source>Permission required</source>
         <translation type="unfinished">Требуются права</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="311"/>
+        <location filename="../assets/main.qml" line="346"/>
         <source>Looks like you didn&apos;t grant permission for shared files. &quot;Don&apos;t Forget&quot; cannot work without this permission since the app stores own database in external resources. In order to use this app you should grant permissions in Settings, then restart the app.</source>
         <translation type="unfinished">Похоже Вы не дали права на использование общих файлов приложением. &quot;Don&apos;t Forget&quot; не может работать без этих прав, так как хранит собственную базу данных во внешних ресурсах. Для того, чтобы пользоваться этим приложением, Вам необходимо добавить права в Настройках, затем перезапустить приложение.</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="314"/>
+        <location filename="../assets/main.qml" line="349"/>
         <source>Settings</source>
         <translation type="unfinished">Настройки</translation>
     </message>

@@ -1,8 +1,9 @@
 1
-23
+24
 components/CustomTitleBar.qml
 components/DeleteTaskDialog.qml
 components/ExpandableButton.qml
+components/InputTitleBar.qml
 components/Task.qml
 components/ToggleBlock.qml
 images/ic_add.png
