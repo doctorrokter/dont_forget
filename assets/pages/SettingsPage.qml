@@ -39,11 +39,8 @@ Page {
                 }
                 
                 ToggleButton {
+                    id: themeToggle
                     horizontalAlignment: HorizontalAlignment.Right
-                    checked: {
-                        var theme = _appConfig.get("theme");
-                        return theme && theme === "DARK";
-                    }
                     
                     onCheckedChanged: {
                         if (checked) {
@@ -75,11 +72,8 @@ Page {
                 }
                 
                 ToggleButton {
+                    id: dontAskBeforeDeletingToggle
                     horizontalAlignment: HorizontalAlignment.Right
-                    checked: {
-                        var doNotAsk = _appConfig.get("do_not_ask_before_deleting");
-                        return doNotAsk && doNotAsk === "true";
-                    }
                     
                     onCheckedChanged: {
                         if (checked) {
@@ -101,21 +95,15 @@ Page {
                     
                     options: [
                         Option {
+                            id: sortByNameOption
                             text: qsTr("Name") + Retranslate.onLocaleOrLanguageChanged
                             value: "name"
-                            selected: {
-                                var sortBy = _appConfig.get("sort_by");
-                                return sortBy === "" || sortBy === "name";
-                            } 
                         },
                         
                         Option {
+                            id: sortByCreationOption
                             text: qsTr("Creation") + Retranslate.onLocaleOrLanguageChanged
                             value: "id"
-                            selected: {
-                                var sortBy = _appConfig.get("sort_by");
-                                return sortBy === "id";
-                            }
                         }
                     ]
                     
@@ -136,21 +124,15 @@ Page {
                     
                     options: [
                         Option {
+                            id: folderOption
                             text: qsTr("Folder") + Retranslate.onLocaleOrLanguageChanged
                             value: "FOLDER"
-                            selected: {
-                                var defaultTaskType = _appConfig.get("default_task_type");
-                                return defaultTaskType === "" || defaultTaskType === "FOLDER";
-                            } 
                         },
                         
                         Option {
+                            id: taskOption
                             text: qsTr("Task") + Retranslate.onLocaleOrLanguageChanged
                             value: "TASK"
-                            selected: {
-                                var defaultTaskType = _appConfig.get("default_task_type");
-                                return defaultTaskType === "TASK";
-                            }
                         }
                     ]
                     
@@ -161,5 +143,34 @@ Page {
                 }
             }
         }
+    }
+    
+    function adjustTheme() {
+        var theme = _appConfig.get("theme");
+        themeToggle.checked = theme && theme === "DARK";
+    }
+    
+    function adjustAskBeforeDeleting() {
+        var doNotAsk = _appConfig.get("do_not_ask_before_deleting");
+        dontAskBeforeDeletingToggle.checked = doNotAsk && doNotAsk === "true";
+    }
+    
+    function adjustSortBy() {
+        var sortBy = _appConfig.get("sort_by");
+        sortByNameOption.selected = sortBy === "" || sortBy === "name";
+        sortByCreationOption.selected = sortBy === "id";
+    }
+    
+    function adjustDefaultTaskType() {
+        var defaultTaskType = _appConfig.get("default_task_type");
+        folderOption.selected = defaultTaskType === "" || defaultTaskType === "FOLDER";
+        taskOption.selected = defaultTaskType === "TASK";
+    }
+    
+    onCreationCompleted: {
+        adjustTheme();
+        adjustAskBeforeDeleting();
+        adjustSortBy();
+        adjustDefaultTaskType();
     }
 }

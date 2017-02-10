@@ -97,42 +97,42 @@
         <translation type="unfinished">Тёмная тема</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="61"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="58"/>
         <source>Behavior</source>
         <translation type="unfinished">Поведение</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="72"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="69"/>
         <source>Don&apos;t ask before deleting</source>
         <translation type="unfinished">Не спрашивать перед удалением</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="100"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="94"/>
         <source>Sort by</source>
         <translation type="unfinished">Сортировка по</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="104"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="99"/>
         <source>Name</source>
         <translation type="unfinished">Названию</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="113"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="105"/>
         <source>Creation</source>
         <translation type="unfinished">Созданию</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="135"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="123"/>
         <source>Default task type</source>
         <translation type="unfinished">Тип задачи по-умолчанию</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="139"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="128"/>
         <source>Folder</source>
         <translation type="unfinished">Папка</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="148"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="134"/>
         <source>Task</source>
         <translation type="unfinished">Задача</translation>
     </message>

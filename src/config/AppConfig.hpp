@@ -10,6 +10,7 @@
 
 #include <QtCore/QObject>
 #include <QVariant>
+#include <QtCore/QSettings>
 
 class AppConfig: public QObject {
     Q_OBJECT
@@ -26,6 +27,7 @@ public:
     static QString PROVIDER_APP_ID;
     static QString PPG_URL;
     static bool LAUNCH_APP_ON_PUSH;
+    static QSettings CONF;
 
     static QVariant getStatic(const QString name);
     static void setStatic(const QString name, const QVariant value);

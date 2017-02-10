@@ -6,25 +6,23 @@
  */
 
 #include "AppConfig.hpp"
-#include <QtCore/QSettings>
 
 bool AppConfig::USING_PUBLIC_PPG = true;
 QString AppConfig::PROVIDER_APP_ID = "300065-910B145627tryr34c5425h82824k3s724";
 QString AppConfig::PPG_URL = "http://cp300065.pushapi.eval.blackberry.com";
 bool AppConfig::LAUNCH_APP_ON_PUSH = true;
+QSettings AppConfig::CONF;
 
 AppConfig::AppConfig(QObject* parent) : QObject(parent) {}
 
 AppConfig::~AppConfig() {}
 
 QVariant AppConfig::getStatic(const QString name) {
-    QSettings conf;
-    return conf.value(name, "");
+    return CONF.value(name, "");
 }
 
 void AppConfig::setStatic(const QString name, const QVariant value) {
-    QSettings conf;
-    conf.setValue(name, value);
+    CONF.setValue(name, value);
 }
 
 QVariant AppConfig::get(const QString name) const {
