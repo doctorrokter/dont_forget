@@ -163,8 +163,8 @@ Page {
     
     function adjustDefaultTaskType() {
         var defaultTaskType = _appConfig.get("default_task_type");
-        folderOption.selected = defaultTaskType === "" || defaultTaskType === "FOLDER";
-        taskOption.selected = defaultTaskType === "TASK";
+        folderOption.selected = defaultTaskType === "FOLDER";
+        taskOption.selected = defaultTaskType === "" || defaultTaskType === "TASK";
     }
     
     onCreationCompleted: {

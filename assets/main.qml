@@ -63,7 +63,6 @@ NavigationPane {
             SHOW_ALL: "SHOW_ALL",
             HIDE_CLOSED: "HIDE_CLOSED"
         }
-        property bool quickTaskMode: false
         property string viewMode: viewModes.SHOW_ALL
         
         
@@ -249,25 +248,6 @@ NavigationPane {
                         }
                     }
                 ]
-            },
-            
-            ActionItem {
-                id: quickTaskModeSwitcher
-                title: qsTr("Quick task") + Retranslate.onLocaleOrLanguageChanged
-                
-                onTriggered: {
-                    main.quickTaskMode = true;
-                }
-                
-                shortcuts: [
-                    Shortcut {
-                        key: "q"
-                        
-                        onTriggered: {
-                            quickTaskModeSwitcher.triggered();
-                        }
-                    }
-                ]
             }
         ]
         
@@ -276,14 +256,6 @@ NavigationPane {
                 id: titleBar
                 title: qsTr("All Tasks") + Retranslate.onLocaleOrLanguageChanged
                 clearable: _tasksService.activeTask !== null && _tasksService.activeTask !== undefined;
-            },
-            
-            InputTitleBar {
-                id: inputTitleBar
-                
-                onCancel: {
-                    main.quickTaskMode = false;
-                }
             },
             
             ComponentDefinition {
@@ -392,15 +364,6 @@ NavigationPane {
             }
             _tasksService.activeTaskChanged.connect(main.updateTitleBar);
             _tasksService.viewModeChanged.connect(main.changeViewMode);
-        }
-        
-        onQuickTaskModeChanged: {
-            if (quickTaskMode) {
-                main.titleBar = inputTitleBar;
-                inputTitleBar.focus();
-            } else {
-                main.titleBar = titleBar;
-            }
         }
     }
     

@@ -175,12 +175,12 @@ Sheet {
     
     function adjustFolderOption() {
         var defaultTaskType = _appConfig.get("default_task_type");
-        folderOption.selected = defaultTaskType === "" || defaultTaskType === folderOption.value;
+        folderOption.selected = defaultTaskType === folderOption.value;
     }
     
     function adjustTaskOption() {
         var defaultTaskType = _appConfig.get("default_task_type");
-        taskOption.selected = defaultTaskType === taskOption.value;
+        taskOption.selected = defaultTaskType === "" || defaultTaskType === taskOption.value;
     }
     
     function currDatePlus2Hourse() {
