@@ -274,9 +274,17 @@ NavigationPane {
             
             ComponentDefinition {
                 id: moveTaskPage
-                MoveTaskPage {
-                    onTaskMove: {
-                        navigation.pop();                        
+//                MoveTaskPage {
+//                    onTaskMove: {
+//                        navigation.pop();                        
+//                    }
+//                }
+                TasksListPage {
+                    onTaskChosen: {
+                        if (_tasksService.activeTask.parentId !== chosenTask.id) {
+                            _tasksService.moveTask(chosenTask.id);
+                        }
+                        navigation.pop();
                     }
                 }
             },

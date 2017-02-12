@@ -2,6 +2,49 @@
 <!DOCTYPE TS>
 <TS version="2.0">
 <context>
+    <name>CreateTaskFromUrlCard</name>
+    <message>
+        <source>Create task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create in: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Root</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change placement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deadline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create in Remember</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Important</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Task created!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DeleteTaskDialog</name>
     <message>
         <source>Confirm the deleting</source>
@@ -61,11 +104,11 @@
 <context>
     <name>MoveTaskPage</name>
     <message>
-        <source>Move task</source>
+        <source>Root</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Root</source>
+        <source>Choose a folder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -117,6 +160,27 @@
     </message>
 </context>
 <context>
+    <name>TaskDeadlineContainer</name>
+    <message>
+        <source>Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskDescriptionContainer</name>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskNameContainer</name>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TaskSheet</name>
     <message>
         <source>Create task</source>
@@ -131,11 +195,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Description</source>
+        <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -155,10 +215,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Date</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Create in Remember</source>
         <translation type="unfinished"></translation>
     </message>
@@ -166,8 +222,19 @@
         <source>Important</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>TasksListPage</name>
     <message>
-        <source>OK</source>
+        <source>Choose a folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Root</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

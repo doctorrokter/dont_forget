@@ -9,7 +9,7 @@ Page {
     property variant tasks: []
     
     titleBar: CustomTitleBar {
-        title: qsTr("Move task") + Retranslate.onLocaleOrLanguageChanged
+        title: qsTr("Choose a folder") + Retranslate.onLocaleOrLanguageChanged
     }
     
     actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
@@ -30,6 +30,8 @@ Page {
         
         ListView {
             id: tasksListView
+            
+            scrollRole: ScrollRole.Main
             
             dataModel: ArrayDataModel {
                 id: tasksDataModel

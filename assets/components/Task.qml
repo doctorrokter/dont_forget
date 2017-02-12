@@ -7,7 +7,7 @@ Container {
     property bool expanded: true
     property bool expandable: true
     property bool important: false
-    property bool closed: false
+    property bool closed: true
     property bool selected: false
     property int deadline: 0
     property string parentId: ""

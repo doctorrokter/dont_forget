@@ -36,11 +36,16 @@ simulator {
 
 config_pri_assets {
     OTHER_FILES += \
+        $$quote($$BASEDIR/assets/cards/CreateTaskFromUrlCard.qml) \
+        $$quote($$BASEDIR/assets/cards/TestCard.qml) \
         $$quote($$BASEDIR/assets/components/CustomTitleBar.qml) \
         $$quote($$BASEDIR/assets/components/DeleteTaskDialog.qml) \
         $$quote($$BASEDIR/assets/components/ExpandableButton.qml) \
         $$quote($$BASEDIR/assets/components/InputTitleBar.qml) \
         $$quote($$BASEDIR/assets/components/Task.qml) \
+        $$quote($$BASEDIR/assets/components/TaskDeadlineContainer.qml) \
+        $$quote($$BASEDIR/assets/components/TaskDescriptionContainer.qml) \
+        $$quote($$BASEDIR/assets/components/TaskNameContainer.qml) \
         $$quote($$BASEDIR/assets/components/ToggleBlock.qml) \
         $$quote($$BASEDIR/assets/images/ic_add.png) \
         $$quote($$BASEDIR/assets/images/ic_clear.png) \
@@ -54,11 +59,13 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/ic_forward.png) \
         $$quote($$BASEDIR/assets/images/ic_minus.png) \
         $$quote($$BASEDIR/assets/images/ic_plus.png) \
+        $$quote($$BASEDIR/assets/images/ic_search.png) \
         $$quote($$BASEDIR/assets/images/yellow_pellet.png) \
         $$quote($$BASEDIR/assets/main.qml) \
         $$quote($$BASEDIR/assets/pages/HelpPage.qml) \
         $$quote($$BASEDIR/assets/pages/MoveTaskPage.qml) \
         $$quote($$BASEDIR/assets/pages/SettingsPage.qml) \
+        $$quote($$BASEDIR/assets/pages/TasksListPage.qml) \
         $$quote($$BASEDIR/assets/sheets/TaskSheet.qml)
 }
 
@@ -69,6 +76,7 @@ config_pri_source_group1 {
         $$quote($$BASEDIR/src/main.cpp) \
         $$quote($$BASEDIR/src/models/Task.cpp) \
         $$quote($$BASEDIR/src/services/PushNotificationService.cpp) \
+        $$quote($$BASEDIR/src/services/SearchService.cpp) \
         $$quote($$BASEDIR/src/services/TasksService.cpp) \
         $$quote($$BASEDIR/src/vendor/Console.cpp)
 
@@ -77,6 +85,7 @@ config_pri_source_group1 {
         $$quote($$BASEDIR/src/config/AppConfig.hpp) \
         $$quote($$BASEDIR/src/models/Task.hpp) \
         $$quote($$BASEDIR/src/services/PushNotificationService.hpp) \
+        $$quote($$BASEDIR/src/services/SearchService.hpp) \
         $$quote($$BASEDIR/src/services/TasksService.hpp) \
         $$quote($$BASEDIR/src/vendor/Console.hpp)
 }
@@ -115,6 +124,9 @@ lupdate_inclusion {
         $$quote($$BASEDIR/../assets/*.qml) \
         $$quote($$BASEDIR/../assets/*.js) \
         $$quote($$BASEDIR/../assets/*.qs) \
+        $$quote($$BASEDIR/../assets/cards/*.qml) \
+        $$quote($$BASEDIR/../assets/cards/*.js) \
+        $$quote($$BASEDIR/../assets/cards/*.qs) \
         $$quote($$BASEDIR/../assets/components/*.qml) \
         $$quote($$BASEDIR/../assets/components/*.js) \
         $$quote($$BASEDIR/../assets/components/*.qs) \

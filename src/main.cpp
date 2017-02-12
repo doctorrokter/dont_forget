@@ -23,6 +23,7 @@
 
 #include <Qt/qdeclarativedebug.h>
 #include <QList>
+#include <QtCore/QObject>
 
 #include "vendor/Console.hpp"
 #include <QSettings>
@@ -30,6 +31,7 @@
 #include "models/Task.hpp"
 
 using namespace bb::cascades;
+using namespace bb::system;
 
 void myMessageOutput(QtMsgType type, const char* msg) {  // <-- ADD THIS
     Q_UNUSED(type);
@@ -44,8 +46,7 @@ void myMessageOutput(QtMsgType type, const char* msg) {  // <-- ADD THIS
     }
 }
 
-Q_DECL_EXPORT int main(int argc, char **argv)
-{
+Q_DECL_EXPORT int main(int argc, char **argv) {
     qmlRegisterType<Task>("chachkouski.models", 1, 0, "Task");
     qRegisterMetaType<QList<Task> >("QList<Task>");
     qRegisterMetaType<Task*>("Task*");
@@ -54,10 +55,6 @@ Q_DECL_EXPORT int main(int argc, char **argv)
 
     qInstallMsgHandler(myMessageOutput);
 
-    // Create the Application UI object, this is where the main.qml file
-    // is loaded and the application scene is set.
     ApplicationUI appui;
-
-    // Enter the application main event loop.
     return Application::exec();
 }

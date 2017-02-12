@@ -2,6 +2,83 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="ru_RU">
 <context>
+    <name>CreateTaskFromUrlCard</name>
+    <message>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="21"/>
+        <source>Create task</source>
+        <translation type="unfinished">Создать задачу</translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="24"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Отмена</translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="32"/>
+        <source>OK</source>
+        <translation type="unfinished">OK</translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="179"/>
+        <source>Task created!</source>
+        <translation type="unfinished">Задача создана!</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="obsolete">Название</translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="obsolete">Описание</translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="79"/>
+        <source>Create in: </source>
+        <translation type="unfinished">Создать в: </translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="86"/>
+        <source>Root</source>
+        <translation type="unfinished">Корень</translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="101"/>
+        <source>Change placement</source>
+        <translation type="unfinished">Изменить расположение</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="obsolete">Тип</translation>
+    </message>
+    <message>
+        <source>Folder</source>
+        <translation type="obsolete">Папка</translation>
+    </message>
+    <message>
+        <source>Task</source>
+        <translation type="obsolete">Задача</translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="113"/>
+        <source>Deadline</source>
+        <translation type="unfinished">Срок выполнения</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation type="obsolete">Дата</translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="124"/>
+        <source>Create in Remember</source>
+        <translation type="unfinished">Создать в Remember</translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="129"/>
+        <source>Important</source>
+        <translation type="unfinished">Важно</translation>
+    </message>
+</context>
+<context>
     <name>DeleteTaskDialog</name>
     <message>
         <location filename="../assets/components/DeleteTaskDialog.qml" line="30"/>
@@ -65,7 +142,7 @@
 <context>
     <name>InputTitleBar</name>
     <message>
-        <location filename="../assets/components/InputTitleBar.qml" line="48"/>
+        <location filename="../assets/components/InputTitleBar.qml" line="53"/>
         <source>Cancel</source>
         <translation type="unfinished">Отмена</translation>
     </message>
@@ -77,12 +154,16 @@
         <translation type="obsolete">Удалить</translation>
     </message>
     <message>
-        <location filename="../assets/pages/MoveTaskPage.qml" line="12"/>
         <source>Move task</source>
-        <translation type="unfinished">Переместить задачу</translation>
+        <translation type="obsolete">Переместить задачу</translation>
     </message>
     <message>
-        <location filename="../assets/pages/MoveTaskPage.qml" line="147"/>
+        <location filename="../assets/pages/MoveTaskPage.qml" line="12"/>
+        <source>Choose a folder</source>
+        <translation type="unfinished">Выберите папку</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/MoveTaskPage.qml" line="149"/>
         <source>Root</source>
         <translation type="unfinished">Сделать корневой задачей</translation>
     </message>
@@ -150,6 +231,30 @@
     </message>
 </context>
 <context>
+    <name>TaskDeadlineContainer</name>
+    <message>
+        <location filename="../assets/components/TaskDeadlineContainer.qml" line="20"/>
+        <source>Date</source>
+        <translation type="unfinished">Дата</translation>
+    </message>
+</context>
+<context>
+    <name>TaskDescriptionContainer</name>
+    <message>
+        <location filename="../assets/components/TaskDescriptionContainer.qml" line="17"/>
+        <source>Description</source>
+        <translation type="unfinished">Описание</translation>
+    </message>
+</context>
+<context>
+    <name>TaskNameContainer</name>
+    <message>
+        <location filename="../assets/components/TaskNameContainer.qml" line="17"/>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TaskSheet</name>
     <message>
         <location filename="../assets/sheets/TaskSheet.qml" line="17"/>
@@ -176,49 +281,79 @@
         <translation type="unfinished">OK</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="64"/>
         <source>Name</source>
-        <translation type="unfinished">Название</translation>
+        <translation type="obsolete">Название</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="79"/>
         <source>Description</source>
-        <translation type="unfinished">Описание</translation>
+        <translation type="obsolete">Описание</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="99"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="75"/>
         <source>Type</source>
         <translation type="unfinished">Тип</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="104"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="80"/>
         <source>Folder</source>
         <translation type="unfinished">Папка</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="110"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="86"/>
         <source>Task</source>
         <translation type="unfinished">Задача</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="120"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="96"/>
         <source>Deadline</source>
         <translation type="unfinished">Срок выполнения</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="133"/>
         <source>Date</source>
-        <translation type="unfinished">Дата</translation>
+        <translation type="obsolete">Дата</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="144"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="107"/>
         <source>Create in Remember</source>
         <translation type="unfinished">Создать в Remember</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="149"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="112"/>
         <source>Important</source>
         <translation type="unfinished">Важно</translation>
+    </message>
+</context>
+<context>
+    <name>TasksList</name>
+    <message>
+        <source>Move task</source>
+        <translation type="obsolete">Переместить задачу</translation>
+    </message>
+    <message>
+        <source>Choose a folder</source>
+        <translation type="obsolete">Выберите папку</translation>
+    </message>
+    <message>
+        <source>Root</source>
+        <translation type="obsolete">Сделать корневой задачей</translation>
+    </message>
+</context>
+<context>
+    <name>TasksListPage</name>
+    <message>
+        <location filename="../assets/pages/TasksListPage.qml" line="68"/>
+        <source>Choose a folder</source>
+        <translation type="unfinished">Выберите папку</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/TasksListPage.qml" line="90"/>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/TasksListPage.qml" line="144"/>
+        <source>Root</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -230,7 +365,7 @@
     </message>
     <message>
         <location filename="../assets/main.qml" line="257"/>
-        <location filename="../assets/main.qml" line="353"/>
+        <location filename="../assets/main.qml" line="361"/>
         <source>All Tasks</source>
         <translation type="unfinished">Все задачи</translation>
     </message>
@@ -270,17 +405,17 @@
         <translation type="unfinished">Переместить</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="317"/>
+        <location filename="../assets/main.qml" line="325"/>
         <source>Permission required</source>
         <translation type="unfinished">Требуются права</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="318"/>
+        <location filename="../assets/main.qml" line="326"/>
         <source>Looks like you didn&apos;t grant permission for shared files. &quot;Don&apos;t Forget&quot; cannot work without this permission since the app stores own database in external resources. In order to use this app you should grant permissions in Settings, then restart the app.</source>
         <translation type="unfinished">Похоже Вы не дали права на использование общих файлов приложением. &quot;Don&apos;t Forget&quot; не может работать без этих прав, так как хранит собственную базу данных во внешних ресурсах. Для того, чтобы пользоваться этим приложением, Вам необходимо добавить права в Настройках, затем перезапустить приложение.</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="321"/>
+        <location filename="../assets/main.qml" line="329"/>
         <source>Settings</source>
         <translation type="unfinished">Настройки</translation>
     </message>

@@ -139,5 +139,39 @@
     		<image>icon.png</image>
   		</icon>
 	</invoke-target> -->
+	
+	<!--<invoke-target id="chachkouski.DontForget.search.extended">
+   		<invoke-target-type>card.composer</invoke-target-type>
+   		<filter>
+      		<action>bb.action.SEARCH.EXTENDED</action>
+      		<mime-type>application/vnd.bb.search.criteria</mime-type>
+   		</filter>
+	</invoke-target>-->
+	
+	<invoke-target id="chachkouski.DontForget.search.asyoutype">
+   		<invoke-target-type>application</invoke-target-type>
+   		<filter>
+      		<action>bb.action.SEARCH.SOURCE</action>
+      		<mime-type>application/vnd.bb.search.db.criteria</mime-type>
+   		</filter>
+	</invoke-target>
+	
+	<invoke-target id="chachkouski.DontForget.card.edit.text">
+  		<invoke-target-type>card.composer</invoke-target-type>
+  		<filter>
+    		<action>bb.action.SHARE</action>
+    		<mime-type>text/*</mime-type>
+    		<mime-type>application/json</mime-type>
+  		</filter>
+	</invoke-target>
+	
+	<invoke-target id="chachkouski.DontForget.card.edit.uri">
+  		<invoke-target-type>card.composer</invoke-target-type>
+  		<filter>
+    		<action>bb.action.SHARE</action>
+    		<mime-type>*</mime-type>
+    		<property var="uris" value="http://,https://"/>
+  		</filter>
+	</invoke-target>
 
 </qnx>

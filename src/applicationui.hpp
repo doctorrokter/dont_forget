@@ -21,6 +21,9 @@
 #include <bb/system/InvokeManager>
 #include <bb/system/InvokeRequest>
 #include "services/PushNotificationService.hpp"
+#include "services/TasksService.hpp"
+#include "services/SearchService.hpp"
+#include "config/AppConfig.hpp"
 
 namespace bb
 {
@@ -38,22 +41,34 @@ class QTranslator;
  *
  * Use this object to create and init app UI, to create context objects, to register the new meta types etc.
  */
-class ApplicationUI : public QObject
-{
+class ApplicationUI : public QObject {
     Q_OBJECT
 public:
     ApplicationUI();
     virtual ~ApplicationUI() {}
+
+    Q_INVOKABLE void closeCard();
+
+public Q_SLOTS:
+    void onInvoked(const bb::system::InvokeRequest& request);
+
 private slots:
     void onSystemLanguageChanged();
 
-private Q_SLOTS:
-    void onInvoked(const InvokeRequest& request);
 private:
     QTranslator* m_pTranslator;
     bb::cascades::LocaleHandler* m_pLocaleHandler;
     InvokeManager* m_pInvokeManager;
     PushNotificationService* m_pPushService;
+    QString m_startupMode;
+    AppConfig* m_pAppConfig;
+    TasksService* m_pTasksService;
+    SearchService* m_pSearchService;
+
+    QString m_url;
+
+    void initFullUI();
+    void initComposerUI(const QString& data = "");
 };
 
 #endif /* ApplicationUI_HPP_ */

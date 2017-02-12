@@ -31,17 +31,17 @@ Sheet {
                 title: qsTr("OK") + Retranslate.onLocaleOrLanguageChanged
                 
                 onTriggered: {
-                    var deadline = deadLineToggleButton.checked ? new Date(deadlineDateTimePicker.value).getTime() / 1000 : 0;
+                    var deadline = deadLineToggleButton.checked ? new Date(deadLineContainer.result).getTime() / 1000 : 0;
                     var important = importantToggleButton.checked ? 1 : 0;
                     var createInRemember = rememberToggleButton.checked ? 1 : 0;
                     
                     if (taskSheet.mode === taskSheet.modes.CREATE) {
-                        var names = taskName.text.split(";;");
+                        var names = taskName.result.split(";;");
                         names.forEach(function(name) {
-                            _tasksService.createTask(name.trim(), description.text.trim(), taskType.selectedValue, deadline, important, createInRemember);
+                                _tasksService.createTask(name.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember);
                         });
                     } else {
-                        _tasksService.updateTask(taskName.text, description.text, taskType.selectedValue, deadline, important, createInRemember);
+                        _tasksService.updateTask(taskName.result.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember);
                     }
                     taskSheet.close();    
                 }
@@ -56,37 +56,13 @@ Sheet {
             
             Container {
                 horizontalAlignment: HorizontalAlignment.Fill
-                Container {
-                    Container {
-                        leftPadding: ui.du(2.5)
-                        topPadding: ui.du(2.5)
-                        Label {
-                            text: qsTr("Name") + Retranslate.onLocaleOrLanguageChanged
-                        }
-                    }
-                    
-                    TextField {
-                        id: taskName
-                        inputMode: TextFieldInputMode.Text
-                    }
+                
+                TaskNameContainer {
+                    id: taskName
                 }
                 
-                Container {
-                    Container {
-                        leftPadding: ui.du(2.5)
-                        topPadding: ui.du(2.5)
-                        Label {
-                            text: qsTr("Description") + Retranslate.onLocaleOrLanguageChanged
-                        }
-                    }
-                    
-                    TextArea {
-                        id: description
-                        minHeight: ui.du(25)
-                        autoSize.maxLineCount: 10
-                        scrollMode: TextAreaScrollMode.Elastic
-                        inputMode: TextAreaInputMode.Text
-                    }
+                TaskDescriptionContainer {
+                    id: description
                 }
                 
                 Container {
@@ -120,23 +96,10 @@ Sheet {
                     title: qsTr("Deadline") + Retranslate.onLocaleOrLanguageChanged
                 }
                 
-                Container {
+                TaskDeadlineContainer {
                     id: deadLineContainer
                     visible: deadLineToggleButton.checked
-                    Container {
-                        leftPadding: ui.du(2.5)
-                        topPadding: ui.du(2.5)
-                        rightPadding: ui.du(2.5)
-                        
-                        DateTimePicker {
-                            id: deadlineDateTimePicker
-                            title: qsTr("Date") + Retranslate.onLocaleOrLanguageChanged
-                            mode: DateTimePickerMode.DateTime
-                            value: currDatePlus2Hourse();
-                        }
-                    }
-                    
-                    Divider {}
+                    date: currDatePlus2Hourse();
                 }
                 
                 ToggleBlock {
@@ -163,12 +126,12 @@ Sheet {
     
     function adjustDeadline() {
         if (taskSheet.mode === taskSheet.modes.CREATE) {
-            deadlineDateTimePicker.value = currDatePlus2Hourse();
+            deadLineContainer.date = currDatePlus2Hourse();
         } else {
            if (_tasksService.activeTask.deadline !== 0) {
-               deadlineDateTimePicker.value = new Date(_tasksService.activeTask.deadline * 1000);
+               deadLineContainer.date = new Date(_tasksService.activeTask.deadline * 1000);
            } else {
-               deadlineDateTimePicker.value = currDatePlus2Hourse();
+               deadLineContainer.date = currDatePlus2Hourse();
            }
         }
     }
@@ -190,7 +153,7 @@ Sheet {
     function initialState() {
         importantToggleButton.checked = false;
         deadLineToggleButton.checked = false;
-        deadlineDateTimePicker.value = currDatePlus2Hourse();
+        deadLineContainer.date = currDatePlus2Hourse();
         taskName.resetText();
         description.resetText();
         adjustFolderOption();
@@ -203,8 +166,15 @@ Sheet {
             deadLineToggleButton.checked = _tasksService.activeTask.deadline !== 0;
             folderOption.selected = _tasksService.activeTask.type === folderOption.value;
             taskOption.selected = _tasksService.activeTask.type === taskOption.value;
-            taskName.text = _tasksService.activeTask.name;
-            description.text = _tasksService.activeTask.description;
+            
+            var name = _tasksService.activeTask.name;
+            var desc = _tasksService.activeTask.description;
+            
+            console.debug("===>>> TASK NAME: ", name);
+            console.debug("===>>> TASK DESC: ", desc);
+            
+            taskName.value = name;
+            description.value = desc;
         } else {
             initialState();
         }

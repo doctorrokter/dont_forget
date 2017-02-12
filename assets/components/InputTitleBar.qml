@@ -4,6 +4,7 @@ TitleBar {
     id: root
     
     signal cancel();
+    signal typing(string text);
 
     appearance: TitleBarAppearance.Plain
     kind: TitleBarKind.FreeForm
@@ -42,6 +43,10 @@ TitleBar {
                     }
                 }
                 textStyle.color: ui.palette.textOnPrimary
+                
+                onTextChanging: {
+                    root.typing(text);
+                }
             }
             
             Button {
@@ -58,5 +63,9 @@ TitleBar {
     
     function focus() {
         tasksInputField.requestFocus();
+    }
+    
+    function reset() {
+        tasksInputField.resetText();
     }
 }
