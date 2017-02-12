@@ -109,10 +109,10 @@ void ApplicationUI::initFullUI() {
     Application::instance()->setScene(root);
 }
 
-void ApplicationUI::initComposerUI(const QString& data) {
+void ApplicationUI::initComposerUI(const QString& pathToPage, const QString& data) {
     qDebug() << "Init Composer UI with data: " << data << endl;
 
-    QmlDocument *qml = QmlDocument::create("asset:///cards/CreateTaskFromUrlCard.qml");
+    QmlDocument *qml = QmlDocument::create(pathToPage);
     qml->setContextProperty("_app", this);
 
     QDeclarativeEngine* engine = QmlDocument::defaultDeclarativeEngine();
@@ -135,17 +135,11 @@ void ApplicationUI::onInvoked(const bb::system::InvokeRequest& request) {
     qDebug() << "Requested mimeType: " << mimeType << endl;
 
     if (target == "chachkouski.DontForget.search.asyoutype") {
-        initComposerUI();
+        initComposerUI("asset:///cards/CreateTaskFromUrlCard.qml");
     } else if (target == "chachkouski.DontForget.card.edit.text") {
-        qDebug() << "SHARE card requested" << endl;
-        QString data = QString::fromUtf8(request.data());
-        qDebug() << "Data received: " << data << endl;
-        initComposerUI(data);
+        initComposerUI("asset:///cards/CreateTaskFromTextCard.qml", QString::fromUtf8(request.data()));
     } else if (target == "chachkouski.DontForget.card.edit.uri") {
-        qDebug() << "SHARE card requested" << endl;
-        QUrl url = request.uri();
-        m_url = url.toString();
-        initComposerUI(m_url);
+        initComposerUI("asset:///cards/CreateTaskFromUrlCard.qml", request.uri().toString());
     }
 //    if (action.compare("bb.action.PUSH") == 0) {
 //        PushPayload payload(request);

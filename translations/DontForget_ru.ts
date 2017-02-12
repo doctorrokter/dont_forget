@@ -2,6 +2,59 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="ru_RU">
 <context>
+    <name>CreateTaskFromTextCard</name>
+    <message>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="21"/>
+        <source>Create task</source>
+        <translation type="unfinished">Создать задачу</translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="24"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Отмена</translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="32"/>
+        <source>OK</source>
+        <translation type="unfinished">OK</translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="73"/>
+        <source>Create in: </source>
+        <translation type="unfinished">Создать в: </translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="80"/>
+        <source>Root</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="95"/>
+        <source>Change placement</source>
+        <translation type="unfinished">Изменить расположение</translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="107"/>
+        <source>Deadline</source>
+        <translation type="unfinished">Срок выполнения</translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="118"/>
+        <source>Create in Remember</source>
+        <translation type="unfinished">Создать в Remember</translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="123"/>
+        <source>Important</source>
+        <translation type="unfinished">Важно</translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="146"/>
+        <source>Task created!</source>
+        <translation type="unfinished">Задача создана!</translation>
+    </message>
+</context>
+<context>
     <name>CreateTaskFromUrlCard</name>
     <message>
         <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="21"/>

@@ -2,6 +2,49 @@
 <!DOCTYPE TS>
 <TS version="2.0">
 <context>
+    <name>CreateTaskFromTextCard</name>
+    <message>
+        <source>Create task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create in: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Root</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change placement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deadline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create in Remember</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Important</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Task created!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CreateTaskFromUrlCard</name>
     <message>
         <source>Create task</source>

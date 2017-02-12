@@ -65,10 +65,8 @@ private:
     TasksService* m_pTasksService;
     SearchService* m_pSearchService;
 
-    QString m_url;
-
     void initFullUI();
-    void initComposerUI(const QString& data = "");
+    void initComposerUI(const QString& pathToPage, const QString& data = "");
 };
 
 #endif /* ApplicationUI_HPP_ */

@@ -36,6 +36,7 @@ simulator {
 
 config_pri_assets {
     OTHER_FILES += \
+        $$quote($$BASEDIR/assets/cards/CreateTaskFromTextCard.qml) \
         $$quote($$BASEDIR/assets/cards/CreateTaskFromUrlCard.qml) \
         $$quote($$BASEDIR/assets/cards/TestCard.qml) \
         $$quote($$BASEDIR/assets/components/CustomTitleBar.qml) \

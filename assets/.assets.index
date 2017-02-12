@@ -1,5 +1,6 @@
 1
-31
+32
+cards/CreateTaskFromTextCard.qml
 cards/CreateTaskFromUrlCard.qml
 cards/TestCard.qml
 components/CustomTitleBar.qml
