@@ -1,4 +1,5 @@
 import bb.cascades 1.4
+import "../sheets"
 
 Container {
     id: task
@@ -235,7 +236,17 @@ Container {
                             _tasksService.setActiveTask(task.taskId);
                         }
                     }
-                }            
+                },
+                
+                DoubleTapHandler {
+                    onDoubleTapped: {
+                        if (!task.selected) {
+                            _tasksService.setActiveTask(task.taskId);
+                        }
+                        taskSheet.mode = taskSheet.modes.UPDATE;
+                        taskSheet.open();
+                    }
+                }          
             ]
         }
     }
