@@ -81,6 +81,8 @@ ApplicationUI::ApplicationUI() : QObject() {
             m_startupMode = "Card";
             break;
         }
+
+    qDebug() << "===>>> Startup mode: " << m_startupMode << endl;
 }
 
 void ApplicationUI::onSystemLanguageChanged() {

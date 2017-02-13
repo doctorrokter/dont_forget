@@ -167,27 +167,37 @@
         <translation type="unfinished">Помощь/Обучение</translation>
     </message>
     <message>
-        <location filename="../assets/pages/HelpPage.qml" line="20"/>
+        <location filename="../assets/pages/HelpPage.qml" line="21"/>
+        <source>Reminders</source>
+        <translation type="unfinished">Напоминания</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/HelpPage.qml" line="31"/>
+        <source>Don&apos;t Forget app &lt;strong&gt;does not provide&lt;/strong&gt; own reminder mechanism. Instead of it, app uses Remember as reminder mechanism.&lt;br/&gt;&lt;br/&gt;In order to get notified when task&apos;s deadline is coming you should do the following:&lt;br/&gt;1. Click by &lt;strong&gt;Create&lt;/strong&gt; button.&lt;br/&gt;2. Set &lt;strong&gt;Deadline&lt;/strong&gt;.&lt;br/&gt;3. Set &lt;strong&gt;Create in Remember&lt;/strong&gt;.</source>
+        <translation type="unfinished">Приложение Don&apos;t Forget &lt;strong&gt;не предоставляет&lt;/strong&gt; собственного механизма по напоминанию. Вместо этого для напоминаний используется механизм приложения Remember.&lt;br/&gt;&lt;br/&gt;Для того, чтобы получать уведомления о задачах, срок действия которых подходит к концу, необходимо сделать следующее:&lt;br/&gt;1. Нажмите по кнопке &lt;strong&gt;Создать&lt;/strong&gt;&lt;br/&gt;2. Назначьте &lt;strong&gt;Срок выполнения&lt;/strong&gt;.&lt;br/&gt;3. Выберите &lt;strong&gt;Создать в Remember&lt;/strong&gt;.</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/HelpPage.qml" line="43"/>
         <source>Gestures</source>
         <translation type="unfinished">Жесты</translation>
     </message>
     <message>
-        <location filename="../assets/pages/HelpPage.qml" line="30"/>
-        <source>&lt;strong&gt;Tap gestures&lt;/strong&gt;&lt;br/&gt;1. Single tap by task&apos;s label in a tasks tree will select this task and mark as &lt;strong&gt;active&lt;/strong&gt;. Task will become highlighted.&lt;br/&gt;2. If task is expandable (has children or has type Folder) you can expand or narrow task by clicking - or + button near task&apos;s icon.</source>
-        <translation type="unfinished">&lt;strong&gt;Нажатия&lt;/strong&gt;&lt;br/&gt;1. Одиночное нажатие по названию задачи в дереве задач выделит ее. Задача станет &lt;strong&gt;активной&lt;/strong&gt; и будет подсвечена.&lt;br/&gt;2. Если задача имеет дочерние задачи или тип Папка, вы можете раскрыть или скрыть её содержимое, нажав по кнопке - или + рядом с иконкой задачи.</translation>
+        <location filename="../assets/pages/HelpPage.qml" line="53"/>
+        <source>&lt;strong&gt;Tap gestures&lt;/strong&gt;&lt;br/&gt;1. &lt;strong&gt;Single tap&lt;/strong&gt; by task&apos;s label in a tasks tree will select this task and mark as &lt;strong&gt;active&lt;/strong&gt;. Task will become highlighted.&lt;br/&gt;2. &lt;strong&gt;Double tap&lt;/strong&gt; by task&apos;s label will open task&apos;s details sheet.&lt;br/&gt;3. If task is expandable (has children or has type Folder) you can expand or narrow task by clicking - or + button near task&apos;s icon.</source>
+        <translation type="unfinished">&lt;strong&gt;Нажатия&lt;/strong&gt;&lt;br/&gt;1. &lt;strong&gt;Одиночное нажатие&lt;/strong&gt; по названию задачи в дереве задач выделит ее. Задача станет &lt;strong&gt;активной&lt;/strong&gt; и будет подсвечена.&lt;br/&gt;2. &lt;strong&gt;Двойное нажатие&lt;/strong&gt; на задачу откроет страницу редактирования.&lt;br/&gt;3. Если задача имеет дочерние задачи или тип Папка, вы можете раскрыть или скрыть её содержимое, нажав по кнопке - или + рядом с иконкой задачи.</translation>
     </message>
     <message>
-        <location filename="../assets/pages/HelpPage.qml" line="45"/>
+        <location filename="../assets/pages/HelpPage.qml" line="69"/>
         <source>&lt;strong&gt;Pinch gestures&lt;/strong&gt;&lt;br/&gt;In order to expand or narrow all tasks in a tree you can use pinch gesture.</source>
         <translation type="unfinished">&lt;strong&gt;Pinch жесты&lt;/strong&gt;&lt;br/&gt;Для того, чтобы раскрыть или скрыть содержимое всех задач, вы можете использовать жесты типа pinch.</translation>
     </message>
     <message>
-        <location filename="../assets/pages/HelpPage.qml" line="54"/>
+        <location filename="../assets/pages/HelpPage.qml" line="78"/>
         <source>Bulk creation</source>
         <translation type="unfinished">Создание нескольких задач</translation>
     </message>
     <message>
-        <location filename="../assets/pages/HelpPage.qml" line="63"/>
+        <location filename="../assets/pages/HelpPage.qml" line="87"/>
         <source>In order to create several tasks per one action you can use a special delimeter &lt;strong&gt;;;&lt;/strong&gt; in a &lt;strong&gt;Name&lt;/strong&gt; field during task creation.&lt;br/&gt;&lt;br/&gt;Example:&lt;br/&gt;1. Click by &lt;strong&gt;Create&lt;/strong&gt; button.&lt;br/&gt;2. In a &lt;strong&gt;Name&lt;/strong&gt; field type something like &lt;strong&gt;task1;;task2;;task3&lt;/strong&gt; and click &lt;strong&gt;Save&lt;/strong&gt; button.&lt;br/&gt;3. Result: three separate tasks will be created in a tasks tree.</source>
         <translation type="unfinished">Для того, чтобы создать несколько задач одним действием, вы можете использовать специальный разделитель &lt;strong&gt;;;&lt;/strong&gt; в поле &lt;strong&gt;Название&lt;/strong&gt; во время создания задачи.&lt;br/&gt;&lt;br/&gt;Пример:&lt;br/&gt;1. Нажмите на кнопку &lt;strong&gt;Создать&lt;/strong&gt;.&lt;br/&gt;2. В поле &lt;strong&gt;Название&lt;/strong&gt; наберите что-то вроде &lt;strong&gt;задача1;;задача2;;задача3&lt;/strong&gt;, затем нажмите кнопку &lt;strong&gt;Сохранить&lt;/strong&gt;.&lt;br/&gt;3. Результат: три отдельных задачи будут созданы в дереве задач.</translation>
     </message>

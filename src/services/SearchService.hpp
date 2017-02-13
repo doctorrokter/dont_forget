@@ -11,6 +11,7 @@
 #include <QtCore/QObject>
 #include <bb/data/SqlDataAccess>
 #include <QtSql/QtSql>
+#include <QVariantMap>
 
 #include "TasksService.hpp"
 
@@ -27,11 +28,18 @@ public:
     void dbOpen();
     void init();
 
+private Q_SLOTS:
+    void onTaskCreated(const QVariantMap& task);
+    void onTaskUpdated(const QVariantMap& task);
+    void onTaskDeleted(const int id);
+
 private:
     QSqlDatabase m_database;
     SqlDataAccess* m_pSda;
 
     TasksService* m_pTaskService;
+
+    void addTask(const QVariantMap& taskMap);
 };
 
 #endif /* SEARCHSERVICE_HPP_ */

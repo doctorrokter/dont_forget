@@ -63,6 +63,7 @@ Q_SIGNALS:
     void activeTaskChanged(Task* newActiveTask);
     void taskCreated(QVariantMap newTask);
     void taskUpdated(QVariantMap updatedTask);
+    void taskDeleted(const int id);
     void allTasksExpanded();
     void allTasksUnexpanded();
     void viewModeChanged(const QString& viewMode);

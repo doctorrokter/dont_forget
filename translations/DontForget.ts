@@ -125,15 +125,23 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;strong&gt;Tap gestures&lt;/strong&gt;&lt;br/&gt;1. Single tap by task&apos;s label in a tasks tree will select this task and mark as &lt;strong&gt;active&lt;/strong&gt;. Task will become highlighted.&lt;br/&gt;2. If task is expandable (has children or has type Folder) you can expand or narrow task by clicking - or + button near task&apos;s icon.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;strong&gt;Pinch gestures&lt;/strong&gt;&lt;br/&gt;In order to expand or narrow all tasks in a tree you can use pinch gesture.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Bulk creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reminders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t Forget app &lt;strong&gt;does not provide&lt;/strong&gt; own reminder mechanism. Instead of it, app uses Remember as reminder mechanism.&lt;br/&gt;&lt;br/&gt;In order to get notified when task&apos;s deadline is coming you should do the following:&lt;br/&gt;1. Click by &lt;strong&gt;Create&lt;/strong&gt; button.&lt;br/&gt;2. Set &lt;strong&gt;Deadline&lt;/strong&gt;.&lt;br/&gt;3. Set &lt;strong&gt;Create in Remember&lt;/strong&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;strong&gt;Tap gestures&lt;/strong&gt;&lt;br/&gt;1. &lt;strong&gt;Single tap&lt;/strong&gt; by task&apos;s label in a tasks tree will select this task and mark as &lt;strong&gt;active&lt;/strong&gt;. Task will become highlighted.&lt;br/&gt;2. &lt;strong&gt;Double tap&lt;/strong&gt; by task&apos;s label will open task&apos;s details sheet.&lt;br/&gt;3. If task is expandable (has children or has type Folder) you can expand or narrow task by clicking - or + button near task&apos;s icon.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

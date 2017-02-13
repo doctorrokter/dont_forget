@@ -15,6 +15,29 @@ Page {
         scrollRole: ScrollRole.Main
         
         Container {
+            
+            Container {
+                Header {
+                    title: qsTr("Reminders") + Retranslate.onLocaleOrLanguageChanged
+                }
+                
+                Container {
+                    leftPadding: ui.du(2.5)
+                    rightPadding: ui.du(2.5)
+                    topPadding: ui.du(2.5)
+                    bottomPadding: ui.du(2.5)
+                    
+                    Label {
+                        text: qsTr("Don't Forget app <strong>does not provide</strong> own reminder mechanism. " + 
+                        "Instead of it, app uses Remember as reminder mechanism.<br/><br/>In order to get notified " + 
+                        "when task's deadline is coming you should do the following:<br/>1. Click by <strong>Create</strong> button.<br/>" + 
+                        "2. Set <strong>Deadline</strong>.<br/>3. Set <strong>Create in Remember</strong>.") + Retranslate.onLocaleOrLanguageChanged
+                        textFormat: TextFormat.Html
+                        multiline: true
+                    }
+                }
+            }
+            
             Container {
                 Header {
                     title: qsTr("Gestures") + Retranslate.onLocaleOrLanguageChanged
@@ -27,8 +50,9 @@ Page {
                     bottomPadding: ui.du(2.5)
                     
                     Label {
-                        text: qsTr("<strong>Tap gestures</strong><br/>1. Single tap by task's label in a tasks tree will select this task and mark as " + 
-                                   "<strong>active</strong>. Task will become highlighted.<br/>2. If task is expandable (has children or has type Folder)" + 
+                        text: qsTr("<strong>Tap gestures</strong><br/>1. <strong>Single tap</strong> by task's label in a tasks tree will select this task and mark as " + 
+                                   "<strong>active</strong>. Task will become highlighted.<br/>2. <strong>Double tap</strong> by task's label will open task's details sheet.<br/>" + 
+                                   "3. If task is expandable (has children or has type Folder)" + 
                                    " you can expand or narrow task by clicking - or + button near task's icon.") + Retranslate.onLocaleOrLanguageChanged
                         textFormat: TextFormat.Html
                         multiline: true

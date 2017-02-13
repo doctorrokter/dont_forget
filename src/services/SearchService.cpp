@@ -53,28 +53,64 @@ void SearchService::init() {
         if (m_pTaskService != NULL) {
             QVariantList tasks = m_pTaskService->findAll();
             for (int i = 0; i < tasks.size(); i++) {
-                Task task;
-                task.fromMap(tasks.at(i).toMap());
-
-                QString searchInfoQuery = "INSERT INTO search_info (rowid, icon_path, uri, timestamp, group_id) VALUES (:rowid, '', '', 0, :group_id)";
-                QVariantMap searchInfoData;
-                searchInfoData["rowid"] = task.getId();
-                searchInfoData["group_id"] = task.getId();
-
-                m_pSda->execute(searchInfoQuery, searchInfoData);
-
-                QString searchQuery = "INSERT INTO search (docid, title, description) VALUES (:docid, :title, :description)";
-                QVariantMap searchData;
-                searchData["docid"] = task.getId();
-                searchData["title"] = task.getName();
-                searchData["description"] = task.getDescription();
-
-                m_pSda->execute(searchQuery, searchData);
+                addTask(tasks.at(i).toMap());
             }
+            AppConfig::setStatic("search_db_indexed", "true");
         }
-        AppConfig::setStatic("search_db_indexed", "true");
     } else {
         qDebug() << "Search DB already indexed." << endl;
     }
+
+    if (m_pTaskService != NULL) {
+        bool res = QObject::connect(m_pTaskService, SIGNAL(taskCreated(const QVariantMap&)), this, SLOT(onTaskCreated(const QVariantMap&)));
+        Q_ASSERT(res);
+        res = QObject::connect(m_pTaskService, SIGNAL(taskUpdated(const QVariantMap&)), this, SLOT(onTaskUpdated(const QVariantMap&)));
+        Q_ASSERT(res);
+        res = QObject::connect(m_pTaskService, SIGNAL(taskDeleted(const int)), this, SLOT(onTaskDeleted(const int)));
+        Q_ASSERT(res);
+        Q_UNUSED(res);
+    }
+}
+
+void SearchService::onTaskCreated(const QVariantMap& taskMap) {
+    addTask(taskMap);
+}
+
+void SearchService::onTaskUpdated(const QVariantMap& taskMap) {
+    Task task;
+    task.fromMap(taskMap);
+
+    QString searchQuery = "UPDATE search SET title = :title, description = :description WHERE docid = :docid";
+    QVariantMap searchData;
+    searchData["docid"] = task.getId();
+    searchData["title"] = task.getName();
+    searchData["description"] = task.getDescription();
+
+    m_pSda->execute(searchQuery, searchData);
+}
+
+void SearchService::onTaskDeleted(const int id) {
+    m_pSda->execute(QString::fromLatin1("DELETE FROM search_info WHERE rowid = %1").arg(id));
+    m_pSda->execute(QString::fromLatin1("DELETE FROM search WHERE docid = %1").arg(id));
+}
+
+void SearchService::addTask(const QVariantMap& taskMap) {
+    Task task;
+    task.fromMap(taskMap);
+
+    QString searchInfoQuery = "INSERT INTO search_info (rowid, icon_path, uri, timestamp, group_id) VALUES (:rowid, '', '', 0, :group_id)";
+    QVariantMap searchInfoData;
+    searchInfoData["rowid"] = task.getId();
+    searchInfoData["group_id"] = task.getId();
+
+    m_pSda->execute(searchInfoQuery, searchInfoData);
+
+    QString searchQuery = "INSERT INTO search (docid, title, description) VALUES (:docid, :title, :description)";
+    QVariantMap searchData;
+    searchData["docid"] = task.getId();
+    searchData["title"] = task.getName();
+    searchData["description"] = task.getDescription();
+
+    m_pSda->execute(searchQuery, searchData);
 }
 

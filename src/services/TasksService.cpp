@@ -248,7 +248,7 @@ void TasksService::deleteTask(const int id) {
 
         cout << query.toStdString() << endl;
     }
-
+    emit taskDeleted(id);
 }
 
 void TasksService::moveTask(const int parentId) {
