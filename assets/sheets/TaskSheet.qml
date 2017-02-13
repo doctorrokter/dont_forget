@@ -154,8 +154,8 @@ Sheet {
         importantToggleButton.checked = false;
         deadLineToggleButton.checked = false;
         deadLineContainer.date = currDatePlus2Hourse();
-        taskName.resetText();
-        description.resetText();
+        taskName.value = "";
+        description.value = "";
         adjustFolderOption();
         adjustTaskOption();
     }
@@ -166,15 +166,8 @@ Sheet {
             deadLineToggleButton.checked = _tasksService.activeTask.deadline !== 0;
             folderOption.selected = _tasksService.activeTask.type === folderOption.value;
             taskOption.selected = _tasksService.activeTask.type === taskOption.value;
-            
-            var name = _tasksService.activeTask.name;
-            var desc = _tasksService.activeTask.description;
-            
-            console.debug("===>>> TASK NAME: ", name);
-            console.debug("===>>> TASK DESC: ", desc);
-            
-            taskName.value = name;
-            description.value = desc;
+            taskName.value = _tasksService.activeTask.name;
+            description.value = _tasksService.activeTask.description;
         } else {
             initialState();
         }

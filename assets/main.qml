@@ -70,63 +70,68 @@ NavigationPane {
         actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
         actionBarVisibility: ChromeVisibility.Overlay
         
-        ScrollView {
-            id: scrollView
+        Container {
             
-            property double pinchDistance: 0
-            
-            horizontalAlignment: HorizontalAlignment.Fill
-            verticalAlignment: VerticalAlignment.Fill
-            
-            scrollRole: ScrollRole.Main
+            layout: DockLayout {}
             
             Container {
-                horizontalAlignment: HorizontalAlignment.Fill
-                verticalAlignment: VerticalAlignment.Fill
-                
-                layout: DockLayout {}
-                
-                Container {
-                    id: tasksContainer
-                    objectName: "tasks_container"
-                    horizontalAlignment: HorizontalAlignment.Fill
-                    verticalAlignment: VerticalAlignment.Top
-                }
-                
-                Container {
-                    id: noTasksContainer
-                    visible: false
-                    horizontalAlignment: HorizontalAlignment.Center
-                    verticalAlignment: VerticalAlignment.Center
-                    Label {
-                        text: qsTr("You have no tasks yet. It's time to create new one!") + Retranslate.onLocaleOrLanguageChanged
-                        multiline: true
-                    }
-                }
-                
-                Container {
-                    horizontalAlignment: HorizontalAlignment.Fill
-                    minHeight: ui.du(12)
-                    verticalAlignment: VerticalAlignment.Bottom
+                id: noTasksContainer
+                visible: false
+                horizontalAlignment: HorizontalAlignment.Center
+                verticalAlignment: VerticalAlignment.Center
+                Label {
+                    text: qsTr("You have no tasks yet. It's time to create new one!") + Retranslate.onLocaleOrLanguageChanged
+                    multiline: true
                 }
             }
             
-            gestureHandlers: [
-                PinchHandler {
-                    onPinchStarted: {
-                        scrollView.pinchDistance = event.distance;
+            ScrollView {
+                id: scrollView
+                
+                property double pinchDistance: 0
+                
+                horizontalAlignment: HorizontalAlignment.Fill
+                verticalAlignment: VerticalAlignment.Fill
+                
+                scrollRole: ScrollRole.Main
+                
+                Container {
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    verticalAlignment: VerticalAlignment.Fill
+                    
+                    layout: StackLayout {
+                        orientation: LayoutOrientation.TopToBottom
                     }
                     
-                    onPinchEnded: {
-                        if (event.distance < scrollView.pinchDistance) {
-                            _tasksService.unexpandAll();
-                        } else {
-                            _tasksService.expandAll();
-                        }
-                        scrollView.pinchDistance = 0;
+                    Container {
+                        id: tasksContainer
+                        objectName: "tasks_container"
+                        horizontalAlignment: HorizontalAlignment.Fill
+                    }
+                    
+                    Container {
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        minHeight: ui.du(12)
                     }
                 }
-            ]
+                
+                gestureHandlers: [
+                    PinchHandler {
+                        onPinchStarted: {
+                            scrollView.pinchDistance = event.distance;
+                        }
+                        
+                        onPinchEnded: {
+                            if (event.distance < scrollView.pinchDistance) {
+                                _tasksService.unexpandAll();
+                            } else {
+                                _tasksService.expandAll();
+                            }
+                            scrollView.pinchDistance = 0;
+                        }
+                    }
+                ]
+            }
         }
         
         actions: [

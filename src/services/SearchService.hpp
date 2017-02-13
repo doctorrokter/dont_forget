@@ -12,12 +12,14 @@
 #include <bb/data/SqlDataAccess>
 #include <QtSql/QtSql>
 
+#include "TasksService.hpp"
+
 using namespace bb::data;
 
 class SearchService: public QObject {
     Q_OBJECT
 public:
-    SearchService(QObject* parent = 0);
+    SearchService(QObject* parent = 0, TasksService* tasksService = 0);
     virtual ~SearchService();
 
     static QString DB_PATH;
@@ -28,6 +30,8 @@ public:
 private:
     QSqlDatabase m_database;
     SqlDataAccess* m_pSda;
+
+    TasksService* m_pTaskService;
 };
 
 #endif /* SEARCHSERVICE_HPP_ */

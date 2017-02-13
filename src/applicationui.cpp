@@ -64,7 +64,7 @@ ApplicationUI::ApplicationUI() : QObject() {
     m_pTasksService = new TasksService(this);
     m_pTasksService->init();
 
-    m_pSearchService = new SearchService(this);
+    m_pSearchService = new SearchService(this, m_pTasksService);
     m_pSearchService->init();
 
     switch (m_pInvokeManager->startupMode()) {

@@ -5,11 +5,16 @@
  *      Author: misha
  */
 
-#include <src/services/SearchService.hpp>
+#include "SearchService.hpp"
+#include "../config/AppConfig.hpp"
+#include <QFile>
+#include <QVariantList>
+#include <QVariantMap>
+#include "../models/Task.hpp"
 
 QString SearchService::DB_PATH = "./sharewith/search/search.db";
 
-SearchService::SearchService(QObject* parent) : QObject(parent), m_pSda(NULL) {}
+SearchService::SearchService(QObject* parent, TasksService* tasksService) : QObject(parent), m_pSda(NULL), m_pTaskService(tasksService) {}
 
 SearchService::~SearchService() {
     delete m_pSda;
@@ -30,22 +35,46 @@ void SearchService::dbOpen() {
 void SearchService::init() {
     m_pSda = new SqlDataAccess(DB_PATH);
     m_pSda->execute("PRAGMA encoding = \"UTF-8\"");
-    m_pSda->execute("DROP TABLE IF EXISTS search");
-    m_pSda->execute("DROP TABLE IF EXISTS search_info");
 
-    m_pSda->execute("CREATE TABLE search_info (icon_path VARCHAR(128), "
-                                              "uri VARCHAR(128), "
-                                              "timestamp INTEGER NOT NULL DEFAULT 0, "
-                                              "group_id INTEGER NOT NULL DEFAULT 0)");
+    QString searchDbIndexed = AppConfig::getStatic("search_db_indexed").toString();
+    if (searchDbIndexed.isEmpty()) {
+        qDebug() << "Search DB not indexed yet. Will index it now." << endl;
 
-    m_pSda->execute("CREATE VIRTUAL TABLE search USING fts4 (title, description, TOKENIZE=icu)");
+        m_pSda->execute("DROP TABLE IF EXISTS search");
+        m_pSda->execute("DROP TABLE IF EXISTS search_info");
 
-    m_pSda->execute("INSERT INTO search_info (rowid, icon_path, uri, timestamp, group_id) VALUES (1, '', 'http://onliner.by', 0, 1)");
-    m_pSda->execute("INSERT INTO search_info (rowid, icon_path, uri, timestamp, group_id) VALUES (2, '', '', 0, 2)");
-    m_pSda->execute("INSERT INTO search_info (rowid, icon_path, uri, timestamp, group_id) VALUES (3, '', '', 0, 3)");
+        m_pSda->execute("CREATE TABLE search_info (icon_path VARCHAR(128), "
+                                                              "uri VARCHAR(128), "
+                                                              "timestamp INTEGER NOT NULL DEFAULT 0, "
+                                                              "group_id INTEGER NOT NULL DEFAULT 0)");
 
-    m_pSda->execute("INSERT INTO search (docid, title, description) VALUES (1, 'Onliner', 'Sranoe govno!')");
-    m_pSda->execute("INSERT INTO search (docid, title, description) VALUES (2, 'Task image', 'image')");
-    m_pSda->execute("INSERT INTO search (docid, title, description) VALUES (3, 'empty', '')");
+        m_pSda->execute("CREATE VIRTUAL TABLE search USING fts4 (title, description, TOKENIZE=icu)");
+
+        if (m_pTaskService != NULL) {
+            QVariantList tasks = m_pTaskService->findAll();
+            for (int i = 0; i < tasks.size(); i++) {
+                Task task;
+                task.fromMap(tasks.at(i).toMap());
+
+                QString searchInfoQuery = "INSERT INTO search_info (rowid, icon_path, uri, timestamp, group_id) VALUES (:rowid, '', '', 0, :group_id)";
+                QVariantMap searchInfoData;
+                searchInfoData["rowid"] = task.getId();
+                searchInfoData["group_id"] = task.getId();
+
+                m_pSda->execute(searchInfoQuery, searchInfoData);
+
+                QString searchQuery = "INSERT INTO search (docid, title, description) VALUES (:docid, :title, :description)";
+                QVariantMap searchData;
+                searchData["docid"] = task.getId();
+                searchData["title"] = task.getName();
+                searchData["description"] = task.getDescription();
+
+                m_pSda->execute(searchQuery, searchData);
+            }
+        }
+        AppConfig::setStatic("search_db_indexed", "true");
+    } else {
+        qDebug() << "Search DB already indexed." << endl;
+    }
 }
 
