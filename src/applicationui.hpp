@@ -49,6 +49,9 @@ public:
 
     Q_INVOKABLE void closeCard();
 
+Q_SIGNALS:
+    void taskSheetRequested();
+
 public Q_SLOTS:
     void onInvoked(const bb::system::InvokeRequest& request);
 
@@ -64,6 +67,8 @@ private:
     AppConfig* m_pAppConfig;
     TasksService* m_pTasksService;
     SearchService* m_pSearchService;
+
+    bool m_running;
 
     void initFullUI();
     void initComposerUI(const QString& pathToPage, const QString& data = "");

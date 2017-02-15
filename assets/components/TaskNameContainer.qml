@@ -8,6 +8,7 @@ Container {
     
     function resetText() {
         root.value = "";
+        textField.resetText();
     }
     
     Container {
@@ -23,7 +24,7 @@ Container {
         text: value
         inputMode: TextFieldInputMode.Text
         
-        onTextChanged: {
+        onTextChanging: {
             root.result = text;
         }
     }

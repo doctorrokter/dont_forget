@@ -154,8 +154,8 @@ Sheet {
         importantToggleButton.checked = false;
         deadLineToggleButton.checked = false;
         deadLineContainer.date = currDatePlus2Hourse();
-        taskName.value = "";
-        description.value = "";
+        taskName.resetText();
+        description.resetText();
         adjustFolderOption();
         adjustTaskOption();
     }

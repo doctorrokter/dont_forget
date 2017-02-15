@@ -43,12 +43,21 @@ void SearchService::init() {
         m_pSda->execute("DROP TABLE IF EXISTS search");
         m_pSda->execute("DROP TABLE IF EXISTS search_info");
 
+        m_pSda->execute("PRAGMA foreign_keys = ON");
         m_pSda->execute("CREATE TABLE search_info (icon_path VARCHAR(128), "
                                                               "uri VARCHAR(128), "
                                                               "timestamp INTEGER NOT NULL DEFAULT 0, "
-                                                              "group_id INTEGER NOT NULL DEFAULT 0)");
-
-        m_pSda->execute("CREATE VIRTUAL TABLE search USING fts4 (title, description, TOKENIZE=icu)");
+                                                              "group_id INTEGER NOT NULL DEFAULT 0,"
+                                                              "task_id INTEGER PRIMARY KEY NOT NULL DEFAULT 0,"
+                                                              "parent_id INTEGER DEFAULT NULL,"
+                                                              "FOREIGN KEY (parent_id) REFERENCES search_info(task_id) ON DELETE CASCADE ON UPDATE NO ACTION)");
+        m_pSda->execute("CREATE VIRTUAL TABLE search USING fts4 (title TEXT,"
+                                                                "description TEXT,"
+                                                                "TOKENIZE=icu)");
+        m_pSda->execute("CREATE TRIGGER Search_DELETE AFTER DELETE ON search_info\n"
+                        "BEGIN\n"
+                            "DELETE FROM search WHERE rowid = OLD.rowid;"
+                        "END;");
 
         if (m_pTaskService != NULL) {
             QVariantList tasks = m_pTaskService->findAll();
@@ -67,6 +76,8 @@ void SearchService::init() {
         res = QObject::connect(m_pTaskService, SIGNAL(taskUpdated(const QVariantMap&)), this, SLOT(onTaskUpdated(const QVariantMap&)));
         Q_ASSERT(res);
         res = QObject::connect(m_pTaskService, SIGNAL(taskDeleted(const int)), this, SLOT(onTaskDeleted(const int)));
+        Q_ASSERT(res);
+        res = QObject::connect(m_pTaskService, SIGNAL(taskMoved(const int, const int)), this, SLOT(onTaskMoved(const int, const int)));
         Q_ASSERT(res);
         Q_UNUSED(res);
     }
@@ -90,18 +101,39 @@ void SearchService::onTaskUpdated(const QVariantMap& taskMap) {
 }
 
 void SearchService::onTaskDeleted(const int id) {
-    m_pSda->execute(QString::fromLatin1("DELETE FROM search_info WHERE rowid = %1").arg(id));
+    m_pSda->execute("PRAGMA foreign_keys = ON");
+    m_pSda->execute(QString::fromLatin1("DELETE FROM search_info WHERE task_id = %1").arg(id));
     m_pSda->execute(QString::fromLatin1("DELETE FROM search WHERE docid = %1").arg(id));
+}
+
+void SearchService::onTaskMoved(const int id, const int parentId) {
+    QString parent = NULL;
+    if (parentId != 0) {
+        parent = QString::number(parentId);
+    }
+    QVariantMap searchInfoData;
+    searchInfoData["parent_id"] = parent;
+    searchInfoData["rowid"] = id;
+    m_pSda->execute("UPDATE search_info SET parent_id = :parent_id WHERE rowid = :rowid", searchInfoData);
 }
 
 void SearchService::addTask(const QVariantMap& taskMap) {
     Task task;
     task.fromMap(taskMap);
 
-    QString searchInfoQuery = "INSERT INTO search_info (rowid, icon_path, uri, timestamp, group_id) VALUES (:rowid, '', '', 0, :group_id)";
+    QString parentId = NULL;
+    if (!taskMap.value("parent_id").toString().isEmpty()) {
+        parentId = taskMap.value("parent_id").toString();
+    }
+
+    QString searchInfoQuery = "INSERT INTO search_info (rowid, icon_path, uri, timestamp, group_id, task_id, parent_id) VALUES (:rowid, '', '', 0, :group_id, :task_id, :parent_id)";
     QVariantMap searchInfoData;
     searchInfoData["rowid"] = task.getId();
     searchInfoData["group_id"] = task.getId();
+    searchInfoData["task_id"] = task.getId();
+    searchInfoData["parent_id"] = parentId;
+
+    qDebug() << searchInfoQuery << searchInfoData << endl;
 
     m_pSda->execute(searchInfoQuery, searchInfoData);
 
@@ -111,6 +143,7 @@ void SearchService::addTask(const QVariantMap& taskMap) {
     searchData["title"] = task.getName();
     searchData["description"] = task.getDescription();
 
+    qDebug() << searchQuery << searchData << endl;
+
     m_pSda->execute(searchQuery, searchData);
 }
-

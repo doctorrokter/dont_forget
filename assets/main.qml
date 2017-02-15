@@ -182,8 +182,9 @@ NavigationPane {
                 ]
             },
                         
-            ActionItem {
+            DeleteActionItem {
                 id: deleteActionItem
+                
                 enabled: _tasksService.activeTask !== null;
                 title: qsTr("Delete") + Retranslate.onLocaleOrLanguageChanged
                 imageSource: "asset:///images/ic_delete.png"
@@ -279,11 +280,6 @@ NavigationPane {
             
             ComponentDefinition {
                 id: moveTaskPage
-//                MoveTaskPage {
-//                    onTaskMove: {
-//                        navigation.pop();                        
-//                    }
-//                }
                 TasksListPage {
                     onTaskChosen: {
                         if (_tasksService.activeTask.parentId !== chosenTask.id) {
@@ -479,9 +475,15 @@ NavigationPane {
         }
     }
     
+    function openTaskSheetEditMode() {
+        taskSheet.mode = taskSheet.modes.UPDATE;
+        taskSheet.open();
+    }
+    
     onCreationCompleted: {
         renderTree();
         _tasksService.taskCreated.connect(navigation.onTaskCreated);
         _tasksService.taskMoved.connect(navigation.renderTree);
+        _app.taskSheetRequested.connect(navigation.openTaskSheetEditMode);
     }
 }

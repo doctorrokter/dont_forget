@@ -1,8 +1,9 @@
 1
-32
+33
 cards/CreateTaskFromTextCard.qml
 cards/CreateTaskFromUrlCard.qml
 cards/TestCard.qml
+cards/UpdateTaskCard.qml
 components/CustomTitleBar.qml
 components/DeleteTaskDialog.qml
 components/ExpandableButton.qml

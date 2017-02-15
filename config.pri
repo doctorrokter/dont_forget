@@ -39,6 +39,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/cards/CreateTaskFromTextCard.qml) \
         $$quote($$BASEDIR/assets/cards/CreateTaskFromUrlCard.qml) \
         $$quote($$BASEDIR/assets/cards/TestCard.qml) \
+        $$quote($$BASEDIR/assets/cards/UpdateTaskCard.qml) \
         $$quote($$BASEDIR/assets/components/CustomTitleBar.qml) \
         $$quote($$BASEDIR/assets/components/DeleteTaskDialog.qml) \
         $$quote($$BASEDIR/assets/components/ExpandableButton.qml) \

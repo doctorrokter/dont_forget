@@ -67,7 +67,7 @@ Q_SIGNALS:
     void allTasksExpanded();
     void allTasksUnexpanded();
     void viewModeChanged(const QString& viewMode);
-    void taskMoved();
+    void taskMoved(const int id, const int parentId);
 
 private:
     QSqlDatabase m_database;

@@ -77,7 +77,7 @@ Page {
             
             onTyping: {
                 var filteredTasks = tasks.filter(function(t) {
-                    return t.name.toLowerCase().indexOf(text.toLowerCase()) !== -1;
+                    return t.title.toLowerCase().indexOf(text.toLowerCase()) !== -1;
                 });
                 tasksDataModel.clear();
                 tasksDataModel.append(filteredTasks);

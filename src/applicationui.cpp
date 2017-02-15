@@ -31,6 +31,10 @@
 #include "services/TasksService.hpp"
 #include "services/SearchService.hpp"
 
+#define INVOKE_SEARCH_SOURCE "chachkouski.DontForget.search.asyoutype"
+#define INVOKE_CARD_EDIT_TEXT "chachkouski.DontForget.card.edit.text"
+#define INVOKE_CARD_EDIT_URI "chachkouski.DontForget.card.edit.uri"
+
 using namespace bb::cascades;
 using namespace bb::network;
 using namespace bb::system;
@@ -103,9 +107,11 @@ void ApplicationUI::initFullUI() {
     QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
     QDeclarativeEngine* engine = QmlDocument::defaultDeclarativeEngine();
     QDeclarativeContext* rootContext = engine->rootContext();
+    rootContext->setContextProperty("_app", this);
     rootContext->setContextProperty("_currentPath", QDir::currentPath());
     rootContext->setContextProperty("_appConfig", m_pAppConfig);
     rootContext->setContextProperty("_tasksService", m_pTasksService);
+    m_running = true;
 
     AbstractPane *root = qml->createRootObject<AbstractPane>();
     Application::instance()->setScene(root);
@@ -119,6 +125,7 @@ void ApplicationUI::initComposerUI(const QString& pathToPage, const QString& dat
 
     QDeclarativeEngine* engine = QmlDocument::defaultDeclarativeEngine();
     QDeclarativeContext* rootContext = engine->rootContext();
+    rootContext->setContextProperty("_app", this);
     rootContext->setContextProperty("_appConfig", m_pAppConfig);
     rootContext->setContextProperty("_tasksService", m_pTasksService);
     rootContext->setContextProperty("_data", data);
@@ -136,11 +143,20 @@ void ApplicationUI::onInvoked(const bb::system::InvokeRequest& request) {
     qDebug() << "Requested action: " << action << endl;
     qDebug() << "Requested mimeType: " << mimeType << endl;
 
-    if (target == "chachkouski.DontForget.search.asyoutype") {
-        initComposerUI("asset:///cards/CreateTaskFromUrlCard.qml");
-    } else if (target == "chachkouski.DontForget.card.edit.text") {
+    if (target == INVOKE_SEARCH_SOURCE) {
+        int id = QString::fromUtf8(request.data()).toInt();
+        m_pTasksService->setActiveTask(id);
+        if (m_running) {
+            qDebug() << "===>>> App already running: " << m_running << endl;
+            emit taskSheetRequested();
+        } else {
+            qDebug() << "===>>> Run app" << endl;
+            initFullUI();
+            emit taskSheetRequested();
+        }
+    } else if (target == INVOKE_CARD_EDIT_TEXT) {
         initComposerUI("asset:///cards/CreateTaskFromTextCard.qml", QString::fromUtf8(request.data()));
-    } else if (target == "chachkouski.DontForget.card.edit.uri") {
+    } else if (target == INVOKE_CARD_EDIT_URI) {
         initComposerUI("asset:///cards/CreateTaskFromUrlCard.qml", request.uri().toString());
     }
 //    if (action.compare("bb.action.PUSH") == 0) {

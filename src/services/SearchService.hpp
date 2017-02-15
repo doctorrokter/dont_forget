@@ -32,6 +32,7 @@ private Q_SLOTS:
     void onTaskCreated(const QVariantMap& task);
     void onTaskUpdated(const QVariantMap& task);
     void onTaskDeleted(const int id);
+    void onTaskMoved(const int id, const int parentId);
 
 private:
     QSqlDatabase m_database;

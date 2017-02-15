@@ -8,6 +8,7 @@ Container {
     
     function resetText() {
         root.value = "";
+        textArea.resetText();
     }
     
     Container {
@@ -27,7 +28,7 @@ Container {
         scrollMode: TextAreaScrollMode.Elastic
         inputMode: TextAreaInputMode.Text
         
-        onTextChanged: {
+        onTextChanging: {
             root.result = text;
         }
     }

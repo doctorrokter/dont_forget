@@ -290,9 +290,52 @@
     </message>
 </context>
 <context>
+    <name>UpdateTaskCard</name>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deadline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create in Remember</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Important</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Task updated!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>main</name>
     <message>
-        <source>All Tasks</source>
+        <source>Send feedback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have no tasks yet. It&apos;s time to create new one!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -320,11 +363,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Send feedback</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You have no tasks yet. It&apos;s time to create new one!</source>
+        <source>All Tasks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -332,11 +371,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Settings</source>
+        <source>Looks like you didn&apos;t grant permission for shared files. &quot;Don&apos;t Forget&quot; cannot work without this permission since the app stores own database in external resources. In order to use this app you should grant permissions in Settings, then restart the app.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Looks like you didn&apos;t grant permission for shared files. &quot;Don&apos;t Forget&quot; cannot work without this permission since the app stores own database in external resources. In order to use this app you should grant permissions in Settings, then restart the app.</source>
+        <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

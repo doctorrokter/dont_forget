@@ -266,7 +266,7 @@ void TasksService::moveTask(const int parentId) {
 
     m_pSda->execute(query, values);
 
-    emit taskMoved();
+    emit taskMoved(m_pActiveTask->getId(), parentId);
 }
 
 void TasksService::expandAll() {

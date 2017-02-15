@@ -304,7 +304,7 @@
 <context>
     <name>TaskDescriptionContainer</name>
     <message>
-        <location filename="../assets/components/TaskDescriptionContainer.qml" line="17"/>
+        <location filename="../assets/components/TaskDescriptionContainer.qml" line="18"/>
         <source>Description</source>
         <translation type="unfinished">Описание</translation>
     </message>
@@ -312,7 +312,7 @@
 <context>
     <name>TaskNameContainer</name>
     <message>
-        <location filename="../assets/components/TaskNameContainer.qml" line="17"/>
+        <location filename="../assets/components/TaskNameContainer.qml" line="18"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
@@ -420,6 +420,70 @@
     </message>
 </context>
 <context>
+    <name>UpdateTaskCard</name>
+    <message>
+        <source>Create task</source>
+        <translation type="obsolete">Создать задачу</translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/UpdateTaskCard.qml" line="21"/>
+        <source>Update task</source>
+        <translation type="unfinished">Обновить задачу</translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/UpdateTaskCard.qml" line="24"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Отмена</translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/UpdateTaskCard.qml" line="32"/>
+        <source>OK</source>
+        <translation type="unfinished">OK</translation>
+    </message>
+    <message>
+        <source>Create in: </source>
+        <translation type="obsolete">Создать в: </translation>
+    </message>
+    <message>
+        <source>Change placement</source>
+        <translation type="obsolete">Изменить расположение</translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/UpdateTaskCard.qml" line="80"/>
+        <source>Close task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/UpdateTaskCard.qml" line="97"/>
+        <source>Deadline</source>
+        <translation type="unfinished">Срок выполнения</translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/UpdateTaskCard.qml" line="109"/>
+        <source>Create in Remember</source>
+        <translation type="unfinished">Создать в Remember</translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/UpdateTaskCard.qml" line="115"/>
+        <source>Important</source>
+        <translation type="unfinished">Важно</translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/UpdateTaskCard.qml" line="127"/>
+        <source>Delete task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/UpdateTaskCard.qml" line="152"/>
+        <source>Task updated!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Task created!</source>
+        <translation type="obsolete">Задача создана!</translation>
+    </message>
+</context>
+<context>
     <name>main</name>
     <message>
         <location filename="../assets/main.qml" line="45"/>
@@ -427,8 +491,8 @@
         <translation type="unfinished">Обратная связь</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="262"/>
-        <location filename="../assets/main.qml" line="366"/>
+        <location filename="../assets/main.qml" line="263"/>
+        <location filename="../assets/main.qml" line="362"/>
         <source>All Tasks</source>
         <translation type="unfinished">Все задачи</translation>
     </message>
@@ -448,37 +512,37 @@
         <translation type="unfinished">Изменить</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="188"/>
+        <location filename="../assets/main.qml" line="189"/>
         <source>Delete</source>
         <translation type="unfinished">Удалить</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="219"/>
+        <location filename="../assets/main.qml" line="220"/>
         <source>Hide closed</source>
         <translation type="unfinished">Не показывать закрытые</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="221"/>
+        <location filename="../assets/main.qml" line="222"/>
         <source>Show all</source>
         <translation type="unfinished">Показать все</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="236"/>
+        <location filename="../assets/main.qml" line="237"/>
         <source>Move</source>
         <translation type="unfinished">Переместить</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="330"/>
+        <location filename="../assets/main.qml" line="326"/>
         <source>Permission required</source>
         <translation type="unfinished">Требуются права</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="331"/>
+        <location filename="../assets/main.qml" line="327"/>
         <source>Looks like you didn&apos;t grant permission for shared files. &quot;Don&apos;t Forget&quot; cannot work without this permission since the app stores own database in external resources. In order to use this app you should grant permissions in Settings, then restart the app.</source>
         <translation type="unfinished">Похоже Вы не дали права на использование общих файлов приложением. &quot;Don&apos;t Forget&quot; не может работать без этих прав, так как хранит собственную базу данных во внешних ресурсах. Для того, чтобы пользоваться этим приложением, Вам необходимо добавить права в Настройках, затем перезапустить приложение.</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="334"/>
+        <location filename="../assets/main.qml" line="330"/>
         <source>Settings</source>
         <translation type="unfinished">Настройки</translation>
     </message>
