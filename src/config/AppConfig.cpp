@@ -10,6 +10,8 @@
 bool AppConfig::USING_PUBLIC_PPG = true;
 QString AppConfig::PROVIDER_APP_ID = "300065-910B145627tryr34c5425h82824k3s724";
 QString AppConfig::PPG_URL = "http://cp300065.pushapi.eval.blackberry.com";
+QString AppConfig::PUSH_URL = "https://cp300065.pushapi.eval.blackberry.com";
+QString AppConfig::PUSH_PASSWORD = "nr2rA2W7";
 bool AppConfig::LAUNCH_APP_ON_PUSH = true;
 QSettings AppConfig::CONF;
 

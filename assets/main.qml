@@ -254,6 +254,15 @@ NavigationPane {
                         }
                     }
                 ]
+            },
+            
+            ActionItem {
+                id: sentActionItem
+                title: qsTr("Send") + Retranslate.onLocaleOrLanguageChanged
+                
+                onTriggered: {
+                    _pushService.pushMessageToUser("2AB9B718", 2, "Test", "Test message");
+                }
             }
         ]
         

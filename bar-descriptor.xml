@@ -109,28 +109,30 @@
     <permission system="true">run_native</permission>
     <permission>access_pimdomain_notebooks</permission>
     <permission>access_shared</permission>
+    <permission>post_notification</permission>
+    <permission system="true">_sys_use_consumer_push</permission>
     <env var="LD_LIBRARY_PATH" value="app/native/lib:/usr/lib/qt4/lib"/>
     <env var="CASCADES_THEME" value="default?primaryColor=0x0092CC&amp;primaryBase=0x087099"/>
     
     <!-- Need to put an invoke entry here for push -->
     <!-- The id here must match the invokeTargetID in the PushService constructor -->
-    <!-- <invoke-target id="chachkouski.DontForget.invoke.push">
-      <type>APPLICATION</type>
+    <invoke-target id="chachkouski.DontForget.invoke.push">
+      <type>application</type>
       <filter>
          <action>bb.action.PUSH</action>
          <mime-type>application/vnd.push</mime-type>
       </filter>
-    </invoke-target> -->
+    </invoke-target>
     
     <!-- Have an invoke entry here for when a notification is clicked on in the BlackBerry Hub -->
   	<!-- This will cause the application to be opened -->
-    <!-- <invoke-target id="chachkouski.DontForget.invoke.open">
-      <type>APPLICATION</type>
+    <invoke-target id="chachkouski.DontForget.invoke.open">
+      <type>application</type>
       <filter>
          <action>bb.action.OPEN</action>
          <mime-type>text/plain</mime-type>
       </filter>
-    </invoke-target> -->
+    </invoke-target>
     
     <!-- <invoke-target id="chachkouski.DontForget.image.view">
   		<invoke-target-type>APPLICATION</invoke-target-type>

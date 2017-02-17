@@ -273,6 +273,10 @@
         <source>Important</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Task done</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TasksListPage</name>
@@ -376,6 +380,10 @@
     </message>
     <message>
         <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

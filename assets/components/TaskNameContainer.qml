@@ -11,6 +11,10 @@ Container {
         textField.resetText();
     }
     
+    function requestFocus() {
+        textField.requestFocus();
+    }
+    
     Container {
         leftPadding: ui.du(2.5)
         topPadding: ui.du(2.5)

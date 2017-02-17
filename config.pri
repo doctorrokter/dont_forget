@@ -36,6 +36,7 @@ simulator {
 
 config_pri_assets {
     OTHER_FILES += \
+        $$quote($$BASEDIR/assets/_js/PushService.js) \
         $$quote($$BASEDIR/assets/cards/CreateTaskFromTextCard.qml) \
         $$quote($$BASEDIR/assets/cards/CreateTaskFromUrlCard.qml) \
         $$quote($$BASEDIR/assets/cards/TestCard.qml) \
@@ -68,7 +69,9 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/pages/MoveTaskPage.qml) \
         $$quote($$BASEDIR/assets/pages/SettingsPage.qml) \
         $$quote($$BASEDIR/assets/pages/TasksListPage.qml) \
-        $$quote($$BASEDIR/assets/sheets/TaskSheet.qml)
+        $$quote($$BASEDIR/assets/sheets/TaskSheet.qml) \
+        $$quote($$BASEDIR/assets/templates/pap_push.template) \
+        $$quote($$BASEDIR/assets/templates/pap_subscription.template)
 }
 
 config_pri_source_group1 {
@@ -126,6 +129,9 @@ lupdate_inclusion {
         $$quote($$BASEDIR/../assets/*.qml) \
         $$quote($$BASEDIR/../assets/*.js) \
         $$quote($$BASEDIR/../assets/*.qs) \
+        $$quote($$BASEDIR/../assets/_js/*.qml) \
+        $$quote($$BASEDIR/../assets/_js/*.js) \
+        $$quote($$BASEDIR/../assets/_js/*.qs) \
         $$quote($$BASEDIR/../assets/cards/*.qml) \
         $$quote($$BASEDIR/../assets/cards/*.js) \
         $$quote($$BASEDIR/../assets/cards/*.qs) \
@@ -140,7 +146,10 @@ lupdate_inclusion {
         $$quote($$BASEDIR/../assets/pages/*.qs) \
         $$quote($$BASEDIR/../assets/sheets/*.qml) \
         $$quote($$BASEDIR/../assets/sheets/*.js) \
-        $$quote($$BASEDIR/../assets/sheets/*.qs)
+        $$quote($$BASEDIR/../assets/sheets/*.qs) \
+        $$quote($$BASEDIR/../assets/templates/*.qml) \
+        $$quote($$BASEDIR/../assets/templates/*.js) \
+        $$quote($$BASEDIR/../assets/templates/*.qs)
 
     HEADERS += \
         $$quote($$BASEDIR/../src/*.h) \

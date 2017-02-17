@@ -34,6 +34,8 @@
 #define INVOKE_SEARCH_SOURCE "chachkouski.DontForget.search.asyoutype"
 #define INVOKE_CARD_EDIT_TEXT "chachkouski.DontForget.card.edit.text"
 #define INVOKE_CARD_EDIT_URI "chachkouski.DontForget.card.edit.uri"
+#define CREATE_TASK_FROM_TEXT_CARD "asset:///cards/CreateTaskFromTextCard.qml"
+#define CREATE_TASK_FROM_URL_CARD "asset:///cards/CreateTaskFromUrlCard.qml"
 
 using namespace bb::cascades;
 using namespace bb::network;
@@ -71,6 +73,9 @@ ApplicationUI::ApplicationUI() : QObject() {
     m_pSearchService = new SearchService(this, m_pTasksService);
     m_pSearchService->init();
 
+    m_pPushService = new PushNotificationService(this);
+    m_pPushService->initPushService();
+
     switch (m_pInvokeManager->startupMode()) {
         case ApplicationStartupMode::LaunchApplication:
             m_startupMode = "Launch";
@@ -86,7 +91,7 @@ ApplicationUI::ApplicationUI() : QObject() {
             break;
         }
 
-    qDebug() << "===>>> Startup mode: " << m_startupMode << endl;
+//    qDebug() << "===>>> Startup mode: " << m_startupMode << endl;
 }
 
 void ApplicationUI::onSystemLanguageChanged() {
@@ -111,6 +116,7 @@ void ApplicationUI::initFullUI() {
     rootContext->setContextProperty("_currentPath", QDir::currentPath());
     rootContext->setContextProperty("_appConfig", m_pAppConfig);
     rootContext->setContextProperty("_tasksService", m_pTasksService);
+    rootContext->setContextProperty("_pushService", m_pPushService);
     m_running = true;
 
     AbstractPane *root = qml->createRootObject<AbstractPane>();
@@ -118,7 +124,7 @@ void ApplicationUI::initFullUI() {
 }
 
 void ApplicationUI::initComposerUI(const QString& pathToPage, const QString& data) {
-    qDebug() << "Init Composer UI with data: " << data << endl;
+//    qDebug() << "Init Composer UI with data: " << data << endl;
 
     QmlDocument *qml = QmlDocument::create(pathToPage);
     qml->setContextProperty("_app", this);
@@ -147,37 +153,26 @@ void ApplicationUI::onInvoked(const bb::system::InvokeRequest& request) {
         int id = QString::fromUtf8(request.data()).toInt();
         m_pTasksService->setActiveTask(id);
         if (m_running) {
-            qDebug() << "===>>> App already running: " << m_running << endl;
             emit taskSheetRequested();
         } else {
-            qDebug() << "===>>> Run app" << endl;
             initFullUI();
             emit taskSheetRequested();
         }
     } else if (target == INVOKE_CARD_EDIT_TEXT) {
-        initComposerUI("asset:///cards/CreateTaskFromTextCard.qml", QString::fromUtf8(request.data()));
+        initComposerUI(CREATE_TASK_FROM_TEXT_CARD, QString::fromUtf8(request.data()));
     } else if (target == INVOKE_CARD_EDIT_URI) {
-        initComposerUI("asset:///cards/CreateTaskFromUrlCard.qml", request.uri().toString());
+        initComposerUI(CREATE_TASK_FROM_URL_CARD, request.uri().toString());
+    } else if (target == INVOKE_TARGET_KEY_PUSH) {
+        PushPayload payload(request);
+        if (payload.isValid()) {
+            qDebug() << "Payload is valid. Processing now." << endl;
+            if (payload.isAckRequired()) {
+                qDebug() << "ACK required. Sending..." << endl;
+                m_pPushService->getPushService()->acceptPush(payload.id());
+            }
+
+            QString data = payload.data();
+            qDebug() << data << endl;
+        }
     }
-//    if (action.compare("bb.action.PUSH") == 0) {
-//        PushPayload payload(request);
-//        if (payload.isValid()) {
-//            qDebug() << "Payload is valid. Processing now." << endl;
-//            if (payload.isAckRequired()) {
-//                qDebug() << "ACK required. Sending..." << endl;
-//                m_pPushService->getPushService()->acceptPush(payload.id());
-//            }
-//
-//            QString data = payload.data();
-//            qDebug() << data << endl;
-//        }
-//    } else if (action.compare("bb.action.SEARCH.EXTENDED") == 0) {
-//        qDebug() << "Test: handleInvoke()";
-//        qDebug() << "Invoke action:" << request.action();
-//        qDebug() << "Search term:" << request.data();
-//    } else if (action.compare("bb.action.SEARCH.SOURCE") == 0) {
-//        qDebug() << "Test: handleInvoke()";
-//        qDebug() << "Invoke action:" << request.action();
-//        qDebug() << "Search term:" << request.data();
-//    }
 }

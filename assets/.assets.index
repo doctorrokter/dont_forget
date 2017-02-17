@@ -1,5 +1,5 @@
 1
-33
+36
 cards/CreateTaskFromTextCard.qml
 cards/CreateTaskFromUrlCard.qml
 cards/TestCard.qml
@@ -33,3 +33,6 @@ pages/MoveTaskPage.qml
 pages/SettingsPage.qml
 pages/TasksListPage.qml
 sheets/TaskSheet.qml
+templates/pap_push.template
+templates/pap_subscription.template
+_js/PushService.js

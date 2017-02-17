@@ -38,7 +38,7 @@ void SearchService::init() {
 
     QString searchDbIndexed = AppConfig::getStatic("search_db_indexed").toString();
     if (searchDbIndexed.isEmpty()) {
-        qDebug() << "Search DB not indexed yet. Will index it now." << endl;
+//        qDebug() << "Search DB not indexed yet. Will index it now." << endl;
 
         m_pSda->execute("DROP TABLE IF EXISTS search");
         m_pSda->execute("DROP TABLE IF EXISTS search_info");
@@ -67,7 +67,7 @@ void SearchService::init() {
             AppConfig::setStatic("search_db_indexed", "true");
         }
     } else {
-        qDebug() << "Search DB already indexed." << endl;
+//        qDebug() << "Search DB already indexed." << endl;
     }
 
     if (m_pTaskService != NULL) {
@@ -133,7 +133,7 @@ void SearchService::addTask(const QVariantMap& taskMap) {
     searchInfoData["task_id"] = task.getId();
     searchInfoData["parent_id"] = parentId;
 
-    qDebug() << searchInfoQuery << searchInfoData << endl;
+//    qDebug() << searchInfoQuery << searchInfoData << endl;
 
     m_pSda->execute(searchInfoQuery, searchInfoData);
 
@@ -143,7 +143,7 @@ void SearchService::addTask(const QVariantMap& taskMap) {
     searchData["title"] = task.getName();
     searchData["description"] = task.getDescription();
 
-    qDebug() << searchQuery << searchData << endl;
+//    qDebug() << searchQuery << searchData << endl;
 
     m_pSda->execute(searchQuery, searchData);
 }

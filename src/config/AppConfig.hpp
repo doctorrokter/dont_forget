@@ -26,6 +26,8 @@ public:
     static bool USING_PUBLIC_PPG;
     static QString PROVIDER_APP_ID;
     static QString PPG_URL;
+    static QString PUSH_URL;
+    static QString PUSH_PASSWORD;
     static bool LAUNCH_APP_ON_PUSH;
     static QSettings CONF;
 

@@ -34,6 +34,7 @@ Sheet {
                     var deadline = deadLineToggleButton.checked ? new Date(deadLineContainer.result).getTime() / 1000 : 0;
                     var important = importantToggleButton.checked ? 1 : 0;
                     var createInRemember = rememberToggleButton.checked ? 1 : 0;
+                    var closed = closeTaskCheckbox.checked ? 1 : 0;
                     
                     if (taskSheet.mode === taskSheet.modes.CREATE) {
                         var names = taskName.result.split(";;");
@@ -41,7 +42,7 @@ Sheet {
                                 _tasksService.createTask(name.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember);
                         });
                     } else {
-                        _tasksService.updateTask(taskName.result.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember);
+                        _tasksService.updateTask(taskName.result.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, closed);
                     }
                     taskSheet.close();    
                 }
@@ -63,6 +64,27 @@ Sheet {
                 
                 TaskDescriptionContainer {
                     id: description
+                }
+                
+                Container {
+                    visible: taskSheet.mode === taskSheet.modes.UPDATE
+                    leftPadding: ui.du(2.5)
+                    topPadding: ui.du(2.5)
+                    rightPadding: ui.du(2.5)
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    
+                    layout: DockLayout {}
+                    
+                    Label {
+                        horizontalAlignment: HorizontalAlignment.Left
+                        text: qsTr("Task done") + Retranslate.onLocaleOrLanguageChanged
+                    }
+                    
+                    CheckBox {
+                        id: closeTaskCheckbox
+                        checked: false
+                        horizontalAlignment: HorizontalAlignment.Right
+                    }
                 }
                 
                 Container {
@@ -160,6 +182,10 @@ Sheet {
         adjustTaskOption();
     }
     
+    function adjustClosedTask() {
+        closeTaskCheckbox.checked = _tasksService.activeTask !== null && _tasksService.activeTask.closed;
+    }
+    
     onOpened: {
         if (taskSheet.mode === taskSheet.modes.UPDATE) {
             importantToggleButton.checked = _tasksService.activeTask.important;
@@ -173,10 +199,13 @@ Sheet {
         }
         adjustCreateInRemember();
         adjustDeadline();
+        adjustClosedTask();
+        taskName.requestFocus();
     }
     
     onClosed: {
         taskSheet.mode = taskSheet.modes.CREATE;
+        closeTaskCheckbox.checked = false;
         initialState();
     }
 }

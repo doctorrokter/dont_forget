@@ -110,8 +110,12 @@ void TasksService::changeClosed(const int id, const bool closed) {
     int state = closed ? 1 : 0;
     QString query = QString::fromLatin1("UPDATE tasks SET closed = %1 WHERE id = %2").arg(state).arg(id);
 
-    cout << query.toStdString() << endl;
+//    cout << query.toStdString() << endl;
     m_pSda->execute(query);
+    if (m_pActiveTask != NULL) {
+        m_pActiveTask->setClosed(closed);
+        emit activeTaskChanged(m_pActiveTask);
+    }
 
     Task task;
     task.fromMap(findById(id));
@@ -129,7 +133,7 @@ void TasksService::changeExpanded(const int id, const bool expanded) {
     int state = expanded ? 1 : 0;
     QString query = QString::fromLatin1("UPDATE tasks SET expanded = %1 WHERE id = %2").arg(state).arg(id);
 
-    cout << query.toStdString() << endl;
+//    cout << query.toStdString() << endl;
 
     m_pSda->execute(query);
 }
@@ -174,7 +178,7 @@ void TasksService::createTask(const QString name, const QString description, con
     values["closed"] = 0;
     values["expanded"] = 1;
 
-    cout << query.toStdString() << endl;
+//    cout << query.toStdString() << endl;
 
     m_pSda->execute(query, values);
     QVariantMap taskMap = m_pSda->execute("SELECT * FROM tasks ORDER BY id DESC LIMIT 1").toList().at(0).toMap();
@@ -182,7 +186,7 @@ void TasksService::createTask(const QString name, const QString description, con
     emit taskCreated(taskMap);
 }
 
-void TasksService::updateTask(const QString name, const QString description, const QString type, const int deadline, const int important, const int createInRemember) {
+void TasksService::updateTask(const QString name, const QString description, const QString type, const int deadline, const int important, const int createInRemember, const int closed) {
     QString rememberId = NULL;
 
     if (createInRemember) {
@@ -204,7 +208,7 @@ void TasksService::updateTask(const QString name, const QString description, con
         }
     }
 
-    QString query = "UPDATE tasks SET name = :name, description = :description, type = :type, deadline = :deadline, important = :important, remember_id = :remember_id WHERE id = :id";
+    QString query = "UPDATE tasks SET name = :name, description = :description, type = :type, deadline = :deadline, important = :important, remember_id = :remember_id, closed = :closed WHERE id = :id";
     QVariantMap values;
     values["name"] = name;
     values["description"] = description;
@@ -212,9 +216,10 @@ void TasksService::updateTask(const QString name, const QString description, con
     values["deadline"] = deadline;
     values["important"] = important;
     values["remember_id"] = rememberId;
+    values["closed"] = closed;
     values["id"] = m_pActiveTask->getId();
 
-    qDebug() << query << values << endl;
+//    qDebug() << query << values << endl;
 
     m_pSda->execute(query, values);
 
@@ -234,7 +239,7 @@ void TasksService::deleteTask(const int id) {
 
             query = query.arg(m_pActiveTask->getId());
 
-            cout << query.toStdString() << endl;
+//            cout << query.toStdString() << endl;
 
             m_pSda->execute("PRAGMA foreign_keys = ON");
             m_pSda->execute(query);
@@ -246,7 +251,7 @@ void TasksService::deleteTask(const int id) {
         query = query.arg(id);
         m_pSda->execute(query);
 
-        cout << query.toStdString() << endl;
+//        cout << query.toStdString() << endl;
     }
     emit taskDeleted(id);
 }
@@ -262,7 +267,7 @@ void TasksService::moveTask(const int parentId) {
     values.append(parent);
     values.append(m_pActiveTask->getId());
 
-    qDebug() << query << values << endl;
+//    qDebug() << query << values << endl;
 
     m_pSda->execute(query, values);
 
@@ -358,11 +363,11 @@ void TasksService::sync() {
                 values["closed"] = note.status() == NotebookEntryStatus::Completed ? 1 : 0;
                 values["id"] = taskMap.value("id").toInt();
 
-                cout << query.toStdString() << endl;
+//                cout << query.toStdString() << endl;
                 m_pSda->execute(query, values);
             } else {
                 QString query = QString::fromLatin1("UPDATE tasks SET remember_id = NULL WHERE id = %1").arg(taskMap.value("id").toInt());
-                cout << query.toStdString() << endl;
+//                cout << query.toStdString() << endl;
                 m_pSda->execute(query);
             }
          }
