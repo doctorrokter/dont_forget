@@ -68,6 +68,7 @@ public:
     Q_INVOKABLE void setChildren(const QList<Task>& children);
 
     Q_INVOKABLE QVariantMap toMap() const;
+    Q_INVOKABLE QVariantMap toJson() const;
     Q_INVOKABLE void fromMap(const QVariantMap taskMap);
 
     Q_INVOKABLE void addChild(Task& task);

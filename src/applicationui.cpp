@@ -24,7 +24,11 @@
 #include <bb/cascades/ThemeSupport>
 #include <bb/network/PushPayload>
 #include <QVariantList>
+#include <QList>
+#include <QVariantMap>
 #include <bb/system/InvokeRequest>
+#include <bb/data/JsonDataAccess>
+#include <bb/platform/Notification>
 
 #include "config/AppConfig.hpp"
 #include "models/Task.hpp"
@@ -40,6 +44,8 @@
 using namespace bb::cascades;
 using namespace bb::network;
 using namespace bb::system;
+using namespace bb::data;
+using namespace bb::platform;
 
 ApplicationUI::ApplicationUI() : QObject() {
     m_pTranslator = new QTranslator(this);
@@ -63,7 +69,6 @@ ApplicationUI::ApplicationUI() : QObject() {
 
     bool res = QObject::connect(m_pLocaleHandler, SIGNAL(systemLanguageChanged()), this, SLOT(onSystemLanguageChanged()));
     Q_ASSERT(res);
-    Q_UNUSED(res);
 
     onSystemLanguageChanged();
 
@@ -75,6 +80,12 @@ ApplicationUI::ApplicationUI() : QObject() {
 
     m_pPushService = new PushNotificationService(this);
     m_pPushService->initPushService();
+
+    m_pDropboxService = new DropboxService(this);
+
+    res = QObject::connect(m_pDropboxService, SIGNAL(fileLoaded(const QString&)), this, SLOT(processTasksContent(const QString&)));
+    Q_ASSERT(res);
+    Q_UNUSED(res);
 
     switch (m_pInvokeManager->startupMode()) {
         case ApplicationStartupMode::LaunchApplication:
@@ -117,6 +128,7 @@ void ApplicationUI::initFullUI() {
     rootContext->setContextProperty("_appConfig", m_pAppConfig);
     rootContext->setContextProperty("_tasksService", m_pTasksService);
     rootContext->setContextProperty("_pushService", m_pPushService);
+    rootContext->setContextProperty("_dropboxService", m_pDropboxService);
     m_running = true;
 
     AbstractPane *root = qml->createRootObject<AbstractPane>();
@@ -138,6 +150,48 @@ void ApplicationUI::initComposerUI(const QString& pathToPage, const QString& dat
 
     AbstractPane *root = qml->createRootObject<AbstractPane>();
     Application::instance()->setScene(root);
+}
+
+void ApplicationUI::processTasksContent(const QString& tasksContent) {
+    JsonDataAccess jda;
+    QVariant dataVar = jda.loadFromBuffer(tasksContent);
+    if (!jda.hasError()) {
+        qDebug() << tasksContent << endl;
+
+        QVariantMap dataMap = dataVar.toMap();
+        qDebug() << dataMap << endl;
+
+        processReceivedTaskMap(dataMap, 0);
+
+        Notification* p_notification = new Notification(this);
+        p_notification->setTitle("Don't Forget");
+        p_notification->setBody(tr("Tasks received!"));
+        p_notification->notify();
+        p_notification->deleteLater();
+
+        emit tasksReceived();
+        if (!m_running) {
+            Application::quit();
+        }
+    } else {
+        qDebug() << jda.error() << endl;
+    }
+}
+
+void ApplicationUI::processReceivedTaskMap(const QVariantMap& taskMap, const int parentId) {
+    Task task;
+    task.fromMap(taskMap);
+    task.setParentId(parentId);
+
+    m_pTasksService->copyTask(task);
+
+    QVariantList children = taskMap.value("children").toList();
+    task.fromMap(m_pTasksService->lastCreated());
+    if (!children.isEmpty()) {
+        foreach(QVariant t, children) {
+            processReceivedTaskMap(t.toMap(), task.getId());
+        }
+    }
 }
 
 void ApplicationUI::onInvoked(const bb::system::InvokeRequest& request) {
@@ -171,8 +225,18 @@ void ApplicationUI::onInvoked(const bb::system::InvokeRequest& request) {
                 m_pPushService->getPushService()->acceptPush(payload.id());
             }
 
-            QString data = payload.data();
+            QString data = QString::fromUtf8(payload.data());
             qDebug() << data << endl;
+
+            JsonDataAccess jda;
+            QVariant dataVar = jda.loadFromBuffer(data);
+            if (!jda.hasError()) {
+                QVariantMap dataMap = dataVar.toMap();
+                m_pDropboxService->loadFile(dataMap.value("body").toMap().value("link").toString());
+            } else {
+                qDebug() << jda.error() << endl;
+            }
+
         }
     }
 }

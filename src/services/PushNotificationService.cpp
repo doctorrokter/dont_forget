@@ -29,8 +29,8 @@ void PushNotificationService::initPushService() {
     if (!m_pPushService) {
         m_pPushService = new PushService(AppConfig::PROVIDER_APP_ID, INVOKE_TARGET_KEY_PUSH, this);
 
-        connect(m_pPushService, SIGNAL(createSessionCompleted(const PushStatus&)), this, SLOT(createSessionCompleted(const PushStatus&)));
-        connect(m_pPushService, SIGNAL(createChannelCompleted(const PushStatus&, const QString&)), this, SLOT(createChannelCompleted(const PushStatus&, const QString&)));
+        connect(m_pPushService, SIGNAL(createSessionCompleted(const bb::network::PushStatus&)), this, SLOT(createSessionCompleted(const bb::network::PushStatus&)));
+        connect(m_pPushService, SIGNAL(createChannelCompleted(const bb::network::PushStatus&, const QString&)), this, SLOT(createChannelCompleted(const bb::network::PushStatus&, const QString&)));
 
         m_pPushService->createSession();
     }
@@ -102,7 +102,7 @@ void PushNotificationService::pushMessageToSpecifiedUsers(const QString &papForm
 
     QString postData = readFile("pap_push.template");
     generatePushMessagePostData(postData, papFormattedAddresses, pushMessage);
-    networkAccessManager.post(networkRequest, postData.toAscii());
+    networkAccessManager.post(networkRequest, postData.toUtf8());
     qDebug() << postData;
 }
 
@@ -115,7 +115,7 @@ void PushNotificationService::requestSubscribedUserList() {
 
     QString postData = readFile("pap_subscription.template");
     generateSubscriptionQueryPostData(postData);
-    networkAccessManager.post(networkRequest, postData.toAscii());
+    networkAccessManager.post(networkRequest, postData.toUtf8());
     qDebug() << postData;
 }
 
@@ -174,7 +174,10 @@ void PushNotificationService::papFormatAddress(QString &address) {
 }
 
 void PushNotificationService::generatePushMessage(QString& pushMessage, const int priority, const QString &title, const QString &body) {
-    pushMessage = QString("%1|%2|%3").arg(priority).arg(title).arg(body);
+    Q_UNUSED(priority);
+    Q_UNUSED(title);
+//    pushMessage = QString("{\"priority\": %1, \"title\": \"%2\", \"body\": %3}").arg(priority).arg(title).arg(body);
+    pushMessage = QString("{\"body\": %1}").arg(body);
 }
 
 void PushNotificationService::log(const QString& message) {

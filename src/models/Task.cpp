@@ -8,7 +8,7 @@
 #include "Task.hpp"
 #include <QVariantList>
 
-Task::Task(QObject* parent) : QObject(parent), m_id(0), m_name(""), m_description(""), m_type("FOLDER"), m_parentId(0), m_important(false), m_closed(false), m_expanded(true) {}
+Task::Task(QObject* parent) : QObject(parent), m_id(0), m_name(""), m_description(""), m_type("FOLDER"), m_parentId(0), m_deadline(0), m_important(false), m_closed(false), m_expanded(true) {}
 
 Task::Task(const Task& task) : QObject(task.parent()) {
     if (this != &task) {
@@ -139,6 +139,21 @@ QVariantMap Task::toMap() const {
         children.append(m_children.at(i).toMap());
     }
     map.insert("children", children);
+    return map;
+}
+
+QVariantMap Task::toJson() const {
+    QVariantMap map;
+    map.insert("id", this->getId());
+    map.insert("name", this->getName());
+    map.insert("description", this->getDescription());
+    map.insert("type", this->getType());
+    map.insert("parent_id", this->getParentId());
+    map.insert("deadline", this->getDeadline());
+    map.insert("important", this->isImportant() ? 1 : 0);
+    map.insert("closed", this->isClosed() ? 1 : 0);
+    map.insert("expanded", this->isExpanded() ? 1 : 0);
+    map.insert("remember_id", this->getRememberId());
     return map;
 }
 

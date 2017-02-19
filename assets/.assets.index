@@ -26,6 +26,7 @@ images/ic_forward.png
 images/ic_minus.png
 images/ic_plus.png
 images/ic_search.png
+images/ic_share.png
 images/yellow_pellet.png
 main.qml
 pages/HelpPage.qml
@@ -35,4 +36,3 @@ pages/TasksListPage.qml
 sheets/TaskSheet.qml
 templates/pap_push.template
 templates/pap_subscription.template
-_js/PushService.js

@@ -36,7 +36,6 @@ simulator {
 
 config_pri_assets {
     OTHER_FILES += \
-        $$quote($$BASEDIR/assets/_js/PushService.js) \
         $$quote($$BASEDIR/assets/cards/CreateTaskFromTextCard.qml) \
         $$quote($$BASEDIR/assets/cards/CreateTaskFromUrlCard.qml) \
         $$quote($$BASEDIR/assets/cards/TestCard.qml) \
@@ -63,6 +62,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/ic_minus.png) \
         $$quote($$BASEDIR/assets/images/ic_plus.png) \
         $$quote($$BASEDIR/assets/images/ic_search.png) \
+        $$quote($$BASEDIR/assets/images/ic_share.png) \
         $$quote($$BASEDIR/assets/images/yellow_pellet.png) \
         $$quote($$BASEDIR/assets/main.qml) \
         $$quote($$BASEDIR/assets/pages/HelpPage.qml) \
@@ -80,6 +80,7 @@ config_pri_source_group1 {
         $$quote($$BASEDIR/src/config/AppConfig.cpp) \
         $$quote($$BASEDIR/src/main.cpp) \
         $$quote($$BASEDIR/src/models/Task.cpp) \
+        $$quote($$BASEDIR/src/services/DropboxService.cpp) \
         $$quote($$BASEDIR/src/services/PushNotificationService.cpp) \
         $$quote($$BASEDIR/src/services/SearchService.cpp) \
         $$quote($$BASEDIR/src/services/TasksService.cpp) \
@@ -89,6 +90,7 @@ config_pri_source_group1 {
         $$quote($$BASEDIR/src/applicationui.hpp) \
         $$quote($$BASEDIR/src/config/AppConfig.hpp) \
         $$quote($$BASEDIR/src/models/Task.hpp) \
+        $$quote($$BASEDIR/src/services/DropboxService.hpp) \
         $$quote($$BASEDIR/src/services/PushNotificationService.hpp) \
         $$quote($$BASEDIR/src/services/SearchService.hpp) \
         $$quote($$BASEDIR/src/services/TasksService.hpp) \
@@ -129,9 +131,6 @@ lupdate_inclusion {
         $$quote($$BASEDIR/../assets/*.qml) \
         $$quote($$BASEDIR/../assets/*.js) \
         $$quote($$BASEDIR/../assets/*.qs) \
-        $$quote($$BASEDIR/../assets/_js/*.qml) \
-        $$quote($$BASEDIR/../assets/_js/*.js) \
-        $$quote($$BASEDIR/../assets/_js/*.qs) \
         $$quote($$BASEDIR/../assets/cards/*.qml) \
         $$quote($$BASEDIR/../assets/cards/*.js) \
         $$quote($$BASEDIR/../assets/cards/*.qs) \

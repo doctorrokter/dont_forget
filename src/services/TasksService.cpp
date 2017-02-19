@@ -106,6 +106,14 @@ QVariantList TasksService::findByType(const QString& type) {
     return m_pSda->execute(QString::fromLatin1("SELECT * FROM tasks WHERE type = '%1'").arg(type)).toList();
 }
 
+QVariantList TasksService::findSiblings(const int parentId) {
+    return m_pSda->execute(QString::fromLatin1("SELECT * FROM tasks WHERE parent_id = %1").arg(parentId)).toList();
+}
+
+QVariantMap TasksService::lastCreated() {
+    return m_pSda->execute("SELECT * FROM tasks ORDER BY id DESC LIMIT 1").toList().at(0).toMap();
+}
+
 void TasksService::changeClosed(const int id, const bool closed) {
     int state = closed ? 1 : 0;
     QString query = QString::fromLatin1("UPDATE tasks SET closed = %1 WHERE id = %2").arg(state).arg(id);
@@ -181,9 +189,7 @@ void TasksService::createTask(const QString name, const QString description, con
 //    cout << query.toStdString() << endl;
 
     m_pSda->execute(query, values);
-    QVariantMap taskMap = m_pSda->execute("SELECT * FROM tasks ORDER BY id DESC LIMIT 1").toList().at(0).toMap();
-
-    emit taskCreated(taskMap);
+    emit taskCreated(lastCreated());
 }
 
 void TasksService::updateTask(const QString name, const QString description, const QString type, const int deadline, const int important, const int createInRemember, const int closed) {
@@ -272,6 +278,28 @@ void TasksService::moveTask(const int parentId) {
     m_pSda->execute(query, values);
 
     emit taskMoved(m_pActiveTask->getId(), parentId);
+}
+
+void TasksService::copyTask(const Task& task) {
+//    QString query = "INSERT INTO tasks (name, description, type, deadline, important, parent_id, remember_id, closed, expanded) "
+//                        "VALUES (:name, :description, :type, :deadline, :important, :parent_id, :remember_id, :closed, :expanded)";
+    QString parentId = task.getParentId() == 0 ? NULL : QString::number(task.getParentId());
+    QString query = "INSERT INTO tasks (name, description, type, deadline, important, parent_id, closed, expanded) "
+                        "VALUES (:name, :description, :type, :deadline, :important, :parent_id, :closed, :expanded)";
+    QVariantMap values;
+    values["name"] = task.getName();
+    values["description"] = task.getDescription();
+    values["type"] = task.getType();
+    values["deadline"] = task.getDeadline();
+    values["important"] = task.isImportant() ? 1 : 0;
+    values["parent_id"] = parentId;
+//    values["remember_id"] = rememberId;
+    values["closed"] = task.isClosed() ? 1 : 0;
+    values["expanded"] = 1;
+
+    qDebug() << query << values << endl;
+
+    m_pSda->execute(query, values);
 }
 
 void TasksService::expandAll() {

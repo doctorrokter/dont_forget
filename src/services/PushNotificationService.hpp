@@ -40,8 +40,8 @@ public:
     Q_INVOKABLE void requestSubscribedUserList();
 
 private Q_SLOTS:
-    void createSessionCompleted(const PushStatus& pushStatus);
-    void createChannelCompleted(const PushStatus& pushStatus, const QString& token);
+    void createSessionCompleted(const bb::network::PushStatus& pushStatus);
+    void createChannelCompleted(const bb::network::PushStatus& pushStatus, const QString& token);
     void pushMessageResponse(QNetworkReply* reply);
     void subscriptionQueryResponse(QNetworkReply* reply);
 

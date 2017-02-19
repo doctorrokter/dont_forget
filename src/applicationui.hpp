@@ -20,9 +20,11 @@
 #include <QObject>
 #include <bb/system/InvokeManager>
 #include <bb/system/InvokeRequest>
+
 #include "services/PushNotificationService.hpp"
 #include "services/TasksService.hpp"
 #include "services/SearchService.hpp"
+#include "services/DropboxService.hpp"
 #include "config/AppConfig.hpp"
 
 namespace bb
@@ -51,12 +53,14 @@ public:
 
 Q_SIGNALS:
     void taskSheetRequested();
+    void tasksReceived();
 
 public Q_SLOTS:
     void onInvoked(const bb::system::InvokeRequest& request);
 
 private slots:
     void onSystemLanguageChanged();
+    void processTasksContent(const QString& tasksContent);
 
 private:
     QTranslator* m_pTranslator;
@@ -67,11 +71,13 @@ private:
     AppConfig* m_pAppConfig;
     TasksService* m_pTasksService;
     SearchService* m_pSearchService;
+    DropboxService* m_pDropboxService;
 
     bool m_running;
 
     void initFullUI();
     void initComposerUI(const QString& pathToPage, const QString& data = "");
+    void processReceivedTaskMap(const QVariantMap& taskMap, const int parentId);
 };
 
 #endif /* ApplicationUI_HPP_ */

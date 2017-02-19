@@ -135,6 +135,16 @@ Sheet {
                 }
             }
         }
+        
+        shortcuts: [
+            DeviceShortcut {
+                type: DeviceShortcuts.BackTap
+                
+                onTriggered: {
+                    taskSheet.close();
+                }
+            }
+        ]
     }
     
     function adjustCreateInRemember() {

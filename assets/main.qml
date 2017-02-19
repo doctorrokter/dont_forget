@@ -132,6 +132,14 @@ NavigationPane {
                     }
                 ]
             }
+            
+            ActivityIndicator {
+                id: loading
+                running: false
+                verticalAlignment: VerticalAlignment.Center
+                horizontalAlignment: HorizontalAlignment.Center
+                minWidth: ui.du(10);
+            }
         }
         
         actions: [
@@ -215,24 +223,6 @@ NavigationPane {
             },
             
             ActionItem {
-                title: {
-                    if (main.viewMode === main.viewModes.SHOW_ALL) {
-                        return qsTr("Hide closed") + Retranslate.onLocaleOrLanguageChanged;
-                    }
-                    return qsTr("Show all") + Retranslate.onLocaleOrLanguageChanged;
-                }
-                imageSource: "asset:///images/ic_done_all.png"
-                
-                onTriggered: {
-                    if (main.viewMode === main.viewModes.SHOW_ALL) {
-                        _tasksService.changeViewMode(main.viewModes.HIDE_CLOSED);
-                    } else {
-                        _tasksService.changeViewMode(main.viewModes.SHOW_ALL);
-                    }
-                }
-            },
-            
-            ActionItem {
                 id: moveActionItem
                 title: qsTr("Move") + Retranslate.onLocaleOrLanguageChanged
                 imageSource: "asset:///images/ic_forward.png"
@@ -257,11 +247,73 @@ NavigationPane {
             },
             
             ActionItem {
-                id: sentActionItem
-                title: qsTr("Send") + Retranslate.onLocaleOrLanguageChanged
+                id: sendActionItem
+                title: qsTr("Share") + Retranslate.onLocaleOrLanguageChanged
+                enabled: _tasksService.activeTask !== null
+                imageSource: "asset:///images/ic_share.png"
+                
+                shortcuts: [
+                    Shortcut {
+                        key: "s"
+                        
+                        onTriggered: {
+                            if (sendActionItem.enabled) {
+                                sendActionItem.triggered();
+                            }
+                        }
+                    }
+                ]
                 
                 onTriggered: {
-                    _pushService.pushMessageToUser("2AB9B718", 2, "Test", "Test message");
+                    if (_tasksService.activeTask !== null) {
+                        loading.running = true;
+                        
+                        var collectSiblings = function(rootTask) {
+                            rootTask.children = _tasksService.findSiblings(rootTask.id);
+                            if (rootTask.children.length !== 0) {
+                                rootTask.children.forEach(function(sibling) {
+                                    collectSiblings(sibling);
+                                });
+                            }
+                        };
+                        
+                        var rootTask = _tasksService.activeTask.toJson();
+                        collectSiblings(rootTask);
+                        
+                        var PIN = "2BF98F81";
+                        var processTempLink = function(data) {
+                            _dropboxService.tempLinkCreated.disconnect(processTempLink);
+                            _pushService.pushMessageToUser(PIN, 2, "Tasks", data);
+                            if (rootTask.children.length !== 0) {
+                                toast.body = qsTr("Tasks sent!") + Retranslate.onLocaleOrLanguageChanged;
+                            } else {
+                                toast.body = qsTr("Task sent!") + Retranslate.onLocaleOrLanguageChanged;
+                            }
+                            loading.running = false;
+                            toast.show();
+                        };
+                        
+                        _dropboxService.uploadFile(PIN + "_" + new Date().getTime() + ".json", JSON.stringify(rootTask));
+                        _dropboxService.tempLinkCreated.connect(processTempLink);
+                    }
+                }
+            },
+            
+            ActionItem {
+                title: {
+                    if (main.viewMode === main.viewModes.SHOW_ALL) {
+                        return qsTr("Hide closed") + Retranslate.onLocaleOrLanguageChanged;
+                    }
+                    return qsTr("Show all") + Retranslate.onLocaleOrLanguageChanged;
+                }
+                imageSource: "asset:///images/ic_done_all.png"
+                
+                onTriggered: {
+                    if (main.viewMode === main.viewModes.SHOW_ALL) {
+                        _tasksService.changeViewMode(main.viewModes.HIDE_CLOSED);
+                    } else {
+                        _tasksService.changeViewMode(main.viewModes.SHOW_ALL);
+                    }
                 }
             }
         ]
@@ -361,6 +413,10 @@ NavigationPane {
                     _tasksService.deleteTask(id);
                     deleteTask(id, tasksContainer);
                 }
+            },
+            
+            SystemToast {
+                id: toast
             }
         ]
         
@@ -494,5 +550,6 @@ NavigationPane {
         _tasksService.taskCreated.connect(navigation.onTaskCreated);
         _tasksService.taskMoved.connect(navigation.renderTree);
         _app.taskSheetRequested.connect(navigation.openTaskSheetEditMode);
+        _app.tasksReceived.connect(navigation.renderTree);
     }
 }

@@ -22,6 +22,22 @@ Container {
     }
     
     objectName: "task_" + taskId
+    navigation.defaultHighlightEnabled: true
+    navigation.focusPolicy: NavigationFocusPolicy.Focusable
+    
+    eventHandlers: [
+        TrackpadHandler {
+            onTrackpad: {
+                if (event.trackpadEventType === TrackpadEventType.Press) {
+                    console.debug('Trackpad pressed: ', taskId);
+                    if (!task.selected) {
+                        _tasksService.setActiveTask(task.taskId);
+                    }
+                    _app.taskSheetRequested();
+                }
+            }
+        }
+    ] 
     
     function getTaskIcon() {
         if (task.type === taskType.FOLDER) {
@@ -204,6 +220,8 @@ Container {
                 CheckBox {
                     id: closeCheckBox
                     checked: task.closed
+                    navigation.defaultHighlightEnabled: false
+                    navigation.focusPolicy: NavigationFocusPolicy.NotFocusable
                     
                     gestureHandlers: [
                         TapHandler {
@@ -216,7 +234,7 @@ Container {
                                 _tasksService.changeClosed(task.taskId, task.closed);
                             }
                         }
-                    ]             
+                    ]            
                 }    
                 
                 Container {

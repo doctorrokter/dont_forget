@@ -2,6 +2,13 @@
 <!DOCTYPE TS>
 <TS version="2.0">
 <context>
+    <name>ApplicationUI</name>
+    <message>
+        <source>Tasks received!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CreateTaskFromTextCard</name>
     <message>
         <source>Create task</source>
@@ -383,7 +390,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Send</source>
+        <source>Share</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tasks sent!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Task sent!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
