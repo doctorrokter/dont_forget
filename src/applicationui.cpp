@@ -23,8 +23,8 @@
 #include <bb/cascades/VisualStyle>
 #include <bb/cascades/ThemeSupport>
 #include <bb/network/PushPayload>
+#include <bb/system/CardDoneMessage>
 #include <QVariantList>
-#include <QList>
 #include <QVariantMap>
 #include <bb/system/InvokeRequest>
 #include <bb/data/JsonDataAccess>
@@ -115,8 +115,15 @@ void ApplicationUI::onSystemLanguageChanged() {
     }
 }
 
-void ApplicationUI::closeCard() {
-    m_pInvokeManager->closeChildCard();
+void ApplicationUI::cardDone(const QString& msg) {
+    // Assemble message
+    CardDoneMessage message;
+    message.setData(msg);
+    message.setDataType("text/plain");
+    message.setReason(tr("Success!"));
+
+    // Send message
+    m_pInvokeManager->sendCardDone(message);
 }
 
 void ApplicationUI::initFullUI() {
@@ -153,6 +160,9 @@ void ApplicationUI::initComposerUI(const QString& pathToPage, const QString& dat
 }
 
 void ApplicationUI::processTasksContent(const QString& tasksContent) {
+    m_pDropboxService->deleteFile(m_filesToDelete.at(0));
+    m_filesToDelete.pop_front();
+
     JsonDataAccess jda;
     QVariant dataVar = jda.loadFromBuffer(tasksContent);
     if (!jda.hasError()) {
@@ -230,7 +240,9 @@ void ApplicationUI::onInvoked(const bb::system::InvokeRequest& request) {
             QVariant dataVar = jda.loadFromBuffer(data);
             if (!jda.hasError()) {
                 QVariantMap dataMap = dataVar.toMap();
-                m_pDropboxService->loadFile(dataMap.value("body").toMap().value("link").toString());
+                QVariantMap bodyMap = dataMap.value("body").toMap();
+                m_pDropboxService->loadFile(bodyMap.value("link").toString());
+                m_filesToDelete.append(bodyMap.value("metadata").toMap().value("path_display").toString());
             } else {
                 qDebug() << jda.error() << endl;
             }

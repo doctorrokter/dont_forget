@@ -10,8 +10,7 @@ NavigationPane {
     peekEnabled: true
     
     function quit() {
-        Application.aboutToQuit();
-        Application.quit();
+        _app.cardDone("Card done!");
     }
     
     Page {

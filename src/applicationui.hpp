@@ -18,6 +18,7 @@
 #define ApplicationUI_HPP_
 
 #include <QObject>
+#include <QList>
 #include <bb/system/InvokeManager>
 #include <bb/system/InvokeRequest>
 
@@ -49,14 +50,13 @@ public:
     ApplicationUI();
     virtual ~ApplicationUI() {}
 
-    Q_INVOKABLE void closeCard();
-
 Q_SIGNALS:
     void taskSheetRequested();
     void tasksReceived();
 
 public Q_SLOTS:
     void onInvoked(const bb::system::InvokeRequest& request);
+    void cardDone(const QString& msg);
 
 private slots:
     void onSystemLanguageChanged();
@@ -74,6 +74,7 @@ private:
     DropboxService* m_pDropboxService;
 
     bool m_running;
+    QList<QString> m_filesToDelete;
 
     void initFullUI();
     void initComposerUI(const QString& pathToPage, const QString& data = "");

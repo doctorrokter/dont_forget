@@ -7,6 +7,10 @@
         <source>Tasks received!</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Success!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Contacts</name>

@@ -124,6 +124,35 @@ void DropboxService::processLoadingFile(QNetworkReply* reply) {
     }
 }
 
+void DropboxService::deleteFile(const QString& path) {
+    QNetworkRequest request = QNetworkRequest();
+    request.setUrl(QUrl("https://api.dropboxapi.com/2/files/delete"));
+    request.setRawHeader("Content-type", "application/json");
+    request.setRawHeader("Authorization", DROPBOX_AUTH_KEY);
+
+    m_pNetworkManager = new QNetworkAccessManager(this);
+    bool res = QObject::connect(m_pNetworkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(processDeletingFile(QNetworkReply*)));
+    Q_ASSERT(res);
+    Q_UNUSED(res);
+
+    QString dataStr = QString::fromLatin1("{\"path\":\"").append(path).append("\"}");
+    QByteArray data;
+    data.append(dataStr);
+
+    m_pNetworkManager->post(request, data);
+}
+
+void DropboxService::processDeletingFile(QNetworkReply* reply) {
+    clear();
+    if (reply != NULL && reply->bytesAvailable() > 0 && reply->error() == QNetworkReply::NoError) {
+        QByteArray data = reply->readAll();
+        QString dataStr = QString::fromUtf8(data.data());
+        cout << dataStr.toStdString() << endl;
+    } else {
+        cout << "Error reading file! " << reply->errorString().toStdString() << endl;
+    }
+}
+
 void DropboxService::clear() {
     m_pNetworkManager->deleteLater();
 }
