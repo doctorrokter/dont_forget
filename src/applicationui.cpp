@@ -205,13 +205,11 @@ void ApplicationUI::onInvoked(const bb::system::InvokeRequest& request) {
 
     if (target == INVOKE_SEARCH_SOURCE) {
         int id = QString::fromUtf8(request.data()).toInt();
-        m_pTasksService->setActiveTask(id);
-        if (m_running) {
-            emit taskSheetRequested();
-        } else {
+        if (!m_running) {
             initFullUI();
-            emit taskSheetRequested();
         }
+        m_pTasksService->setActiveTask(id);
+        emit taskSheetRequested();
     } else if (target == INVOKE_CARD_EDIT_TEXT) {
         initComposerUI(CREATE_TASK_FROM_TEXT_CARD, QString::fromUtf8(request.data()));
     } else if (target == INVOKE_CARD_EDIT_URI) {

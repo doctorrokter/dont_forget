@@ -104,6 +104,12 @@ Sheet {
                             },
                             
                             Option {
+                                id: listOption
+                                text: qsTr("List") + Retranslate.onLocaleOrLanguageChanged
+                                value: "LIST"
+                            },
+                            
+                            Option {
                                 id: taskOption
                                 text: qsTr("Task") + Retranslate.onLocaleOrLanguageChanged
                                 value: "TASK"
@@ -202,6 +208,7 @@ Sheet {
             deadLineToggleButton.checked = _tasksService.activeTask.deadline !== 0;
             folderOption.selected = _tasksService.activeTask.type === folderOption.value;
             taskOption.selected = _tasksService.activeTask.type === taskOption.value;
+            listOption.selected = _tasksService.activeTask.type === listOption.value;
             taskName.value = _tasksService.activeTask.name;
             description.value = _tasksService.activeTask.description;
         } else {

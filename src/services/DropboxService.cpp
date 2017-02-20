@@ -120,7 +120,7 @@ void DropboxService::processLoadingFile(QNetworkReply* reply) {
         QString dataStr = QString::fromUtf8(data.data());
         emit fileLoaded(dataStr);
     } else {
-        cout << "ERROR READING FILE!!! " << reply->errorString().toStdString() << endl;
+        cout << "Error reading file! " << reply->errorString().toStdString() << endl;
     }
 }
 

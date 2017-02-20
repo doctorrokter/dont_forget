@@ -6,19 +6,20 @@ Container {
     
     property int taskId: 1
     property bool expanded: true
-    property bool expandable: true
+    property bool expandable: false
     property bool important: false
     property bool closed: true
     property bool selected: false
     property int deadline: 0
     property string parentId: ""
     property string rememberId: ""
-    property string type: "FOLDER"
+    property string type: "TASK"
     property string name: "Projects"
     
     property variant taskType: {
         FOLDER: "FOLDER",
-        TASK: "TASK"
+        TASK: "TASK",
+        LIST: "LIST"
     }
     
     objectName: "task_" + taskId
@@ -29,7 +30,6 @@ Container {
         TrackpadHandler {
             onTrackpad: {
                 if (event.trackpadEventType === TrackpadEventType.Press) {
-                    console.debug('Trackpad pressed: ', taskId);
                     if (!task.selected) {
                         _tasksService.setActiveTask(task.taskId);
                     }
@@ -47,6 +47,8 @@ Container {
                 return "asset:///images/ic_done.png";
             }
             return "asset:///images/yellow_pellet.png";
+        } else if (task.type === taskType.LIST) {
+            return "asset:///images/ic_list.png";
         } else {
             return "";
         }
@@ -55,6 +57,8 @@ Container {
     function getTaskIconColor() {
         if (task.type === taskType.FOLDER) {
             return ui.palette.primary;
+        } else if (task.type === taskType.LIST) {
+            return Color.create("#779933");
         } else {
             if (task.closed) {
                 return Color.create("#779933");
@@ -65,6 +69,8 @@ Container {
     function getTaskIconMinHeight() {
         if (task.type === taskType.FOLDER) {
             return ui.du(4.5);
+        } else if (task.type === taskType.LIST) {
+            return ui.du(5);
         }
         return ui.du(5.5);
     }
@@ -161,6 +167,7 @@ Container {
                     }
                     
                     ImageView {
+                        verticalAlignment: VerticalAlignment.Center
                         imageSource: getTaskIcon();
                         filterColor: getTaskIconColor();
                         maxWidth: ui.du(5.5)
@@ -281,18 +288,18 @@ Container {
             task.rememberId = updatedTask.remember_id;
             task.type = updatedTask.type;
             task.name = updatedTask.name;
-            task.expandable = isExpandable() || updatedTask.type === "FOLDER";
+            task.expandable = isExpandable(updatedTask);
         }
     }
     
-    function isExpandable() {
+    function isExpandable(task) {
         var exp = false;
         for (var i = 0; i < taskRoot.controls.length; i++) {
             if (taskRoot.controls[i].objectName.indexOf('task_') !== -1) {
                 exp = true;
             }
         }
-        return exp;
+        return exp ? exp : (task.type === "FOLDER" || task.type === "LIST");
     }
     
     function select() {

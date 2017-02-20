@@ -9,6 +9,29 @@
     </message>
 </context>
 <context>
+    <name>Contacts</name>
+    <message>
+        <source>Users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tasks sent!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Task sent!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CreateTaskFromTextCard</name>
     <message>
         <source>Create task</source>
@@ -284,6 +307,10 @@
         <source>Task done</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>List</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TasksListPage</name>
@@ -391,14 +418,6 @@
     </message>
     <message>
         <source>Share</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tasks sent!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Task sent!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -41,8 +41,8 @@ Page {
                         leftPadding: ui.du(2.5)
                         
                         ImageView {
-                            imageSource: "asset:///images/ic_folder.png"
-                            filterColor: ui.palette.primary
+                            imageSource: ListItemData.type === "FOLDER" ? "asset:///images/ic_folder.png" : "asset:///images/ic_list.png"
+                            filterColor: ListItemData.type === "FOLDER" ? ui.palette.primary : Color.create("#779933");
                             maxWidth: ui.du(8)
                             maxHeight: ui.du(6.5)
                         }
@@ -141,7 +141,7 @@ Page {
     
     function fill() {
         tasksDataModel.clear();
-        tasksDataModel.append({id: 0, title: qsTr("Root") + Retranslate.onLocaleOrLanguageChanged});
+        tasksDataModel.append({id: 0, type: "FOLDER", title: qsTr("Root") + Retranslate.onLocaleOrLanguageChanged});
         tasksDataModel.append(tasks);
     }
     
@@ -152,9 +152,9 @@ Page {
         tasksArray = tasksArray.map(function(t) {
             t.title = getTitle(tasksArray, t.id);
             if (_tasksService.activeTask) {
-                t.visible = (t.id !== _tasksService.activeTask.id) && (t.type === "FOLDER");
+                t.visible = (t.id !== _tasksService.activeTask.id) && (t.type === "FOLDER" || t.type === "LIST");
             } else {
-                t.visible = t.type === "FOLDER";
+                t.visible = (t.type === "FOLDER" || t.type === "LIST");
             }
             return t;
         });

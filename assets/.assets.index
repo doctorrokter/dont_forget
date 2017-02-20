@@ -1,5 +1,5 @@
 1
-36
+38
 cards/CreateTaskFromTextCard.qml
 cards/CreateTaskFromUrlCard.qml
 cards/TestCard.qml
@@ -23,12 +23,14 @@ images/ic_done_all.png
 images/ic_feedback.png
 images/ic_folder.png
 images/ic_forward.png
+images/ic_list.png
 images/ic_minus.png
 images/ic_plus.png
 images/ic_search.png
 images/ic_share.png
 images/yellow_pellet.png
 main.qml
+pages/Contacts.qml
 pages/HelpPage.qml
 pages/MoveTaskPage.qml
 pages/SettingsPage.qml

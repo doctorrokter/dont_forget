@@ -10,6 +10,34 @@
     </message>
 </context>
 <context>
+    <name>Contacts</name>
+    <message>
+        <location filename="../assets/pages/Contacts.qml" line="63"/>
+        <source>Tasks sent!</source>
+        <translation type="unfinished">Задачи отправлены!</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/Contacts.qml" line="65"/>
+        <source>Task sent!</source>
+        <translation type="unfinished">Задача отправлена!</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/Contacts.qml" line="89"/>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/Contacts.qml" line="108"/>
+        <source>Users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/Contacts.qml" line="95"/>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CreateTaskFromTextCard</name>
     <message>
         <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="21"/>
@@ -375,12 +403,17 @@
         <translation type="unfinished">Задача завершена</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="108"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="114"/>
         <source>Task</source>
         <translation type="unfinished">Задача</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="118"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="108"/>
+        <source>List</source>
+        <translation type="unfinished">Список</translation>
+    </message>
+    <message>
+        <location filename="../assets/sheets/TaskSheet.qml" line="124"/>
         <source>Deadline</source>
         <translation type="unfinished">Срок выполнения</translation>
     </message>
@@ -389,12 +422,12 @@
         <translation type="obsolete">Дата</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="129"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="135"/>
         <source>Create in Remember</source>
         <translation type="unfinished">Создать в Remember</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="134"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="140"/>
         <source>Important</source>
         <translation type="unfinished">Важно</translation>
     </message>
@@ -504,8 +537,8 @@
         <translation type="unfinished">Обратная связь</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="324"/>
-        <location filename="../assets/main.qml" line="427"/>
+        <location filename="../assets/main.qml" line="295"/>
+        <location filename="../assets/main.qml" line="407"/>
         <source>All Tasks</source>
         <translation type="unfinished">Все задачи</translation>
     </message>
@@ -535,22 +568,20 @@
         <translation type="unfinished">Поделиться</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="288"/>
         <source>Tasks sent!</source>
-        <translation type="unfinished">Задачи отправлены!</translation>
+        <translation type="obsolete">Задачи отправлены!</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="290"/>
         <source>Task sent!</source>
-        <translation type="unfinished">Задача отправлена!</translation>
+        <translation type="obsolete">Задача отправлена!</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="305"/>
+        <location filename="../assets/main.qml" line="276"/>
         <source>Hide closed</source>
         <translation type="unfinished">Не показывать закрытые</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="307"/>
+        <location filename="../assets/main.qml" line="278"/>
         <source>Show all</source>
         <translation type="unfinished">Показать все</translation>
     </message>
@@ -560,17 +591,17 @@
         <translation type="unfinished">Переместить</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="387"/>
+        <location filename="../assets/main.qml" line="367"/>
         <source>Permission required</source>
         <translation type="unfinished">Требуются права</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="388"/>
+        <location filename="../assets/main.qml" line="368"/>
         <source>Looks like you didn&apos;t grant permission for shared files. &quot;Don&apos;t Forget&quot; cannot work without this permission since the app stores own database in external resources. In order to use this app you should grant permissions in Settings, then restart the app.</source>
         <translation type="unfinished">Похоже Вы не дали права на использование общих файлов приложением. &quot;Don&apos;t Forget&quot; не может работать без этих прав, так как хранит собственную базу данных во внешних ресурсах. Для того, чтобы пользоваться этим приложением, Вам необходимо добавить права в Настройках, затем перезапустить приложение.</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="391"/>
+        <location filename="../assets/main.qml" line="371"/>
         <source>Settings</source>
         <translation type="unfinished">Настройки</translation>
     </message>

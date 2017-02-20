@@ -265,37 +265,8 @@ NavigationPane {
                 ]
                 
                 onTriggered: {
-                    if (_tasksService.activeTask !== null) {
-                        loading.running = true;
-                        
-                        var collectSiblings = function(rootTask) {
-                            rootTask.children = _tasksService.findSiblings(rootTask.id);
-                            if (rootTask.children.length !== 0) {
-                                rootTask.children.forEach(function(sibling) {
-                                    collectSiblings(sibling);
-                                });
-                            }
-                        };
-                        
-                        var rootTask = _tasksService.activeTask.toJson();
-                        collectSiblings(rootTask);
-                        
-                        var PIN = "2BF98F81";
-                        var processTempLink = function(data) {
-                            _dropboxService.tempLinkCreated.disconnect(processTempLink);
-                            _pushService.pushMessageToUser(PIN, 2, "Tasks", data);
-                            if (rootTask.children.length !== 0) {
-                                toast.body = qsTr("Tasks sent!") + Retranslate.onLocaleOrLanguageChanged;
-                            } else {
-                                toast.body = qsTr("Task sent!") + Retranslate.onLocaleOrLanguageChanged;
-                            }
-                            loading.running = false;
-                            toast.show();
-                        };
-                        
-                        _dropboxService.uploadFile(PIN + "_" + new Date().getTime() + ".json", JSON.stringify(rootTask));
-                        _dropboxService.tempLinkCreated.connect(processTempLink);
-                    }
+                    var contactsPage = contacts.createObject(this);
+                    navigation.push(contactsPage);
                 }
             },
             
@@ -349,6 +320,15 @@ NavigationPane {
                         navigation.pop();
                     }
                 }
+            },
+            
+            ComponentDefinition {
+                id: contacts
+                Contacts {
+                    onTasksSent: {
+                        navigation.pop();
+                    }
+                }    
             },
             
             ComponentDefinition {
@@ -486,7 +466,7 @@ NavigationPane {
         newTask.name = t.name;
         newTask.type = t.type;
         newTask.taskId = t.id;
-        newTask.expandable = (t.children.length !== 0) || t.type === "FOLDER";
+        newTask.expandable = (t.children.length !== 0) || t.type === "FOLDER" || t.type === "LIST";
         newTask.expanded = t.expanded;
         newTask.closed = t.closed;
         newTask.important = t.important;
