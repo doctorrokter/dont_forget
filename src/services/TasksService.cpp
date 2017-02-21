@@ -15,70 +15,20 @@
 #include <bb/pim/notebook/NotebookEntryId>
 #include <limits>
 
-//QString TasksService::DB_PATH = "./data/dont_forget.db";
-QString TasksService::DB_PATH = "./shared/misc/dont_forget";
-QString TasksService::DB_NAME = "dont_forget.db";
-QString TasksService::COPY_DB_NAME = "dont_forget_copy.db";
-
 using namespace std;
 
-TasksService::TasksService(QObject* parent) : QObject(parent), m_pSda(NULL),  m_pActiveTask(NULL), m_pNotebookService(new NotebookService(this)), m_hasSharedFilesPermission(true) {}
+TasksService::TasksService(QObject* parent, DBConfig* dbConfig) : QObject(parent), m_pDbConfig(dbConfig), m_pActiveTask(NULL), m_pNotebookService(new NotebookService(this)) {}
 
 TasksService::~TasksService() {
-    delete m_pSda;
-    m_pSda = NULL;
-    m_database.close();
+    delete m_pDbConfig;
+    m_pDbConfig = NULL;
     flushActiveTask();
 }
 
 void TasksService::init() {
-        QDir dbdir(TasksService::DB_PATH);
-        bool newDb = !dbdir.exists();
-
-        if (newDb) {
-            dbdir.mkpath(TasksService::DB_PATH);
-        } else {
-            if (AppConfig::getStatic("first_run").toString().isEmpty()) {
-                AppConfig::setStatic("first_run", "false");
-                QFile dbfile(TasksService::DB_PATH + "/" + TasksService::DB_NAME);
-
-                bool copied = dbfile.copy(TasksService::DB_PATH + "/" + TasksService::DB_NAME, TasksService::DB_PATH + "/" + TasksService::COPY_DB_NAME);
-                qDebug() << "DB copied successfully: " << copied << endl;
-
-                if (copied) {
-                    bool removed = dbfile.remove();
-                    qDebug() << "Old db file removed successfully: " << removed << endl;
-
-                    if(removed) {
-                        QFile newDbfile(TasksService::DB_PATH + "/" + TasksService::COPY_DB_NAME);
-                        bool renamed = newDbfile.rename(TasksService::DB_PATH + "/" + TasksService::COPY_DB_NAME, TasksService::DB_PATH + "/" + TasksService::DB_NAME);
-                        qDebug() << "New DB file renamed successfully: " << renamed << endl;
-                    }
-                }
-            }
-        }
-
-        QString dbpath = TasksService::DB_PATH + "/" + TasksService::DB_NAME;
-        m_database = QSqlDatabase::addDatabase("QSQLITE");
-        m_database.setDatabaseName(dbpath);
-        m_database.open();
-
-        if (m_database.isOpenError()) {
-            m_hasSharedFilesPermission = false;
-        }
-
-        m_pSda = new SqlDataAccess(dbpath);
-        m_pSda->execute("PRAGMA encoding = \"UTF-8\"");
-        if (newDb) {
-            cout << "Create DB from scratch" << endl;
-            m_pSda->execute("DROP TABLE IF EXISTS tasks");
-            m_pSda->execute("PRAGMA foreign_keys = ON");
-            m_pSda->execute("CREATE TABLE tasks (id INTEGER PRIMARY KEY, name TEXT DEFAULT NULL, description TEXT DEFAULT NULL, type TEXT, deadline INTEGER DEFAULT 0, closed INTEGER DEFAULT 0, expanded INTEGER DEFAULT 0, important INTEGER DEFAULT 0, remember_id TEXT DEFAULT NULL)");
-            m_pSda->execute("ALTER TABLE tasks ADD COLUMN parent_id INTEGER AFTER type DEFAULT NULL REFERENCES tasks(id) ON DELETE CASCADE ON UPDATE NO ACTION");
-        } else {
-            cout << "DB already exists. Use one." << endl;
-            sync();
-        }
+    if (!m_pDbConfig->isNewDb()) {
+        sync();
+    }
     //    m_pSda->execute("DELETE FROM tasks");
 }
 
@@ -88,7 +38,7 @@ QVariantList TasksService::findAll() const {
         sortBy = "name";
     }
 
-    QVariantList tasks = m_pSda->execute("SELECT * FROM tasks ORDER BY parent_id, type, " + sortBy).toList();
+    QVariantList tasks = m_pDbConfig->connection()->execute("SELECT * FROM tasks ORDER BY parent_id, type, " + sortBy).toList();
 
     for (int i = 0; i < tasks.size(); i++) {
         QVariantMap taskMap = tasks.at(i).toMap();
@@ -99,19 +49,19 @@ QVariantList TasksService::findAll() const {
 }
 
 QVariantMap TasksService::findById(const int id) {
-    return m_pSda->execute(QString::fromLatin1("SELECT * FROM tasks WHERE id = %1").arg(id)).toList().at(0).toMap();
+    return m_pDbConfig->connection()->execute(QString::fromLatin1("SELECT * FROM tasks WHERE id = %1").arg(id)).toList().at(0).toMap();
 }
 
 QVariantList TasksService::findByType(const QString& type) {
-    return m_pSda->execute(QString::fromLatin1("SELECT * FROM tasks WHERE type = '%1'").arg(type)).toList();
+    return m_pDbConfig->connection()->execute(QString::fromLatin1("SELECT * FROM tasks WHERE type = '%1'").arg(type)).toList();
 }
 
 QVariantList TasksService::findSiblings(const int parentId) {
-    return m_pSda->execute(QString::fromLatin1("SELECT * FROM tasks WHERE parent_id = %1").arg(parentId)).toList();
+    return m_pDbConfig->connection()->execute(QString::fromLatin1("SELECT * FROM tasks WHERE parent_id = %1").arg(parentId)).toList();
 }
 
 QVariantMap TasksService::lastCreated() {
-    return m_pSda->execute("SELECT * FROM tasks ORDER BY id DESC LIMIT 1").toList().at(0).toMap();
+    return m_pDbConfig->connection()->execute("SELECT * FROM tasks ORDER BY id DESC LIMIT 1").toList().at(0).toMap();
 }
 
 void TasksService::changeClosed(const int id, const bool closed) {
@@ -119,7 +69,7 @@ void TasksService::changeClosed(const int id, const bool closed) {
     QString query = QString::fromLatin1("UPDATE tasks SET closed = %1 WHERE id = %2").arg(state).arg(id);
 
 //    cout << query.toStdString() << endl;
-    m_pSda->execute(query);
+    m_pDbConfig->connection()->execute(query);
     if (m_pActiveTask != NULL) {
         m_pActiveTask->setClosed(closed);
         emit activeTaskChanged(m_pActiveTask);
@@ -143,7 +93,7 @@ void TasksService::changeExpanded(const int id, const bool expanded) {
 
 //    cout << query.toStdString() << endl;
 
-    m_pSda->execute(query);
+    m_pDbConfig->connection()->execute(query);
 }
 
 Task* TasksService::getActiveTask() const { return m_pActiveTask; }
@@ -188,7 +138,7 @@ void TasksService::createTask(const QString name, const QString description, con
 
 //    cout << query.toStdString() << endl;
 
-    m_pSda->execute(query, values);
+    m_pDbConfig->connection()->execute(query, values);
     emit taskCreated(lastCreated());
 }
 
@@ -227,7 +177,7 @@ void TasksService::updateTask(const QString name, const QString description, con
 
 //    qDebug() << query << values << endl;
 
-    m_pSda->execute(query, values);
+    m_pDbConfig->connection()->execute(query, values);
 
     QVariantMap taskMap = findById(m_pActiveTask->getId());
     m_pActiveTask->fromMap(taskMap);
@@ -247,15 +197,15 @@ void TasksService::deleteTask(const int id) {
 
 //            cout << query.toStdString() << endl;
 
-            m_pSda->execute("PRAGMA foreign_keys = ON");
-            m_pSda->execute(query);
+            m_pDbConfig->connection()->execute("PRAGMA foreign_keys = ON");
+            m_pDbConfig->connection()->execute(query);
 
             flushActiveTask();
             emit activeTaskChanged(m_pActiveTask);
     } else {
-        m_pSda->execute("PRAGMA foreign_keys = ON");
+        m_pDbConfig->connection()->execute("PRAGMA foreign_keys = ON");
         query = query.arg(id);
-        m_pSda->execute(query);
+        m_pDbConfig->connection()->execute(query);
 
 //        cout << query.toStdString() << endl;
     }
@@ -275,7 +225,7 @@ void TasksService::moveTask(const int parentId) {
 
 //    qDebug() << query << values << endl;
 
-    m_pSda->execute(query, values);
+    m_pDbConfig->connection()->execute(query, values);
 
     emit taskMoved(m_pActiveTask->getId(), parentId);
 }
@@ -299,16 +249,16 @@ void TasksService::copyTask(const Task& task) {
 
     qDebug() << query << values << endl;
 
-    m_pSda->execute(query, values);
+    m_pDbConfig->connection()->execute(query, values);
 }
 
 void TasksService::expandAll() {
-    m_pSda->execute("UPDATE tasks SET expanded = 1");
+    m_pDbConfig->connection()->execute("UPDATE tasks SET expanded = 1");
     emit allTasksExpanded();
 }
 
 void TasksService::unexpandAll() {
-    m_pSda->execute("UPDATE tasks SET expanded = 0");
+    m_pDbConfig->connection()->execute("UPDATE tasks SET expanded = 0");
     flushActiveTask();
     emit allTasksUnexpanded();
     emit activeTaskChanged(m_pActiveTask);
@@ -373,7 +323,7 @@ void TasksService::deleteNotebookEntry(const QString& rememberId) {
 }
 
 void TasksService::sync() {
-    QVariantList rememberTasks = m_pSda->execute("SELECT * FROM tasks WHERE remember_id IS NOT NULL").toList();
+    QVariantList rememberTasks = m_pDbConfig->connection()->execute("SELECT * FROM tasks WHERE remember_id IS NOT NULL").toList();
     if (!rememberTasks.isEmpty()) {
         for (int i = 0; i < rememberTasks.size(); i++) {
             QVariantMap taskMap = rememberTasks.at(i).toMap();
@@ -392,15 +342,12 @@ void TasksService::sync() {
                 values["id"] = taskMap.value("id").toInt();
 
 //                cout << query.toStdString() << endl;
-                m_pSda->execute(query, values);
+                m_pDbConfig->connection()->execute(query, values);
             } else {
                 QString query = QString::fromLatin1("UPDATE tasks SET remember_id = NULL WHERE id = %1").arg(taskMap.value("id").toInt());
 //                cout << query.toStdString() << endl;
-                m_pSda->execute(query);
+                m_pDbConfig->connection()->execute(query);
             }
          }
      }
 }
-
-bool TasksService::hasSharedFilesPermission() { return m_hasSharedFilesPermission; }
-

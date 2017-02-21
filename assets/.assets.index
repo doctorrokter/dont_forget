@@ -1,5 +1,5 @@
 1
-38
+41
 cards/CreateTaskFromTextCard.qml
 cards/CreateTaskFromUrlCard.qml
 cards/TestCard.qml
@@ -30,6 +30,9 @@ images/ic_search.png
 images/ic_share.png
 images/yellow_pellet.png
 main.qml
+migrations/1_create_schema_verion_table.sql
+migrations/2_create_table_tasks.sql
+migrations/3_create_table_df_users.sql
 pages/Contacts.qml
 pages/HelpPage.qml
 pages/MoveTaskPage.qml

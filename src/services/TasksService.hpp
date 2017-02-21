@@ -10,11 +10,8 @@
 
 #include <QtCore/QObject>
 #include "../models/Task.hpp"
+#include "../config/DBConfig.hpp"
 
-#include <bb/data/SqlDataAccess>
-#include <QtSql/QtSql>
-#include <QDir>
-#include <QFile>
 #include <QVariantList>
 #include <QVariantMap>
 #include <bb/pim/notebook/NotebookService>
@@ -26,13 +23,8 @@ using namespace bb::pim::notebook;
 class TasksService: public QObject {
     Q_OBJECT
     Q_PROPERTY(Task* activeTask READ getActiveTask NOTIFY activeTaskChanged)
-    Q_PROPERTY(bool hasSharedFilesPermission READ hasSharedFilesPermission)
 public:
-    static QString DB_PATH;
-    static QString DB_NAME;
-    static QString COPY_DB_NAME;
-
-    TasksService(QObject* parent = 0);
+    TasksService(QObject* parent = 0, DBConfig* dbConfig = 0);
     virtual ~TasksService();
 
     void init();
@@ -60,8 +52,6 @@ public:
 
     Q_INVOKABLE void changeViewMode(const QString& viewMode);
 
-    Q_INVOKABLE bool hasSharedFilesPermission();
-
 Q_SIGNALS:
     void activeTaskChanged(Task* newActiveTask);
     void taskCreated(QVariantMap newTask);
@@ -73,11 +63,10 @@ Q_SIGNALS:
     void taskMoved(const int id, const int parentId);
 
 private:
-    QSqlDatabase m_database;
-    SqlDataAccess* m_pSda;
+    DBConfig* m_pDbConfig;
+
     Task* m_pActiveTask;
     NotebookService* m_pNotebookService;
-    bool m_hasSharedFilesPermission;
 
     void flushActiveTask();
     NotebookEntry findNotebookEntry(const QString& rememberId);

@@ -27,6 +27,7 @@
 #include "services/SearchService.hpp"
 #include "services/DropboxService.hpp"
 #include "config/AppConfig.hpp"
+#include "config/DBConfig.hpp"
 
 namespace bb
 {
@@ -69,6 +70,7 @@ private:
     PushNotificationService* m_pPushService;
     QString m_startupMode;
     AppConfig* m_pAppConfig;
+    DBConfig* m_pDbConfig;
     TasksService* m_pTasksService;
     SearchService* m_pSearchService;
     DropboxService* m_pDropboxService;

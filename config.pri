@@ -66,6 +66,9 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/ic_share.png) \
         $$quote($$BASEDIR/assets/images/yellow_pellet.png) \
         $$quote($$BASEDIR/assets/main.qml) \
+        $$quote($$BASEDIR/assets/migrations/1_create_schema_verion_table.sql) \
+        $$quote($$BASEDIR/assets/migrations/2_create_table_tasks.sql) \
+        $$quote($$BASEDIR/assets/migrations/3_create_table_df_users.sql) \
         $$quote($$BASEDIR/assets/pages/Contacts.qml) \
         $$quote($$BASEDIR/assets/pages/HelpPage.qml) \
         $$quote($$BASEDIR/assets/pages/MoveTaskPage.qml) \
@@ -80,6 +83,7 @@ config_pri_source_group1 {
     SOURCES += \
         $$quote($$BASEDIR/src/applicationui.cpp) \
         $$quote($$BASEDIR/src/config/AppConfig.cpp) \
+        $$quote($$BASEDIR/src/config/DBConfig.cpp) \
         $$quote($$BASEDIR/src/main.cpp) \
         $$quote($$BASEDIR/src/models/Task.cpp) \
         $$quote($$BASEDIR/src/services/DropboxService.cpp) \
@@ -91,6 +95,7 @@ config_pri_source_group1 {
     HEADERS += \
         $$quote($$BASEDIR/src/applicationui.hpp) \
         $$quote($$BASEDIR/src/config/AppConfig.hpp) \
+        $$quote($$BASEDIR/src/config/DBConfig.hpp) \
         $$quote($$BASEDIR/src/models/Task.hpp) \
         $$quote($$BASEDIR/src/services/DropboxService.hpp) \
         $$quote($$BASEDIR/src/services/PushNotificationService.hpp) \
@@ -142,6 +147,9 @@ lupdate_inclusion {
         $$quote($$BASEDIR/../assets/images/*.qml) \
         $$quote($$BASEDIR/../assets/images/*.js) \
         $$quote($$BASEDIR/../assets/images/*.qs) \
+        $$quote($$BASEDIR/../assets/migrations/*.qml) \
+        $$quote($$BASEDIR/../assets/migrations/*.js) \
+        $$quote($$BASEDIR/../assets/migrations/*.qs) \
         $$quote($$BASEDIR/../assets/pages/*.qml) \
         $$quote($$BASEDIR/../assets/pages/*.js) \
         $$quote($$BASEDIR/../assets/pages/*.qs) \
@@ -160,5 +168,6 @@ lupdate_inclusion {
         $$quote($$BASEDIR/../src/*.hxx)
 }
 
-TRANSLATIONS = $$quote($${TARGET}_ru.ts) \
+TRANSLATIONS = $$quote($${TARGET}_fr.ts) \
+    $$quote($${TARGET}_ru.ts) \
     $$quote($${TARGET}.ts)

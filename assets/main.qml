@@ -413,7 +413,7 @@ NavigationPane {
         }
         
         onCreationCompleted: {
-            if (!_tasksService.hasSharedFilesPermission) {
+            if (!_hasSharedFilesPermission) {
                 permissionDialog.show();
             }
             _tasksService.activeTaskChanged.connect(main.updateTitleBar);

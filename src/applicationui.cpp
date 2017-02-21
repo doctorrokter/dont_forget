@@ -30,7 +30,6 @@
 #include <bb/data/JsonDataAccess>
 #include <bb/platform/Notification>
 
-#include "config/AppConfig.hpp"
 #include "models/Task.hpp"
 #include "services/TasksService.hpp"
 #include "services/SearchService.hpp"
@@ -72,7 +71,9 @@ ApplicationUI::ApplicationUI() : QObject() {
 
     onSystemLanguageChanged();
 
-    m_pTasksService = new TasksService(this);
+    m_pDbConfig = new DBConfig(this);
+
+    m_pTasksService = new TasksService(this, m_pDbConfig);
     m_pTasksService->init();
 
     m_pSearchService = new SearchService(this, m_pTasksService);
@@ -135,7 +136,7 @@ void ApplicationUI::initFullUI() {
     rootContext->setContextProperty("_appConfig", m_pAppConfig);
     rootContext->setContextProperty("_tasksService", m_pTasksService);
     rootContext->setContextProperty("_pushService", m_pPushService);
-    rootContext->setContextProperty("_dropboxService", m_pDropboxService);
+    rootContext->setContextProperty("_hasSharedFilesPermission", m_pDbConfig->hasSharedFilesPermission());
     m_running = true;
 
     AbstractPane *root = qml->createRootObject<AbstractPane>();
@@ -154,6 +155,7 @@ void ApplicationUI::initComposerUI(const QString& pathToPage, const QString& dat
     rootContext->setContextProperty("_appConfig", m_pAppConfig);
     rootContext->setContextProperty("_tasksService", m_pTasksService);
     rootContext->setContextProperty("_data", data);
+    rootContext->setContextProperty("_hasSharedFilesPermission", m_pDbConfig->hasSharedFilesPermission());
 
     AbstractPane *root = qml->createRootObject<AbstractPane>();
     Application::instance()->setScene(root);

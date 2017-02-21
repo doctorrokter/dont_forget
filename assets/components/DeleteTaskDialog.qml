@@ -1,4 +1,5 @@
 import bb.cascades 1.4
+import bb.system 1.2
 
 Dialog {
     id: root
