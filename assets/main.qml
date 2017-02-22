@@ -62,6 +62,8 @@ NavigationPane {
     Page {
         id: main
         
+        property bool searchMode: false
+        property variant tasks: []
         property variant viewModes: {
             SHOW_ALL: "SHOW_ALL",
             HIDE_CLOSED: "HIDE_CLOSED"
@@ -255,18 +257,6 @@ NavigationPane {
                 enabled: _tasksService.activeTask !== null
                 imageSource: "asset:///images/ic_send.png"
                 
-                shortcuts: [
-                    Shortcut {
-                        key: "s"
-                        
-                        onTriggered: {
-                            if (sendActionItem.enabled) {
-                                sendActionItem.triggered();
-                            }
-                        }
-                    }
-                ]
-                
                 onTriggered: {
                     var contactsPage = contacts.createObject(this);
                     navigation.push(contactsPage);
@@ -289,14 +279,63 @@ NavigationPane {
                         _tasksService.changeViewMode(main.viewModes.SHOW_ALL);
                     }
                 }
+            },
+            
+            ActionItem {
+                id: searchActionItem
+                title: qsTr("Search") + Retranslate.onLocaleOrLanguageChanged
+                imageSource: "asset:///images/ic_search.png"
+                
+                shortcuts: [
+                    Shortcut {
+                        key: "s"
+                        
+                        onTriggered: {
+                            searchActionItem.triggered();
+                        }
+                    }
+                ]
+                
+                onTriggered: {
+                    main.searchMode = true;
+                }
             }
         ]
+        
+        onSearchModeChanged: {
+            if (main.searchMode) {
+                main.titleBar = inputTitleBar;
+                main.titleBar.focus();
+            } else {
+                main.titleBar.reset();
+                main.titleBar = titleBar;
+                renderTree();
+            }
+        }
         
         attachedObjects: [
             CustomTitleBar {
                 id: titleBar
                 title: qsTr("All Tasks") + Retranslate.onLocaleOrLanguageChanged
                 clearable: _tasksService.activeTask !== null && _tasksService.activeTask !== undefined;
+            },
+            
+            InputTitleBar {
+                id: inputTitleBar
+                
+                onCancel: {
+                    main.searchMode = false;
+                }
+                
+                onTyping: {
+                    var filteredTasks = main.tasks.filter(function(t) {
+                        return t.name.toLowerCase().indexOf(text.toLowerCase()) !== -1;
+                    });
+                    deleteAllTasks();
+                    filteredTasks.forEach(function(t) {
+                        tasksContainer.add(createSingleTaskComponent(t));
+                    });
+                }
             },
             
             ComponentDefinition {
@@ -466,25 +505,29 @@ NavigationPane {
         }
     }
     
-    function addTask(parent, t) {
-        var newTask = taskComponent.createObject(parent);
+    function createSingleTaskComponent(t, parent) {
+        var newTask = taskComponent.createObject(parent !== undefined ? parent : this);
         newTask.name = t.name;
         newTask.type = t.type;
         newTask.taskId = t.id;
-        newTask.expandable = (t.children.length !== 0) || t.type === "FOLDER" || t.type === "LIST";
+        newTask.expandable = (t.children && t.children.length !== 0) || t.type === "FOLDER" || t.type === "LIST";
         newTask.expanded = t.expanded;
         newTask.closed = t.closed;
         newTask.important = t.important;
         newTask.deadline = t.deadline;
         newTask.rememberId = t.remember_id;
         newTask.parentId = t.parent_id;
+        return newTask;
+    }
+    
+    function addTask(parent, t) {
+        var newTask = createSingleTaskComponent(t, parent);
         
         if (parent.objectName === "tasks_container") {
             parent.add(newTask);
         } else {
             parent.addChildTask(newTask);
         }
-        
         
         t.children.forEach(function(t1) {
             addTask(newTask, t1);
@@ -507,6 +550,7 @@ NavigationPane {
         deleteAllTasks();
         
         var allTasks = _tasksService.findAll();
+        main.tasks = allTasks;
         if (allTasks.length === 0) {
             noTasksContainer.visible = true;
         } else {
