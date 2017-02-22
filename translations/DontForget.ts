@@ -2,6 +2,37 @@
 <!DOCTYPE TS>
 <TS version="2.0">
 <context>
+    <name>AddContactSheet</name>
+    <message>
+        <source>Add user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>required</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Last name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PIN</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ApplicationUI</name>
     <message>
         <source>Tasks received!</source>
@@ -421,7 +452,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Share</source>
+        <source>Send</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

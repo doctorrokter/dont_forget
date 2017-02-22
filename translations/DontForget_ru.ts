@@ -2,6 +2,56 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="ru_RU">
 <context>
+    <name>AddContactPage</name>
+    <message>
+        <source>Cancel</source>
+        <translation type="obsolete">Отмена</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="obsolete">OK</translation>
+    </message>
+</context>
+<context>
+    <name>AddContactSheet</name>
+    <message>
+        <location filename="../assets/sheets/AddContactSheet.qml" line="17"/>
+        <source>Add user</source>
+        <translation type="unfinished">Добавить</translation>
+    </message>
+    <message>
+        <location filename="../assets/sheets/AddContactSheet.qml" line="20"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Отмена</translation>
+    </message>
+    <message>
+        <location filename="../assets/sheets/AddContactSheet.qml" line="28"/>
+        <source>OK</source>
+        <translation type="unfinished">OK</translation>
+    </message>
+    <message>
+        <location filename="../assets/sheets/AddContactSheet.qml" line="68"/>
+        <source>First name</source>
+        <translation type="unfinished">Имя</translation>
+    </message>
+    <message>
+        <location filename="../assets/sheets/AddContactSheet.qml" line="74"/>
+        <location filename="../assets/sheets/AddContactSheet.qml" line="113"/>
+        <source>required</source>
+        <translation type="unfinished">обязательное поле</translation>
+    </message>
+    <message>
+        <location filename="../assets/sheets/AddContactSheet.qml" line="91"/>
+        <source>Last name</source>
+        <translation type="unfinished">Фамилия</translation>
+    </message>
+    <message>
+        <location filename="../assets/sheets/AddContactSheet.qml" line="108"/>
+        <source>PIN</source>
+        <translation type="unfinished">PIN</translation>
+    </message>
+</context>
+<context>
     <name>ApplicationUI</name>
     <message>
         <location filename="../src/applicationui.cpp" line="124"/>
@@ -9,7 +59,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="180"/>
+        <location filename="../src/applicationui.cpp" line="182"/>
         <source>Tasks received!</source>
         <translation type="unfinished">Получены новые задачи!</translation>
     </message>
@@ -17,29 +67,29 @@
 <context>
     <name>Contacts</name>
     <message>
-        <location filename="../assets/pages/Contacts.qml" line="63"/>
+        <location filename="../assets/pages/Contacts.qml" line="67"/>
         <source>Tasks sent!</source>
         <translation type="unfinished">Задачи отправлены!</translation>
     </message>
     <message>
-        <location filename="../assets/pages/Contacts.qml" line="65"/>
+        <location filename="../assets/pages/Contacts.qml" line="69"/>
         <source>Task sent!</source>
         <translation type="unfinished">Задача отправлена!</translation>
     </message>
     <message>
-        <location filename="../assets/pages/Contacts.qml" line="89"/>
+        <location filename="../assets/pages/Contacts.qml" line="93"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Добавить</translation>
     </message>
     <message>
-        <location filename="../assets/pages/Contacts.qml" line="108"/>
+        <location filename="../assets/pages/Contacts.qml" line="116"/>
         <source>Users</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Пользователи</translation>
     </message>
     <message>
-        <location filename="../assets/pages/Contacts.qml" line="95"/>
+        <location filename="../assets/pages/Contacts.qml" line="103"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Поиск</translation>
     </message>
 </context>
 <context>
@@ -67,7 +117,7 @@
     <message>
         <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="79"/>
         <source>Root</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Корень</translation>
     </message>
     <message>
         <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="94"/>
@@ -355,7 +405,7 @@
     <message>
         <location filename="../assets/components/TaskNameContainer.qml" line="22"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Название</translation>
     </message>
 </context>
 <context>
@@ -462,12 +512,12 @@
     <message>
         <location filename="../assets/pages/TasksListPage.qml" line="90"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Поиск</translation>
     </message>
     <message>
         <location filename="../assets/pages/TasksListPage.qml" line="144"/>
         <source>Root</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Корень</translation>
     </message>
 </context>
 <context>
@@ -502,7 +552,7 @@
     <message>
         <location filename="../assets/cards/UpdateTaskCard.qml" line="79"/>
         <source>Close task</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Задача выполнена</translation>
     </message>
     <message>
         <location filename="../assets/cards/UpdateTaskCard.qml" line="96"/>
@@ -522,12 +572,12 @@
     <message>
         <location filename="../assets/cards/UpdateTaskCard.qml" line="126"/>
         <source>Delete task</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Удалить задачу</translation>
     </message>
     <message>
         <location filename="../assets/cards/UpdateTaskCard.qml" line="151"/>
         <source>Task updated!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Задача обновлена!</translation>
     </message>
     <message>
         <source>Task created!</source>
@@ -568,9 +618,8 @@
         <translation type="unfinished">Удалить</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="251"/>
         <source>Share</source>
-        <translation type="unfinished">Поделиться</translation>
+        <translation type="obsolete">Поделиться</translation>
     </message>
     <message>
         <source>Tasks sent!</source>
@@ -594,6 +643,11 @@
         <location filename="../assets/main.qml" line="227"/>
         <source>Move</source>
         <translation type="unfinished">Переместить</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="251"/>
+        <source>Send</source>
+        <translation type="unfinished">Переслать</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="367"/>

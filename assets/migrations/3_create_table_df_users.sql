@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS df_users;
-
 CREATE TABLE df_users (
 	id INTEGER PRIMARY KEY, 
 	first_name TEXT DEFAULT NULL, 

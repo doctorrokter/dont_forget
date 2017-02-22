@@ -1,5 +1,6 @@
 import bb.cascades 1.4
 import "../components"
+import "../sheets"
 
 Page {
     id: root
@@ -25,12 +26,15 @@ Page {
             
             scrollRole: ScrollRole.Main
             
-            dataModel: ArrayDataModel {
+            dataModel: GroupDataModel {
                 id: contactsDataModel
+                grouping: ItemGrouping.ByFirstChar
+                sortingKeys: ["first_name", "last_name"]
             }
             
             listItemComponents: [
                 ListItemComponent {
+                    type: "item"
                     StandardListItem {
                         title: ListItemData.first_name + " " + ListItemData.last_name
                         description: ListItemData.pin
@@ -89,6 +93,10 @@ Page {
             title: qsTr("Add") + Retranslate.onLocaleOrLanguageChanged
             imageSource: "asset:///images/ic_add.png"
             ActionBar.placement: ActionBarPlacement.Signature
+            
+            onTriggered: {
+                contactSheet.open();
+            }
         },
         
         ActionItem {
@@ -124,15 +132,25 @@ Page {
                 contactsDataModel.clear();
                 contactsDataModel.append(filteredUsers);
             }
+        },
+        
+        AddContactSheet {
+            id: contactSheet
         }
     ]
     
+    function addUser(user) {
+        contactsDataModel.insert(user);
+    }
+    
     onCreationCompleted: {
-        var data = [];
-        data.push({first_name: "Mikhail", last_name: "Chachkouski", pin: "2BF98F81"});
-        data.push({first_name: "Tatiana", last_name: "Yukhnovskaya", pin: "2BF98F81"});
-        root.users = data;
-        contactsDataModel.append(data);
+//        var data = [];
+//        data.push({first_name: "Mikhail", last_name: "Chachkouski", pin: "2BF98F81"});
+//        data.push({first_name: "Tatiana", last_name: "Yukhnovskaya", pin: "2BF98F81"});
+//        root.users = data;
+//        contactsDataModel.insertList(data);
+        contactsDataModel.insertList(_usersService.findAll());
+        _usersService.userAdded.connect(root.addUser);
     }
     
     onSearchModeChanged: {

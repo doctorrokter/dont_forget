@@ -31,8 +31,6 @@
 #include <bb/platform/Notification>
 
 #include "models/Task.hpp"
-#include "services/TasksService.hpp"
-#include "services/SearchService.hpp"
 
 #define INVOKE_SEARCH_SOURCE "chachkouski.DontForget.search.asyoutype"
 #define INVOKE_CARD_EDIT_TEXT "chachkouski.DontForget.card.edit.text"
@@ -75,6 +73,8 @@ ApplicationUI::ApplicationUI() : QObject() {
 
     m_pTasksService = new TasksService(this, m_pDbConfig);
     m_pTasksService->init();
+
+    m_pUsersService = new UsersService(this, m_pDbConfig);
 
     m_pSearchService = new SearchService(this, m_pTasksService);
     m_pSearchService->init();
@@ -135,7 +135,9 @@ void ApplicationUI::initFullUI() {
     rootContext->setContextProperty("_currentPath", QDir::currentPath());
     rootContext->setContextProperty("_appConfig", m_pAppConfig);
     rootContext->setContextProperty("_tasksService", m_pTasksService);
+    rootContext->setContextProperty("_usersService", m_pUsersService);
     rootContext->setContextProperty("_pushService", m_pPushService);
+    rootContext->setContextProperty("_dropboxService", m_pDropboxService);
     rootContext->setContextProperty("_hasSharedFilesPermission", m_pDbConfig->hasSharedFilesPermission());
     m_running = true;
 
@@ -182,11 +184,11 @@ void ApplicationUI::processTasksContent(const QString& tasksContent) {
         p_notification->deleteLater();
 
         emit tasksReceived();
-        if (!m_running) {
-            Application::quit();
-        }
     } else {
         qDebug() << jda.error() << endl;
+    }
+    if (!m_running) {
+        Application::quit();
     }
 }
 

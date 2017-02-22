@@ -248,9 +248,9 @@ NavigationPane {
             
             ActionItem {
                 id: sendActionItem
-                title: qsTr("Share") + Retranslate.onLocaleOrLanguageChanged
+                title: qsTr("Send") + Retranslate.onLocaleOrLanguageChanged
                 enabled: _tasksService.activeTask !== null
-                imageSource: "asset:///images/ic_share.png"
+                imageSource: "asset:///images/ic_send.png"
                 
                 shortcuts: [
                     Shortcut {

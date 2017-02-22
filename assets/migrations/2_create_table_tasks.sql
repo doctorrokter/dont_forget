@@ -1,4 +1,3 @@
-DROP TABLE IF EXISTS tasks;
 PRAGMA foreign_keys = ON;
 
 CREATE TABLE tasks (

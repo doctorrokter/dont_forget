@@ -63,10 +63,11 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/ic_minus.png) \
         $$quote($$BASEDIR/assets/images/ic_plus.png) \
         $$quote($$BASEDIR/assets/images/ic_search.png) \
+        $$quote($$BASEDIR/assets/images/ic_send.png) \
         $$quote($$BASEDIR/assets/images/ic_share.png) \
         $$quote($$BASEDIR/assets/images/yellow_pellet.png) \
         $$quote($$BASEDIR/assets/main.qml) \
-        $$quote($$BASEDIR/assets/migrations/1_create_schema_verion_table.sql) \
+        $$quote($$BASEDIR/assets/migrations/1_create_schema_version_table.sql) \
         $$quote($$BASEDIR/assets/migrations/2_create_table_tasks.sql) \
         $$quote($$BASEDIR/assets/migrations/3_create_table_df_users.sql) \
         $$quote($$BASEDIR/assets/pages/Contacts.qml) \
@@ -74,6 +75,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/pages/MoveTaskPage.qml) \
         $$quote($$BASEDIR/assets/pages/SettingsPage.qml) \
         $$quote($$BASEDIR/assets/pages/TasksListPage.qml) \
+        $$quote($$BASEDIR/assets/sheets/AddContactSheet.qml) \
         $$quote($$BASEDIR/assets/sheets/TaskSheet.qml) \
         $$quote($$BASEDIR/assets/templates/pap_push.template) \
         $$quote($$BASEDIR/assets/templates/pap_subscription.template)
@@ -90,6 +92,7 @@ config_pri_source_group1 {
         $$quote($$BASEDIR/src/services/PushNotificationService.cpp) \
         $$quote($$BASEDIR/src/services/SearchService.cpp) \
         $$quote($$BASEDIR/src/services/TasksService.cpp) \
+        $$quote($$BASEDIR/src/services/UsersService.cpp) \
         $$quote($$BASEDIR/src/vendor/Console.cpp)
 
     HEADERS += \
@@ -101,6 +104,7 @@ config_pri_source_group1 {
         $$quote($$BASEDIR/src/services/PushNotificationService.hpp) \
         $$quote($$BASEDIR/src/services/SearchService.hpp) \
         $$quote($$BASEDIR/src/services/TasksService.hpp) \
+        $$quote($$BASEDIR/src/services/UsersService.hpp) \
         $$quote($$BASEDIR/src/vendor/Console.hpp)
 }
 
@@ -168,6 +172,5 @@ lupdate_inclusion {
         $$quote($$BASEDIR/../src/*.hxx)
 }
 
-TRANSLATIONS = $$quote($${TARGET}_fr.ts) \
-    $$quote($${TARGET}_ru.ts) \
+TRANSLATIONS = $$quote($${TARGET}_ru.ts) \
     $$quote($${TARGET}.ts)

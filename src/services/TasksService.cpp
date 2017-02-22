@@ -231,11 +231,20 @@ void TasksService::moveTask(const int parentId) {
 }
 
 void TasksService::copyTask(const Task& task) {
-//    QString query = "INSERT INTO tasks (name, description, type, deadline, important, parent_id, remember_id, closed, expanded) "
-//                        "VALUES (:name, :description, :type, :deadline, :important, :parent_id, :remember_id, :closed, :expanded)";
     QString parentId = task.getParentId() == 0 ? NULL : QString::number(task.getParentId());
-    QString query = "INSERT INTO tasks (name, description, type, deadline, important, parent_id, closed, expanded) "
-                        "VALUES (:name, :description, :type, :deadline, :important, :parent_id, :closed, :expanded)";
+    QString rememberId = NULL;
+
+    bool createInRemember = !task.getRememberId().isEmpty();
+    if (createInRemember) {
+        NotebookEntry* note = createNotebookEntry(task.getName(), task.getDescription(), task.getDeadline());
+        rememberId = note->id().toString();
+
+        delete note;
+        note = NULL;
+    }
+
+    QString query = "INSERT INTO tasks (name, description, type, deadline, important, parent_id, closed, expanded, remember_id) "
+                        "VALUES (:name, :description, :type, :deadline, :important, :parent_id, :closed, :expanded, :remember_id)";
     QVariantMap values;
     values["name"] = task.getName();
     values["description"] = task.getDescription();
@@ -243,7 +252,7 @@ void TasksService::copyTask(const Task& task) {
     values["deadline"] = task.getDeadline();
     values["important"] = task.isImportant() ? 1 : 0;
     values["parent_id"] = parentId;
-//    values["remember_id"] = rememberId;
+    values["remember_id"] = rememberId;
     values["closed"] = task.isClosed() ? 1 : 0;
     values["expanded"] = 1;
 

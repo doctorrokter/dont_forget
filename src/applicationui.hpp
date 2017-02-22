@@ -25,6 +25,7 @@
 #include "services/PushNotificationService.hpp"
 #include "services/TasksService.hpp"
 #include "services/SearchService.hpp"
+#include "services/UsersService.hpp"
 #include "services/DropboxService.hpp"
 #include "config/AppConfig.hpp"
 #include "config/DBConfig.hpp"
@@ -72,6 +73,7 @@ private:
     AppConfig* m_pAppConfig;
     DBConfig* m_pDbConfig;
     TasksService* m_pTasksService;
+    UsersService* m_pUsersService;
     SearchService* m_pSearchService;
     DropboxService* m_pDropboxService;
 

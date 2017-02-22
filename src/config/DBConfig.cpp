@@ -67,15 +67,17 @@ DBConfig::DBConfig(QObject* parent) : QObject(parent) {
      } else {
          qDebug() << "DB already exists. Use one." << endl;
 //         m_pSda->execute("DROP TABLE IF EXISTS schema_version");
+//         m_pSda->execute("DROP TABLE IF EXISTS df_users");
          if (AppConfig::getStatic("db_migrated").toString().isEmpty()) {
              qDebug() << "Start DB migration" << endl;
              if (!hasSchemaVersionTable()) {
                  qDebug() << "No schema version table! Will create it" << endl;
-                 runMigration("app/native/assets/migrations/1_create_schema_verion_table.sql");
+                 runMigration("app/native/assets/migrations/1_create_schema_version_table.sql");
                  setVersion(2);
                  qDebug() << "Current schema_version is " << getVersion() << endl;
              }
              migrate();
+             qDebug() << "Current DB version is: " << getVersion() << endl;
              AppConfig::setStatic("db_migrated", "true");
          }
      }
@@ -105,7 +107,9 @@ void DBConfig::runMigration(const QString& path) {
 
     QStringList statements = data.split(";");
     foreach(QString stmt, statements) {
-        m_pSda->execute(stmt);
+        if (!stmt.isEmpty()) {
+            m_pSda->execute(stmt);
+        }
     }
 
     setVersion(version);
