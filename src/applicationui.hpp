@@ -50,7 +50,7 @@ class ApplicationUI : public QObject {
     Q_OBJECT
 public:
     ApplicationUI();
-    virtual ~ApplicationUI() {}
+    virtual ~ApplicationUI();
 
 Q_SIGNALS:
     void taskSheetRequested();
@@ -83,6 +83,7 @@ private:
     void initFullUI();
     void initComposerUI(const QString& pathToPage, const QString& data = "");
     void processReceivedTaskMap(const QVariantMap& taskMap, const int parentId);
+    void clear();
 };
 
 #endif /* ApplicationUI_HPP_ */

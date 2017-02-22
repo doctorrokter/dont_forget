@@ -4,6 +4,11 @@ import "../components"
 Sheet {
     id: contactSheet
     
+    property int userId: 0
+    property string firstName: ""
+    property string lastName: ""
+    property string pin: ""
+    
     property string mode: "CREATE"
     property variant modes: {
         CREATE: "CREATE",
@@ -14,7 +19,12 @@ Sheet {
         id: root
     
         titleBar: CustomTitleBar {
-            title: qsTr("Add user") + Retranslate.onLocaleOrLanguageChanged
+            title: {
+                if (mode === modes.CREATE) {
+                    return qsTr("Add user") + Retranslate.onLocaleOrLanguageChanged;
+                }
+                return qsTr("Update user") + Retranslate.onLocaleOrLanguageChanged;
+            }
             
             cancelAction: ActionItem {
                 title: qsTr("Cancel") + Retranslate.onLocaleOrLanguageChanged
@@ -42,7 +52,11 @@ Sheet {
                     }
                     
                     if (!error) {
-                        _usersService.add(firstName, lastName, pin);
+                        if (userId !== 0) {
+                            _usersService.update(userId, firstName, lastName, pin);
+                        } else {
+                            _usersService.add(firstName, lastName, pin);
+                        }
                         contactSheet.close();
                     }
                 }
@@ -82,6 +96,7 @@ Sheet {
                 TextField {
                     id: firstNameField
                     inputMode: TextFieldInputMode.Text
+                    text: firstName
                 }
             
                 Container {
@@ -95,6 +110,7 @@ Sheet {
                 TextField {
                     id: lastNameField
                     inputMode: TextFieldInputMode.Text
+                    text: lastName
                 }
             
                 Container {
@@ -121,8 +137,20 @@ Sheet {
                 TextField {
                     id: pinField
                     inputMode: TextFieldInputMode.Text
+                    text: pin
                 }
             }
         }
+    }
+    
+    onClosed: {
+        userId = 0;
+        firstName = "";
+        lastName = "";
+        pin = "";
+        mode = "CREATE";
+        firstNameField.resetText();
+        lastNameField.resetText();
+        pinField.resetText();
     }
 }

@@ -25,13 +25,17 @@ public:
     Q_INVOKABLE void remove(const int id);
     Q_INVOKABLE void update(const int id, const QString& firstName, const QString& lastName, const QString& pin);
 
+    Q_INVOKABLE void requestUser(const int id);
+
 Q_SIGNALS:
     void userAdded(QVariantMap userMap);
     void userUpdated();
     void userRemoved();
+    void requestedUserDone(QVariantMap userMap);
 
 private:
     DBConfig* m_pDbConfig;
+    QVariantMap m_activeUser;
 
     QVariantMap lastCreated();
 };

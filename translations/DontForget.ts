@@ -31,6 +31,10 @@
         <source>PIN</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Update user</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ApplicationUI</name>
@@ -44,13 +48,13 @@
     </message>
 </context>
 <context>
-    <name>Contacts</name>
+    <name>ContactsPage</name>
     <message>
-        <source>Users</source>
+        <source>Tasks sent!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Search</source>
+        <source>Task sent!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -58,11 +62,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Tasks sent!</source>
+        <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Task sent!</source>
+        <source>Users</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

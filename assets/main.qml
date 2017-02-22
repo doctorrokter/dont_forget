@@ -54,6 +54,9 @@ NavigationPane {
     
     onPopTransitionEnded: {
         Application.menuEnabled = true;
+        if (page.clear) {
+            page.clear();
+        }
     }
     
     Page {
@@ -324,8 +327,10 @@ NavigationPane {
             
             ComponentDefinition {
                 id: contacts
-                Contacts {
+                ContactsPage {
+                    id: contactsPage
                     onTasksSent: {
+                        contactsPage.clear();
                         navigation.pop();
                     }
                 }    

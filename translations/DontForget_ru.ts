@@ -15,38 +15,43 @@
 <context>
     <name>AddContactSheet</name>
     <message>
-        <location filename="../assets/sheets/AddContactSheet.qml" line="17"/>
+        <location filename="../assets/sheets/AddContactSheet.qml" line="24"/>
         <source>Add user</source>
         <translation type="unfinished">Добавить</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/AddContactSheet.qml" line="20"/>
+        <location filename="../assets/sheets/AddContactSheet.qml" line="26"/>
+        <source>Update user</source>
+        <translation type="unfinished">Изменить</translation>
+    </message>
+    <message>
+        <location filename="../assets/sheets/AddContactSheet.qml" line="30"/>
         <source>Cancel</source>
         <translation type="unfinished">Отмена</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/AddContactSheet.qml" line="28"/>
+        <location filename="../assets/sheets/AddContactSheet.qml" line="38"/>
         <source>OK</source>
         <translation type="unfinished">OK</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/AddContactSheet.qml" line="68"/>
+        <location filename="../assets/sheets/AddContactSheet.qml" line="82"/>
         <source>First name</source>
         <translation type="unfinished">Имя</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/AddContactSheet.qml" line="74"/>
-        <location filename="../assets/sheets/AddContactSheet.qml" line="113"/>
+        <location filename="../assets/sheets/AddContactSheet.qml" line="88"/>
+        <location filename="../assets/sheets/AddContactSheet.qml" line="129"/>
         <source>required</source>
         <translation type="unfinished">обязательное поле</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/AddContactSheet.qml" line="91"/>
+        <location filename="../assets/sheets/AddContactSheet.qml" line="106"/>
         <source>Last name</source>
         <translation type="unfinished">Фамилия</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/AddContactSheet.qml" line="108"/>
+        <location filename="../assets/sheets/AddContactSheet.qml" line="124"/>
         <source>PIN</source>
         <translation type="unfinished">PIN</translation>
     </message>
@@ -54,12 +59,12 @@
 <context>
     <name>ApplicationUI</name>
     <message>
-        <location filename="../src/applicationui.cpp" line="124"/>
+        <location filename="../src/applicationui.cpp" line="128"/>
         <source>Success!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="182"/>
+        <location filename="../src/applicationui.cpp" line="186"/>
         <source>Tasks received!</source>
         <translation type="unfinished">Получены новые задачи!</translation>
     </message>
@@ -67,29 +72,57 @@
 <context>
     <name>Contacts</name>
     <message>
-        <location filename="../assets/pages/Contacts.qml" line="67"/>
+        <source>Tasks sent!</source>
+        <translation type="obsolete">Задачи отправлены!</translation>
+    </message>
+    <message>
+        <source>Task sent!</source>
+        <translation type="obsolete">Задача отправлена!</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="obsolete">Добавить</translation>
+    </message>
+    <message>
+        <source>Users</source>
+        <translation type="obsolete">Пользователи</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="obsolete">Поиск</translation>
+    </message>
+</context>
+<context>
+    <name>ContactsPage</name>
+    <message>
+        <location filename="../assets/pages/ContactsPage.qml" line="51"/>
+        <source>Edit</source>
+        <translation type="unfinished">Изменить</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/ContactsPage.qml" line="86"/>
         <source>Tasks sent!</source>
         <translation type="unfinished">Задачи отправлены!</translation>
     </message>
     <message>
-        <location filename="../assets/pages/Contacts.qml" line="69"/>
+        <location filename="../assets/pages/ContactsPage.qml" line="88"/>
         <source>Task sent!</source>
         <translation type="unfinished">Задача отправлена!</translation>
     </message>
     <message>
-        <location filename="../assets/pages/Contacts.qml" line="93"/>
+        <location filename="../assets/pages/ContactsPage.qml" line="112"/>
         <source>Add</source>
         <translation type="unfinished">Добавить</translation>
     </message>
     <message>
-        <location filename="../assets/pages/Contacts.qml" line="116"/>
-        <source>Users</source>
-        <translation type="unfinished">Пользователи</translation>
-    </message>
-    <message>
-        <location filename="../assets/pages/Contacts.qml" line="103"/>
+        <location filename="../assets/pages/ContactsPage.qml" line="122"/>
         <source>Search</source>
         <translation type="unfinished">Поиск</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/ContactsPage.qml" line="135"/>
+        <source>Users</source>
+        <translation type="unfinished">Пользователи</translation>
     </message>
 </context>
 <context>
@@ -592,28 +625,28 @@
         <translation type="unfinished">Обратная связь</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="295"/>
-        <location filename="../assets/main.qml" line="407"/>
+        <location filename="../assets/main.qml" line="298"/>
+        <location filename="../assets/main.qml" line="412"/>
         <source>All Tasks</source>
         <translation type="unfinished">Все задачи</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="83"/>
+        <location filename="../assets/main.qml" line="86"/>
         <source>You have no tasks yet. It&apos;s time to create new one!</source>
         <translation type="unfinished">У вас пока нет ни одной задачи. Самое время создать!</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="148"/>
+        <location filename="../assets/main.qml" line="151"/>
         <source>Create</source>
         <translation type="unfinished">Создать</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="171"/>
+        <location filename="../assets/main.qml" line="174"/>
         <source>Edit</source>
         <translation type="unfinished">Изменить</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="197"/>
+        <location filename="../assets/main.qml" line="200"/>
         <source>Delete</source>
         <translation type="unfinished">Удалить</translation>
     </message>
@@ -630,37 +663,37 @@
         <translation type="obsolete">Задача отправлена!</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="276"/>
+        <location filename="../assets/main.qml" line="279"/>
         <source>Hide closed</source>
         <translation type="unfinished">Не показывать закрытые</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="278"/>
+        <location filename="../assets/main.qml" line="281"/>
         <source>Show all</source>
         <translation type="unfinished">Показать все</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="227"/>
+        <location filename="../assets/main.qml" line="230"/>
         <source>Move</source>
         <translation type="unfinished">Переместить</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="251"/>
+        <location filename="../assets/main.qml" line="254"/>
         <source>Send</source>
         <translation type="unfinished">Переслать</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="367"/>
+        <location filename="../assets/main.qml" line="372"/>
         <source>Permission required</source>
         <translation type="unfinished">Требуются права</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="368"/>
+        <location filename="../assets/main.qml" line="373"/>
         <source>Looks like you didn&apos;t grant permission for shared files. &quot;Don&apos;t Forget&quot; cannot work without this permission since the app stores own database in external resources. In order to use this app you should grant permissions in Settings, then restart the app.</source>
         <translation type="unfinished">Похоже Вы не дали права на использование общих файлов приложением. &quot;Don&apos;t Forget&quot; не может работать без этих прав, так как хранит собственную базу данных во внешних ресурсах. Для того, чтобы пользоваться этим приложением, Вам необходимо добавить права в Настройках, затем перезапустить приложение.</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="371"/>
+        <location filename="../assets/main.qml" line="376"/>
         <source>Settings</source>
         <translation type="unfinished">Настройки</translation>
     </message>

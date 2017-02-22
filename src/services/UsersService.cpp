@@ -52,3 +52,7 @@ QVariantMap UsersService::lastCreated() {
     return m_pDbConfig->connection()->execute("SELECT * FROM df_users ORDER BY id DESC LIMIT 1").toList().at(0).toMap();
 }
 
+void UsersService::requestUser(const int id) {
+    emit requestedUserDone(findById(id));
+}
+

@@ -70,7 +70,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/migrations/1_create_schema_version_table.sql) \
         $$quote($$BASEDIR/assets/migrations/2_create_table_tasks.sql) \
         $$quote($$BASEDIR/assets/migrations/3_create_table_df_users.sql) \
-        $$quote($$BASEDIR/assets/pages/Contacts.qml) \
+        $$quote($$BASEDIR/assets/pages/ContactsPage.qml) \
         $$quote($$BASEDIR/assets/pages/HelpPage.qml) \
         $$quote($$BASEDIR/assets/pages/MoveTaskPage.qml) \
         $$quote($$BASEDIR/assets/pages/SettingsPage.qml) \

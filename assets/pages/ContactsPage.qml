@@ -38,6 +38,25 @@ Page {
                     StandardListItem {
                         title: ListItemData.first_name + " " + ListItemData.last_name
                         description: ListItemData.pin
+                        
+                        contextActions: [
+                            ActionSet {
+                                DeleteActionItem {
+                                    onTriggered: {
+                                        _usersService.remove(ListItemData.id);
+                                    }
+                                }
+                                
+                                ActionItem {
+                                    title: qsTr("Edit") + Retranslate.onLocaleOrLanguageChanged
+                                    imageSource: "asset:///images/ic_compose.png"
+                                    
+                                    onTriggered: {
+                                        _usersService.requestUser(ListItemData.id);
+                                    }
+                                }
+                            }
+                        ]
                     }
                 }
             ]
@@ -130,7 +149,7 @@ Page {
                            u.pin.toLowerCase().indexOf(text.toLowerCase()) !== -1;
                 });
                 contactsDataModel.clear();
-                contactsDataModel.append(filteredUsers);
+                contactsDataModel.insertList(filteredUsers);
             }
         },
         
@@ -143,14 +162,34 @@ Page {
         contactsDataModel.insert(user);
     }
     
+    function fill() {
+        root.users = _usersService.findAll();
+        contactsDataModel.clear();
+        contactsDataModel.insertList(root.users);
+    }
+    
+    function showActiveUser(user) {
+        contactSheet.userId = user.id;
+        contactSheet.firstName = user.first_name;
+        contactSheet.lastName = user.last_name;
+        contactSheet.pin = user.pin;
+        contactSheet.mode = "UPDATE";
+        contactSheet.open();
+    }
+    
+    function clear() {
+        _usersService.userAdded.disconnect(root.addUser);
+        _usersService.userRemoved.disconnect(root.fill);
+        _usersService.userUpdated.disconnect(root.fill);
+        _usersService.requestedUserDone.disconnect(root.showActiveUser);
+    }
+    
     onCreationCompleted: {
-//        var data = [];
-//        data.push({first_name: "Mikhail", last_name: "Chachkouski", pin: "2BF98F81"});
-//        data.push({first_name: "Tatiana", last_name: "Yukhnovskaya", pin: "2BF98F81"});
-//        root.users = data;
-//        contactsDataModel.insertList(data);
-        contactsDataModel.insertList(_usersService.findAll());
+        fill();
         _usersService.userAdded.connect(root.addUser);
+        _usersService.userRemoved.connect(root.fill);
+        _usersService.userUpdated.connect(root.fill);
+        _usersService.requestedUserDone.connect(root.showActiveUser);
     }
     
     onSearchModeChanged: {
@@ -160,8 +199,7 @@ Page {
         } else {
             root.titleBar.reset();
             root.titleBar = defaultTitleBar;
-            contactsDataModel.clear();
-            contactsDataModel.append(users);
+            fill();
         }
     }
 }

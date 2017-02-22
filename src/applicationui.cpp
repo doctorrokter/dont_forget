@@ -106,6 +106,10 @@ ApplicationUI::ApplicationUI() : QObject() {
 //    qDebug() << "===>>> Startup mode: " << m_startupMode << endl;
 }
 
+ApplicationUI::~ApplicationUI() {
+    clear();
+}
+
 void ApplicationUI::onSystemLanguageChanged() {
     QCoreApplication::instance()->removeTranslator(m_pTranslator);
     // Initiate, load and install the application translation files.
@@ -188,7 +192,9 @@ void ApplicationUI::processTasksContent(const QString& tasksContent) {
         qDebug() << jda.error() << endl;
     }
     if (!m_running) {
-        Application::quit();
+        clear();
+        exit(0);
+//        Application::quit();
     }
 }
 
@@ -253,4 +259,17 @@ void ApplicationUI::onInvoked(const bb::system::InvokeRequest& request) {
 
         }
     }
+}
+
+void ApplicationUI::clear() {
+    m_pAppConfig->deleteLater();
+    m_pDbConfig->deleteLater();
+    m_pDropboxService->deleteLater();
+    m_pTasksService->deleteLater();
+    m_pInvokeManager->deleteLater();
+    m_pPushService->deleteLater();
+    m_pSearchService->deleteLater();
+    m_pUsersService->deleteLater();
+    m_pTranslator->deleteLater();
+    m_pLocaleHandler->deleteLater();
 }
