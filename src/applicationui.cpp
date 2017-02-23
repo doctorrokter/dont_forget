@@ -69,6 +69,7 @@ ApplicationUI::ApplicationUI() : QObject() {
 
     onSystemLanguageChanged();
 
+    m_running = false;
     m_pDbConfig = new DBConfig(this);
 
     m_pTasksService = new TasksService(this, m_pDbConfig);
@@ -194,7 +195,6 @@ void ApplicationUI::processTasksContent(const QString& tasksContent) {
     if (!m_running) {
         clear();
         exit(0);
-//        Application::quit();
     }
 }
 

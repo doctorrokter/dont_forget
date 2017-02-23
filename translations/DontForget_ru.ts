@@ -59,12 +59,12 @@
 <context>
     <name>ApplicationUI</name>
     <message>
-        <location filename="../src/applicationui.cpp" line="128"/>
+        <location filename="../src/applicationui.cpp" line="129"/>
         <source>Success!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="186"/>
+        <location filename="../src/applicationui.cpp" line="187"/>
         <source>Tasks received!</source>
         <translation type="unfinished">Получены новые задачи!</translation>
     </message>
@@ -625,28 +625,28 @@
         <translation type="unfinished">Обратная связь</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="319"/>
-        <location filename="../assets/main.qml" line="451"/>
+        <location filename="../assets/main.qml" line="320"/>
+        <location filename="../assets/main.qml" line="452"/>
         <source>All Tasks</source>
         <translation type="unfinished">Все задачи</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="88"/>
+        <location filename="../assets/main.qml" line="89"/>
         <source>You have no tasks yet. It&apos;s time to create new one!</source>
         <translation type="unfinished">У вас пока нет ни одной задачи. Самое время создать!</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="153"/>
+        <location filename="../assets/main.qml" line="154"/>
         <source>Create</source>
         <translation type="unfinished">Создать</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="176"/>
+        <location filename="../assets/main.qml" line="177"/>
         <source>Edit</source>
         <translation type="unfinished">Изменить</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="202"/>
+        <location filename="../assets/main.qml" line="203"/>
         <source>Delete</source>
         <translation type="unfinished">Удалить</translation>
     </message>
@@ -663,42 +663,42 @@
         <translation type="obsolete">Задача отправлена!</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="269"/>
+        <location filename="../assets/main.qml" line="270"/>
         <source>Hide closed</source>
         <translation type="unfinished">Не показывать закрытые</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="271"/>
+        <location filename="../assets/main.qml" line="272"/>
         <source>Show all</source>
         <translation type="unfinished">Показать все</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="232"/>
+        <location filename="../assets/main.qml" line="233"/>
         <source>Move</source>
         <translation type="unfinished">Переместить</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="256"/>
+        <location filename="../assets/main.qml" line="257"/>
         <source>Send</source>
         <translation type="unfinished">Переслать</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="286"/>
+        <location filename="../assets/main.qml" line="287"/>
         <source>Search</source>
         <translation type="unfinished">Поиск</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="411"/>
+        <location filename="../assets/main.qml" line="412"/>
         <source>Permission required</source>
         <translation type="unfinished">Требуются права</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="412"/>
+        <location filename="../assets/main.qml" line="413"/>
         <source>Looks like you didn&apos;t grant permission for shared files. &quot;Don&apos;t Forget&quot; cannot work without this permission since the app stores own database in external resources. In order to use this app you should grant permissions in Settings, then restart the app.</source>
         <translation type="unfinished">Похоже Вы не дали права на использование общих файлов приложением. &quot;Don&apos;t Forget&quot; не может работать без этих прав, так как хранит собственную базу данных во внешних ресурсах. Для того, чтобы пользоваться этим приложением, Вам необходимо добавить права в Настройках, затем перезапустить приложение.</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="415"/>
+        <location filename="../assets/main.qml" line="416"/>
         <source>Settings</source>
         <translation type="unfinished">Настройки</translation>
     </message>

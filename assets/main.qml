@@ -57,6 +57,7 @@ NavigationPane {
         if (page.clear) {
             page.clear();
         }
+        page.destroy();
     }
     
     Page {
@@ -309,7 +310,7 @@ NavigationPane {
             } else {
                 main.titleBar.reset();
                 main.titleBar = titleBar;
-                renderTree();
+                navigation.renderTree(main.tasks);
             }
         }
         
@@ -329,7 +330,7 @@ NavigationPane {
                 
                 onTyping: {
                     var filteredTasks = main.tasks.filter(function(t) {
-                        return t.name.toLowerCase().indexOf(text.toLowerCase()) !== -1;
+                        return t.name.toLowerCase().startsWith(text.toLowerCase());
                     });
                     deleteAllTasks();
                     filteredTasks.forEach(function(t) {
@@ -501,7 +502,9 @@ NavigationPane {
     
     function deleteAllTasks() {
         while(tasksContainer.controls.length !== 0) {
-            tasksContainer.remove(tasksContainer.controls[tasksContainer.controls.length - 1]);
+            var control = tasksContainer.controls[tasksContainer.controls.length - 1];
+            tasksContainer.remove(control);
+            control.destroy();
         }
     }
     
@@ -546,11 +549,16 @@ NavigationPane {
         }
     }
     
-    function renderTree() {
+    function renderTree(tasksToRender) {
+        loading.running = true;
         deleteAllTasks();
         
-        var allTasks = _tasksService.findAll();
-        main.tasks = allTasks;
+        var allTasks = tasksToRender;
+        if (!tasksToRender) {
+            allTasks = _tasksService.findAll();
+            main.tasks = allTasks;
+        }
+        
         if (allTasks.length === 0) {
             noTasksContainer.visible = true;
         } else {
@@ -567,6 +575,7 @@ NavigationPane {
                 addTask(tasksContainer, t);
             });
         }
+        loading.running = false;
     }
     
     function openTaskSheetEditMode() {
@@ -575,6 +584,12 @@ NavigationPane {
     }
     
     onCreationCompleted: {
+        if (!String.prototype.startsWith) {
+            String.prototype.startsWith = function(searchString, position){
+                position = position || 0;
+                return this.substr(position, searchString.length) === searchString;
+            };
+        }
         renderTree();
         _tasksService.taskCreated.connect(navigation.onTaskCreated);
         _tasksService.taskMoved.connect(navigation.renderTree);
