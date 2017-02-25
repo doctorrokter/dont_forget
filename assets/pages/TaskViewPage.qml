@@ -111,6 +111,9 @@ Page {
                                 }
                                 
                                 Label {
+                                    layoutProperties: StackLayoutProperties {
+                                        spaceQuota: 1
+                                    }
                                     text: rootChildTask.name
                                     multiline: true
                                 }
