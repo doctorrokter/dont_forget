@@ -200,27 +200,27 @@
 <context>
     <name>DeleteTaskDialog</name>
     <message>
-        <location filename="../assets/components/DeleteTaskDialog.qml" line="31"/>
+        <location filename="../assets/components/DeleteTaskDialog.qml" line="32"/>
         <source>Confirm the deleting</source>
         <translation type="unfinished">Confirmer la suppression</translation>
     </message>
     <message>
-        <location filename="../assets/components/DeleteTaskDialog.qml" line="45"/>
+        <location filename="../assets/components/DeleteTaskDialog.qml" line="46"/>
         <source>This action cannot be undone. Also, task may contain children. All these will be deleted. Continue?</source>
         <translation type="unfinished">Cette action ne peut pas être effectuée. La tâche peut être liée à d&apos;autres. L&apos;ensemble va être supprimer. Continuer?</translation>
     </message>
     <message>
-        <location filename="../assets/components/DeleteTaskDialog.qml" line="59"/>
+        <location filename="../assets/components/DeleteTaskDialog.qml" line="60"/>
         <source>Don&apos;t ask again</source>
         <translation type="unfinished">Ne plus demander</translation>
     </message>
     <message>
-        <location filename="../assets/components/DeleteTaskDialog.qml" line="74"/>
+        <location filename="../assets/components/DeleteTaskDialog.qml" line="75"/>
         <source>Cancel</source>
         <translation type="unfinished">Annuler</translation>
     </message>
     <message>
-        <location filename="../assets/components/DeleteTaskDialog.qml" line="83"/>
+        <location filename="../assets/components/DeleteTaskDialog.qml" line="84"/>
         <source>OK</source>
         <translation type="unfinished">OK</translation>
     </message>

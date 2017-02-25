@@ -19,7 +19,8 @@ Dialog {
             horizontalAlignment: HorizontalAlignment.Center
             maxHeight: ui.du(70)
             maxWidth: ui.du(70);
-            background: ui.palette.background
+//            background: ui.palette.background
+            background: ui.palette.plain
             
             Container {
                 horizontalAlignment: HorizontalAlignment.Fill
