@@ -194,7 +194,7 @@ NavigationPane {
                     }
                 ]
             },
-                        
+            
             DeleteActionItem {
                 id: deleteActionItem
                 
@@ -261,6 +261,30 @@ NavigationPane {
                     var contactsPage = contacts.createObject(this);
                     navigation.push(contactsPage);
                 }
+            },
+            
+            ActionItem {
+                id: viewActionItem
+                enabled: _tasksService.activeTask !== null;
+                title: qsTr("View") + Retranslate.onLocaleOrLanguageChanged
+                imageSource: "asset:///images/ic_watch.png"
+                
+                onTriggered: {
+                    var viewPage = taskViewPage.createObject(this);
+                    navigation.push(viewPage);
+                }
+                
+                shortcuts: [
+                    Shortcut {
+                        key: "d"
+                        
+                        onTriggered: {
+                            if (viewActionItem.enabled) {
+                                viewActionItem.triggered();
+                            }
+                        }
+                    }
+                ]
             },
             
             ActionItem {
@@ -373,6 +397,11 @@ NavigationPane {
                         navigation.pop();
                     }
                 }    
+            },
+            
+            ComponentDefinition {
+                id: taskViewPage
+                TaskViewPage {}    
             },
             
             ComponentDefinition {
@@ -519,6 +548,9 @@ NavigationPane {
         newTask.deadline = t.deadline;
         newTask.rememberId = t.remember_id;
         newTask.parentId = t.parent_id;
+        newTask.taskViewRequested.connect(function() {
+            viewActionItem.triggered();
+        });
         return newTask;
     }
     
@@ -553,6 +585,10 @@ NavigationPane {
         deleteAllTasks();
         
         var allTasks = tasksToRender;
+        if (typeof tasksToRender !== 'object') {
+            allTasks = undefined;
+            tasksToRender = undefined;
+        }
         if (!tasksToRender) {
             allTasks = _tasksService.findAll();
             main.tasks = allTasks;

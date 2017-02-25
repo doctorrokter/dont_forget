@@ -49,6 +49,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/components/TaskDescriptionContainer.qml) \
         $$quote($$BASEDIR/assets/components/TaskNameContainer.qml) \
         $$quote($$BASEDIR/assets/components/ToggleBlock.qml) \
+        $$quote($$BASEDIR/assets/images/grey_pellet.png) \
         $$quote($$BASEDIR/assets/images/ic_add.png) \
         $$quote($$BASEDIR/assets/images/ic_clear.png) \
         $$quote($$BASEDIR/assets/images/ic_compose.png) \
@@ -59,12 +60,14 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/ic_feedback.png) \
         $$quote($$BASEDIR/assets/images/ic_folder.png) \
         $$quote($$BASEDIR/assets/images/ic_forward.png) \
+        $$quote($$BASEDIR/assets/images/ic_history.png) \
         $$quote($$BASEDIR/assets/images/ic_list.png) \
         $$quote($$BASEDIR/assets/images/ic_minus.png) \
         $$quote($$BASEDIR/assets/images/ic_plus.png) \
         $$quote($$BASEDIR/assets/images/ic_search.png) \
         $$quote($$BASEDIR/assets/images/ic_send.png) \
         $$quote($$BASEDIR/assets/images/ic_share.png) \
+        $$quote($$BASEDIR/assets/images/ic_watch.png) \
         $$quote($$BASEDIR/assets/images/yellow_pellet.png) \
         $$quote($$BASEDIR/assets/main.qml) \
         $$quote($$BASEDIR/assets/migrations/1_create_schema_version_table.sql) \
@@ -74,6 +77,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/pages/HelpPage.qml) \
         $$quote($$BASEDIR/assets/pages/MoveTaskPage.qml) \
         $$quote($$BASEDIR/assets/pages/SettingsPage.qml) \
+        $$quote($$BASEDIR/assets/pages/TaskViewPage.qml) \
         $$quote($$BASEDIR/assets/pages/TasksListPage.qml) \
         $$quote($$BASEDIR/assets/sheets/AddContactSheet.qml) \
         $$quote($$BASEDIR/assets/sheets/TaskSheet.qml) \
@@ -93,6 +97,7 @@ config_pri_source_group1 {
         $$quote($$BASEDIR/src/services/SearchService.cpp) \
         $$quote($$BASEDIR/src/services/TasksService.cpp) \
         $$quote($$BASEDIR/src/services/UsersService.cpp) \
+        $$quote($$BASEDIR/src/util/Calendar.cpp) \
         $$quote($$BASEDIR/src/vendor/Console.cpp)
 
     HEADERS += \
@@ -105,6 +110,7 @@ config_pri_source_group1 {
         $$quote($$BASEDIR/src/services/SearchService.hpp) \
         $$quote($$BASEDIR/src/services/TasksService.hpp) \
         $$quote($$BASEDIR/src/services/UsersService.hpp) \
+        $$quote($$BASEDIR/src/util/Calendar.hpp) \
         $$quote($$BASEDIR/src/vendor/Console.hpp)
 }
 
@@ -134,6 +140,11 @@ lupdate_inclusion {
         $$quote($$BASEDIR/../src/services/*.cc) \
         $$quote($$BASEDIR/../src/services/*.cpp) \
         $$quote($$BASEDIR/../src/services/*.cxx) \
+        $$quote($$BASEDIR/../src/util/*.c) \
+        $$quote($$BASEDIR/../src/util/*.c++) \
+        $$quote($$BASEDIR/../src/util/*.cc) \
+        $$quote($$BASEDIR/../src/util/*.cpp) \
+        $$quote($$BASEDIR/../src/util/*.cxx) \
         $$quote($$BASEDIR/../src/vendor/*.c) \
         $$quote($$BASEDIR/../src/vendor/*.c++) \
         $$quote($$BASEDIR/../src/vendor/*.cc) \

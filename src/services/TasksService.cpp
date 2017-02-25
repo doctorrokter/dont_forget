@@ -10,6 +10,7 @@
 #include <QVariantMap>
 #include <iostream>
 #include <QDateTime>
+#include <bb/pim/Global>
 #include <bb/pim/notebook/NotebookEntryStatus>
 #include <bb/pim/notebook/NotebookEntryDescription>
 #include <bb/pim/notebook/NotebookEntryId>

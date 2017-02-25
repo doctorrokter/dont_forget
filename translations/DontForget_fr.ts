@@ -435,6 +435,14 @@
     </message>
 </context>
 <context>
+    <name>TaskViewPage</name>
+    <message>
+        <location filename="../assets/pages/TaskViewPage.qml" line="77"/>
+        <source>Child tasks</source>
+        <translation type="unfinished">Tâches enfant</translation>
+    </message>
+</context>
+<context>
     <name>TasksListPage</name>
     <message>
         <location filename="../assets/pages/TasksListPage.qml" line="68"/>
@@ -523,6 +531,11 @@
         <translation type="unfinished">Editer</translation>
     </message>
     <message>
+        <location filename="../assets/main.qml" line="269"/>
+        <source>View</source>
+        <translation type="unfinished">Regarder</translation>
+    </message>
+    <message>
         <location filename="../assets/main.qml" line="202"/>
         <source>Delete</source>
         <translation type="unfinished">Supprimer</translation>
@@ -538,38 +551,38 @@
         <translation type="unfinished">Envoyer</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="269"/>
+        <location filename="../assets/main.qml" line="293"/>
         <source>Hide closed</source>
         <translation type="unfinished">Cacher terminer</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="271"/>
+        <location filename="../assets/main.qml" line="295"/>
         <source>Show all</source>
         <translation type="unfinished">Tout afficher</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="286"/>
+        <location filename="../assets/main.qml" line="310"/>
         <source>Search</source>
         <translation type="unfinished">Rechercher</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="319"/>
-        <location filename="../assets/main.qml" line="451"/>
+        <location filename="../assets/main.qml" line="343"/>
+        <location filename="../assets/main.qml" line="480"/>
         <source>All Tasks</source>
         <translation type="unfinished">Toutes les tâches</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="411"/>
+        <location filename="../assets/main.qml" line="440"/>
         <source>Permission required</source>
         <translation type="unfinished">Permission demandée</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="412"/>
+        <location filename="../assets/main.qml" line="441"/>
         <source>Looks like you didn&apos;t grant permission for shared files. &quot;Don&apos;t Forget&quot; cannot work without this permission since the app stores own database in external resources. In order to use this app you should grant permissions in Settings, then restart the app.</source>
         <translation type="unfinished">Il semblerait que vous n&apos;avez pas accepter la permission de partage de fichiers. &quot;Don&apos;t Forget&quot; ne peut fonctionner sans cette permission. Pour utiliser cette application vous devez autoriser cette permission dans les paramètres du téléphone, puis redémarrer l&apos;application.</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="415"/>
+        <location filename="../assets/main.qml" line="444"/>
         <source>Settings</source>
         <translation type="unfinished">Paramètres</translation>
     </message>

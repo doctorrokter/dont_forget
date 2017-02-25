@@ -1,8 +1,11 @@
 import bb.cascades 1.4
 import "../sheets"
+import "../pages"
 
 Container {
     id: task
+    
+    signal taskViewRequested();
     
     property int taskId: 1
     property bool expanded: true
@@ -33,7 +36,7 @@ Container {
                     if (!task.selected) {
                         _tasksService.setActiveTask(task.taskId);
                     }
-                    _app.taskSheetRequested();
+                    taskViewRequested();
                 }
             }
         }
@@ -268,8 +271,7 @@ Container {
                         if (!task.selected) {
                             _tasksService.setActiveTask(task.taskId);
                         }
-                        taskSheet.mode = taskSheet.modes.UPDATE;
-                        taskSheet.open();
+                        taskViewRequested();
                     }
                 }          
             ]

@@ -176,7 +176,6 @@ void PushNotificationService::papFormatAddress(QString &address) {
 void PushNotificationService::generatePushMessage(QString& pushMessage, const int priority, const QString &title, const QString &body) {
     Q_UNUSED(priority);
     Q_UNUSED(title);
-//    pushMessage = QString("{\"priority\": %1, \"title\": \"%2\", \"body\": %3}").arg(priority).arg(title).arg(body);
     pushMessage = QString("{\"body\": %1}").arg(body);
 }
 
