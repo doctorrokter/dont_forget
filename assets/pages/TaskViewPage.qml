@@ -21,7 +21,9 @@ Page {
             Container {
                 horizontalAlignment: HorizontalAlignment.Fill
                 Label {
-                    text: _tasksService.activeTask.name
+                    text: {
+                        return _tasksService.activeTask !== null ? _tasksService.activeTask.name : ""
+                    }
                     multiline: true
                     textStyle.base: SystemDefaults.TextStyles.BigText
                 }
@@ -29,13 +31,15 @@ Page {
             }
             
             Container {
-                visible: _tasksService.activeTask.description.trim() !== ""
+                visible: _tasksService.activeTask !== null && _tasksService.activeTask.description.trim() !== ""
                 horizontalAlignment: HorizontalAlignment.Fill
                 topPadding: ui.du(2.5)
                 bottomPadding: ui.du(2.5)
                 Label {
                     multiline: true
-                    text: _tasksService.activeTask.description
+                    text: {
+                        return _tasksService.activeTask !== null ? _tasksService.activeTask.description : ""
+                    }
                     textStyle.base: SystemDefaults.TextStyles.BodyText
                 }
             }
@@ -45,7 +49,7 @@ Page {
                 topPadding: ui.du(2.5)
                 bottomPadding: ui.du(2.5)
                 background: ui.palette.plain
-                visible: _tasksService.activeTask.deadline !== 0
+                visible: _tasksService.activeTask !== null && _tasksService.activeTask.deadline !== 0
 //                visible: false
                 
                 Container {
@@ -60,7 +64,9 @@ Page {
                     
                     Label {
                         verticalAlignment: VerticalAlignment.Center
-                        text: Qt.formatDateTime(new Date(_tasksService.activeTask.deadline * 1000), "dd.MM.yyyy HH:mm")
+                        text: {
+                            return _tasksService.activeTask !== null ? Qt.formatDateTime(new Date(_tasksService.activeTask.deadline * 1000), "dd.MM.yyyy HH:mm") : "";
+                        }
                         textStyle.base: SystemDefaults.TextStyles.TitleText
                         textStyle.color: Color.create("#779933")
                     }

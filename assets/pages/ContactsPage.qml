@@ -1,4 +1,5 @@
 import bb.cascades 1.4
+import bb.system 1.2
 import "../components"
 import "../sheets"
 
@@ -62,38 +63,68 @@ Page {
             ]
             
             onTriggered: {
-                var data = contactsDataModel.data(indexPath);
-                if (_tasksService.activeTask !== null) {
-                    loading.running = true;
-                    
-                    var collectSiblings = function(rootTask) {
-                        rootTask.children = _tasksService.findSiblings(rootTask.id);
-                        if (rootTask.children.length !== 0) {
-                            rootTask.children.forEach(function(sibling) {
-                                    collectSiblings(sibling);
-                            });
-                        }
-                    };
-                    
-                    var rootTask = _tasksService.activeTask.toJson();
-                    collectSiblings(rootTask);
-                    
-                    var PIN = data.pin;
-                    var processTempLink = function(data) {
-                        _dropboxService.tempLinkCreated.disconnect(processTempLink);
-                        _pushService.pushMessageToUser(PIN, 2, "Tasks", data);
-                        if (rootTask.children.length !== 0) {
-                            toast.body = qsTr("Tasks sent!") + Retranslate.onLocaleOrLanguageChanged;
-                        } else {
-                            toast.body = qsTr("Task sent!") + Retranslate.onLocaleOrLanguageChanged;
-                        }
-                        loading.running = false;
-                        toast.show();
-                        tasksSent();
-                    };
-                    
-                    _dropboxService.uploadFile(PIN + "_" + new Date().getTime() + ".json", JSON.stringify(rootTask));
-                    _dropboxService.tempLinkCreated.connect(processTempLink);
+                if (_appConfig.hasNetwork()) {
+                    var data = contactsDataModel.data(indexPath);
+                    if (_tasksService.activeTask !== null) {
+                        loading.running = true;
+                        
+                        var collectSiblings = function(rootTask) {
+                            rootTask.children = _tasksService.findSiblings(rootTask.id);
+                            if (rootTask.children.length !== 0) {
+                                rootTask.children.forEach(function(sibling) {
+                                        collectSiblings(sibling);
+                                });
+                            }
+                        };
+                        
+                        var rootTask = _tasksService.activeTask.toJson();
+                        collectSiblings(rootTask);
+                        
+                        var PIN = data.pin;
+                        var processTempLink = function(data) {
+                            _dropboxService.tempLinkCreated.disconnect(processTempLink);
+                            
+                            var xhr = new XMLHttpRequest();
+                            xhr.open("POST", "https://bb10-push-sender.herokuapp.com/push", true);
+                            xhr.setRequestHeader("Content-type", "application/json");
+                            xhr.onreadystatechange = function() {
+                                if (xhr.readyState == 4) {
+                                    loading.running = false;
+                                    
+                                    var responseStr = xhr.responseText;
+                                    console.debug(responseStr);
+                                    
+                                    var response = JSON.parse(responseStr);
+                                    var statusCode = parseInt(response.message.statusCode);
+                                    if (statusCode === 1001) {
+                                        if (rootTask.children.length !== 0) {
+                                            toast.body = qsTr("Tasks sent!") + Retranslate.onLocaleOrLanguageChanged;
+                                        } else {
+                                            toast.body = qsTr("Task sent!") + Retranslate.onLocaleOrLanguageChanged;
+                                        }
+                                        toast.show();
+                                        tasksSent();
+                                    } else if (statusCode === 4001) {
+                                        toast.body = qsTr("The BlackBerry Push Server is busy, try again later.") + Retranslate.onLocaleOrLanguageChanged;
+                                        toast.show();
+                                    }
+                                } else {
+                                    loading.running = false;
+                                    console.debug(xhr.responseText);
+                                    toast.body = qsTr("Something went wrong with sending push notification...") + Retranslate.onLocaleOrLanguageChanged;
+                                    toast.show();
+                                }
+                            }
+                            var params = JSON.stringify({pins: [PIN], message: {body: JSON.parse(data)}});
+                            xhr.send(params);
+                        };
+                        
+                        _dropboxService.uploadFile(PIN + "_" + new Date().getTime() + ".json", JSON.stringify(rootTask));
+                        _dropboxService.tempLinkCreated.connect(processTempLink);
+                    }
+                } else {
+                    toast.body = qsTr("Check your network connection") + Retranslate.onLocaleOrLanguageChanged;
+                    toast.show();                   
                 }
             }
         }
@@ -155,6 +186,10 @@ Page {
         
         AddContactSheet {
             id: contactSheet
+        },
+        
+        SystemToast {
+            id: toast
         }
     ]
     

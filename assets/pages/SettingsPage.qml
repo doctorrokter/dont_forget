@@ -1,4 +1,5 @@
 import bb.cascades 1.4
+import bb.system 1.2
 import "../components"
 
 Page {
@@ -18,131 +19,216 @@ Page {
         scrollRole: ScrollRole.Main
         
         Container {
-            horizontalAlignment: HorizontalAlignment.Fill
-            verticalAlignment: VerticalAlignment.Fill
-            
-            Header {
-                title: qsTr("Look and Feel") + Retranslate.onLocaleOrLanguageChanged
-            }
-            
+            layout: DockLayout {}
             Container {
-                layout: DockLayout {}
-                topPadding: ui.du(2)
-                bottomPadding: ui.du(2.5)
-                leftPadding: ui.du(2.5)
-                rightPadding: ui.du(2.5)
                 horizontalAlignment: HorizontalAlignment.Fill
-                Label {
-                    text: qsTr("Dark theme") + Retranslate.onLocaleOrLanguageChanged
-                    verticalAlignment: VerticalAlignment.Center
-                    horizontalAlignment: HorizontalAlignment.Left
+                verticalAlignment: VerticalAlignment.Fill
+                
+                Header {
+                    title: qsTr("Look and Feel") + Retranslate.onLocaleOrLanguageChanged
                 }
                 
-                ToggleButton {
-                    id: themeToggle
-                    horizontalAlignment: HorizontalAlignment.Right
+                Container {
+                    layout: DockLayout {}
+                    topPadding: ui.du(2)
+                    bottomPadding: ui.du(2.5)
+                    leftPadding: ui.du(2.5)
+                    rightPadding: ui.du(2.5)
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    Label {
+                        text: qsTr("Dark theme") + Retranslate.onLocaleOrLanguageChanged
+                        verticalAlignment: VerticalAlignment.Center
+                        horizontalAlignment: HorizontalAlignment.Left
+                    }
                     
-                    onCheckedChanged: {
-                        if (checked) {
-                            Application.themeSupport.setVisualStyle(VisualStyle.Dark);
-                            _appConfig.set("theme", "DARK");
-                        } else {
-                            Application.themeSupport.setVisualStyle(VisualStyle.Bright);
-                            _appConfig.set("theme", "BRIGHT");
+                    ToggleButton {
+                        id: themeToggle
+                        horizontalAlignment: HorizontalAlignment.Right
+                        
+                        onCheckedChanged: {
+                            if (checked) {
+                                Application.themeSupport.setVisualStyle(VisualStyle.Dark);
+                                _appConfig.set("theme", "DARK");
+                            } else {
+                                Application.themeSupport.setVisualStyle(VisualStyle.Bright);
+                                _appConfig.set("theme", "BRIGHT");
+                            }
                         }
                     }
-                }
-            }
-            
-            Header {
-                title: qsTr("Behavior") + Retranslate.onLocaleOrLanguageChanged
-            }
-            
-            Container {
-                layout: DockLayout {}
-                topPadding: ui.du(2)
-                bottomPadding: ui.du(0.5)
-                leftPadding: ui.du(2.5)
-                rightPadding: ui.du(2.5)
-                horizontalAlignment: HorizontalAlignment.Fill
-                Label {
-                    text: qsTr("Don't ask before deleting") + Retranslate.onLocaleOrLanguageChanged
-                    verticalAlignment: VerticalAlignment.Center
-                    horizontalAlignment: HorizontalAlignment.Left
                 }
                 
-                ToggleButton {
-                    id: dontAskBeforeDeletingToggle
-                    horizontalAlignment: HorizontalAlignment.Right
+                Header {
+                    title: qsTr("Behavior") + Retranslate.onLocaleOrLanguageChanged
+                }
+                
+                Container {
+                    layout: DockLayout {}
+                    topPadding: ui.du(2)
+                    bottomPadding: ui.du(0.5)
+                    leftPadding: ui.du(2.5)
+                    rightPadding: ui.du(2.5)
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    Label {
+                        text: qsTr("Don't ask before deleting") + Retranslate.onLocaleOrLanguageChanged
+                        verticalAlignment: VerticalAlignment.Center
+                        horizontalAlignment: HorizontalAlignment.Left
+                    }
                     
-                    onCheckedChanged: {
-                        if (checked) {
-                            _appConfig.set("do_not_ask_before_deleting", "true");
-                        } else {
-                            _appConfig.set("do_not_ask_before_deleting", "false");
+                    ToggleButton {
+                        id: dontAskBeforeDeletingToggle
+                        horizontalAlignment: HorizontalAlignment.Right
+                        
+                        onCheckedChanged: {
+                            if (checked) {
+                                _appConfig.set("do_not_ask_before_deleting", "true");
+                            } else {
+                                _appConfig.set("do_not_ask_before_deleting", "false");
+                            }
+                        }
+                    }
+                }  
+                
+                Container {
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    topPadding: ui.du(2.5)
+                    leftPadding: ui.du(2.5)
+                    rightPadding: ui.du(2.5)
+                    DropDown {
+                        title: qsTr("Sort by") + Retranslate.onLocaleOrLanguageChanged
+                        
+                        options: [
+                            Option {
+                                id: sortByNameOption
+                                text: qsTr("Name") + Retranslate.onLocaleOrLanguageChanged
+                                value: "name"
+                            },
+                            
+                            Option {
+                                id: sortByCreationOption
+                                text: qsTr("Creation") + Retranslate.onLocaleOrLanguageChanged
+                                value: "id"
+                            }
+                        ]
+                        
+                        onSelectedOptionChanged: {
+                            _appConfig.set("sort_by", selectedOption.value);
+                            root.sortByChanged();
                         }
                     }
                 }
-            }  
-            
-            Container {
-                horizontalAlignment: HorizontalAlignment.Fill
-                topPadding: ui.du(2.5)
-                leftPadding: ui.du(2.5)
-                rightPadding: ui.du(2.5)
-                DropDown {
-                    title: qsTr("Sort by") + Retranslate.onLocaleOrLanguageChanged
-                    
-                    options: [
-                        Option {
-                            id: sortByNameOption
-                            text: qsTr("Name") + Retranslate.onLocaleOrLanguageChanged
-                            value: "name"
-                        },
+                
+                Container {
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    topPadding: ui.du(2.5)
+                    leftPadding: ui.du(2.5)
+                    rightPadding: ui.du(2.5)
+                    bottomPadding: ui.du(2.5)
+                    DropDown {
+                        title: qsTr("Default task type") + Retranslate.onLocaleOrLanguageChanged
                         
-                        Option {
-                            id: sortByCreationOption
-                            text: qsTr("Creation") + Retranslate.onLocaleOrLanguageChanged
-                            value: "id"
+                        options: [
+                            Option {
+                                id: folderOption
+                                text: qsTr("Folder") + Retranslate.onLocaleOrLanguageChanged
+                                value: "FOLDER"
+                            },
+                            
+                            Option {
+                                id: taskOption
+                                text: qsTr("Task") + Retranslate.onLocaleOrLanguageChanged
+                                value: "TASK"
+                            }
+                        ]
+                        
+                        onSelectedOptionChanged: {
+                            _appConfig.set("default_task_type", selectedOption.value);
+                            root.defaultTaskTypeChanged();
                         }
-                    ]
+                    }
+                }
+                
+                Header {
+                    title: qsTr("Network") + Retranslate.onLocaleOrLanguageChanged
+                }
+                
+                Container {
+                    layout: DockLayout {}
+                    topPadding: ui.du(2)
+                    bottomPadding: ui.du(0.5)
+                    leftPadding: ui.du(2.5)
+                    rightPadding: ui.du(2.5)
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    Label {
+                        text: qsTr("Receive push notifications") + Retranslate.onLocaleOrLanguageChanged
+                        verticalAlignment: VerticalAlignment.Center
+                        horizontalAlignment: HorizontalAlignment.Left
+                    }
                     
-                    onSelectedOptionChanged: {
-                        _appConfig.set("sort_by", selectedOption.value);
-                        root.sortByChanged();
+                    Label {
+                        id: pushEnabledLabel
+                        verticalAlignment: VerticalAlignment.Center
+                        horizontalAlignment: HorizontalAlignment.Right
+                        textStyle.color: Color.create("#FF3333");
+                    }
+                }
+                
+                Container {
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    topPadding: ui.du(2)
+                    leftPadding: ui.du(2.5)
+                    rightPadding: ui.du(2.5)
+                    
+                    Button {
+                        id: pushServiceButton
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        
+                        onClicked: {
+                            if (_appConfig.hasNetwork()) {
+                                loading.running = true;
+                                var pushEnabled = _appConfig.get("push_service_registered");
+                                if (pushEnabled === "true") {
+                                    _pushService.destroyPushService();
+                                } else {
+                                    _pushService.initPushService();
+                                }
+                            } else {
+                                systemToast.body = qsTr("Check your network connection") + Retranslate.onLocaleOrLanguageChanged
+                                systemToast.show();
+                            }
+                        }
+                    }
+                }
+                
+                Container {
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    topPadding: ui.du(2)
+                    bottomPadding: ui.du(0.5)
+                    leftPadding: ui.du(2.5)
+                    rightPadding: ui.du(2.5)
+                    
+                    Label {
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        multiline: true
+                        textStyle.fontWeight: FontWeight.W100
+                        text: qsTr("If this setting is turned on you can send/receive tasks to/from your colleague or someone else using PIN. " +
+                        "To achieve this goal app uses BlackBerry Push Service") + Retranslate.onLocaleOrLanguageChanged
                     }
                 }
             }
             
-            Container {
-                horizontalAlignment: HorizontalAlignment.Fill
-                topPadding: ui.du(2.5)
-                leftPadding: ui.du(2.5)
-                rightPadding: ui.du(2.5)
-                DropDown {
-                    title: qsTr("Default task type") + Retranslate.onLocaleOrLanguageChanged
-                    
-                    options: [
-                        Option {
-                            id: folderOption
-                            text: qsTr("Folder") + Retranslate.onLocaleOrLanguageChanged
-                            value: "FOLDER"
-                        },
-                        
-                        Option {
-                            id: taskOption
-                            text: qsTr("Task") + Retranslate.onLocaleOrLanguageChanged
-                            value: "TASK"
-                        }
-                    ]
-                    
-                    onSelectedOptionChanged: {
-                        _appConfig.set("default_task_type", selectedOption.value);
-                        root.defaultTaskTypeChanged();
-                    }
-                }
+            ActivityIndicator {
+                id: loading
+                verticalAlignment: VerticalAlignment.Center
+                horizontalAlignment: HorizontalAlignment.Center
+                minWidth: ui.du(10)
             }
         }
+        
+        attachedObjects: [
+            SystemToast {
+                id: systemToast
+            }
+        ]
     }
     
     function adjustTheme() {
@@ -167,10 +253,64 @@ Page {
         taskOption.selected = defaultTaskType === "" || defaultTaskType === "TASK";
     }
     
+    function adjustPushEnabledLabel() {
+        var pushEnabled = _appConfig.get("push_service_registered");
+        if (pushEnabled === "true") {
+            pushEnabledLabel.text = qsTr("Enabled") + Retranslate.onLocaleOrLanguageChanged;
+        } else {
+            pushEnabledLabel.text = qsTr("Disabled") + Retranslate.onLocaleOrLanguageChanged;
+        }
+    }
+    
+    function adjustPushServiceButton() {
+        var pushEnabled = _appConfig.get("push_service_registered");
+        if (pushEnabled === "true") {
+            pushServiceButton.text = qsTr("Disable") + Retranslate.onLocaleOrLanguageChanged;
+        } else {
+            pushServiceButton.text = qsTr("Enable") + Retranslate.onLocaleOrLanguageChanged;
+        }
+    }
+    
+    function pushRegistered() {
+        _appConfig.set("push_service_registered", "true");
+        loading.running = false;
+        systemToast.body = qsTr("Push Service enabled") + Retranslate.onLocaleOrLanguageChanged;
+        systemToast.show();
+        adjustPushEnabledLabel();
+        adjustPushServiceButton();
+    }
+    
+    function pushUnregistered() {
+        _appConfig.set("push_service_registered", "false");
+        loading.running = false;
+        systemToast.body = qsTr("Push Service disabled") + Retranslate.onLocaleOrLanguageChanged;
+        systemToast.show();
+        adjustPushEnabledLabel();
+        adjustPushServiceButton();
+    }
+    
+    function pushFailed() {
+        loading.running = false;
+        enabledPushToggle.checked = !enabledPushToggle.checked;
+        systemToast.body = qsTr("Failed to enable Push Service") + Retranslate.onLocaleOrLanguageChanged;
+        systemToast.show();
+    }
+    
+    function clear() {
+        _pushService.channelCreated.disconnect(root.pushRegistered);
+        _pushService.channelDestroyed.disconnect(root.pushUnregistered);
+        _pushService.channelCreationFailed.disconnect(root.pushFailed);
+    }
+    
     onCreationCompleted: {
         adjustTheme();
         adjustAskBeforeDeleting();
         adjustSortBy();
         adjustDefaultTaskType();
+        adjustPushEnabledLabel();
+        adjustPushServiceButton();
+        _pushService.channelCreated.connect(root.pushRegistered);
+        _pushService.channelDestroyed.connect(root.pushUnregistered);
+        _pushService.channelCreationFailed.connect(root.pushFailed);
     }
 }

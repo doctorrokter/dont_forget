@@ -24,7 +24,7 @@ using namespace bb::network;
 #define INVOKE_TARGET_KEY_OPEN "chachkouski.DontForget.invoke.open"
 
 #define PUSH_SERVICE_REGISTERED "push_service_registered"
-#define BLACKBERRY_PUSH_BOUNDARY "asdfglkjhqwert"
+#define BLACKBERRY_PUSH_BOUNDARY "PMasdfglkjhqwert"
 
 class PushNotificationService: public QObject {
     Q_OBJECT
@@ -32,12 +32,18 @@ public:
     PushNotificationService(QObject* parent = 0);
     virtual ~PushNotificationService();
 
-    void initPushService();
-    PushService* getPushService();
+    Q_INVOKABLE void initPushService();
+    Q_INVOKABLE void destroyPushService();
+    Q_INVOKABLE PushService* getPushService();
 
     Q_INVOKABLE void pushMessageToUser(const QString &userPin, const int priority, const QString &title, const QString &body);
     Q_INVOKABLE void pushMessageToUserList(const int priority, const QString &title, const QString &body);
     Q_INVOKABLE void requestSubscribedUserList();
+
+Q_SIGNALS:
+    void channelCreated();
+    void channelDestroyed();
+    void channelCreationFailed();
 
 private Q_SLOTS:
     void createSessionCompleted(const bb::network::PushStatus& pushStatus);
@@ -58,6 +64,8 @@ private:
     void generatePushMessage(QString& pushMessage, const int priority, const QString &title, const QString &body);
     void papFormatAddress(QString &address);
     void log(const QString& message);
+
+    void clear();
 };
 
 #endif /* PUSHNOTIFICATIONSERVICE_HPP_ */

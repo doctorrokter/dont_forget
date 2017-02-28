@@ -21,18 +21,32 @@ using namespace bb::network;
 PushNotificationService::PushNotificationService(QObject* parent) : QObject(parent), m_pPushService(0) {}
 
 PushNotificationService::~PushNotificationService() {
-    delete m_pPushService;
-    m_pPushService = NULL;
+    clear();
 }
 
 void PushNotificationService::initPushService() {
+    clear();
     if (!m_pPushService) {
         m_pPushService = new PushService(AppConfig::PROVIDER_APP_ID, INVOKE_TARGET_KEY_PUSH, this);
 
         connect(m_pPushService, SIGNAL(createSessionCompleted(const bb::network::PushStatus&)), this, SLOT(createSessionCompleted(const bb::network::PushStatus&)));
         connect(m_pPushService, SIGNAL(createChannelCompleted(const bb::network::PushStatus&, const QString&)), this, SLOT(createChannelCompleted(const bb::network::PushStatus&, const QString&)));
 
-        m_pPushService->createSession();
+        if (m_pPushService->hasConnection()) {
+            m_pPushService->createSession();
+        } else {
+            qDebug() << "PUSH SERVICE HAS NO CONNECTION FOR SESSION CREATION!!!" << endl;
+        }
+    }
+}
+
+void PushNotificationService::destroyPushService() {
+    if (m_pPushService != NULL) {
+        m_pPushService->destroyChannel();
+        m_pPushService->unregisterFromLaunch();
+        clear();
+        AppConfig::setStatic(PUSH_SERVICE_REGISTERED, false);
+        emit channelDestroyed();
     }
 }
 
@@ -46,25 +60,32 @@ void PushNotificationService::createSessionCompleted(const PushStatus& pushStatu
         if (!pushServiceRegisterd) {
             qDebug() << "Push Service not registered yet." << endl;
 
-            m_pPushService->createChannel(QUrl(AppConfig::PPG_URL));
-            AppConfig::setStatic(PUSH_SERVICE_REGISTERED, true);
+            if (m_pPushService->hasConnection()) {
+                m_pPushService->createChannel(QUrl(AppConfig::PPG_URL));
+            } else {
+                qDebug() << "PUSH SERVICE HAS NO CONNECTION FOR CHANNEL CREATION!!!" << endl;
+            }
+
         } else {
             qDebug() << "Push Service already registered. Use one." << endl;
         }
     } else {
-        qDebug() << pushStatus.errorDescription() << endl;
+        qDebug() << "Error registering " << pushStatus.errorDescription() << endl;
     }
 }
 void PushNotificationService::createChannelCompleted(const PushStatus& pushStatus, const QString& token) {
     Q_UNUSED(token);
     if (!pushStatus.isError() && m_pPushService) {
         qDebug() << "Push Service registered succsessfully!" << endl;
+        AppConfig::setStatic(PUSH_SERVICE_REGISTERED, true);
 
         if (AppConfig::LAUNCH_APP_ON_PUSH) {
             m_pPushService->registerToLaunch();
         }
+        emit channelCreated();
     } else {
-        qDebug() << pushStatus.errorDescription() << endl;
+        qDebug() << "Error during channel creation: " << pushStatus.errorDescription() << endl;
+        emit channelCreationFailed();
     }
 }
 
@@ -121,7 +142,9 @@ void PushNotificationService::requestSubscribedUserList() {
 
 QNetworkRequest PushNotificationService::generateBasicNetworkRequest(const QString & urlSuffix) {
     QNetworkRequest networkRequest;
-    networkRequest.setUrl(QUrl(AppConfig::PPG_URL + "/" + urlSuffix));
+    QString url = QString::fromLatin1("").append(AppConfig::PUSH_URL).append("/").append(urlSuffix);;
+    qDebug() << "Full push request url: \n" << url << endl;
+    networkRequest.setUrl(QUrl(url));
     QString login = QString("%1:%2").arg(AppConfig::PROVIDER_APP_ID).arg(AppConfig::PUSH_PASSWORD);
     QByteArray encoded = login.toAscii().toBase64();
     networkRequest.setRawHeader("Authorization", "Basic " + encoded);
@@ -189,6 +212,7 @@ void PushNotificationService::pushMessageResponse(QNetworkReply* reply) {
     } else {
         log("Failed to send Push: \n" + reply->errorString());
     }
+    reply->deleteLater();
 }
 
 void PushNotificationService::subscriptionQueryResponse(QNetworkReply* reply) {
@@ -211,5 +235,13 @@ void PushNotificationService::subscriptionQueryResponse(QNetworkReply* reply) {
         settings.setValue("pins", pinList);
     } else {
         log("Failed to receive PINs: \n" + reply->errorString());
+    }
+    reply->deleteLater();
+}
+
+void PushNotificationService::clear() {
+    if (m_pPushService != NULL) {
+        delete m_pPushService;
+        m_pPushService = NULL;
     }
 }

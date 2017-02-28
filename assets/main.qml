@@ -276,7 +276,7 @@ NavigationPane {
                 
                 shortcuts: [
                     Shortcut {
-                        key: "d"
+                        key: "v"
                         
                         onTriggered: {
                             if (viewActionItem.enabled) {
@@ -333,7 +333,7 @@ NavigationPane {
             } else {
                 main.titleBar.reset();
                 main.titleBar = titleBar;
-                navigation.renderTree(main.tasks);
+                navigation.renderTree(_tasksService.findAll());
             }
         }
         
@@ -519,6 +519,9 @@ NavigationPane {
     function deleteTask(id, parent) {
         if (parent.objectName === "task_" + id) {
             parent.parent.remove(parent);
+            if (parent.clear) {
+                parent.clear();
+            }
         } else {
             if (parent.controls) {
                 for (var i = 0; i < parent.controls.length; i++) {
@@ -532,6 +535,9 @@ NavigationPane {
         while(tasksContainer.controls.length !== 0) {
             var control = tasksContainer.controls[tasksContainer.controls.length - 1];
             tasksContainer.remove(control);
+            if (control.clear) {
+                control.clear();
+            }
             control.destroy();
         }
     }

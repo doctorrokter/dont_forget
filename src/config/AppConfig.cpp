@@ -15,13 +15,23 @@ bool AppConfig::USING_PUBLIC_PPG = true;
 QString AppConfig::PROVIDER_APP_ID = "1400-la83B532433iO13y8508o50c3a106a20s92";
 QString AppConfig::PPG_URL = "http://cp1400.pushapi.na.blackberry.com";
 QString AppConfig::PUSH_URL = "https://cp1400.pushapi.na.blackberry.com";
-QString AppConfig::PUSH_PASSWORD = "6rDQacw";
+QString AppConfig::PUSH_PASSWORD = "6rDQacwP";
 bool AppConfig::LAUNCH_APP_ON_PUSH = true;
 QSettings AppConfig::CONF;
+bool AppConfig::isOnline = false;
 
-AppConfig::AppConfig(QObject* parent) : QObject(parent) {}
+AppConfig::AppConfig(QObject* parent) : QObject(parent), m_pNetworkConf(new QNetworkConfigurationManager()) {
+    isOnline = m_pNetworkConf->isOnline();
 
-AppConfig::~AppConfig() {}
+    bool res = connect(m_pNetworkConf, SIGNAL(onlineStateChanged(bool)), this, SLOT(onOnlineStatusChanged(bool)));
+    Q_ASSERT(res);
+    Q_UNUSED(res);
+}
+
+AppConfig::~AppConfig() {
+    delete m_pNetworkConf;
+    m_pNetworkConf = NULL;
+}
 
 QVariant AppConfig::getStatic(const QString name) {
     return CONF.value(name, "");
@@ -30,6 +40,8 @@ QVariant AppConfig::getStatic(const QString name) {
 void AppConfig::setStatic(const QString name, const QVariant value) {
     CONF.setValue(name, value);
 }
+
+bool AppConfig::hasNetworkStatic() { return isOnline; }
 
 QVariant AppConfig::get(const QString name) const {
     return getStatic(name);
@@ -43,4 +55,9 @@ bool AppConfig::isUsingPublicPushProxyGateway() const { return USING_PUBLIC_PPG;
 const QString& AppConfig::getProviderApplicationId() const { return PROVIDER_APP_ID; }
 const QString& AppConfig::getPpgUrl() const { return PPG_URL; }
 bool AppConfig::shouldLaunchApplicationOnPush() const { return LAUNCH_APP_ON_PUSH; }
+bool AppConfig::hasNetwork() { return hasNetworkStatic(); }
+
+void AppConfig::onOnlineStatusChanged(bool onlineStatus) {
+    isOnline = onlineStatus;
+}
 

@@ -50,6 +50,10 @@
 <context>
     <name>ContactsPage</name>
     <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Tasks sent!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -70,7 +74,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit</source>
+        <source>Something went wrong with sending push notification...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The BlackBerry Push Server is busy, try again later.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check your network connection</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -280,6 +292,54 @@
     </message>
     <message>
         <source>Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Network</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source></source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Receive push notifications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If this setting is turned on you can send/receive tasks to/from your colleague or someone else using PIN. To achieve this goal app uses BlackBerry Push Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Push Service enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Push Service disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to enable Push Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check your network connection</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

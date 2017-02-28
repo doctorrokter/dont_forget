@@ -61,32 +61,47 @@
 <context>
     <name>ContactsPage</name>
     <message>
-        <location filename="../assets/pages/ContactsPage.qml" line="51"/>
+        <location filename="../assets/pages/ContactsPage.qml" line="52"/>
         <source>Edit</source>
         <translation type="unfinished">Editer</translation>
     </message>
     <message>
-        <location filename="../assets/pages/ContactsPage.qml" line="86"/>
+        <location filename="../assets/pages/ContactsPage.qml" line="101"/>
         <source>Tasks sent!</source>
         <translation type="unfinished">Tâches envoyées!</translation>
     </message>
     <message>
-        <location filename="../assets/pages/ContactsPage.qml" line="88"/>
+        <location filename="../assets/pages/ContactsPage.qml" line="103"/>
         <source>Task sent!</source>
         <translation type="unfinished">Tâche envoyée!</translation>
     </message>
     <message>
-        <location filename="../assets/pages/ContactsPage.qml" line="112"/>
+        <location filename="../assets/pages/ContactsPage.qml" line="108"/>
+        <source>The BlackBerry Push Server is busy, try again later.</source>
+        <translation type="unfinished">BlackBerry Push Server est occupé, réessayez ultérieurement.</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/ContactsPage.qml" line="114"/>
+        <source>Something went wrong with sending push notification...</source>
+        <translation type="unfinished">Quelque chose s&apos;est mal passé avec l&apos;envoi d&apos;une notification par push...</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/ContactsPage.qml" line="126"/>
+        <source>Check your network connection</source>
+        <translation type="unfinished">Vérifiez votre connexion réseau</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/ContactsPage.qml" line="143"/>
         <source>Add</source>
         <translation type="unfinished">Ajouter</translation>
     </message>
     <message>
-        <location filename="../assets/pages/ContactsPage.qml" line="122"/>
+        <location filename="../assets/pages/ContactsPage.qml" line="153"/>
         <source>Search</source>
         <translation type="unfinished">Rechercher</translation>
     </message>
     <message>
-        <location filename="../assets/pages/ContactsPage.qml" line="135"/>
+        <location filename="../assets/pages/ContactsPage.qml" line="166"/>
         <source>Users</source>
         <translation type="unfinished">Utilisateurs</translation>
     </message>
@@ -292,59 +307,114 @@
 <context>
     <name>SettingsPage</name>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="14"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="15"/>
         <source>Settings</source>
         <translation type="unfinished">Paramètres</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="25"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="28"/>
         <source>Look and Feel</source>
         <translation type="unfinished">Apparence</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="36"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="39"/>
         <source>Dark theme</source>
         <translation type="unfinished">Thème foncé</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="58"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="61"/>
         <source>Behavior</source>
         <translation type="unfinished">Comportement</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="69"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="72"/>
         <source>Don&apos;t ask before deleting</source>
         <translation type="unfinished">Ne pas demander avant la suppression</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="94"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="97"/>
         <source>Sort by</source>
         <translation type="unfinished">Trier par</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="99"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="102"/>
         <source>Name</source>
         <translation type="unfinished">Nom</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="105"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="108"/>
         <source>Creation</source>
         <translation type="unfinished">Créer</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="123"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="127"/>
         <source>Default task type</source>
         <translation type="unfinished">Type de tâche par défaut</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="128"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="132"/>
         <source>Folder</source>
         <translation type="unfinished">Dossier</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="134"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="138"/>
         <source>Task</source>
         <translation type="unfinished">Tâche</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/SettingsPage.qml" line="151"/>
+        <source>Network</source>
+        <translation type="unfinished">Réseau</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/SettingsPage.qml" line="195"/>
+        <source>Check your network connection</source>
+        <translation type="unfinished">Vérifiez votre connexion réseau</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/SettingsPage.qml" line="259"/>
+        <source>Enabled</source>
+        <translation type="unfinished">Activée</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/SettingsPage.qml" line="261"/>
+        <source>Disabled</source>
+        <translation type="unfinished">Désactivée</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/SettingsPage.qml" line="268"/>
+        <source>Disable</source>
+        <translation type="unfinished">Désactiver</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/SettingsPage.qml" line="270"/>
+        <source>Enable</source>
+        <translation type="unfinished">Activer</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/SettingsPage.qml" line="295"/>
+        <source>Failed to enable Push Service</source>
+        <translation type="unfinished">Impossible d&apos;activer Push Service</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/SettingsPage.qml" line="213"/>
+        <source>If this setting is turned on you can send/receive tasks to/from your colleague or someone else using PIN. To achieve this goal app uses BlackBerry Push Service</source>
+        <translation type="unfinished">Si ce paramètre est activé, vous pouvez envoyer / recevoir des tâches à / de votre collègue ou quelqu&apos;un d&apos;autre utilisant le NIP. Pour atteindre cet objectif, l&apos;application utilise BlackBerry Push Service</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/SettingsPage.qml" line="277"/>
+        <source>Push Service enabled</source>
+        <translation type="unfinished">Push Service activée</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/SettingsPage.qml" line="286"/>
+        <source>Push Service disabled</source>
+        <translation type="unfinished">Push Service désactivée</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/SettingsPage.qml" line="162"/>
+        <source>Receive push notifications</source>
+        <translation type="unfinished">Recevoir des notifications push</translation>
     </message>
 </context>
 <context>
@@ -437,7 +507,7 @@
 <context>
     <name>TaskViewPage</name>
     <message>
-        <location filename="../assets/pages/TaskViewPage.qml" line="77"/>
+        <location filename="../assets/pages/TaskViewPage.qml" line="83"/>
         <source>Child tasks</source>
         <translation type="unfinished">Tâches enfant</translation>
     </message>

@@ -305,7 +305,8 @@ Container {
     }
     
     function select() {
-        task.selected = (_tasksService.activeTask !== null) && (_tasksService.activeTask.id === task.taskId);
+        task.selected = (_tasksService.activeTask !== null) &&
+        (_tasksService.activeTask.id === task.taskId);
     }
     
     function expand() {
@@ -330,6 +331,14 @@ Container {
         }
     }
     
+    function clear() {
+        _tasksService.activeTaskChanged.disconnect(task.select);
+        _tasksService.taskUpdated.disconnect(task.updateTask);
+        _tasksService.allTasksExpanded.disconnect(task.expand);
+        _tasksService.allTasksUnexpanded.disconnect(task.unexpand);
+        _tasksService.viewModeChanged.disconnect(task.changeViewMode);
+    }
+    
     onParentIdChanged: {
         divider.visible = parentId === "";
     }
@@ -351,10 +360,6 @@ Container {
     }
     
     onControlRemoved: {
-        _tasksService.activeTaskChanged.disconnect(task.select);
-        _tasksService.taskUpdated.disconnect(task.updateTask);
-        _tasksService.allTasksExpanded.disconnect(task.expand);
-        _tasksService.allTasksUnexpanded.disconnect(task.unexpand);
-        _tasksService.viewModeChanged.disconnect(task.changeViewMode);
+        clear();
     }
 }

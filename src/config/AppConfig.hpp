@@ -11,6 +11,7 @@
 #include <QtCore/QObject>
 #include <QVariant>
 #include <QtCore/QSettings>
+#include <QtNetwork/QNetworkConfigurationManager>
 
 class AppConfig: public QObject {
     Q_OBJECT
@@ -30,9 +31,11 @@ public:
     static QString PUSH_PASSWORD;
     static bool LAUNCH_APP_ON_PUSH;
     static QSettings CONF;
+    static bool isOnline;
 
     static QVariant getStatic(const QString name);
     static void setStatic(const QString name, const QVariant value);
+    static bool hasNetworkStatic();
 
     Q_INVOKABLE QVariant get(const QString name) const;
     Q_INVOKABLE void set(const QString name, const QVariant value);
@@ -41,6 +44,14 @@ public:
     Q_INVOKABLE const QString& getProviderApplicationId() const;
     Q_INVOKABLE const QString& getPpgUrl() const;
     Q_INVOKABLE bool shouldLaunchApplicationOnPush() const;
+
+    Q_INVOKABLE bool hasNetwork();
+
+private Q_SLOTS:
+    void onOnlineStatusChanged(bool isOnline);
+
+private:
+    QNetworkConfigurationManager* m_pNetworkConf;
 };
 
 #endif /* APPCONFIG_HPP_ */
