@@ -570,7 +570,7 @@
 <context>
     <name>TaskViewPage</name>
     <message>
-        <location filename="../assets/pages/TaskViewPage.qml" line="83"/>
+        <location filename="../assets/pages/TaskViewPage.qml" line="82"/>
         <source>Child tasks</source>
         <translation type="unfinished">Дочерние задачи</translation>
     </message>

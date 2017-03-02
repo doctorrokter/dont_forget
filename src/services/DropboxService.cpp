@@ -149,7 +149,7 @@ void DropboxService::processDeletingFile(QNetworkReply* reply) {
         QString dataStr = QString::fromUtf8(data.data());
         cout << dataStr.toStdString() << endl;
     } else {
-        cout << "Error reading file! " << reply->errorString().toStdString() << endl;
+        cout << "Error deleting file! " << reply->errorString().toStdString() << endl;
     }
 }
 

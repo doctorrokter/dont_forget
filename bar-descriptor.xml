@@ -70,7 +70,10 @@
 
     <!--  Name of author which is used for signing. Must match the developer name of your development certificate. -->
     <icon>
-       <image>icon.png</image>
+       <image>icon_144x144.png</image>
+       <image>icon_110x110.png</image>
+       <image>icon_96x96.png</image>
+       <image>icon_90x90.png</image>
     </icon>
     <splashScreens>
        <image>splash_1440_x_1440.png</image>
@@ -104,6 +107,10 @@
     <asset path="E:/OneDrive/dev/DontForget/spplash_768_x_1280.png">spplash_768_x_1280.png</asset>
     <asset path="E:/OneDrive/dev/DontForget/splash_720_x_720.png">splash_720_x_720.png</asset>
     <asset path="E:/OneDrive/dev/DontForget/splash_720_x_1280.png">splash_720_x_1280.png</asset>
+    <asset path="E:/OneDrive/dev/DontForget/ic_launcher/icon_144x144.png">icon_144x144.png</asset>
+    <asset path="E:/OneDrive/dev/DontForget/ic_launcher/icon_110x110.png">icon_110x110.png</asset>
+    <asset path="E:/OneDrive/dev/DontForget/ic_launcher/icon_96x96.png">icon_96x96.png</asset>
+    <asset path="E:/OneDrive/dev/DontForget/ic_launcher/icon_90x90.png">icon_90x90.png</asset>
 
     <!-- Request permission to execute native code.  Required for native applications. -->
     <permission system="true">run_native</permission>

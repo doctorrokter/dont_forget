@@ -50,7 +50,6 @@ Page {
                 bottomPadding: ui.du(2.5)
                 background: ui.palette.plain
                 visible: _tasksService.activeTask !== null && _tasksService.activeTask.deadline !== 0
-//                visible: false
                 
                 Container {
                     layout: StackLayout {
@@ -127,6 +126,11 @@ Page {
                         }
                     ]    
                 }
+            }
+            
+            Container {
+                horizontalAlignment: HorizontalAlignment.Fill
+                minHeight: ui.du(20)
             }
         }
     }
