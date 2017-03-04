@@ -11,6 +11,7 @@
 #include <QtCore/QObject>
 #include "../models/Task.hpp"
 #include "../config/DBConfig.hpp"
+#include "AttachmentsService.hpp"
 
 #include <QVariantList>
 #include <QVariantMap>
@@ -24,7 +25,7 @@ class TasksService: public QObject {
     Q_OBJECT
     Q_PROPERTY(Task* activeTask READ getActiveTask NOTIFY activeTaskChanged)
 public:
-    TasksService(QObject* parent = 0, DBConfig* dbConfig = 0);
+    TasksService(QObject* parent = 0, DBConfig* dbConfig = 0, AttachmentsService* attachmentsService = 0);
     virtual ~TasksService();
 
     void init();
@@ -41,8 +42,8 @@ public:
     Q_INVOKABLE Task* getActiveTask() const;
     Q_INVOKABLE void setActiveTask(const int id);
 
-    Q_INVOKABLE void createTask(const QString name = "", const QString description = "", const QString type = "TASK", const int deadline = 0, const int important = 0, const int createInRemember = 0);
-    Q_INVOKABLE void updateTask(const QString name = "", const QString description = "", const QString type = "TASK", const int deadline = 0, const int important = 0, const int createInRemember = 0, const int closed = 0);
+    Q_INVOKABLE void createTask(const QString name = "", const QString description = "", const QString type = "TASK", const int deadline = 0, const int important = 0, const int createInRemember = 0, const QVariantList attachments = QVariantList());
+    Q_INVOKABLE void updateTask(const QString name = "", const QString description = "", const QString type = "TASK", const int deadline = 0, const int important = 0, const int createInRemember = 0, const int closed = 0, const QVariantList attachments = QVariantList());
     Q_INVOKABLE void deleteTask(const int id);
     Q_INVOKABLE void moveTask(const int parentId = 0);
     Q_INVOKABLE void copyTask(const Task& task);
@@ -64,6 +65,7 @@ Q_SIGNALS:
 
 private:
     DBConfig* m_pDbConfig;
+    AttachmentsService* m_pAttachmentsService;
 
     Task* m_pActiveTask;
     NotebookService* m_pNotebookService;

@@ -48,6 +48,13 @@
     </message>
 </context>
 <context>
+    <name>AttachmentsContainer</name>
+    <message>
+        <source>Attachments</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ContactsPage</name>
     <message>
         <source>Edit</source>
@@ -419,6 +426,10 @@
     <name>TaskViewPage</name>
     <message>
         <source>Child tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Attachments</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

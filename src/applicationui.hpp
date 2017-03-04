@@ -27,6 +27,7 @@
 #include "services/SearchService.hpp"
 #include "services/UsersService.hpp"
 #include "services/DropboxService.hpp"
+#include "services/AttachmentsService.hpp"
 #include "config/AppConfig.hpp"
 #include "config/DBConfig.hpp"
 
@@ -52,6 +53,8 @@ public:
     ApplicationUI();
     virtual ~ApplicationUI();
 
+    Q_INVOKABLE void invokePreviewer(const QString& uri, const QString& mimeType);
+
 Q_SIGNALS:
     void taskSheetRequested();
     void tasksReceived();
@@ -76,12 +79,13 @@ private:
     UsersService* m_pUsersService;
     SearchService* m_pSearchService;
     DropboxService* m_pDropboxService;
+    AttachmentsService* m_pAttachmentsService;
 
     bool m_running;
     QList<QString> m_filesToDelete;
 
     void initFullUI();
-    void initComposerUI(const QString& pathToPage, const QString& data = "");
+    void initComposerUI(const QString& pathToPage, const QString& data = "", const QString& mimeType = "");
     void processReceivedTaskMap(const QVariantMap& taskMap, const int parentId);
     void clear();
 };

@@ -18,7 +18,7 @@
 
 using namespace std;
 
-TasksService::TasksService(QObject* parent, DBConfig* dbConfig) : QObject(parent), m_pDbConfig(dbConfig), m_pActiveTask(NULL), m_pNotebookService(new NotebookService(this)) {}
+TasksService::TasksService(QObject* parent, DBConfig* dbConfig, AttachmentsService* attachmentsService) : QObject(parent), m_pDbConfig(dbConfig), m_pAttachmentsService(attachmentsService), m_pActiveTask(NULL), m_pNotebookService(new NotebookService(this)) {}
 
 TasksService::~TasksService() {
     delete m_pDbConfig;
@@ -69,7 +69,6 @@ void TasksService::changeClosed(const int id, const bool closed) {
     int state = closed ? 1 : 0;
     QString query = QString::fromLatin1("UPDATE tasks SET closed = %1 WHERE id = %2").arg(state).arg(id);
 
-//    cout << query.toStdString() << endl;
     m_pDbConfig->connection()->execute(query);
     if (m_pActiveTask != NULL) {
         m_pActiveTask->setClosed(closed);
@@ -90,11 +89,7 @@ void TasksService::changeClosed(const int id, const bool closed) {
 
 void TasksService::changeExpanded(const int id, const bool expanded) {
     int state = expanded ? 1 : 0;
-    QString query = QString::fromLatin1("UPDATE tasks SET expanded = %1 WHERE id = %2").arg(state).arg(id);
-
-//    cout << query.toStdString() << endl;
-
-    m_pDbConfig->connection()->execute(query);
+    m_pDbConfig->connection()->execute(QString::fromLatin1("UPDATE tasks SET expanded = %1 WHERE id = %2").arg(state).arg(id));
 }
 
 Task* TasksService::getActiveTask() const { return m_pActiveTask; }
@@ -112,7 +107,7 @@ void TasksService::setActiveTask(const int id) {
     emit activeTaskChanged(m_pActiveTask);
 }
 
-void TasksService::createTask(const QString name, const QString description, const QString type, const int deadline, const int important, const int createInRemember) {
+void TasksService::createTask(const QString name, const QString description, const QString type, const int deadline, const int important, const int createInRemember, const QVariantList attachments) {
     QString parentId = m_pActiveTask == NULL ? NULL : QString::number(m_pActiveTask->getId());
     QString rememberId = NULL;
 
@@ -137,13 +132,20 @@ void TasksService::createTask(const QString name, const QString description, con
     values["closed"] = 0;
     values["expanded"] = 1;
 
-//    cout << query.toStdString() << endl;
-
     m_pDbConfig->connection()->execute(query, values);
-    emit taskCreated(lastCreated());
+    QVariantMap newTask = lastCreated();
+
+    if (!attachments.isEmpty()) {
+        foreach(QVariant attVar, attachments) {
+            QVariantMap attMap = attVar.toMap();
+            m_pAttachmentsService->add(newTask.value("id").toInt(), attMap.value("name").toString(), attMap.value("path").toString(), attMap.value("mime_type").toString());
+        }
+    }
+
+    emit taskCreated(newTask);
 }
 
-void TasksService::updateTask(const QString name, const QString description, const QString type, const int deadline, const int important, const int createInRemember, const int closed) {
+void TasksService::updateTask(const QString name, const QString description, const QString type, const int deadline, const int important, const int createInRemember, const int closed, const QVariantList attachments) {
     QString rememberId = NULL;
 
     if (createInRemember) {
@@ -176,12 +178,16 @@ void TasksService::updateTask(const QString name, const QString description, con
     values["closed"] = closed;
     values["id"] = m_pActiveTask->getId();
 
-//    qDebug() << query << values << endl;
-
     m_pDbConfig->connection()->execute(query, values);
 
     QVariantMap taskMap = findById(m_pActiveTask->getId());
     m_pActiveTask->fromMap(taskMap);
+
+
+    if (attachments.isEmpty()) {
+        m_pDbConfig->connection()->execute(QString::fromLatin1("DELETE FROM attachments WHERE task_id = %1").arg(m_pActiveTask->getId()));
+    }
+
     emit taskUpdated(taskMap);
     emit activeTaskChanged(m_pActiveTask);
 }

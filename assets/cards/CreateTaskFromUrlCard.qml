@@ -31,11 +31,16 @@ NavigationPane {
                 title: qsTr("OK") + Retranslate.onLocaleOrLanguageChanged
                 
                 onTriggered: {
+                    var files = [];
+                    for (var i = 0; i < attachmentsContainer.attachments.length; i++) {
+                        files.push(attachmentsContainer.attachments[i]);
+                    }
+                    
                     var deadline = deadLineToggleButton.checked ? new Date(deadLineContainer.result).getTime() / 1000 : 0;
                     var important = importantToggleButton.checked ? 1 : 0;
                     var createInRemember = rememberToggleButton.checked ? 1 : 0;
                     
-                    _tasksService.createTask(taskName.result.trim(), description.result.trim(), "TASK", deadline, important, createInRemember);
+                    _tasksService.createTask(taskName.result.trim(), description.result.trim(), "TASK", deadline, important, createInRemember, files);
                     toast.show();
                 }
             }
@@ -62,7 +67,10 @@ NavigationPane {
                     
                     TaskDescriptionContainer { 
                         id: description 
-                        value: _data 
+                    }
+                    
+                    AttachmentsContainer {
+                        id: attachmentsContainer
                     }
                     
                     Container {
@@ -127,6 +135,11 @@ NavigationPane {
                         id: importantToggleButton
                         title: qsTr("Important") + Retranslate.onLocaleOrLanguageChanged
                     }
+                    
+                    Container {
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        minHeight: ui.du(12)
+                    }
                 }
             }
             
@@ -147,7 +160,7 @@ NavigationPane {
             return new Date(new Date().getTime() + 7200000);
         }
         
-        onCreationCompleted: {
+        function loadTitle() {
             loading.running = true;
             var xhr = new XMLHttpRequest();
             xhr.open("GET", _data, true);
@@ -159,6 +172,29 @@ NavigationPane {
                 }
             }
             xhr.send();
+        }
+        
+        function processAttachments() {
+            taskName.requestFocus();
+            
+            var parts = _data.split("/");
+            var name = parts[parts.length - 1];
+            var file = {name: name, mime_type: _mimeType, path: _data};
+//            if (_mimeType === "application/pdf") {
+//                file.icon = "asset:///images/pdf_icon.png";
+//            } else {
+//                file.icon = _data;
+//            }
+            attachmentsContainer.attachments = [file];
+        }
+        
+        onCreationCompleted: {
+            if (!_mimeType || _mimeType.trim() === "") {
+                description.value = _data;
+                loadTitle();
+            } else {
+                processAttachments();
+            }
         }
         
         attachedObjects: [

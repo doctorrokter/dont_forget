@@ -111,6 +111,8 @@
     <asset path="E:/OneDrive/dev/DontForget/ic_launcher/icon_110x110.png">icon_110x110.png</asset>
     <asset path="E:/OneDrive/dev/DontForget/ic_launcher/icon_96x96.png">icon_96x96.png</asset>
     <asset path="E:/OneDrive/dev/DontForget/ic_launcher/icon_90x90.png">icon_90x90.png</asset>
+    <asset path="icon_big.png">icon_big.png</asset>
+    <asset path="icon_small.png">icon_small.png</asset>
 
     <!-- Request permission to execute native code.  Required for native applications. -->
     <permission system="true">run_native</permission>
@@ -159,6 +161,9 @@
 	
 	<invoke-target id="chachkouski.DontForget.search.asyoutype">
    		<invoke-target-type>application</invoke-target-type>
+   		<icon>
+   			<image>icon.png</image>
+   		</icon>
    		<filter>
       		<action>bb.action.SEARCH.SOURCE</action>
       		<mime-type>application/vnd.bb.search.db.criteria</mime-type>
@@ -167,6 +172,10 @@
 	
 	<invoke-target id="chachkouski.DontForget.card.edit.text">
   		<invoke-target-type>card.composer</invoke-target-type>
+  		<icon>
+  			<image public="true">icon_small.png</image>
+    		<image public="true">icon_big.png</image>
+		</icon>
   		<filter>
     		<action>bb.action.SHARE</action>
     		<mime-type>text/*</mime-type>
@@ -175,10 +184,22 @@
 	
 	<invoke-target id="chachkouski.DontForget.card.edit.uri">
   		<invoke-target-type>card.composer</invoke-target-type>
+  		<icon>
+  			<image public="true">icon_small.png</image>
+    		<image public="true">icon_big.png</image>
+		</icon>
   		<filter>
     		<action>bb.action.SHARE</action>
     		<mime-type>*</mime-type>
     		<property var="uris" value="http://,https://"/>
+  		</filter>
+  		<filter>
+    		<action>bb.action.SHARE</action>
+    		<mime-type>image/png</mime-type>
+    		<mime-type>image/jpg</mime-type>
+    		<mime-type>image/jpeg</mime-type>
+    		<mime-type>application/pdf</mime-type>
+    		<property var="uris" value="file://"/>
   		</filter>
 	</invoke-target>
 

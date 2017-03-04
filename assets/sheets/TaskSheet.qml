@@ -139,6 +139,10 @@ Sheet {
                     id: importantToggleButton
                     title: qsTr("Important") + Retranslate.onLocaleOrLanguageChanged
                 }
+                
+                AttachmentsContainer {
+                    id: attachmentsContainer
+                }
             }
         }
         
@@ -184,6 +188,10 @@ Sheet {
         taskOption.selected = defaultTaskType === "" || defaultTaskType === taskOption.value;
     }
     
+    function adjustAttachments() {
+        attachmentsContainer.attachments = _attachmentsService.findByTaskId(_tasksService.activeTask.id);
+    }
+    
     function currDatePlus2Hourse() {
         return new Date(new Date().getTime() + 7200000);
     }
@@ -211,6 +219,7 @@ Sheet {
             listOption.selected = _tasksService.activeTask.type === listOption.value;
             taskName.value = _tasksService.activeTask.name;
             description.value = _tasksService.activeTask.description;
+            adjustAttachments();
         } else {
             initialState();
         }

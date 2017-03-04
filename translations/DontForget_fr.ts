@@ -48,14 +48,22 @@
 <context>
     <name>ApplicationUI</name>
     <message>
-        <location filename="../src/applicationui.cpp" line="129"/>
+        <location filename="../src/applicationui.cpp" line="146"/>
         <source>Success!</source>
         <translation type="unfinished">Réussite!</translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="187"/>
+        <location filename="../src/applicationui.cpp" line="204"/>
         <source>Tasks received!</source>
         <translation type="unfinished">Tâches reçue!</translation>
+    </message>
+</context>
+<context>
+    <name>AttachmentsContainer</name>
+    <message>
+        <location filename="../assets/components/AttachmentsContainer.qml" line="12"/>
+        <source>Attachments</source>
+        <translation type="unfinished">Pièces jointes</translation>
     </message>
 </context>
 <context>
@@ -177,37 +185,37 @@
         <translation type="unfinished">OK</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="78"/>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="86"/>
         <source>Create in: </source>
         <translation type="unfinished">Créer dans:</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="85"/>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="93"/>
         <source>Root</source>
         <translation type="unfinished">Racine</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="100"/>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="108"/>
         <source>Change placement</source>
         <translation type="unfinished">Changer d&apos;endroit</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="112"/>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="120"/>
         <source>Deadline</source>
         <translation type="unfinished">Date de fin</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="123"/>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="131"/>
         <source>Create in Remember</source>
         <translation type="unfinished">Créer dans Remember</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="128"/>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="136"/>
         <source>Important</source>
         <translation type="unfinished">Important</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="178"/>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="214"/>
         <source>Task created!</source>
         <translation type="unfinished">Tâche créée!</translation>
     </message>
@@ -507,9 +515,14 @@
 <context>
     <name>TaskViewPage</name>
     <message>
-        <location filename="../assets/pages/TaskViewPage.qml" line="82"/>
+        <location filename="../assets/pages/TaskViewPage.qml" line="89"/>
         <source>Child tasks</source>
         <translation type="unfinished">Tâches enfant</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/TaskViewPage.qml" line="134"/>
+        <source>Attachments</source>
+        <translation type="unfinished">Pièces jointes</translation>
     </message>
 </context>
 <context>

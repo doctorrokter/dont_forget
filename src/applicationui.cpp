@@ -72,7 +72,9 @@ ApplicationUI::ApplicationUI() : QObject() {
     m_running = false;
     m_pDbConfig = new DBConfig(this);
 
-    m_pTasksService = new TasksService(this, m_pDbConfig);
+    m_pAttachmentsService = new AttachmentsService(this, m_pDbConfig);
+
+    m_pTasksService = new TasksService(this, m_pDbConfig, m_pAttachmentsService);
     m_pTasksService->init();
 
     m_pUsersService = new UsersService(this, m_pDbConfig);
@@ -111,6 +113,21 @@ ApplicationUI::~ApplicationUI() {
     clear();
 }
 
+void ApplicationUI::invokePreviewer(const QString& uri, const QString& mimeType) {
+    InvokeManager invokeManager;
+    InvokeRequest request;
+
+    request.setAction("bb.action.VIEW");
+    request.setUri(uri);
+
+    if (mimeType == "application/pdf") {
+        request.setTarget("com.rim.bb.app.adobeReader.viewer");
+    } else {
+        request.setTarget("sys.pictures.card.previewer");
+    }
+    invokeManager.invoke(request);
+}
+
 void ApplicationUI::onSystemLanguageChanged() {
     QCoreApplication::instance()->removeTranslator(m_pTranslator);
     // Initiate, load and install the application translation files.
@@ -143,6 +160,7 @@ void ApplicationUI::initFullUI() {
     rootContext->setContextProperty("_usersService", m_pUsersService);
     rootContext->setContextProperty("_pushService", m_pPushService);
     rootContext->setContextProperty("_dropboxService", m_pDropboxService);
+    rootContext->setContextProperty("_attachmentsService", m_pAttachmentsService);
     rootContext->setContextProperty("_hasSharedFilesPermission", m_pDbConfig->hasSharedFilesPermission());
     m_running = true;
 
@@ -150,9 +168,7 @@ void ApplicationUI::initFullUI() {
     Application::instance()->setScene(root);
 }
 
-void ApplicationUI::initComposerUI(const QString& pathToPage, const QString& data) {
-//    qDebug() << "Init Composer UI with data: " << data << endl;
-
+void ApplicationUI::initComposerUI(const QString& pathToPage, const QString& data, const QString& mimeType) {
     QmlDocument *qml = QmlDocument::create(pathToPage);
     qml->setContextProperty("_app", this);
 
@@ -163,6 +179,7 @@ void ApplicationUI::initComposerUI(const QString& pathToPage, const QString& dat
     rootContext->setContextProperty("_tasksService", m_pTasksService);
     rootContext->setContextProperty("_data", data);
     rootContext->setContextProperty("_hasSharedFilesPermission", m_pDbConfig->hasSharedFilesPermission());
+    rootContext->setContextProperty("_mimeType", mimeType);
 
     AbstractPane *root = qml->createRootObject<AbstractPane>();
     Application::instance()->setScene(root);
@@ -231,9 +248,9 @@ void ApplicationUI::onInvoked(const bb::system::InvokeRequest& request) {
         m_pTasksService->setActiveTask(id);
         emit taskSheetRequested();
     } else if (target == INVOKE_CARD_EDIT_TEXT) {
-        initComposerUI(CREATE_TASK_FROM_TEXT_CARD, QString::fromUtf8(request.data()));
+        initComposerUI(CREATE_TASK_FROM_TEXT_CARD, QString::fromUtf8(request.data()), mimeType);
     } else if (target == INVOKE_CARD_EDIT_URI) {
-        initComposerUI(CREATE_TASK_FROM_URL_CARD, request.uri().toString());
+        initComposerUI(CREATE_TASK_FROM_URL_CARD, request.uri().toString(), mimeType);
     } else if (target == INVOKE_TARGET_KEY_PUSH) {
         PushPayload payload(request);
         if (payload.isValid()) {

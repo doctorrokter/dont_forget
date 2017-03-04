@@ -40,6 +40,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/cards/CreateTaskFromUrlCard.qml) \
         $$quote($$BASEDIR/assets/cards/TestCard.qml) \
         $$quote($$BASEDIR/assets/cards/UpdateTaskCard.qml) \
+        $$quote($$BASEDIR/assets/components/AttachmentsContainer.qml) \
         $$quote($$BASEDIR/assets/components/CustomTitleBar.qml) \
         $$quote($$BASEDIR/assets/components/DeleteTaskDialog.qml) \
         $$quote($$BASEDIR/assets/components/ExpandableButton.qml) \
@@ -68,11 +69,14 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/ic_send.png) \
         $$quote($$BASEDIR/assets/images/ic_share.png) \
         $$quote($$BASEDIR/assets/images/ic_watch.png) \
+        $$quote($$BASEDIR/assets/images/pdf_icon.png) \
+        $$quote($$BASEDIR/assets/images/pdf_icon_big.png) \
         $$quote($$BASEDIR/assets/images/yellow_pellet.png) \
         $$quote($$BASEDIR/assets/main.qml) \
         $$quote($$BASEDIR/assets/migrations/1_create_schema_version_table.sql) \
         $$quote($$BASEDIR/assets/migrations/2_create_table_tasks.sql) \
         $$quote($$BASEDIR/assets/migrations/3_create_table_df_users.sql) \
+        $$quote($$BASEDIR/assets/migrations/4_create_table_attachments.sql) \
         $$quote($$BASEDIR/assets/pages/ContactsPage.qml) \
         $$quote($$BASEDIR/assets/pages/HelpPage.qml) \
         $$quote($$BASEDIR/assets/pages/MoveTaskPage.qml) \
@@ -92,6 +96,7 @@ config_pri_source_group1 {
         $$quote($$BASEDIR/src/config/DBConfig.cpp) \
         $$quote($$BASEDIR/src/main.cpp) \
         $$quote($$BASEDIR/src/models/Task.cpp) \
+        $$quote($$BASEDIR/src/services/AttachmentsService.cpp) \
         $$quote($$BASEDIR/src/services/DropboxService.cpp) \
         $$quote($$BASEDIR/src/services/PushNotificationService.cpp) \
         $$quote($$BASEDIR/src/services/SearchService.cpp) \
@@ -105,6 +110,7 @@ config_pri_source_group1 {
         $$quote($$BASEDIR/src/config/AppConfig.hpp) \
         $$quote($$BASEDIR/src/config/DBConfig.hpp) \
         $$quote($$BASEDIR/src/models/Task.hpp) \
+        $$quote($$BASEDIR/src/services/AttachmentsService.hpp) \
         $$quote($$BASEDIR/src/services/DropboxService.hpp) \
         $$quote($$BASEDIR/src/services/PushNotificationService.hpp) \
         $$quote($$BASEDIR/src/services/SearchService.hpp) \

@@ -1,0 +1,10 @@
+PRAGMA foreign_keys = ON;
+
+CREATE TABLE attachments (
+	id INTEGER PRIMARY KEY,
+	task_id INTEGER,
+	name TEXT DEFAULT NULL, 
+	path TEXT DEFAULT NULL, 
+	mime_type TEXT DEFAULT NULL, 
+	FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE ON UPDATE NO ACTION
+);
