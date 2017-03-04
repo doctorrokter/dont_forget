@@ -177,6 +177,7 @@ void ApplicationUI::initComposerUI(const QString& pathToPage, const QString& dat
     rootContext->setContextProperty("_app", this);
     rootContext->setContextProperty("_appConfig", m_pAppConfig);
     rootContext->setContextProperty("_tasksService", m_pTasksService);
+    rootContext->setContextProperty("_attachmentsService", m_pAttachmentsService);
     rootContext->setContextProperty("_data", data);
     rootContext->setContextProperty("_hasSharedFilesPermission", m_pDbConfig->hasSharedFilesPermission());
     rootContext->setContextProperty("_mimeType", mimeType);

@@ -53,7 +53,7 @@
         <translation type="unfinished">Réussite!</translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="204"/>
+        <location filename="../src/applicationui.cpp" line="205"/>
         <source>Tasks received!</source>
         <translation type="unfinished">Tâches reçue!</translation>
     </message>

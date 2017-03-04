@@ -28,10 +28,24 @@ Container {
                 StandardListItem {
                     imageSource: ListItemData.icon
                     title: ListItemData.name
+                    
+                    contextActions: [
+                        ActionSet {
+                            DeleteActionItem {
+                                onTriggered: {
+                                    if (ListItemData.id) {
+                                        _attachmentsService.remove(ListItemData.id);
+                                    } else {
+                                        _attachmentsService.remove();
+                                    }
+                                }
+                            }
+                        }
+                    ]
                 }
             }
         ]
-        
+                
         onTriggered: {
             var item = attachmentsDataModel.data(indexPath);
             _app.invokePreviewer(item.path, item.mime_type);
@@ -58,8 +72,20 @@ Container {
         adjustHeight();
     }
     
+    function removeAttachment(id) {
+        if (id !== 0) {
+            var newAttachments = root.attachments.filter(function(a) {
+                    return a.id !== id;
+            });
+            root.attachments = newAttachments;
+        } else {
+            root.attachments = [];            
+        }
+    }
+    
     onCreationCompleted: {
         fill();
+        _attachmentsService.attachmentRemoved.connect(root.removeAttachment);
     }
     
     onAttachmentsChanged: {

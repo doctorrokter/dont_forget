@@ -45,9 +45,11 @@ void AttachmentsService::add(const int taskid, const QString& name, const QStrin
 }
 
 void AttachmentsService::remove(const int id) {
-    m_pDbConfig->connection()->execute(QString::fromLatin1("DELETE FROM attachments WHERE id = %1").arg(id));
+    if (id != 0) {
+        m_pDbConfig->connection()->execute(QString::fromLatin1("DELETE FROM attachments WHERE id = %1").arg(id));
+        // TODO: remove file from app folder
+    }
     emit attachmentRemoved(id);
-    // TODO: remove file from app folder
 }
 
 QVariantMap AttachmentsService::lastCreated() {
