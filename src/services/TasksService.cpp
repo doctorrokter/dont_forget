@@ -184,8 +184,13 @@ void TasksService::updateTask(const QString name, const QString description, con
     m_pActiveTask->fromMap(taskMap);
 
 
-    if (attachments.isEmpty()) {
-        m_pDbConfig->connection()->execute(QString::fromLatin1("DELETE FROM attachments WHERE task_id = %1").arg(m_pActiveTask->getId()));
+    if (!attachments.isEmpty()) {
+        foreach(QVariant attVar, attachments) {
+            QVariantMap attMap = attVar.toMap();
+            if (!attMap.contains("id")) {
+                m_pAttachmentsService->add(m_pActiveTask->getId(), attMap.value("name").toString(), attMap.value("path").toString(), attMap.value("mime_type").toString());
+            }
+        }
     }
 
     emit taskUpdated(taskMap);
@@ -199,10 +204,7 @@ void TasksService::deleteTask(const int id) {
         if (!m_pActiveTask->getRememberId().isEmpty()) {
                 deleteNotebookEntry(m_pActiveTask->getRememberId());
             }
-
             query = query.arg(m_pActiveTask->getId());
-
-//            cout << query.toStdString() << endl;
 
             m_pDbConfig->connection()->execute("PRAGMA foreign_keys = ON");
             m_pDbConfig->connection()->execute(query);
@@ -213,8 +215,6 @@ void TasksService::deleteTask(const int id) {
         m_pDbConfig->connection()->execute("PRAGMA foreign_keys = ON");
         query = query.arg(id);
         m_pDbConfig->connection()->execute(query);
-
-//        cout << query.toStdString() << endl;
     }
     emit taskDeleted(id);
 }

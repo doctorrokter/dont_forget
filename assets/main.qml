@@ -16,9 +16,9 @@
 
 import bb.cascades 1.4
 import bb.system 1.2
-import "../components"
-import "../pages"
-import "../sheets"
+import "./components"
+import "./pages"
+import "./sheets"
 
 NavigationPane {
     id: navigation

@@ -52,10 +52,15 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/components/ToggleBlock.qml) \
         $$quote($$BASEDIR/assets/images/grey_pellet.png) \
         $$quote($$BASEDIR/assets/images/ic_add.png) \
+        $$quote($$BASEDIR/assets/images/ic_attach.png) \
         $$quote($$BASEDIR/assets/images/ic_clear.png) \
         $$quote($$BASEDIR/assets/images/ic_compose.png) \
         $$quote($$BASEDIR/assets/images/ic_delete.png) \
         $$quote($$BASEDIR/assets/images/ic_deselect.png) \
+        $$quote($$BASEDIR/assets/images/ic_doctype_generic.png) \
+        $$quote($$BASEDIR/assets/images/ic_doctype_music.png) \
+        $$quote($$BASEDIR/assets/images/ic_doctype_picture.png) \
+        $$quote($$BASEDIR/assets/images/ic_doctype_video.png) \
         $$quote($$BASEDIR/assets/images/ic_done.png) \
         $$quote($$BASEDIR/assets/images/ic_done_all.png) \
         $$quote($$BASEDIR/assets/images/ic_feedback.png) \
@@ -84,6 +89,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/pages/TaskViewPage.qml) \
         $$quote($$BASEDIR/assets/pages/TasksListPage.qml) \
         $$quote($$BASEDIR/assets/sheets/AddContactSheet.qml) \
+        $$quote($$BASEDIR/assets/sheets/FilePickersSheet.qml) \
         $$quote($$BASEDIR/assets/sheets/TaskSheet.qml) \
         $$quote($$BASEDIR/assets/templates/pap_push.template) \
         $$quote($$BASEDIR/assets/templates/pap_subscription.template)

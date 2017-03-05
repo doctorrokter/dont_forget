@@ -180,11 +180,6 @@ NavigationPane {
             var parts = _data.split("/");
             var name = parts[parts.length - 1];
             var file = {name: name, mime_type: _mimeType, path: _data};
-//            if (_mimeType === "application/pdf") {
-//                file.icon = "asset:///images/pdf_icon.png";
-//            } else {
-//                file.icon = _data;
-//            }
             attachmentsContainer.attachments = [file];
         }
         

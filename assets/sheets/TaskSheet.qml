@@ -36,13 +36,18 @@ Sheet {
                     var createInRemember = rememberToggleButton.checked ? 1 : 0;
                     var closed = closeTaskCheckbox.checked ? 1 : 0;
                     
+                    var files = [];
+                    for (var i = 0; i < attachmentsContainer.attachments.length; i++) {
+                        files.push(attachmentsContainer.attachments[i]);
+                    }
+                    
                     if (taskSheet.mode === taskSheet.modes.CREATE) {
                         var names = taskName.result.split(";;");
                         names.forEach(function(name) {
-                                _tasksService.createTask(name.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember);
+                            _tasksService.createTask(name.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, files);
                         });
                     } else {
-                        _tasksService.updateTask(taskName.result.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, closed);
+                        _tasksService.updateTask(taskName.result.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, closed, files);
                     }
                     taskSheet.close();    
                 }
@@ -155,6 +160,29 @@ Sheet {
                 }
             }
         ]
+        
+        actions: [
+            ActionItem {
+                id: attach
+                title: qsTr("Attachment") + Retranslate.onLocaleOrLanguageChanged
+                imageSource: "asset:///images/ic_attach.png"
+                ActionBar.placement: ActionBarPlacement.OnBar
+                
+                onTriggered: {
+                    filePickersSheet.open();
+                }
+            }
+        ]
+        
+        attachedObjects: [
+            FilePickersSheet {
+                id: filePickersSheet
+                
+                onAttachmentsChosen: {
+                    attachmentsContainer.attachments = attachmentsContainer.attachments.concat(attachments);
+                }
+            }
+        ]
     }
     
     function adjustCreateInRemember() {
@@ -189,7 +217,11 @@ Sheet {
     }
     
     function adjustAttachments() {
-        attachmentsContainer.attachments = _attachmentsService.findByTaskId(_tasksService.activeTask.id);
+        if (taskSheet.mode === taskSheet.modes.CREATE) {
+            attachmentsContainer.attachments = [];
+        } else {
+            attachmentsContainer.attachments = _attachmentsService.findByTaskId(_tasksService.activeTask.id);
+        }
     }
     
     function currDatePlus2Hourse() {
@@ -219,13 +251,13 @@ Sheet {
             listOption.selected = _tasksService.activeTask.type === listOption.value;
             taskName.value = _tasksService.activeTask.name;
             description.value = _tasksService.activeTask.description;
-            adjustAttachments();
         } else {
             initialState();
         }
         adjustCreateInRemember();
         adjustDeadline();
         adjustClosedTask();
+        adjustAttachments();
         taskName.requestFocus();
     }
     

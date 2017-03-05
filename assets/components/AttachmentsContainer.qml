@@ -72,10 +72,14 @@ Container {
         adjustHeight();
     }
     
+    function addAttachment(attachment) {
+        attachmentsDataModel.append(attachment);
+    }
+    
     function removeAttachment(id) {
         if (id !== 0) {
             var newAttachments = root.attachments.filter(function(a) {
-                    return a.id !== id;
+                return a.id !== id;
             });
             root.attachments = newAttachments;
         } else {

@@ -1,5 +1,5 @@
 1
-51
+57
 cards/CreateTaskFromTextCard.qml
 cards/CreateTaskFromUrlCard.qml
 cards/TestCard.qml
@@ -16,10 +16,15 @@ components/TaskNameContainer.qml
 components/ToggleBlock.qml
 images/grey_pellet.png
 images/ic_add.png
+images/ic_attach.png
 images/ic_clear.png
 images/ic_compose.png
 images/ic_delete.png
 images/ic_deselect.png
+images/ic_doctype_generic.png
+images/ic_doctype_music.png
+images/ic_doctype_picture.png
+images/ic_doctype_video.png
 images/ic_done.png
 images/ic_done_all.png
 images/ic_feedback.png
@@ -48,6 +53,7 @@ pages/SettingsPage.qml
 pages/TasksListPage.qml
 pages/TaskViewPage.qml
 sheets/AddContactSheet.qml
+sheets/FilePickersSheet.qml
 sheets/TaskSheet.qml
 templates/pap_push.template
 templates/pap_subscription.template

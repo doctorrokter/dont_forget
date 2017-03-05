@@ -203,6 +203,37 @@
     </message>
 </context>
 <context>
+    <name>FilePickersSheet</name>
+    <message>
+        <source>Choose a type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Picture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Music</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a file</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>HelpPage</name>
     <message>
         <source>Help/Tutorial Center</source>
@@ -419,6 +450,10 @@
     </message>
     <message>
         <source>List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Attachment</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
