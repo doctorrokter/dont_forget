@@ -7,7 +7,16 @@
 
 #include <src/services/AttachmentsService.hpp>
 
-AttachmentsService::AttachmentsService(QObject* parent, DBConfig* dbConfig) : QObject(parent), m_pDbConfig(dbConfig) {}
+#include <bb/system/InvokeRequest>
+#include <bb/system/InvokeManager>
+
+using namespace bb::system;
+
+AttachmentsService::AttachmentsService(QObject* parent, DBConfig* dbConfig) : QObject(parent), m_pDbConfig(dbConfig) {
+    m_docList << "doc" << "dot" << "txt" << "docx" << "dotx" << "docm" << "dotm";
+    m_xlsList << "xls" << "xlt" << "xlsx" << "xltx" << "xlsm" << "xltm";
+    m_pptList << "ppt" << "pot" << "pps" << "pptx" << "potx" << "ppsx" << "pptm" << "potm" << "ppsm";
+}
 
 AttachmentsService::~AttachmentsService() {
     delete m_pDbConfig;
@@ -41,17 +50,109 @@ void AttachmentsService::add(const int taskid, const QString& name, const QStrin
 
     m_pDbConfig->connection()->execute(query, values);
     emit attachmentAdded(lastCreated());
-    // TODO: copy file to app folder
 }
 
 void AttachmentsService::remove(const int id) {
     if (id != 0) {
         m_pDbConfig->connection()->execute(QString::fromLatin1("DELETE FROM attachments WHERE id = %1").arg(id));
-        // TODO: remove file from app folder
     }
     emit attachmentRemoved(id);
 }
 
+void AttachmentsService::showAttachment(const QString& uri, const QString& mimeType) {
+    InvokeManager invokeManager;
+    InvokeRequest request;
+
+    request.setAction("bb.action.VIEW");
+    request.setUri(uri);
+    request.setMimeType(mimeType);
+
+    if (mimeType == "application/pdf") {
+        request.setTarget("com.rim.bb.app.adobeReader.viewer");
+    } else if (mimeType.contains("image/")) {
+        request.setTarget("sys.pictures.card.previewer");
+    } else if (mimeType.contains("audio/") || mimeType.contains("video/")) {
+        request.setTarget("sys.mediaplayer.previewer");
+    } else {
+        QString ext = getExtension(uri);
+        if (hasExtension(m_docList, ext)) {
+            request.setTarget("sys.wordtogo.previewer");
+        } else if (hasExtension(m_xlsList, ext)) {
+            request.setTarget("sys.sheettogo.previewer");
+        } else if (hasExtension(m_pptList, ext)) {
+            request.setTarget("sys.slideshowtogo.previewer");
+        }
+    }
+
+    if (!request.target().isEmpty()) {
+        invokeManager.invoke(request);
+    }
+}
+
+QString AttachmentsService::getIconBig(const QString& ext, const QString& mimeType) {
+    if (mimeType.contains("audio/")) {
+        return "audio_icon_big_512x512.png";
+    } else if (mimeType.contains("video/")) {
+        return "video_icon_big_512x512.png";
+    } else if (mimeType.contains("application/pdf")) {
+        return "pdf_icon_big.png";
+    } else if (mimeType.contains("application/javascript")) {
+        return "js_icon_big_512x512.png";
+    } else if (mimeType.contains("application/vnd.android.package-archive")) {
+        return "apk_icon_big_512x512.png";
+    } else if (mimeType.contains("application/zip")) {
+        return "zip_icon_big_512x512.png";
+    } else if (hasExtension(m_docList, ext)) {
+        return "doc_icon_big_512x512.png";
+    } else if (hasExtension(m_xlsList, ext)) {
+        return "xls_icon_big_512x512.png";
+    } else if (hasExtension(m_pptList, ext)) {
+        return "ppt_icon_big_512x512.png";
+    }
+    return "generic_icon_big_512x512.png";
+}
+
+QVariantMap AttachmentsService::getIconColorMap(const QString& ext, const QString& mimeType) {
+    QVariantMap map;
+    if (mimeType.contains("audio/")) {
+        map.insert("image", "ic_doctype_music.png");
+        map.insert("color", "#8F3096");
+    } else if (mimeType.contains("video/")) {
+        map.insert("image", "ic_doctype_video.png");
+        map.insert("color", "#FF3333");
+    } else if (ext == "pdf") {
+        map.insert("image", "ic_doctype_pdf.png");
+        map.insert("color", "#FF3333");
+    } else if (hasExtension(m_docList, ext)) {
+        map.insert("image", "ic_doctype_doc.png");
+        map.insert("color", "#0092CC");
+    } else if (hasExtension(m_xlsList, ext)) {
+        map.insert("image", "ic_doctype_xls.png");
+        map.insert("color", "#779933");
+    } else if (hasExtension(m_pptList, ext)) {
+        map.insert("image", "ic_doctype_ppt.png");
+        map.insert("color", "#FF3333");
+    } else {
+        map.insert("image", "ic_doctype_generic.png");
+        map.insert("color", "#969696");
+    }
+    return map;
+}
+
 QVariantMap AttachmentsService::lastCreated() {
     return m_pDbConfig->connection()->execute("SELECT * FROM attachments ORDER BY id DESC LIMIT 1").toList().at(0).toMap();
+}
+
+QString AttachmentsService::getExtension(const QString& path) {
+    QStringList parts = path.split(".");
+    return parts[1];
+}
+
+bool AttachmentsService::hasExtension(const QStringList& extenstions, const QString& ext) {
+    foreach(QString e, extenstions) {
+        if (e.compare(ext) == 0) {
+            return true;
+        }
+    }
+    return false;
 }

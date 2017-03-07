@@ -1,5 +1,5 @@
 1
-57
+70
 cards/CreateTaskFromTextCard.qml
 cards/CreateTaskFromUrlCard.qml
 cards/TestCard.qml
@@ -14,6 +14,10 @@ components/TaskDeadlineContainer.qml
 components/TaskDescriptionContainer.qml
 components/TaskNameContainer.qml
 components/ToggleBlock.qml
+images/apk_icon_big_512x512.png
+images/audio_icon_big_512x512.png
+images/doc_icon_big_512x512.png
+images/generic_icon_big_512x512.png
 images/grey_pellet.png
 images/ic_add.png
 images/ic_attach.png
@@ -21,10 +25,14 @@ images/ic_clear.png
 images/ic_compose.png
 images/ic_delete.png
 images/ic_deselect.png
+images/ic_doctype_doc.png
 images/ic_doctype_generic.png
 images/ic_doctype_music.png
+images/ic_doctype_pdf.png
 images/ic_doctype_picture.png
+images/ic_doctype_ppt.png
 images/ic_doctype_video.png
+images/ic_doctype_xls.png
 images/ic_done.png
 images/ic_done_all.png
 images/ic_feedback.png
@@ -38,9 +46,14 @@ images/ic_search.png
 images/ic_send.png
 images/ic_share.png
 images/ic_watch.png
+images/js_icon_big_512x512.png
 images/pdf_icon.png
 images/pdf_icon_big.png
+images/ppt_icon_big_512x512.png
+images/video_icon_big_512x512.png
+images/xls_icon_big_512x512.png
 images/yellow_pellet.png
+images/zip_icon_big_512x512.png
 main.qml
 migrations/1_create_schema_version_table.sql
 migrations/2_create_table_tasks.sql

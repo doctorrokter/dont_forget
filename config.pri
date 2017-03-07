@@ -50,6 +50,10 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/components/TaskDescriptionContainer.qml) \
         $$quote($$BASEDIR/assets/components/TaskNameContainer.qml) \
         $$quote($$BASEDIR/assets/components/ToggleBlock.qml) \
+        $$quote($$BASEDIR/assets/images/apk_icon_big_512x512.png) \
+        $$quote($$BASEDIR/assets/images/audio_icon_big_512x512.png) \
+        $$quote($$BASEDIR/assets/images/doc_icon_big_512x512.png) \
+        $$quote($$BASEDIR/assets/images/generic_icon_big_512x512.png) \
         $$quote($$BASEDIR/assets/images/grey_pellet.png) \
         $$quote($$BASEDIR/assets/images/ic_add.png) \
         $$quote($$BASEDIR/assets/images/ic_attach.png) \
@@ -57,10 +61,14 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/ic_compose.png) \
         $$quote($$BASEDIR/assets/images/ic_delete.png) \
         $$quote($$BASEDIR/assets/images/ic_deselect.png) \
+        $$quote($$BASEDIR/assets/images/ic_doctype_doc.png) \
         $$quote($$BASEDIR/assets/images/ic_doctype_generic.png) \
         $$quote($$BASEDIR/assets/images/ic_doctype_music.png) \
+        $$quote($$BASEDIR/assets/images/ic_doctype_pdf.png) \
         $$quote($$BASEDIR/assets/images/ic_doctype_picture.png) \
+        $$quote($$BASEDIR/assets/images/ic_doctype_ppt.png) \
         $$quote($$BASEDIR/assets/images/ic_doctype_video.png) \
+        $$quote($$BASEDIR/assets/images/ic_doctype_xls.png) \
         $$quote($$BASEDIR/assets/images/ic_done.png) \
         $$quote($$BASEDIR/assets/images/ic_done_all.png) \
         $$quote($$BASEDIR/assets/images/ic_feedback.png) \
@@ -74,9 +82,14 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/ic_send.png) \
         $$quote($$BASEDIR/assets/images/ic_share.png) \
         $$quote($$BASEDIR/assets/images/ic_watch.png) \
+        $$quote($$BASEDIR/assets/images/js_icon_big_512x512.png) \
         $$quote($$BASEDIR/assets/images/pdf_icon.png) \
         $$quote($$BASEDIR/assets/images/pdf_icon_big.png) \
+        $$quote($$BASEDIR/assets/images/ppt_icon_big_512x512.png) \
+        $$quote($$BASEDIR/assets/images/video_icon_big_512x512.png) \
+        $$quote($$BASEDIR/assets/images/xls_icon_big_512x512.png) \
         $$quote($$BASEDIR/assets/images/yellow_pellet.png) \
+        $$quote($$BASEDIR/assets/images/zip_icon_big_512x512.png) \
         $$quote($$BASEDIR/assets/main.qml) \
         $$quote($$BASEDIR/assets/migrations/1_create_schema_version_table.sql) \
         $$quote($$BASEDIR/assets/migrations/2_create_table_tasks.sql) \

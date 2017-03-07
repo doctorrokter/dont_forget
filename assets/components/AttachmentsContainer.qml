@@ -21,22 +21,83 @@ Container {
             onItemAdded: {
                 adjustHeight();
             }
+            
+            onItemRemoved: {
+                adjustHeight();
+            }
+        }
+        
+        function indexOf(data) {
+            return attachmentsDataModel.indexOf(data);
+        }
+        
+        function removeAt(index) {
+            attachmentsDataModel.removeAt(index);
+            var toRemove = root.attachments[index];
+            if (toRemove) {
+                root.attachments = root.attachments.filter(function(a) {
+                    return a.path !== toRemove.path;
+                });
+            }
+            
         }
         
         listItemComponents: [
             ListItemComponent {
-                StandardListItem {
-                    imageSource: ListItemData.icon
-                    title: ListItemData.name
+                CustomListItem {
+                    id: attachmentItem
+                    preferredHeight: ui.du(12)
+                    maxHeight: ui.du(12)
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    verticalAlignment: VerticalAlignment.Fill
+                    Container {
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        layout: StackLayout {
+                            orientation: LayoutOrientation.LeftToRight
+                        }
+                        
+                        Container {
+                            maxWidth: ui.du(12)
+                            preferredWidth: ui.du(12)
+                            verticalAlignment: VerticalAlignment.Fill
+                            
+                            ImageView {
+                                horizontalAlignment: HorizontalAlignment.Center
+                                verticalAlignment: VerticalAlignment.Center
+                                filterColor: {
+                                    if (ListItemData.icon.color) {
+                                        return Color.create(ListItemData.icon.color);
+                                    }
+                                    return null;
+                                }
+                                imageSource: ListItemData.icon.path
+                                layoutProperties: StackLayoutProperties {
+                                    spaceQuota: -1
+                                }
+                            }
+                        }
+                        
+                        
+                        Label {
+                            verticalAlignment: VerticalAlignment.Center
+                            text: ListItemData.name
+                            textStyle.base: SystemDefaults.TextStyles.TitleText
+                            layoutProperties: StackLayoutProperties {
+                                spaceQuota: 1
+                            }
+                        }
+                    }
                     
                     contextActions: [
                         ActionSet {
                             DeleteActionItem {
                                 onTriggered: {
-                                    if (ListItemData.id) {
-                                        _attachmentsService.remove(ListItemData.id);
+                                    var index = attachmentItem.ListItem.view.indexOf(ListItemData);
+                                    var attach = ListItemData;
+                                    if (attach.id) {
+                                        _attachmentsService.remove(attach.id);
                                     } else {
-                                        _attachmentsService.remove();
+                                        attachmentItem.ListItem.view.removeAt(index);
                                     }
                                 }
                             }
@@ -48,21 +109,24 @@ Container {
                 
         onTriggered: {
             var item = attachmentsDataModel.data(indexPath);
-            _app.invokePreviewer(item.path, item.mime_type);
+            _attachmentsService.showAttachment(item.path, item.mime_type);
         }
     }
     
     function adjustHeight() {
-        root.maxHeight = attachmentsDataModel.size() * 250;
+        root.maxHeight = (attachmentsDataModel.size() + 0.5) * ui.du(12);
     }
     
     function fill() {
         root.visible = root.attachments.length !== 0;
         var newAttachments = root.attachments.map(function(a) {
-            if (a.mime_type === "application/pdf") {
-                a.icon = "asset:///images/pdf_icon.png";
+            console.debug(a);
+            if (a.mime_type.indexOf("image/") !== -1) {
+                a.icon = {path: a.path, color: ""};
             } else {
-                a.icon = a.path;
+                var ext = _attachmentsService.getExtension(a.path);
+                var iconAndColor = _attachmentsService.getIconColorMap(ext, a.mime_type);
+                a.icon = {path: "asset:///images/" + iconAndColor.image, color: iconAndColor.color};
             }
             return a;
         });

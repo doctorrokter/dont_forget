@@ -357,11 +357,9 @@ void TasksService::sync() {
                 values["closed"] = note.status() == NotebookEntryStatus::Completed ? 1 : 0;
                 values["id"] = taskMap.value("id").toInt();
 
-//                cout << query.toStdString() << endl;
                 m_pDbConfig->connection()->execute(query, values);
             } else {
                 QString query = QString::fromLatin1("UPDATE tasks SET remember_id = NULL WHERE id = %1").arg(taskMap.value("id").toInt());
-//                cout << query.toStdString() << endl;
                 m_pDbConfig->connection()->execute(query);
             }
          }

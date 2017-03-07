@@ -159,15 +159,16 @@ Page {
                                         verticalAlignment: VerticalAlignment.Center
                                         horizontalAlignment: HorizontalAlignment.Center
                                         imageSource: {
-                                            if (ListItemData.mime_type === "application/pdf") {
-                                                return "asset:///images/pdf_icon_big.png";
+                                            if (ListItemData.mime_type.indexOf("image/") === -1) {
+                                                var ext = _attachmentsService.getExtension(ListItemData.path);
+                                                return "asset:///images/" + _attachmentsService.getIconBig(ext, ListItemData.mime_type);
                                             }
                                             return ListItemData.path;
                                         }
                                     }
                                     
                                     Container {
-                                        visible: ListItemData.mime_type === "application/pdf"
+                                        visible: ListItemData.mime_type.indexOf("image/") === -1
                                         verticalAlignment: VerticalAlignment.Center
                                         horizontalAlignment: HorizontalAlignment.Center
                                         leftPadding: ui.du(1)
@@ -188,7 +189,7 @@ Page {
                     
                     onTriggered: {
                         var item = attachmentsDataModel.data(indexPath);
-                        _app.invokePreviewer(item.path, item.mime_type);
+                        _attachmentsService.showAttachment(item.path, item.mime_type);
                     }
                 }
             }
@@ -207,6 +208,7 @@ Page {
             var maxHeight = (attachmentsDataModel.size() / 3) * 500;
             attachmentsContainer.maxHeight = maxHeight;
         }
+//        attachmentsContainer.maxHeight = attachmentsDataModel.size() * 500;
     }
     
     onCreationCompleted: {

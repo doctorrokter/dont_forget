@@ -113,21 +113,6 @@ ApplicationUI::~ApplicationUI() {
     clear();
 }
 
-void ApplicationUI::invokePreviewer(const QString& uri, const QString& mimeType) {
-    InvokeManager invokeManager;
-    InvokeRequest request;
-
-    request.setAction("bb.action.VIEW");
-    request.setUri(uri);
-
-    if (mimeType == "application/pdf") {
-        request.setTarget("com.rim.bb.app.adobeReader.viewer");
-    } else {
-        request.setTarget("sys.pictures.card.previewer");
-    }
-    invokeManager.invoke(request);
-}
-
 void ApplicationUI::onSystemLanguageChanged() {
     QCoreApplication::instance()->removeTranslator(m_pTranslator);
     // Initiate, load and install the application translation files.

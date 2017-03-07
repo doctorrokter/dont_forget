@@ -48,12 +48,12 @@
 <context>
     <name>ApplicationUI</name>
     <message>
-        <location filename="../src/applicationui.cpp" line="146"/>
+        <location filename="../src/applicationui.cpp" line="131"/>
         <source>Success!</source>
         <translation type="unfinished">Réussite!</translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="205"/>
+        <location filename="../src/applicationui.cpp" line="190"/>
         <source>Tasks received!</source>
         <translation type="unfinished">Tâches reçue!</translation>
     </message>
@@ -251,40 +251,40 @@
 <context>
     <name>FilePickersSheet</name>
     <message>
-        <location filename="../assets/sheets/FilePickersSheet.qml" line="14"/>
+        <location filename="../assets/sheets/FilePickersSheet.qml" line="47"/>
         <source>Choose a type</source>
         <translation type="unfinished">Choisir un type</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/FilePickersSheet.qml" line="17"/>
+        <location filename="../assets/sheets/FilePickersSheet.qml" line="50"/>
         <source>Cancel</source>
         <translation type="unfinished">Annuler</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/FilePickersSheet.qml" line="103"/>
-        <location filename="../assets/sheets/FilePickersSheet.qml" line="115"/>
-        <location filename="../assets/sheets/FilePickersSheet.qml" line="130"/>
-        <location filename="../assets/sheets/FilePickersSheet.qml" line="142"/>
+        <location filename="../assets/sheets/FilePickersSheet.qml" line="137"/>
+        <location filename="../assets/sheets/FilePickersSheet.qml" line="149"/>
+        <location filename="../assets/sheets/FilePickersSheet.qml" line="165"/>
+        <location filename="../assets/sheets/FilePickersSheet.qml" line="177"/>
         <source>Select a file</source>
         <translation type="unfinished">Choisir un fichier</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/FilePickersSheet.qml" line="71"/>
+        <location filename="../assets/sheets/FilePickersSheet.qml" line="104"/>
         <source>Picture</source>
         <translation type="unfinished">Image</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/FilePickersSheet.qml" line="72"/>
+        <location filename="../assets/sheets/FilePickersSheet.qml" line="105"/>
         <source>Document</source>
         <translation type="unfinished">Document</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/FilePickersSheet.qml" line="73"/>
+        <location filename="../assets/sheets/FilePickersSheet.qml" line="106"/>
         <source>Music</source>
         <translation type="unfinished">La musique</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/FilePickersSheet.qml" line="74"/>
+        <location filename="../assets/sheets/FilePickersSheet.qml" line="107"/>
         <source>Video</source>
         <translation type="unfinished">Vidéo</translation>
     </message>
@@ -518,42 +518,42 @@
         <translation type="unfinished">Tâche effectuée</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="102"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="106"/>
         <source>Type</source>
         <translation type="unfinished">Type</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="107"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="111"/>
         <source>Folder</source>
         <translation type="unfinished">Dossier</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="113"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="117"/>
         <source>List</source>
         <translation type="unfinished">Liste</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="119"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="123"/>
         <source>Task</source>
         <translation type="unfinished">Tâche</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="129"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="133"/>
         <source>Deadline</source>
         <translation type="unfinished">Date de fin</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="140"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="144"/>
         <source>Create in Remember</source>
         <translation type="unfinished">Créer dans Remember</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="145"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="149"/>
         <source>Important</source>
         <translation type="unfinished">Important</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="167"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="172"/>
         <source>Attachment</source>
         <translation type="unfinished">Image</translation>
     </message>

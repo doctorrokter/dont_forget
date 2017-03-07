@@ -53,8 +53,6 @@ public:
     ApplicationUI();
     virtual ~ApplicationUI();
 
-    Q_INVOKABLE void invokePreviewer(const QString& uri, const QString& mimeType);
-
 Q_SIGNALS:
     void taskSheetRequested();
     void tasksReceived();

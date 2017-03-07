@@ -195,10 +195,7 @@
   		</filter>
   		<filter>
     		<action>bb.action.SHARE</action>
-    		<mime-type>image/*</mime-type>
-    		<mime-type>audio/*</mime-type>
-    		<mime-type>video/*</mime-type>
-    		<mime-type>application/pdf</mime-type>
+    		<mime-type>*</mime-type>
     		<property var="uris" value="file://"/>
   		</filter>
 	</invoke-target>

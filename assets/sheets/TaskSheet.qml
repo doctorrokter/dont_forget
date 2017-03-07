@@ -92,6 +92,10 @@ Sheet {
                     }
                 }
                 
+                AttachmentsContainer {
+                    id: attachmentsContainer
+                }
+                
                 Container {
                     leftPadding: ui.du(2.5)
                     topPadding: ui.du(2.5)
@@ -145,8 +149,9 @@ Sheet {
                     title: qsTr("Important") + Retranslate.onLocaleOrLanguageChanged
                 }
                 
-                AttachmentsContainer {
-                    id: attachmentsContainer
+                Container {
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    preferredHeight: ui.du(12)
                 }
             }
         }
@@ -179,7 +184,8 @@ Sheet {
                 id: filePickersSheet
                 
                 onAttachmentsChosen: {
-                    attachmentsContainer.attachments = attachmentsContainer.attachments.concat(attachments);
+                    var newAttachments = attachmentsContainer.attachments.concat(attachments);
+                    attachmentsContainer.attachments = newAttachments;
                 }
             }
         ]
@@ -236,6 +242,7 @@ Sheet {
         description.resetText();
         adjustFolderOption();
         adjustTaskOption();
+        adjustAttachments();
     }
     
     function adjustClosedTask() {
