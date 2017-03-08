@@ -587,7 +587,7 @@
         <translation type="unfinished">Папка</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="85"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="89"/>
         <source>Task done</source>
         <translation type="unfinished">Задача завершена</translation>
     </message>

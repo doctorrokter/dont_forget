@@ -513,7 +513,7 @@
         <translation type="unfinished">OK</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="85"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="89"/>
         <source>Task done</source>
         <translation type="unfinished">Tâche effectuée</translation>
     </message>

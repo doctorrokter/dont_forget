@@ -71,6 +71,10 @@ Sheet {
                     id: description
                 }
                 
+                AttachmentsContainer {
+                    id: attachmentsContainer
+                }
+                
                 Container {
                     visible: taskSheet.mode === taskSheet.modes.UPDATE
                     leftPadding: ui.du(2.5)
@@ -90,10 +94,6 @@ Sheet {
                         checked: false
                         horizontalAlignment: HorizontalAlignment.Right
                     }
-                }
-                
-                AttachmentsContainer {
-                    id: attachmentsContainer
                 }
                 
                 Container {
