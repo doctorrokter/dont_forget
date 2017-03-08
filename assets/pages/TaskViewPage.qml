@@ -141,7 +141,6 @@ Page {
                         id: attachmentsDataModel
                         
                         onItemAdded: {
-                            console.debug("item added");
                             adjustListViewHeight();
                         }
                     }
@@ -205,10 +204,10 @@ Page {
         if (attachmentsDataModel.size() === 1) {
             attachmentsContainer.maxHeight = 500;
         } else {
-            var maxHeight = (attachmentsDataModel.size() / 3) * 500;
+            var rows = Math.floor(attachmentsDataModel.size() / 3);
+            var maxHeight = (rows === 0 ? 1 : rows) * 1000;
             attachmentsContainer.maxHeight = maxHeight;
         }
-//        attachmentsContainer.maxHeight = attachmentsDataModel.size() * 500;
     }
     
     onCreationCompleted: {

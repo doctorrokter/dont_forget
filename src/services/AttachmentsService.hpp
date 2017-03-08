@@ -22,6 +22,7 @@ public:
     Q_INVOKABLE QVariantList findAll();
     Q_INVOKABLE QVariantMap findById(const int id);
     Q_INVOKABLE QVariantList findByTaskId(const int taskId);
+    Q_INVOKABLE QVariantList getEncodedAttachments(const int taskId);
 
     Q_INVOKABLE void add(const int taskid, const QString& name, const QString& path, const QString& mimeType);
     Q_INVOKABLE void remove(const int id = 0);

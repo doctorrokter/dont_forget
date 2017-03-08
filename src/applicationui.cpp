@@ -97,16 +97,12 @@ ApplicationUI::ApplicationUI() : QObject() {
             initFullUI();
             break;
         case ApplicationStartupMode::InvokeApplication:
-            // Wait for invoked signal to determine and initialize the appropriate UI
             m_startupMode = "Invoke";
             break;
         case ApplicationStartupMode::InvokeCard:
-            // Wait for invoked signal to determine and initialize the appropriate UI
             m_startupMode = "Card";
             break;
         }
-
-//    qDebug() << "===>>> Startup mode: " << m_startupMode << endl;
 }
 
 ApplicationUI::~ApplicationUI() {
@@ -124,13 +120,11 @@ void ApplicationUI::onSystemLanguageChanged() {
 }
 
 void ApplicationUI::cardDone(const QString& msg) {
-    // Assemble message
     CardDoneMessage message;
     message.setData(msg);
     message.setDataType("text/plain");
     message.setReason(tr("Success!"));
 
-    // Send message
     m_pInvokeManager->sendCardDone(message);
 }
 
@@ -207,9 +201,34 @@ void ApplicationUI::processReceivedTaskMap(const QVariantMap& taskMap, const int
     task.setParentId(parentId);
 
     m_pTasksService->copyTask(task);
+    task.fromMap(m_pTasksService->lastCreated());
+
+    QVariantList attachments = taskMap.value("attachments").toList();
+    if (!attachments.isEmpty()) {
+        foreach(QVariant attVar, attachments) {
+            QVariantMap attMap = attVar.toMap();
+            QByteArray bytes = QByteArray::fromBase64(attMap.value("data").toString().toAscii());
+            QString name = attMap.value("name").toString();
+            QString partialPath = "/shared/misc/dont_forget/attachments/";
+
+            QDir dir("." + partialPath);
+            if (!dir.exists()) {
+                dir.mkpath("." + partialPath);
+            }
+
+            QFile attachment("." + partialPath + name);
+            bool opened = attachment.open(QIODevice::WriteOnly);
+            if (opened) {
+                attachment.write(bytes);
+                attachment.close();
+                m_pAttachmentsService->add(task.getId(), name, "file:///accounts/1000" + partialPath + name, attMap.value("mime_type").toString());
+            } else {
+                qDebug() << "Cannot open a file: " << name << " " << attachment.errorString() << endl;
+            }
+        }
+    }
 
     QVariantList children = taskMap.value("children").toList();
-    task.fromMap(m_pTasksService->lastCreated());
     if (!children.isEmpty()) {
         foreach(QVariant t, children) {
             processReceivedTaskMap(t.toMap(), task.getId());
@@ -221,10 +240,6 @@ void ApplicationUI::onInvoked(const bb::system::InvokeRequest& request) {
     QString action = request.action();
     QString target = request.target();
     QString mimeType = request.mimeType();
-
-    qDebug() << "Requested target: " << target << endl;
-    qDebug() << "Requested action: " << action << endl;
-    qDebug() << "Requested mimeType: " << mimeType << endl;
 
     if (target == INVOKE_SEARCH_SOURCE) {
         int id = QString::fromUtf8(request.data()).toInt();
@@ -247,7 +262,6 @@ void ApplicationUI::onInvoked(const bb::system::InvokeRequest& request) {
             }
 
             QString data = QString::fromUtf8(payload.data());
-            qDebug() << data << endl;
 
             JsonDataAccess jda;
             QVariant dataVar = jda.loadFromBuffer(data);

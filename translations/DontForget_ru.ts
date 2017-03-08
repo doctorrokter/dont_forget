@@ -59,12 +59,12 @@
 <context>
     <name>ApplicationUI</name>
     <message>
-        <location filename="../src/applicationui.cpp" line="131"/>
+        <location filename="../src/applicationui.cpp" line="126"/>
         <source>Success!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="190"/>
+        <location filename="../src/applicationui.cpp" line="184"/>
         <source>Tasks received!</source>
         <translation type="unfinished">Получены новые задачи!</translation>
     </message>
@@ -85,42 +85,42 @@
         <translation type="unfinished">Изменить</translation>
     </message>
     <message>
-        <location filename="../assets/pages/ContactsPage.qml" line="101"/>
+        <location filename="../assets/pages/ContactsPage.qml" line="102"/>
         <source>Tasks sent!</source>
         <translation type="unfinished">Задачи отправлены!</translation>
     </message>
     <message>
-        <location filename="../assets/pages/ContactsPage.qml" line="103"/>
+        <location filename="../assets/pages/ContactsPage.qml" line="104"/>
         <source>Task sent!</source>
         <translation type="unfinished">Задача отправлена!</translation>
     </message>
     <message>
-        <location filename="../assets/pages/ContactsPage.qml" line="108"/>
+        <location filename="../assets/pages/ContactsPage.qml" line="109"/>
         <source>The BlackBerry Push Server is busy, try again later.</source>
         <translation type="unfinished">Push-сервер BlackBerry занят, попробуйте позже.</translation>
     </message>
     <message>
-        <location filename="../assets/pages/ContactsPage.qml" line="114"/>
+        <location filename="../assets/pages/ContactsPage.qml" line="115"/>
         <source>Something went wrong with sending push notification...</source>
         <translation type="unfinished">Что-то пошло не так с отправкой push-уведомления...</translation>
     </message>
     <message>
-        <location filename="../assets/pages/ContactsPage.qml" line="126"/>
+        <location filename="../assets/pages/ContactsPage.qml" line="127"/>
         <source>Check your network connection</source>
         <translation type="unfinished">Проверьте интернет-соединение</translation>
     </message>
     <message>
-        <location filename="../assets/pages/ContactsPage.qml" line="143"/>
+        <location filename="../assets/pages/ContactsPage.qml" line="144"/>
         <source>Add</source>
         <translation type="unfinished">Добавить</translation>
     </message>
     <message>
-        <location filename="../assets/pages/ContactsPage.qml" line="153"/>
+        <location filename="../assets/pages/ContactsPage.qml" line="154"/>
         <source>Search</source>
         <translation type="unfinished">Поиск</translation>
     </message>
     <message>
-        <location filename="../assets/pages/ContactsPage.qml" line="166"/>
+        <location filename="../assets/pages/ContactsPage.qml" line="167"/>
         <source>Users</source>
         <translation type="unfinished">Пользователи</translation>
     </message>

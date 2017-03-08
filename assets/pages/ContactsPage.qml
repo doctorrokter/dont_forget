@@ -70,6 +70,7 @@ Page {
                         
                         var collectSiblings = function(rootTask) {
                             rootTask.children = _tasksService.findSiblings(rootTask.id);
+                            rootTask.attachments = _attachmentsService.getEncodedAttachments(rootTask.id);
                             if (rootTask.children.length !== 0) {
                                 rootTask.children.forEach(function(sibling) {
                                         collectSiblings(sibling);

@@ -52,6 +52,7 @@ Container {
                     verticalAlignment: VerticalAlignment.Fill
                     Container {
                         horizontalAlignment: HorizontalAlignment.Fill
+                        verticalAlignment: VerticalAlignment.Center
                         layout: StackLayout {
                             orientation: LayoutOrientation.LeftToRight
                         }

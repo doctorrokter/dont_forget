@@ -9,6 +9,7 @@
 
 #include <bb/system/InvokeRequest>
 #include <bb/system/InvokeManager>
+#include <QFile>
 
 using namespace bb::system;
 
@@ -37,6 +38,24 @@ QVariantMap AttachmentsService::findById(const int id) {
 
 QVariantList AttachmentsService::findByTaskId(const int taskId) {
     return m_pDbConfig->connection()->execute(QString::fromLatin1("SELECT * FROM attachments WHERE task_id = %1").arg(taskId)).toList();
+}
+
+QVariantList AttachmentsService::getEncodedAttachments(const int taskId) {
+    QVariantList attachments = findByTaskId(taskId);
+    QVariantList encoded;
+    foreach(QVariant attVar, attachments) {
+        QVariantMap attMap = attVar.toMap();
+        QFile att(attMap.value("path").toString().replace("file://", ""));
+        bool opened = att.open(QIODevice::ReadOnly);
+        if (opened) {
+            QByteArray bytes = att.readAll();
+            attMap["data"] = QString::fromAscii(bytes.toBase64().data());
+            encoded.append(attMap);
+        } else {
+            qDebug() << "Cannot open a file: " << attMap.value("path").toString() << " " << att.errorString() << endl;
+        }
+    }
+    return encoded;
 }
 
 void AttachmentsService::add(const int taskid, const QString& name, const QString& path, const QString& mimeType) {
@@ -120,7 +139,7 @@ QVariantMap AttachmentsService::getIconColorMap(const QString& ext, const QStrin
     } else if (mimeType.contains("video/")) {
         map.insert("image", "ic_doctype_video.png");
         map.insert("color", "#FF3333");
-    } else if (ext == "pdf") {
+    } else if (mimeType.contains("application/pdf")) {
         map.insert("image", "ic_doctype_pdf.png");
         map.insert("color", "#FF3333");
     } else if (hasExtension(m_docList, ext)) {
