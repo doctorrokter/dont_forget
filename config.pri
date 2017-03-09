@@ -101,6 +101,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/pages/SettingsPage.qml) \
         $$quote($$BASEDIR/assets/pages/TaskViewPage.qml) \
         $$quote($$BASEDIR/assets/pages/TasksListPage.qml) \
+        $$quote($$BASEDIR/assets/pages/Test.qml) \
         $$quote($$BASEDIR/assets/sheets/AddContactSheet.qml) \
         $$quote($$BASEDIR/assets/sheets/FilePickersSheet.qml) \
         $$quote($$BASEDIR/assets/sheets/TaskSheet.qml) \

@@ -82,9 +82,13 @@ void AttachmentsService::showAttachment(const QString& uri, const QString& mimeT
     InvokeManager invokeManager;
     InvokeRequest request;
 
+    QUrl url(uri);
+
     request.setAction("bb.action.VIEW");
-    request.setUri(uri);
+    request.setUri(url);
     request.setMimeType(mimeType);
+
+//    qDebug() << url << mimeType << endl;
 
     if (mimeType == "application/pdf") {
         request.setTarget("com.rim.bb.app.adobeReader.viewer");
@@ -164,7 +168,7 @@ QVariantMap AttachmentsService::lastCreated() {
 
 QString AttachmentsService::getExtension(const QString& path) {
     QStringList parts = path.split(".");
-    return parts[1];
+    return parts[parts.length() - 1];
 }
 
 bool AttachmentsService::hasExtension(const QStringList& extenstions, const QString& ext) {
