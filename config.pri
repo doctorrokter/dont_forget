@@ -123,6 +123,7 @@ config_pri_source_group1 {
         $$quote($$BASEDIR/src/services/TasksService.cpp) \
         $$quote($$BASEDIR/src/services/UsersService.cpp) \
         $$quote($$BASEDIR/src/util/Calendar.cpp) \
+        $$quote($$BASEDIR/src/util/Signal.cpp) \
         $$quote($$BASEDIR/src/vendor/Console.cpp)
 
     HEADERS += \
@@ -137,6 +138,7 @@ config_pri_source_group1 {
         $$quote($$BASEDIR/src/services/TasksService.hpp) \
         $$quote($$BASEDIR/src/services/UsersService.hpp) \
         $$quote($$BASEDIR/src/util/Calendar.hpp) \
+        $$quote($$BASEDIR/src/util/Signal.hpp) \
         $$quote($$BASEDIR/src/vendor/Console.hpp)
 }
 

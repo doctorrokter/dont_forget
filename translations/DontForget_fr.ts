@@ -48,12 +48,12 @@
 <context>
     <name>ApplicationUI</name>
     <message>
-        <location filename="../src/applicationui.cpp" line="126"/>
+        <location filename="../src/applicationui.cpp" line="128"/>
         <source>Success!</source>
         <translation type="unfinished">Réussite!</translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="184"/>
+        <location filename="../src/applicationui.cpp" line="187"/>
         <source>Tasks received!</source>
         <translation type="unfinished">Tâches reçue!</translation>
     </message>
@@ -411,57 +411,67 @@
         <translation type="unfinished">Tâche</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="151"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="158"/>
+        <source>System sound on selection</source>
+        <translation type="unfinished">Son sur sélection</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/SettingsPage.qml" line="187"/>
+        <source>Vibrate on selection</source>
+        <translation type="unfinished">Vibreur sur sélection</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/SettingsPage.qml" line="209"/>
         <source>Network</source>
         <translation type="unfinished">Réseau</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="195"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="253"/>
         <source>Check your network connection</source>
         <translation type="unfinished">Vérifiez votre connexion réseau</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="259"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="332"/>
         <source>Enabled</source>
         <translation type="unfinished">Activée</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="261"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="334"/>
         <source>Disabled</source>
         <translation type="unfinished">Désactivée</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="268"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="341"/>
         <source>Disable</source>
         <translation type="unfinished">Désactiver</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="270"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="343"/>
         <source>Enable</source>
         <translation type="unfinished">Activer</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="295"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="368"/>
         <source>Failed to enable Push Service</source>
         <translation type="unfinished">Impossible d&apos;activer Push Service</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="213"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="271"/>
         <source>If this setting is turned on you can send/receive tasks to/from your colleague or someone else using PIN. To achieve this goal app uses BlackBerry Push Service</source>
         <translation type="unfinished">Si ce paramètre est activé, vous pouvez envoyer / recevoir des tâches à / de votre collègue ou quelqu&apos;un d&apos;autre utilisant le NIP. Pour atteindre cet objectif, l&apos;application utilise BlackBerry Push Service</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="277"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="350"/>
         <source>Push Service enabled</source>
         <translation type="unfinished">Push Service activée</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="286"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="359"/>
         <source>Push Service disabled</source>
         <translation type="unfinished">Push Service désactivée</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="162"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="220"/>
         <source>Receive push notifications</source>
         <translation type="unfinished">Recevoir des notifications push</translation>
     </message>

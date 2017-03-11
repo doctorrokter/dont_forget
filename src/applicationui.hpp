@@ -30,6 +30,7 @@
 #include "services/AttachmentsService.hpp"
 #include "config/AppConfig.hpp"
 #include "config/DBConfig.hpp"
+#include "util/Signal.hpp"
 
 namespace bb
 {
@@ -78,6 +79,7 @@ private:
     SearchService* m_pSearchService;
     DropboxService* m_pDropboxService;
     AttachmentsService* m_pAttachmentsService;
+    Signal* m_pSignal;
 
     bool m_running;
     QList<QString> m_filesToDelete;

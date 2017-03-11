@@ -87,6 +87,8 @@ ApplicationUI::ApplicationUI() : QObject() {
 
     m_pDropboxService = new DropboxService(this);
 
+    m_pSignal = new Signal(this);
+
     res = QObject::connect(m_pDropboxService, SIGNAL(fileLoaded(const QString&)), this, SLOT(processTasksContent(const QString&)));
     Q_ASSERT(res);
     Q_UNUSED(res);
@@ -140,6 +142,7 @@ void ApplicationUI::initFullUI() {
     rootContext->setContextProperty("_pushService", m_pPushService);
     rootContext->setContextProperty("_dropboxService", m_pDropboxService);
     rootContext->setContextProperty("_attachmentsService", m_pAttachmentsService);
+    rootContext->setContextProperty("_signal", m_pSignal);
     rootContext->setContextProperty("_hasSharedFilesPermission", m_pDbConfig->hasSharedFilesPermission());
     m_running = true;
 

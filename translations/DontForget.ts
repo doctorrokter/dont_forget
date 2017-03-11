@@ -380,6 +380,14 @@
         <source>Check your network connection</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>System sound on selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vibrate on selection</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TaskDeadlineContainer</name>

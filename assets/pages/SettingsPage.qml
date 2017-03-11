@@ -147,6 +147,64 @@ Page {
                     }
                 }
                 
+                Container {
+                    layout: DockLayout {}
+                    topPadding: ui.du(2)
+                    bottomPadding: ui.du(0.5)
+                    leftPadding: ui.du(2.5)
+                    rightPadding: ui.du(2.5)
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    Label {
+                        text: qsTr("System sound on selection") + Retranslate.onLocaleOrLanguageChanged
+                        verticalAlignment: VerticalAlignment.Center
+                        horizontalAlignment: HorizontalAlignment.Left
+                    }
+                    
+                    ToggleButton {
+                        id: soundOnSelect
+                        horizontalAlignment: HorizontalAlignment.Right
+                        
+                        onCheckedChanged: {
+                            if (checked) {
+                                _appConfig.set("sound_on_select", "true");
+                                _signal.setSoundEnabled(true);
+                            } else {
+                                _appConfig.set("sound_on_select", "false");
+                                _signal.setSoundEnabled(false);
+                            }
+                        }
+                    }
+                }  
+            
+                Container {
+                    layout: DockLayout {}
+                    topPadding: ui.du(2)
+                    bottomPadding: ui.du(0.5)
+                    leftPadding: ui.du(2.5)
+                    rightPadding: ui.du(2.5)
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    Label {
+                        text: qsTr("Vibrate on selection") + Retranslate.onLocaleOrLanguageChanged
+                        verticalAlignment: VerticalAlignment.Center
+                        horizontalAlignment: HorizontalAlignment.Left
+                    }
+                    
+                    ToggleButton {
+                        id: vibrateOnSelect
+                        horizontalAlignment: HorizontalAlignment.Right
+                        
+                        onCheckedChanged: {
+                            if (checked) {
+                                _appConfig.set("vibrate_on_select", "true");
+                                _signal.setVibrationEnabled(true);
+                            } else {
+                                _appConfig.set("vibrate_on_select", "false");
+                                _signal.setVibrationEnabled(false);
+                            }
+                        }
+                    }
+                }  
+                
                 Header {
                     title: qsTr("Network") + Retranslate.onLocaleOrLanguageChanged
                 }
@@ -214,6 +272,11 @@ Page {
                         "To achieve this goal app uses BlackBerry Push Service") + Retranslate.onLocaleOrLanguageChanged
                     }
                 }
+                
+                Container {
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    minHeight: ui.du(20)
+                }
             }
             
             ActivityIndicator {
@@ -239,6 +302,16 @@ Page {
     function adjustAskBeforeDeleting() {
         var doNotAsk = _appConfig.get("do_not_ask_before_deleting");
         dontAskBeforeDeletingToggle.checked = doNotAsk && doNotAsk === "true";
+    }
+    
+    function adjustSoundOnSelect() {
+        var sound = _appConfig.get("sound_on_select");
+        soundOnSelect.checked = sound && sound === "true";
+    }
+    
+    function adjustVibrationOnSelect() {
+        var vibro = _appConfig.get("vibrate_on_select");
+        vibrateOnSelect.checked = vibro && vibro === "true";
     }
     
     function adjustSortBy() {
@@ -309,6 +382,8 @@ Page {
         adjustDefaultTaskType();
         adjustPushEnabledLabel();
         adjustPushServiceButton();
+        adjustSoundOnSelect();
+        adjustVibrationOnSelect();
         _pushService.channelCreated.connect(root.pushRegistered);
         _pushService.channelDestroyed.connect(root.pushUnregistered);
         _pushService.channelCreationFailed.connect(root.pushFailed);

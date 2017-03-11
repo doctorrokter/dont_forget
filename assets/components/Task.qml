@@ -362,4 +362,10 @@ Container {
     onControlRemoved: {
         clear();
     }
+    
+    onSelectedChanged: {
+        if (selected) {
+            _signal.play();
+        }
+    }
 }

@@ -66,8 +66,6 @@ DBConfig::DBConfig(QObject* parent) : QObject(parent) {
          }
      } else {
          qDebug() << "DB already exists. Use one." << endl;
-//         m_pSda->execute("DROP TABLE IF EXISTS schema_version");
-//         m_pSda->execute("DROP TABLE IF EXISTS df_users");
          if (AppConfig::getStatic("db_migrated").toString().isEmpty()) {
              qDebug() << "Start DB migration" << endl;
              if (!hasSchemaVersionTable()) {
