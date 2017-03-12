@@ -56,8 +56,8 @@ void PushNotificationService::createSessionCompleted(const PushStatus& pushStatu
     if (!pushStatus.isError() && m_pPushService) {
         qDebug() << "Session creation completed successfully!" << endl;
 
-        bool pushServiceRegisterd = AppConfig::getStatic(PUSH_SERVICE_REGISTERED).toBool();
-        if (!pushServiceRegisterd) {
+        QString pushServiceRegisterd = AppConfig::getStatic(PUSH_SERVICE_REGISTERED).toString();
+        if (pushServiceRegisterd.isEmpty() || pushServiceRegisterd.compare("registration_request") == 0) {
             qDebug() << "Push Service not registered yet." << endl;
 
             if (m_pPushService->hasConnection()) {

@@ -247,6 +247,7 @@ Page {
                                 if (pushEnabled === "true") {
                                     _pushService.destroyPushService();
                                 } else {
+                                    _appConfig.set("push_service_registered", "registration_request");
                                     _pushService.initPushService();
                                 }
                             } else {

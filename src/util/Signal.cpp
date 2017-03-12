@@ -39,10 +39,10 @@ void Signal::setVibrationEnabled(const bool vibrationEnabled) {
 
 bool Signal::isSoundEnabled() const {
     QString s = AppConfig::getStatic("sound_on_select").toString();
-    return !s.isEmpty() || s.compare("true") == 0;
+    return !s.isEmpty() && s.compare("true") == 0;
 }
 
 bool Signal::isVibrationEnabled() const {
     QString s = AppConfig::getStatic("vibrate_on_select").toString();
-    return !s.isEmpty() || s.compare("true") == 0;
+    return !s.isEmpty() && s.compare("true") == 0;
 }

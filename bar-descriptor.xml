@@ -143,14 +143,6 @@
       </filter>
     </invoke-target>
     
-    <!-- <invoke-target id="chachkouski.DontForget.image.view">
-  		<invoke-target-type>APPLICATION</invoke-target-type>
-  		<invoke-target-name>Don't Forget</invoke-target-name>
-  		<icon>
-    		<image>icon.png</image>
-  		</icon>
-	</invoke-target> -->
-	
 	<!--<invoke-target id="chachkouski.DontForget.search.extended">
    		<invoke-target-type>application</invoke-target-type>
    		<filter>
