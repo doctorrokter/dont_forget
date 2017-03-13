@@ -6,6 +6,8 @@
  */
 
 #include "AppConfig.hpp"
+#include <QUrl>
+#include <QDir>
 
 bool AppConfig::USING_PUBLIC_PPG = true;
 //QString AppConfig::PROVIDER_APP_ID = "300065-910B145627tryr34c5425h82824k3s724";
@@ -26,6 +28,8 @@ AppConfig::AppConfig(QObject* parent) : QObject(parent), m_pNetworkConf(new QNet
     bool res = connect(m_pNetworkConf, SIGNAL(onlineStateChanged(bool)), this, SLOT(onOnlineStatusChanged(bool)));
     Q_ASSERT(res);
     Q_UNUSED(res);
+
+    m_publicAssetsPath = QUrl("file://" + QDir::currentPath() + "/app/public").toString();
 }
 
 AppConfig::~AppConfig() {
@@ -61,3 +65,4 @@ void AppConfig::onOnlineStatusChanged(bool onlineStatus) {
     isOnline = onlineStatus;
 }
 
+QString AppConfig::getPublicAssets() const { return m_publicAssetsPath; }

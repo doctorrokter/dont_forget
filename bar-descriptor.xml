@@ -95,8 +95,9 @@
 
     <!--  The icon for the application, which should be 114x114. -->
 
-    <asset path="icon.png">icon.png</asset>
+    <!--<asset path="icon.png">icon.png</asset>-->
     <asset path="assets">assets</asset>
+    <asset path="public" public="true">.</asset>
 
     <!-- Locale support -->
     <asset path="translations" dest="qm">
@@ -120,6 +121,7 @@
     <permission>post_notification</permission>
     <permission system="true">_sys_use_consumer_push</permission>
     <permission>access_pimdomain_notebooks</permission>
+    <permission>access_notify_settings_control</permission>
     <env var="LD_LIBRARY_PATH" value="app/native/lib:/usr/lib/qt4/lib"/>
     <env var="CASCADES_THEME" value="default?primaryColor=0x0092CC&amp;primaryBase=0x087099"/>
     

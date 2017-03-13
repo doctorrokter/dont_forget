@@ -19,6 +19,7 @@ class AppConfig: public QObject {
     Q_PROPERTY(QString providerApplicationId READ getProviderApplicationId)
     Q_PROPERTY(QString ppgUrl READ getPpgUrl)
     Q_PROPERTY(bool launchApplicationOnPush READ shouldLaunchApplicationOnPush)
+    Q_PROPERTY(QString publicAssets READ getPublicAssets)
 
 public:
     AppConfig(QObject* parent = 0);
@@ -47,11 +48,14 @@ public:
 
     Q_INVOKABLE bool hasNetwork();
 
+    Q_INVOKABLE QString getPublicAssets() const;
+
 private Q_SLOTS:
     void onOnlineStatusChanged(bool isOnline);
 
 private:
     QNetworkConfigurationManager* m_pNetworkConf;
+    QString m_publicAssetsPath;
 };
 
 #endif /* APPCONFIG_HPP_ */

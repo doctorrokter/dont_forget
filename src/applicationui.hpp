@@ -21,6 +21,7 @@
 #include <QList>
 #include <bb/system/InvokeManager>
 #include <bb/system/InvokeRequest>
+#include <bb/platform/NotificationDefaultApplicationSettings>
 
 #include "services/PushNotificationService.hpp"
 #include "services/TasksService.hpp"
@@ -40,6 +41,7 @@ namespace bb
     }
 }
 using namespace bb::system;
+using namespace bb::platform;
 
 class QTranslator;
 
@@ -83,6 +85,7 @@ private:
 
     bool m_running;
     QList<QString> m_filesToDelete;
+    NotificationDefaultApplicationSettings m_notifSettings;
 
     void initFullUI();
     void initComposerUI(const QString& pathToPage, const QString& data = "", const QString& mimeType = "");

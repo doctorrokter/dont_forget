@@ -388,6 +388,18 @@
         <source>Vibrate on selection</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Notification sound</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Standard Theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t Forget Theme</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TaskDeadlineContainer</name>

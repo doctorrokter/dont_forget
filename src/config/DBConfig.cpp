@@ -75,9 +75,15 @@ DBConfig::DBConfig(QObject* parent) : QObject(parent) {
                  qDebug() << "Current schema_version is " << getVersion() << endl;
              }
              migrate();
-             qDebug() << "Current DB version is: " << getVersion() << endl;
              AppConfig::setStatic("db_migrated", "true");
          }
+
+         if (maxMigrationVersion() > getVersion()) {
+             migrate();
+         } else {
+             qDebug() << "DB versions matches!" << endl;
+         }
+         qDebug() << "Current DB version is: " << getVersion() << endl;
      }
 }
 
@@ -147,5 +153,20 @@ void DBConfig::migrate() {
             }
         }
     }
+}
+
+int DBConfig::maxMigrationVersion() {
+    QDirIterator iter("app/native/assets/migrations", QDirIterator::NoIteratorFlags);
+    int startVersion = 0;
+    while (iter.hasNext()) {
+        QString path = iter.next();
+        if (path.endsWith(".sql")) {
+            int v = getMigrationVersion(path);
+            if (v > startVersion) {
+                startVersion = v;
+            }
+        }
+    }
+    return startVersion;
 }
 

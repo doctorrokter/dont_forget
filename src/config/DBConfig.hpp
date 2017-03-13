@@ -37,6 +37,7 @@ private:
     bool hasSchemaVersionTable();
     int getMigrationVersion(const QString& path);
     void migrate();
+    int maxMigrationVersion();
 };
 
 #endif /* DBCONFIG_HPP_ */

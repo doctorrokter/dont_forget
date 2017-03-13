@@ -1,5 +1,6 @@
 import bb.cascades 1.4
 import bb.system 1.2
+import bb.multimedia 1.4
 import "../components"
 
 Page {
@@ -203,7 +204,61 @@ Page {
                             }
                         }
                     }
-                }  
+                }
+                
+                Container {
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    topPadding: ui.du(2.5)
+                    leftPadding: ui.du(2.5)
+                    rightPadding: ui.du(2.5)
+                    DropDown {
+                        title: qsTr("Notification sound") + Retranslate.onLocaleOrLanguageChanged
+                        
+                        options: [
+                            Option {
+                                id: standardTheme
+                                text: qsTr("Standard Theme") + Retranslate.onLocaleOrLanguageChanged
+                                value: "standard_theme"
+                                selected: {
+                                    var theme = _appConfig.get("notification_theme");
+                                    return theme === "" || theme === standardTheme.value;
+                                }
+                            },
+                            
+                            Option {
+                                id: chachkouskiTheme
+                                text: qsTr("Don't Forget Theme") + Retranslate.onLocaleOrLanguageChanged
+                                value: "chachkouski_theme"
+                                selected: {
+                                    var theme = _appConfig.get("notification_theme");
+                                    return theme === chachkouskiTheme.value;
+                                }
+                            }
+                        ]
+                        
+                        onSelectedOptionChanged: {
+                            _appConfig.set("notification_theme", selectedOption.value);
+                            if (selectedOption.value === standardTheme.value) {
+                                systemSound.play();
+                            } else {
+                                mediaPlayer.play();
+                            }
+                        }
+                    }
+                    
+                    attachedObjects: [
+                        SystemSound {
+                            id: systemSound
+                            sound: SystemSound.GeneralNotification
+                        },
+                        
+                        MediaPlayer {
+                            id: mediaPlayer
+                            volume: 1.0
+                            sourceUrl: _appConfig.publicAssets + "/notification.mp3"
+                        }
+                    ]
+                }
                 
                 Header {
                     title: qsTr("Network") + Retranslate.onLocaleOrLanguageChanged
@@ -327,6 +382,12 @@ Page {
         taskOption.selected = defaultTaskType === "" || defaultTaskType === "TASK";
     }
     
+    function adjustNotificationTheme() {
+        var theme = _appConfig.get("notification_theme");
+        standardTheme.selected = theme === "standard_theme" || theme === "";
+        chachkouskiTheme.selected = theme === "chachkouski_theme";
+    }
+    
     function adjustPushEnabledLabel() {
         var pushEnabled = _appConfig.get("push_service_registered");
         if (pushEnabled === "true") {
@@ -385,6 +446,7 @@ Page {
         adjustPushServiceButton();
         adjustSoundOnSelect();
         adjustVibrationOnSelect();
+//        adjustNotificationTheme();
         _pushService.channelCreated.connect(root.pushRegistered);
         _pushService.channelDestroyed.connect(root.pushUnregistered);
         _pushService.channelCreationFailed.connect(root.pushFailed);

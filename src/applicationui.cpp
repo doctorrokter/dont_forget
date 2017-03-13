@@ -29,6 +29,7 @@
 #include <bb/system/InvokeRequest>
 #include <bb/data/JsonDataAccess>
 #include <bb/platform/Notification>
+#include <bb/platform/NotificationPriorityPolicy>
 
 #include "models/Task.hpp"
 
@@ -50,6 +51,9 @@ ApplicationUI::ApplicationUI() : QObject() {
 
     QCoreApplication::setOrganizationName("mikhail.chachkouski");
     QCoreApplication::setApplicationName("DontForget");
+
+    m_notifSettings.setPreview(NotificationPriorityPolicy::Allow);
+    m_notifSettings.apply();
 
     m_pInvokeManager = new InvokeManager(this);
     connect(m_pInvokeManager, SIGNAL(invoked(const bb::system::InvokeRequest&)), SLOT(onInvoked(const bb::system::InvokeRequest&)));
@@ -185,6 +189,13 @@ void ApplicationUI::processTasksContent(const QString& tasksContent) {
         Notification* p_notification = new Notification(this);
         p_notification->setTitle("Don't Forget");
         p_notification->setBody(tr("Tasks received!"));
+        p_notification->setIconUrl(QUrl("file://" + QDir::currentPath() + "/app/public/icon.png"));
+
+        QString soundType = AppConfig::getStatic("notification_theme").toString();
+        if (soundType.compare("chachkouski_theme") == 0) {
+            p_notification->setSoundUrl(QUrl("file://" + QDir::currentPath() + "/app/public/notification2.mp3"));
+        }
+
         p_notification->notify();
         p_notification->deleteLater();
 
