@@ -34,6 +34,7 @@
 #include "models/Task.hpp"
 
 #define INVOKE_SEARCH_SOURCE "chachkouski.DontForget.search.asyoutype"
+#define INVOKE_SEARCH_EXTENDED "chachkouski.DontForget.search.extended"
 #define INVOKE_CARD_EDIT_TEXT "chachkouski.DontForget.card.edit.text"
 #define INVOKE_CARD_EDIT_URI "chachkouski.DontForget.card.edit.uri"
 #define CREATE_TASK_FROM_TEXT_CARD "asset:///cards/CreateTaskFromTextCard.qml"
@@ -255,13 +256,23 @@ void ApplicationUI::onInvoked(const bb::system::InvokeRequest& request) {
     QString target = request.target();
     QString mimeType = request.mimeType();
 
+    qDebug() << "action: " << action << endl;
+    qDebug() << "target: " << target << endl;
+    qDebug() << "mimeType: " << mimeType << endl;
+
     if (target == INVOKE_SEARCH_SOURCE) {
         int id = QString::fromUtf8(request.data()).toInt();
         if (!m_running) {
             initFullUI();
         }
         m_pTasksService->setActiveTask(id);
-        emit taskSheetRequested();
+        emit taskSheetRequested("");
+    } else if (target == INVOKE_SEARCH_EXTENDED) {
+        if (!m_running) {
+            initFullUI();
+        }
+        QString data = QString::fromUtf8(request.data());
+        emit taskSheetRequested(data);
     } else if (target == INVOKE_CARD_EDIT_TEXT) {
         initComposerUI(CREATE_TASK_FROM_TEXT_CARD, QString::fromUtf8(request.data()), mimeType);
     } else if (target == INVOKE_CARD_EDIT_URI) {
@@ -269,9 +280,7 @@ void ApplicationUI::onInvoked(const bb::system::InvokeRequest& request) {
     } else if (target == INVOKE_TARGET_KEY_PUSH) {
         PushPayload payload(request);
         if (payload.isValid()) {
-            qDebug() << "Payload is valid. Processing now." << endl;
             if (payload.isAckRequired()) {
-                qDebug() << "ACK required. Sending..." << endl;
                 m_pPushService->getPushService()->acceptPush(payload.id());
             }
 
@@ -287,7 +296,6 @@ void ApplicationUI::onInvoked(const bb::system::InvokeRequest& request) {
             } else {
                 qDebug() << jda.error() << endl;
             }
-
         }
     }
 }

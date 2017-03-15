@@ -27,6 +27,7 @@
 
 #include "vendor/Console.hpp"
 #include <QSettings>
+#include <bb/cascades/WebPage>
 
 #include "models/Task.hpp"
 
@@ -48,6 +49,7 @@ void myMessageOutput(QtMsgType type, const char* msg) {  // <-- ADD THIS
 
 Q_DECL_EXPORT int main(int argc, char **argv) {
     qmlRegisterType<Task>("chachkouski.models", 1, 0, "Task");
+    qmlRegisterType<WebPage>("WebPageComponent", 1, 0, "WebPage");
     qRegisterMetaType<QList<Task> >("QList<Task>");
     qRegisterMetaType<Task*>("Task*");
 

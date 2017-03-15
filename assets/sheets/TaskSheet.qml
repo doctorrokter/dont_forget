@@ -4,6 +4,7 @@ import "../components"
 Sheet {
     id: taskSheet
     
+    property string data: ""
     property string mode: "CREATE"
     property variant modes: {
         CREATE: "CREATE",
@@ -235,10 +236,12 @@ Sheet {
     }
     
     function initialState() {
+        if (!taskSheet.data) {
+            taskName.resetText();
+        }
         importantToggleButton.checked = false;
         deadLineToggleButton.checked = false;
         deadLineContainer.date = currDatePlus2Hourse();
-        taskName.resetText();
         description.resetText();
         adjustFolderOption();
         adjustTaskOption();
@@ -269,8 +272,13 @@ Sheet {
     }
     
     onClosed: {
+        taskSheet.data = "";
         taskSheet.mode = taskSheet.modes.CREATE;
         closeTaskCheckbox.checked = false;
         initialState();
+    }
+    
+    onDataChanged: {
+        taskName.value = taskSheet.data;
     }
 }

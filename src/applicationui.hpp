@@ -57,7 +57,7 @@ public:
     virtual ~ApplicationUI();
 
 Q_SIGNALS:
-    void taskSheetRequested();
+    void taskSheetRequested(const QString& data);
     void tasksReceived();
 
 public Q_SLOTS:

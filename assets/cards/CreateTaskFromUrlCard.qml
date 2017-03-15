@@ -1,5 +1,6 @@
 import bb.cascades 1.4
 import bb.system 1.2
+import WebPageComponent 1.0
 import "../components"
 import "../pages"
 
@@ -160,20 +161,6 @@ NavigationPane {
             return new Date(new Date().getTime() + 7200000);
         }
         
-        function loadTitle() {
-            loading.running = true;
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", _data, true);
-            xhr.onreadystatechange = function() { 
-                if (xhr.readyState == 4) {
-                    loading.running = false;
-                    var title = (/<title>(.*?)<\/title>/m).exec(xhr.responseText)[1];
-                    root.setTitle(title); 
-                }
-            }
-            xhr.send();
-        }
-        
         function processAttachments() {
             taskName.requestFocus();
             
@@ -186,7 +173,7 @@ NavigationPane {
         onCreationCompleted: {
             if (!_mimeType || _mimeType.trim() === "") {
                 description.value = _data;
-                loadTitle();
+                webPage.url = _data;
             } else {
                 processAttachments();
             }
@@ -210,6 +197,14 @@ NavigationPane {
                 
                 onFinished: {
                     navigation.quit();
+                }
+            },
+            
+            WebPage {
+                id: webPage
+                
+                onTitleChanged: {
+                    root.setTitle(title);
                 }
             }
         ]

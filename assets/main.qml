@@ -619,8 +619,12 @@ NavigationPane {
         loading.running = false;
     }
     
-    function openTaskSheetEditMode() {
-        taskSheet.mode = taskSheet.modes.UPDATE;
+    function openTaskSheetEditMode(data) {
+        if (!data) {
+            taskSheet.mode = taskSheet.modes.UPDATE;
+        } else {
+            taskSheet.data = data;
+        }
         taskSheet.open();
     }
     
