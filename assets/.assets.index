@@ -1,5 +1,5 @@
 1
-71
+70
 cards/CreateTaskFromTextCard.qml
 cards/CreateTaskFromUrlCard.qml
 cards/TestCard.qml
@@ -65,7 +65,6 @@ pages/MoveTaskPage.qml
 pages/SettingsPage.qml
 pages/TasksListPage.qml
 pages/TaskViewPage.qml
-pages/Test.qml
 sheets/AddContactSheet.qml
 sheets/FilePickersSheet.qml
 sheets/TaskSheet.qml

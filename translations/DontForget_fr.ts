@@ -591,7 +591,7 @@
         <translation type="unfinished">Tâches enfant</translation>
     </message>
     <message>
-        <location filename="../assets/pages/TaskViewPage.qml" line="134"/>
+        <location filename="../assets/pages/TaskViewPage.qml" line="135"/>
         <source>Attachments</source>
         <translation type="unfinished">Pièces jointes</translation>
     </message>

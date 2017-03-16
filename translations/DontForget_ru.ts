@@ -654,7 +654,7 @@
         <translation type="unfinished">Дочерние задачи</translation>
     </message>
     <message>
-        <location filename="../assets/pages/TaskViewPage.qml" line="134"/>
+        <location filename="../assets/pages/TaskViewPage.qml" line="135"/>
         <source>Attachments</source>
         <translation type="unfinished">Вложения</translation>
     </message>

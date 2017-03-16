@@ -118,6 +118,7 @@ Page {
                                         }
                                         text: rootChildTask.name
                                         multiline: true
+                                        textFormat: TextFormat.Html
                                     }
                                 }
                             }
@@ -210,6 +211,21 @@ Page {
         }
     }
     
+    function getTaskName(task) {
+        var name = "<html>";
+        if (task.closed) {
+            name += "<span style=\"text-decoration: line-through;\">" + task.name +"</span>";
+        } else {
+            name += task.name;
+        }
+        
+        if (task.important) {
+            name += "<span style=\"color: #FF3333; font-size: 1em;\"> !</span>";
+        }
+        name += "</html>";
+        return name;
+    }
+    
     onCreationCompleted: {
         var attachments = _attachmentsService.findByTaskId(_tasksService.activeTask.id);
         
@@ -217,7 +233,7 @@ Page {
         childrenContainer.visible = siblings.length !== 0;
         siblings.forEach(function(sibling) {
             var siblingContainer = childTask.createObject(this);
-            siblingContainer.name = sibling.name;
+            siblingContainer.name = getTaskName(sibling);
             children.add(siblingContainer);
             attachments = attachments.concat(_attachmentsService.findByTaskId(sibling.id));
         });
