@@ -677,17 +677,27 @@
 <context>
     <name>TasksListPage</name>
     <message>
-        <location filename="../assets/pages/TasksListPage.qml" line="68"/>
+        <location filename="../assets/pages/TasksListPage.qml" line="69"/>
         <source>Choose a folder</source>
         <translation type="unfinished">Выберите папку</translation>
     </message>
     <message>
         <location filename="../assets/pages/TasksListPage.qml" line="90"/>
+        <source>Create a folder</source>
+        <translation type="unfinished">Создать папку</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/TasksListPage.qml" line="107"/>
         <source>Search</source>
         <translation type="unfinished">Поиск</translation>
     </message>
     <message>
-        <location filename="../assets/pages/TasksListPage.qml" line="144"/>
+        <location filename="../assets/pages/TasksListPage.qml" line="128"/>
+        <source>Create</source>
+        <translation type="unfinished">Создать</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/TasksListPage.qml" line="192"/>
         <source>Root</source>
         <translation type="unfinished">Корень</translation>
     </message>

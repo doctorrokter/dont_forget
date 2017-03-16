@@ -502,6 +502,14 @@
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Create</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a folder</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>UpdateTaskCard</name>

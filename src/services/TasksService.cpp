@@ -30,7 +30,7 @@ void TasksService::init() {
     if (!m_pDbConfig->isNewDb()) {
         sync();
     }
-    //    m_pSda->execute("DELETE FROM tasks");
+//    m_pDbConfig->connection()->execute("DELETE FROM tasks");
 }
 
 QVariantList TasksService::findAll() const {
@@ -141,6 +141,19 @@ void TasksService::createTask(const QString name, const QString description, con
             m_pAttachmentsService->add(newTask.value("id").toInt(), attMap.value("name").toString(), attMap.value("path").toString(), attMap.value("mime_type").toString());
         }
     }
+
+    emit taskCreated(newTask);
+}
+
+void TasksService::createFolderQuick(const QString& name) {
+    QString query = "INSERT INTO tasks (name, type, expanded) VALUES (:name, :type, 1)";
+
+    QVariantMap values;
+    values["name"] = name;
+    values["type"] = "FOLDER";
+
+    m_pDbConfig->connection()->execute(query, values);
+    QVariantMap newTask = lastCreated();
 
     emit taskCreated(newTask);
 }

@@ -1,4 +1,5 @@
 import bb.cascades 1.4
+import bb.system 1.2
 import "../components"
 
 Page {
@@ -82,18 +83,65 @@ Page {
                 tasksDataModel.clear();
                 tasksDataModel.append(filteredTasks);
             }
+        },
+        
+        SystemPrompt {
+            id: prompt
+            title: qsTr("Create a folder") + Retranslate.onLocaleOrLanguageChanged
+            inputField.inputMode: SystemUiInputMode.Default
+            inputField.maximumLength: 50
+            
+            onFinished: {
+                console.debug(value);
+                if (value === 2) {
+                    var name = prompt.inputFieldTextEntry();
+                    _tasksService.createFolderQuick(name);
+                }
+            }
         }
     ]
     
     actions: [
         ActionItem {
+            id: searchActionItem
             title: qsTr("Search") + Retranslate.onLocaleOrLanguageChanged
             ActionBar.placement: ActionBarPlacement.Signature
             imageSource: "asset:///images/ic_search.png"
             
+            shortcuts: [
+                Shortcut {
+                    key: "s"
+                    
+                    onTriggered: {
+                        searchActionItem.triggered();
+                    }
+                }
+            ]
+            
             onTriggered: {
                 root.searchMode = true;
             }
+        },
+        
+        ActionItem {
+            id: createActionItem
+            title: qsTr("Create") + Retranslate.onLocaleOrLanguageChanged
+            imageSource: "asset:///images/ic_add.png"
+            ActionBar.placement: ActionBarPlacement.OnBar
+            
+            onTriggered: {
+                prompt.show();
+            }
+            
+            shortcuts: [
+                SystemShortcut {
+                    type: SystemShortcuts.CreateNew
+                    
+                    onTriggered: {
+                        createActionItem.triggered();
+                    }
+                }
+            ]
         }
     ]
     
@@ -145,6 +193,11 @@ Page {
         tasksDataModel.append(tasks);
     }
     
+    function addNewFolder(task) {
+        task.title = task.name;
+        tasksDataModel.insert(1, task);
+    }
+    
     onCreationCompleted: {
         tasksDataModel.clear();
         var tasksArray = _tasksService.findAll();
@@ -169,6 +222,7 @@ Page {
         } else {
             root.tasks = tasksArray;
         }
+        _tasksService.taskCreated.connect(root.addNewFolder);
     }
     
     onTasksChanged: {

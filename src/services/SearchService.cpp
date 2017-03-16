@@ -35,11 +35,11 @@ void SearchService::dbOpen() {
 void SearchService::init() {
     m_pSda = new SqlDataAccess(DB_PATH);
     m_pSda->execute("PRAGMA encoding = \"UTF-8\"");
+//    m_pSda->execute("DELETE FROM search");
+//    m_pSda->execute("DELETE FROM search_info");
 
     QString searchDbIndexed = AppConfig::getStatic("search_db_indexed").toString();
     if (searchDbIndexed.isEmpty()) {
-//        qDebug() << "Search DB not indexed yet. Will index it now." << endl;
-
         m_pSda->execute("DROP TABLE IF EXISTS search");
         m_pSda->execute("DROP TABLE IF EXISTS search_info");
 

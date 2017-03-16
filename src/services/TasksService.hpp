@@ -43,6 +43,7 @@ public:
     Q_INVOKABLE void setActiveTask(const int id);
 
     Q_INVOKABLE void createTask(const QString name = "", const QString description = "", const QString type = "TASK", const int deadline = 0, const int important = 0, const int createInRemember = 0, const QVariantList attachments = QVariantList());
+    Q_INVOKABLE void createFolderQuick(const QString& name);
     Q_INVOKABLE void updateTask(const QString name = "", const QString description = "", const QString type = "TASK", const int deadline = 0, const int important = 0, const int createInRemember = 0, const int closed = 0, const QVariantList attachments = QVariantList());
     Q_INVOKABLE void deleteTask(const int id);
     Q_INVOKABLE void moveTask(const int parentId = 0);
