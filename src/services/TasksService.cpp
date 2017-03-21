@@ -76,6 +76,10 @@ QVariantMap TasksService::lastCreated() {
     return m_pDbConfig->connection()->execute("SELECT * FROM tasks ORDER BY id DESC LIMIT 1").toList().at(0).toMap();
 }
 
+bool TasksService::isExists(const int id) {
+    return m_pDbConfig->connection()->execute(QString::fromLatin1("SELECT EXISTS (SELECT 1 FROM tasks WHERE id = %1) AS present").arg(id)).toList().at(0).toMap().value("present").toBool();
+}
+
 void TasksService::changeClosed(const int id, const bool closed) {
     int state = closed ? 1 : 0;
     QString query = QString::fromLatin1("UPDATE tasks SET closed = %1 WHERE id = %2").arg(state).arg(id);
@@ -225,13 +229,16 @@ void TasksService::deleteTask(const int id) {
     QString query = QString::fromLatin1("DELETE FROM tasks WHERE id = %1");
 
     if (m_multiselectMode) {
-        QVariantMap taskMap = findById(id);
-        m_pActiveTask = new Task(this);
-        m_pActiveTask->fromMap(taskMap);
+        if (isExists(id)) {
+            QVariantMap taskMap = findById(id);
+            m_pActiveTask = new Task(this);
+            m_pActiveTask->fromMap(taskMap);
+        }
     }
 
-    if (id == m_pActiveTask->getId()) {
-        if (!m_pActiveTask->getRememberId().isEmpty()) {
+    if (m_pActiveTask != NULL) {
+        if (id == m_pActiveTask->getId()) {
+            if (!m_pActiveTask->getRememberId().isEmpty()) {
                 deleteNotebookEntry(m_pActiveTask->getRememberId());
             }
             query = query.arg(m_pActiveTask->getId());
@@ -241,12 +248,13 @@ void TasksService::deleteTask(const int id) {
 
             flushActiveTask();
             emit activeTaskChanged(m_pActiveTask);
-    } else {
-        m_pDbConfig->connection()->execute("PRAGMA foreign_keys = ON");
-        query = query.arg(id);
-        m_pDbConfig->connection()->execute(query);
+        } else {
+            m_pDbConfig->connection()->execute("PRAGMA foreign_keys = ON");
+            query = query.arg(id);
+            m_pDbConfig->connection()->execute(query);
+        }
+        emit taskDeleted(id);
     }
-    emit taskDeleted(id);
 }
 
 void TasksService::moveTask(const int parentId) {

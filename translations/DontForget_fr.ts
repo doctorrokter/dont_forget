@@ -741,7 +741,7 @@
     </message>
     <message>
         <location filename="../assets/main.qml" line="367"/>
-        <location filename="../assets/main.qml" line="515"/>
+        <location filename="../assets/main.qml" line="511"/>
         <source>All Tasks</source>
         <translation type="unfinished">Toutes les tâches</translation>
     </message>

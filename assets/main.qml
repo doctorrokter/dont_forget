@@ -496,10 +496,6 @@ NavigationPane {
                         _tasksService.deleteTask(id);
                         deleteTask(id, tasksContainer);
                     }
-                    
-//                    var id = _tasksService.activeTask.id;
-//                    _tasksService.deleteTask(id);
-//                    deleteTask(id, tasksContainer);
                 }
             },
             
@@ -520,12 +516,17 @@ NavigationPane {
             main.viewMode = viewMode;
         }
         
+        function changeMultiselectMode(multiselectMode) {
+            main.multiselectMode = multiselectMode;
+        }
+        
         onCreationCompleted: {
             if (!_hasSharedFilesPermission) {
                 permissionDialog.show();
             }
             _tasksService.activeTaskChanged.connect(main.updateTitleBar);
             _tasksService.viewModeChanged.connect(main.changeViewMode);
+            _tasksService.multiselectModeChanged.connect(main.changeMultiselectMode);
         }
     }
     

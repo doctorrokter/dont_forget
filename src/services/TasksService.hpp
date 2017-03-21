@@ -37,6 +37,7 @@ public:
     Q_INVOKABLE QVariantList findByType(const QString& type);
     Q_INVOKABLE QVariantList findSiblings(const int parentId);
     Q_INVOKABLE QVariantMap lastCreated();
+    Q_INVOKABLE bool isExists(const int id);
 
     Q_INVOKABLE void changeClosed(const int id, const bool closed);
     Q_INVOKABLE void changeExpanded(const int id, const bool expanded);

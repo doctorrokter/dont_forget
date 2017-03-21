@@ -6,7 +6,7 @@ Container {
     id: task
     
     signal taskViewRequested();
-    
+          
     property int taskId: 1
     property bool expanded: true
     property bool expandable: false
