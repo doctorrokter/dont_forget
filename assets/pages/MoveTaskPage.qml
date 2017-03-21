@@ -74,8 +74,12 @@ Page {
             onTriggered: {
                 spinner.running = true;
                 var data = tasksDataModel.data(indexPath);
-                if (_tasksService.activeTask.parentId !== data.id) {
-                    _tasksService.moveTask(data.id);
+                if (_tasksService.multiselectMode) {
+                    _tasksService.moveBulk(data.id);
+                } else {
+                    if (_tasksService.activeTask.parentId !== data.id) {
+                        _tasksService.moveTask(data.id);
+                    }
                 }
                 taskMove();
                 spinner.running = false;

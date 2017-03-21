@@ -62,6 +62,7 @@ public:
     Q_INVOKABLE void deselectTask(const int id);
     Q_INVOKABLE bool isTaskSelected(const int id);
     Q_INVOKABLE QVariantList deleteBulk();
+    Q_INVOKABLE void moveBulk(const int parentId);
 
 Q_SIGNALS:
     void activeTaskChanged(Task* newActiveTask);
@@ -75,6 +76,7 @@ Q_SIGNALS:
     void multiselectModeChanged(const bool multiselectMode);
     void taskSelected(const int id);
     void taskDeselected(const int id);
+    void taskMovedInBulk();
 
 private Q_SLOTS:
     void processMultiselectMode(const bool multiselectMode);

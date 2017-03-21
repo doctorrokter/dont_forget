@@ -404,8 +404,12 @@ NavigationPane {
                 id: moveTaskPage
                 TasksListPage {
                     onTaskChosen: {
-                        if (_tasksService.activeTask.parentId !== chosenTask.id) {
-                            _tasksService.moveTask(chosenTask.id);
+                        if (_tasksService.multiselectMode) {
+                            _tasksService.moveBulk(chosenTask.id);
+                        } else {
+                            if (_tasksService.activeTask.parentId !== chosenTask.id) {
+                                _tasksService.moveTask(chosenTask.id);
+                            }
                         }
                         navigation.pop();
                     }
@@ -489,7 +493,7 @@ NavigationPane {
                     if (_tasksService.multiselectMode) {
                         var ids = _tasksService.deleteBulk();
                         ids.forEach(function(id) {
-                                deleteTask(id, tasksContainer);
+                            deleteTask(id, tasksContainer);
                         });
                     } else {
                         var id = _tasksService.activeTask.id;
@@ -674,6 +678,7 @@ NavigationPane {
         renderTree();
         _tasksService.taskCreated.connect(navigation.onTaskCreated);
         _tasksService.taskMoved.connect(navigation.renderTree);
+        _tasksService.taskMovedInBulk.connect(navigation.renderTree);
         _app.taskSheetRequested.connect(navigation.openTaskSheetEditMode);
         _app.tasksReceived.connect(navigation.renderTree);
     }

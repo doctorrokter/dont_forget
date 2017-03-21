@@ -348,7 +348,7 @@
         <translation type="unfinished">Choisir un dossier</translation>
     </message>
     <message>
-        <location filename="../assets/pages/MoveTaskPage.qml" line="149"/>
+        <location filename="../assets/pages/MoveTaskPage.qml" line="153"/>
         <source>Root</source>
         <translation type="unfinished">Racine</translation>
     </message>
@@ -741,22 +741,22 @@
     </message>
     <message>
         <location filename="../assets/main.qml" line="367"/>
-        <location filename="../assets/main.qml" line="511"/>
+        <location filename="../assets/main.qml" line="515"/>
         <source>All Tasks</source>
         <translation type="unfinished">Toutes les tâches</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="464"/>
+        <location filename="../assets/main.qml" line="468"/>
         <source>Permission required</source>
         <translation type="unfinished">Permission demandée</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="465"/>
+        <location filename="../assets/main.qml" line="469"/>
         <source>Looks like you didn&apos;t grant permission for shared files. &quot;Don&apos;t Forget&quot; cannot work without this permission since the app stores own database in external resources. In order to use this app you should grant permissions in Settings, then restart the app.</source>
         <translation type="unfinished">Il semblerait que vous n&apos;avez pas accepter la permission de partage de fichiers. &quot;Don&apos;t Forget&quot; ne peut fonctionner sans cette permission. Pour utiliser cette application vous devez autoriser cette permission dans les paramètres du téléphone, puis redémarrer l&apos;application.</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="468"/>
+        <location filename="../assets/main.qml" line="472"/>
         <source>Settings</source>
         <translation type="unfinished">Paramètres</translation>
     </message>

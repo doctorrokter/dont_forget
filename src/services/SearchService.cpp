@@ -67,7 +67,7 @@ void SearchService::init() {
             AppConfig::setStatic("search_db_indexed", "true");
         }
     } else {
-//        qDebug() << "Search DB already indexed." << endl;
+        qDebug() << "Search DB already indexed." << endl;
     }
 
     if (m_pTaskService != NULL) {

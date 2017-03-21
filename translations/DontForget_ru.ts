@@ -391,7 +391,7 @@
         <translation type="unfinished">Выберите папку</translation>
     </message>
     <message>
-        <location filename="../assets/pages/MoveTaskPage.qml" line="149"/>
+        <location filename="../assets/pages/MoveTaskPage.qml" line="153"/>
         <source>Root</source>
         <translation type="unfinished">Сделать корневой задачей</translation>
     </message>
@@ -776,11 +776,11 @@
     <message>
         <location filename="../assets/main.qml" line="343"/>
         <source>Multiselect mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Групповой режим</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="367"/>
-        <location filename="../assets/main.qml" line="511"/>
+        <location filename="../assets/main.qml" line="515"/>
         <source>All Tasks</source>
         <translation type="unfinished">Все задачи</translation>
     </message>
@@ -849,20 +849,20 @@
     <message>
         <location filename="../assets/main.qml" line="341"/>
         <source>Single select mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Одиночный режим</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="464"/>
+        <location filename="../assets/main.qml" line="468"/>
         <source>Permission required</source>
         <translation type="unfinished">Требуются права</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="465"/>
+        <location filename="../assets/main.qml" line="469"/>
         <source>Looks like you didn&apos;t grant permission for shared files. &quot;Don&apos;t Forget&quot; cannot work without this permission since the app stores own database in external resources. In order to use this app you should grant permissions in Settings, then restart the app.</source>
         <translation type="unfinished">Похоже Вы не дали права на использование общих файлов приложением. &quot;Don&apos;t Forget&quot; не может работать без этих прав, так как хранит собственную базу данных во внешних ресурсах. Для того, чтобы пользоваться этим приложением, Вам необходимо добавить права в Настройках, затем перезапустить приложение.</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="468"/>
+        <location filename="../assets/main.qml" line="472"/>
         <source>Settings</source>
         <translation type="unfinished">Настройки</translation>
     </message>

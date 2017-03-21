@@ -268,10 +268,7 @@ void TasksService::moveTask(const int parentId) {
     values.append(parent);
     values.append(m_pActiveTask->getId());
 
-//    qDebug() << query << values << endl;
-
     m_pDbConfig->connection()->execute(query, values);
-
     emit taskMoved(m_pActiveTask->getId(), parentId);
 }
 
@@ -440,6 +437,27 @@ QVariantList TasksService::deleteBulk() {
     m_tasksIds.clear();
     setMultiselectMode(false);
     return ids;
+}
+
+void TasksService::moveBulk(const int parentId) {
+    foreach(int id, m_tasksIds) {
+        if (parentId != id) {
+            QString parent = NULL;
+            if (parentId != 0) {
+                parent = QString::number(parentId);
+            }
+
+            QString query = "UPDATE tasks SET parent_id = ? WHERE id = ?";
+            QVariantList values;
+            values.append(parent);
+            values.append(id);
+
+            m_pDbConfig->connection()->execute(query, values);
+        }
+    }
+    m_tasksIds.clear();
+    setMultiselectMode(false);
+    emit taskMovedInBulk();
 }
 
 void TasksService::processMultiselectMode(const bool multiselectMode) {

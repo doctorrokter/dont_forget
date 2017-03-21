@@ -355,6 +355,7 @@ Container {
     }
     
     function clear() {
+        console.debug("clear");
         _tasksService.activeTaskChanged.disconnect(task.select);
         _tasksService.taskUpdated.disconnect(task.updateTask);
         _tasksService.allTasksExpanded.disconnect(task.expand);
