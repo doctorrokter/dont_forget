@@ -238,12 +238,12 @@
         <translation type="unfinished">Ne plus demander</translation>
     </message>
     <message>
-        <location filename="../assets/components/DeleteTaskDialog.qml" line="75"/>
+        <location filename="../assets/components/DeleteTaskDialog.qml" line="79"/>
         <source>Cancel</source>
         <translation type="unfinished">Annuler</translation>
     </message>
     <message>
-        <location filename="../assets/components/DeleteTaskDialog.qml" line="84"/>
+        <location filename="../assets/components/DeleteTaskDialog.qml" line="88"/>
         <source>OK</source>
         <translation type="unfinished">OK</translation>
     </message>
@@ -680,73 +680,83 @@
         <translation type="unfinished">Envoyer un retour d&apos;information</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="88"/>
+        <location filename="../assets/main.qml" line="89"/>
         <source>You have no tasks yet. It&apos;s time to create new one!</source>
         <translation type="unfinished">Vous n&apos;avez pas encore de tâches. Il est temps d&apos;en créer une nouvelle!</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="153"/>
+        <location filename="../assets/main.qml" line="154"/>
         <source>Create</source>
         <translation type="unfinished">Créer</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="176"/>
+        <location filename="../assets/main.qml" line="178"/>
         <source>Edit</source>
         <translation type="unfinished">Editer</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="269"/>
+        <location filename="../assets/main.qml" line="278"/>
         <source>View</source>
         <translation type="unfinished">Regarder</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="202"/>
+        <location filename="../assets/main.qml" line="204"/>
         <source>Delete</source>
         <translation type="unfinished">Supprimer</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="232"/>
+        <location filename="../assets/main.qml" line="241"/>
         <source>Move</source>
         <translation type="unfinished">Déplacer</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="256"/>
+        <location filename="../assets/main.qml" line="265"/>
         <source>Send</source>
         <translation type="unfinished">Envoyer</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="293"/>
+        <location filename="../assets/main.qml" line="302"/>
         <source>Hide closed</source>
         <translation type="unfinished">Cacher terminer</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="295"/>
+        <location filename="../assets/main.qml" line="304"/>
         <source>Show all</source>
         <translation type="unfinished">Tout afficher</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="310"/>
+        <location filename="../assets/main.qml" line="319"/>
         <source>Search</source>
         <translation type="unfinished">Rechercher</translation>
     </message>
     <message>
+        <location filename="../assets/main.qml" line="341"/>
+        <source>Single select mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../assets/main.qml" line="343"/>
-        <location filename="../assets/main.qml" line="480"/>
+        <source>Multiselect mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="367"/>
+        <location filename="../assets/main.qml" line="515"/>
         <source>All Tasks</source>
         <translation type="unfinished">Toutes les tâches</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="440"/>
+        <location filename="../assets/main.qml" line="464"/>
         <source>Permission required</source>
         <translation type="unfinished">Permission demandée</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="441"/>
+        <location filename="../assets/main.qml" line="465"/>
         <source>Looks like you didn&apos;t grant permission for shared files. &quot;Don&apos;t Forget&quot; cannot work without this permission since the app stores own database in external resources. In order to use this app you should grant permissions in Settings, then restart the app.</source>
         <translation type="unfinished">Il semblerait que vous n&apos;avez pas accepter la permission de partage de fichiers. &quot;Don&apos;t Forget&quot; ne peut fonctionner sans cette permission. Pour utiliser cette application vous devez autoriser cette permission dans les paramètres du téléphone, puis redémarrer l&apos;application.</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="444"/>
+        <location filename="../assets/main.qml" line="468"/>
         <source>Settings</source>
         <translation type="unfinished">Paramètres</translation>
     </message>

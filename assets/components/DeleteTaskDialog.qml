@@ -60,7 +60,11 @@ Dialog {
                     text: qsTr("Don't ask again") + Retranslate.onLocaleOrLanguageChanged
                     
                     onCheckedChanged: {
-                        _appConfig.set("do_not_ask_before_deleting", checked);
+                        if (checked) {
+                            _appConfig.set("do_not_ask_before_deleting", "true");
+                        } else {
+                            _appConfig.set("do_not_ask_before_deleting", "false");
+                        }
                     }
                 }
             }

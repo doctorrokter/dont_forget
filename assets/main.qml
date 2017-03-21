@@ -63,6 +63,7 @@ NavigationPane {
         id: main
         
         property bool searchMode: false
+        property bool multiselectMode: _tasksService.multiselectMode
         property variant tasks: []
         property variant viewModes: {
             SHOW_ALL: "SHOW_ALL",
@@ -153,6 +154,7 @@ NavigationPane {
                 title: qsTr("Create") + Retranslate.onLocaleOrLanguageChanged
                 imageSource: "asset:///images/ic_add.png"
                 ActionBar.placement: ActionBarPlacement.Signature
+                enabled: !main.multiselectMode
                 
                 onTriggered: {
                     taskSheet.mode = taskSheet.modes.CREATE;
@@ -172,7 +174,7 @@ NavigationPane {
             
             ActionItem {
                 id: editActionItem
-                enabled: _tasksService.activeTask !== null;
+                enabled: _tasksService.activeTask !== null && !main.multiselectMode;
                 title: qsTr("Edit") + Retranslate.onLocaleOrLanguageChanged
                 imageSource: "asset:///images/ic_compose.png"
                 ActionBar.placement: ActionBarPlacement.OnBar
@@ -198,7 +200,7 @@ NavigationPane {
             DeleteActionItem {
                 id: deleteActionItem
                 
-                enabled: _tasksService.activeTask !== null;
+                enabled: _tasksService.activeTask !== null || main.multiselectMode;
                 title: qsTr("Delete") + Retranslate.onLocaleOrLanguageChanged
                 imageSource: "asset:///images/ic_delete.png"
                 ActionBar.placement: ActionBarPlacement.OnBar
@@ -206,9 +208,16 @@ NavigationPane {
                 onTriggered: {
                     var doNotAsk = _appConfig.get("do_not_ask_before_deleting");
                     if (doNotAsk && doNotAsk === "true") {
-                        var id = _tasksService.activeTask.id;
-                        _tasksService.deleteTask(id);
-                        deleteTask(id, tasksContainer);
+                        if (_tasksService.multiselectMode) {
+                            var ids = _tasksService.deleteBulk();
+                            ids.forEach(function(id) {
+                                deleteTask(id, tasksContainer);
+                            });
+                        } else {
+                            var id = _tasksService.activeTask.id;
+                            _tasksService.deleteTask(id);
+                            deleteTask(id, tasksContainer);
+                        }
                     } else {
                         deleteTaskDialog.open();
                     }
@@ -231,7 +240,7 @@ NavigationPane {
                 id: moveActionItem
                 title: qsTr("Move") + Retranslate.onLocaleOrLanguageChanged
                 imageSource: "asset:///images/ic_forward.png"
-                enabled: _tasksService.activeTask !== null;
+                enabled: _tasksService.activeTask !== null || main.multiselectMode;
                 
                 onTriggered: {
                     var mtp = moveTaskPage.createObject(this);
@@ -254,7 +263,7 @@ NavigationPane {
             ActionItem {
                 id: sendActionItem
                 title: qsTr("Send") + Retranslate.onLocaleOrLanguageChanged
-                enabled: _tasksService.activeTask !== null
+                enabled: _tasksService.activeTask !== null && !main.multiselectMode;
                 imageSource: "asset:///images/ic_send.png"
                 
                 onTriggered: {
@@ -265,7 +274,7 @@ NavigationPane {
             
             ActionItem {
                 id: viewActionItem
-                enabled: _tasksService.activeTask !== null;
+                enabled: _tasksService.activeTask !== null && !main.multiselectMode;
                 title: qsTr("View") + Retranslate.onLocaleOrLanguageChanged
                 imageSource: "asset:///images/ic_watch.png"
                 
@@ -322,6 +331,21 @@ NavigationPane {
                 
                 onTriggered: {
                     main.searchMode = true;
+                }
+            },
+            
+            ActionItem {
+                id: multiselectActionItem
+                title: {
+                    if (main.multiselectMode) {
+                        return qsTr("Single select mode") + Retranslate.onLocaleOrLanguageChanged;
+                    }
+                    return qsTr("Multiselect mode") + Retranslate.onLocaleOrLanguageChanged;
+                }
+                imageSource: "asset:///images/ic_select_more.png"
+                
+                onTriggered: {
+                    _tasksService.multiselectMode = !_tasksService.multiselectMode;
                 }
             }
         ]
@@ -462,9 +486,20 @@ NavigationPane {
                 id: deleteTaskDialog
                 
                 onConfirm: {
-                    var id = _tasksService.activeTask.id;
-                    _tasksService.deleteTask(id);
-                    deleteTask(id, tasksContainer);
+                    if (_tasksService.multiselectMode) {
+                        var ids = _tasksService.deleteBulk();
+                        ids.forEach(function(id) {
+                                deleteTask(id, tasksContainer);
+                        });
+                    } else {
+                        var id = _tasksService.activeTask.id;
+                        _tasksService.deleteTask(id);
+                        deleteTask(id, tasksContainer);
+                    }
+                    
+//                    var id = _tasksService.activeTask.id;
+//                    _tasksService.deleteTask(id);
+//                    deleteTask(id, tasksContainer);
                 }
             },
             

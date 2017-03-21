@@ -8,6 +8,7 @@
 #include "TasksService.hpp"
 #include "../config/AppConfig.hpp"
 #include <QVariantMap>
+#include <QMutableListIterator>
 #include <iostream>
 #include <QDateTime>
 #include <bb/pim/Global>
@@ -18,7 +19,17 @@
 
 using namespace std;
 
-TasksService::TasksService(QObject* parent, DBConfig* dbConfig, AttachmentsService* attachmentsService) : QObject(parent), m_pDbConfig(dbConfig), m_pAttachmentsService(attachmentsService), m_pActiveTask(NULL), m_pNotebookService(new NotebookService(this)) {}
+TasksService::TasksService(QObject* parent, DBConfig* dbConfig, AttachmentsService* attachmentsService) : QObject(parent),
+        m_pDbConfig(dbConfig),
+        m_pAttachmentsService(attachmentsService),
+        m_pActiveTask(NULL),
+        m_pNotebookService(new NotebookService(this)),
+        m_multiselectMode(false) {
+
+    bool res = QObject::connect(this, SIGNAL(multiselectModeChanged(bool)), this, SLOT(processMultiselectMode(bool)));
+    Q_ASSERT(res);
+    Q_UNUSED(res);
+}
 
 TasksService::~TasksService() {
     delete m_pDbConfig;
@@ -213,6 +224,12 @@ void TasksService::updateTask(const QString name, const QString description, con
 void TasksService::deleteTask(const int id) {
     QString query = QString::fromLatin1("DELETE FROM tasks WHERE id = %1");
 
+    if (m_multiselectMode) {
+        QVariantMap taskMap = findById(id);
+        m_pActiveTask = new Task(this);
+        m_pActiveTask->fromMap(taskMap);
+    }
+
     if (id == m_pActiveTask->getId()) {
         if (!m_pActiveTask->getRememberId().isEmpty()) {
                 deleteNotebookEntry(m_pActiveTask->getRememberId());
@@ -377,4 +394,54 @@ void TasksService::sync() {
             }
          }
      }
+}
+
+bool TasksService::isMultiselectMode() const { return m_multiselectMode; }
+void TasksService::setMultiselectMode(const bool multiselectMode) {
+    m_multiselectMode = multiselectMode;
+    emit multiselectModeChanged(multiselectMode);
+}
+
+void TasksService::selectTask(const int id) {
+    m_tasksIds.append(id);
+    qDebug() << m_tasksIds << endl;
+    emit taskSelected(id);
+}
+
+void TasksService::deselectTask(const int id) {
+    QMutableListIterator<int> iterator(m_tasksIds);
+    while (iterator.hasNext()) {
+        if (iterator.next() == id) {
+            iterator.remove();
+        }
+    }
+    qDebug() << m_tasksIds << endl;
+    emit taskDeselected(id);
+}
+
+bool TasksService::isTaskSelected(const int id) {
+    return m_tasksIds.contains(id);
+}
+
+QVariantList TasksService::deleteBulk() {
+    QVariantList ids;
+    foreach(int id, m_tasksIds) {
+        deleteTask(id);
+        ids.append(id);
+    }
+    m_tasksIds.clear();
+    setMultiselectMode(false);
+    return ids;
+}
+
+void TasksService::processMultiselectMode(const bool multiselectMode) {
+    if (multiselectMode) {
+        if (m_pActiveTask != NULL) {
+            m_tasksIds.append(m_pActiveTask->getId());
+            flushActiveTask();
+            emit activeTaskChanged(m_pActiveTask);
+        }
+    } else {
+        m_tasksIds.clear();
+    }
 }

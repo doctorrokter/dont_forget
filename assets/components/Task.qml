@@ -12,7 +12,7 @@ Container {
     property bool expandable: false
     property bool important: false
     property bool closed: true
-    property bool selected: false
+    property bool selected: _tasksService.isTaskSelected(taskId)
     property int deadline: 0
     property string parentId: ""
     property string rememberId: ""
@@ -148,8 +148,10 @@ Container {
                     gestureHandlers: [
                         TapHandler {
                             onTapped: {
-                                if (!task.selected) {
-                                    _tasksService.setActiveTask(task.taskId);
+                                if (!_tasksService.multiselectMode) {
+                                    if (!task.selected) {
+                                        _tasksService.setActiveTask(task.taskId);
+                                    }
                                 }
                                 
                                 if (task.expandable) {
@@ -237,7 +239,11 @@ Container {
                         TapHandler {
                             onTapped: {
                                 if (!task.selected) {
-                                    _tasksService.setActiveTask(task.taskId);
+                                    if (!_tasksService.multiselectMode) {
+                                        _tasksService.setActiveTask(task.taskId);
+                                    } else {
+                                        _tasksService.selectTask(task.taskId);
+                                    }
                                 }
                                 
                                 task.closed = !task.closed;
@@ -260,8 +266,16 @@ Container {
             gestureHandlers: [
                 TapHandler {
                     onTapped: {
-                        if (!task.selected) {
-                            _tasksService.setActiveTask(task.taskId);
+                        if (!_tasksService.multiselectMode) {
+                            if (!task.selected) {
+                                _tasksService.setActiveTask(task.taskId);
+                            }
+                        } else {
+                            if (!task.selected) {
+                                _tasksService.selectTask(task.taskId);
+                            } else {
+                                _tasksService.deselectTask(task.taskId);
+                            }
                         }
                     }
                 },
@@ -269,7 +283,11 @@ Container {
                 DoubleTapHandler {
                     onDoubleTapped: {
                         if (!task.selected) {
-                            _tasksService.setActiveTask(task.taskId);
+                            if (!_tasksService.multiselectMode) {
+                                _tasksService.setActiveTask(task.taskId);
+                            } else {
+                                _tasksService.selectTask(task.taskId);
+                            }
                         }
                         taskViewRequested();
                     }
@@ -304,9 +322,14 @@ Container {
         return exp ? exp : (task.type === "FOLDER" || task.type === "LIST");
     }
     
-    function select() {
-        task.selected = (_tasksService.activeTask !== null) &&
-        (_tasksService.activeTask.id === task.taskId);
+    function select(id) {
+        if (_tasksService.multiselectMode) {
+            if (task.taskId === id) {
+                task.selected = !task.selected;
+            }
+        } else {
+            task.selected = (_tasksService.activeTask !== null) && (_tasksService.activeTask.id === task.taskId);
+        }
     }
     
     function expand() {
@@ -337,6 +360,17 @@ Container {
         _tasksService.allTasksExpanded.disconnect(task.expand);
         _tasksService.allTasksUnexpanded.disconnect(task.unexpand);
         _tasksService.viewModeChanged.disconnect(task.changeViewMode);
+        _tasksService.taskSelected.disconnect(task.select);
+        _tasksService.taskDeselected.disconnect(task.select);
+        _tasksService.multiselectModeChanged.disconnect(task.handleMultiselectModeChanged);
+    }
+    
+    function handleMultiselectModeChanged(multiselectMode) {
+        if (!multiselectMode) {
+            if (task.selected) {
+                task.selected = false;
+            }
+        }
     }
     
     onParentIdChanged: {
@@ -357,6 +391,9 @@ Container {
         _tasksService.allTasksExpanded.connect(task.expand);
         _tasksService.allTasksUnexpanded.connect(task.unexpand);
         _tasksService.viewModeChanged.connect(task.changeViewMode);
+        _tasksService.taskSelected.connect(task.select);
+        _tasksService.taskDeselected.connect(task.select);
+        _tasksService.multiselectModeChanged.connect(task.handleMultiselectModeChanged);
     }
     
     onControlRemoved: {

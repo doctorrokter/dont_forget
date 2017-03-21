@@ -612,5 +612,13 @@
         <source>View</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Multiselect mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Single select mode</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
