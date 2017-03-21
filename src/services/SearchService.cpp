@@ -33,13 +33,13 @@ void SearchService::dbOpen() {
 }
 
 void SearchService::init() {
+    qDebug() << "Reindex tasks" << endl;
+
     m_pSda = new SqlDataAccess(DB_PATH);
     m_pSda->execute("PRAGMA encoding = \"UTF-8\"");
-//    m_pSda->execute("DELETE FROM search");
-//    m_pSda->execute("DELETE FROM search_info");
 
-    QString searchDbIndexed = AppConfig::getStatic("search_db_indexed").toString();
-    if (searchDbIndexed.isEmpty()) {
+//    QString searchDbIndexed = AppConfig::getStatic("search_db_indexed").toString();
+//    if (searchDbIndexed.isEmpty()) {
         m_pSda->execute("DROP TABLE IF EXISTS search");
         m_pSda->execute("DROP TABLE IF EXISTS search_info");
 
@@ -64,11 +64,11 @@ void SearchService::init() {
             for (int i = 0; i < tasks.size(); i++) {
                 addTask(tasks.at(i).toMap());
             }
-            AppConfig::setStatic("search_db_indexed", "true");
+//            AppConfig::setStatic("search_db_indexed", "true");
         }
-    } else {
-        qDebug() << "Search DB already indexed." << endl;
-    }
+//    } else {
+//        qDebug() << "Search DB already indexed." << endl;
+//    }
 
     if (m_pTaskService != NULL) {
         bool res = QObject::connect(m_pTaskService, SIGNAL(taskCreated(const QVariantMap&)), this, SLOT(onTaskCreated(const QVariantMap&)));

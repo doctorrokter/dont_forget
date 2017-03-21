@@ -41,7 +41,6 @@ void TasksService::init() {
     if (!m_pDbConfig->isNewDb()) {
         sync();
     }
-//    m_pDbConfig->connection()->execute("DELETE FROM tasks");
 }
 
 QVariantList TasksService::findAll() const {

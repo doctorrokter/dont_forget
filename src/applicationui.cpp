@@ -30,6 +30,7 @@
 #include <bb/data/JsonDataAccess>
 #include <bb/platform/Notification>
 #include <bb/platform/NotificationPriorityPolicy>
+#include <QtConcurrentRun>
 
 #include "models/Task.hpp"
 
@@ -50,6 +51,28 @@ ApplicationUI::ApplicationUI() : QObject() {
     m_pTranslator = new QTranslator(this);
     m_pLocaleHandler = new LocaleHandler(this);
 
+    m_running = false;
+    m_pDbConfig = new DBConfig(this);
+
+    m_pAttachmentsService = new AttachmentsService(this, m_pDbConfig);
+
+    m_pPushService = new PushNotificationService(this);
+    m_pPushService->initPushService();
+
+    m_pTasksService = new TasksService(this, m_pDbConfig, m_pAttachmentsService);
+    QtConcurrent::run(m_pTasksService, &TasksService::init);
+
+    m_pSearchService = new SearchService(this, m_pTasksService);
+    QtConcurrent::run(m_pSearchService, &SearchService::init);
+
+    m_pUsersService = new UsersService(this, m_pDbConfig);
+    m_pDropboxService = new DropboxService(this);
+    m_pSignal = new Signal(this);
+
+    bool res = QObject::connect(m_pDropboxService, SIGNAL(fileLoaded(const QString&)), this, SLOT(processTasksContent(const QString&)));
+    Q_ASSERT(res);
+    Q_UNUSED(res);
+
     QCoreApplication::setOrganizationName("mikhail.chachkouski");
     QCoreApplication::setApplicationName("DontForget");
 
@@ -69,34 +92,10 @@ ApplicationUI::ApplicationUI() : QObject() {
         }
     }
 
-    bool res = QObject::connect(m_pLocaleHandler, SIGNAL(systemLanguageChanged()), this, SLOT(onSystemLanguageChanged()));
+    res = QObject::connect(m_pLocaleHandler, SIGNAL(systemLanguageChanged()), this, SLOT(onSystemLanguageChanged()));
     Q_ASSERT(res);
 
     onSystemLanguageChanged();
-
-    m_running = false;
-    m_pDbConfig = new DBConfig(this);
-
-    m_pAttachmentsService = new AttachmentsService(this, m_pDbConfig);
-
-    m_pTasksService = new TasksService(this, m_pDbConfig, m_pAttachmentsService);
-    m_pTasksService->init();
-
-    m_pUsersService = new UsersService(this, m_pDbConfig);
-
-    m_pSearchService = new SearchService(this, m_pTasksService);
-    m_pSearchService->init();
-
-    m_pPushService = new PushNotificationService(this);
-    m_pPushService->initPushService();
-
-    m_pDropboxService = new DropboxService(this);
-
-    m_pSignal = new Signal(this);
-
-    res = QObject::connect(m_pDropboxService, SIGNAL(fileLoaded(const QString&)), this, SLOT(processTasksContent(const QString&)));
-    Q_ASSERT(res);
-    Q_UNUSED(res);
 
     switch (m_pInvokeManager->startupMode()) {
         case ApplicationStartupMode::LaunchApplication:

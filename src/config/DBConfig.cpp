@@ -14,6 +14,7 @@
 #define DB_PATH "./shared/misc/dont_forget"
 #define DB_NAME "dont_forget.db"
 #define COPY_DB_NAME "dont_forget_copy.db"
+#define MIGRATIONS_PATH "app/native/assets/migrations"
 
 DBConfig::DBConfig(QObject* parent) : QObject(parent) {
     QDir dbdir(DB_PATH);
@@ -56,21 +57,14 @@ DBConfig::DBConfig(QObject* parent) : QObject(parent) {
      m_pSda->execute("PRAGMA encoding = \"UTF-8\"");
      if (m_newDb) {
          qDebug() << "Create DB from scratch" << endl;
-
-         QDirIterator iter("app/native/assets/migrations", QDirIterator::NoIteratorFlags);
-         while (iter.hasNext()) {
-             QString path = iter.next();
-             if (path.endsWith(".sql")) {
-                 runMigration(path);
-             }
-         }
+         migrate();
      } else {
          qDebug() << "DB already exists. Use one." << endl;
          if (AppConfig::getStatic("db_migrated").toString().isEmpty()) {
              qDebug() << "Start DB migration" << endl;
              if (!hasSchemaVersionTable()) {
                  qDebug() << "No schema version table! Will create it" << endl;
-                 runMigration("app/native/assets/migrations/1_create_schema_version_table.sql");
+                 runMigration("1_create_schema_version_table.sql");
                  setVersion(2);
                  qDebug() << "Current schema_version is " << getVersion() << endl;
              }
@@ -104,7 +98,7 @@ void DBConfig::runMigration(const QString& path) {
     qDebug() << "Process migration: " << path << endl;
     int version = getMigrationVersion(path);
 
-    QFile migration(path);
+    QFile migration(QString::fromLatin1(MIGRATIONS_PATH).append("/").append(path));
     migration.open(QIODevice::ReadOnly);
     QString data = migration.readAll();
     qDebug() << data << endl;
@@ -142,10 +136,17 @@ int DBConfig::getMigrationVersion(const QString& path) {
 }
 
 void DBConfig::migrate() {
-    QDirIterator iter("app/native/assets/migrations", QDirIterator::NoIteratorFlags);
-    int currVersion = getVersion();
-    while (iter.hasNext()) {
-        QString path = iter.next();
+    QDir dir(MIGRATIONS_PATH);
+    dir.setSorting(QDir::Name);
+
+    int currVersion = 0;
+    if (hasSchemaVersionTable()) {
+        currVersion = getVersion();
+    }
+
+    QStringList paths = dir.entryList();
+    foreach(QString path, paths) {
+        qDebug() << path << endl;
         if (path.endsWith(".sql")) {
             if (getMigrationVersion(path) > currVersion) {
                 qDebug() << "Found new migration" << endl;
@@ -156,7 +157,7 @@ void DBConfig::migrate() {
 }
 
 int DBConfig::maxMigrationVersion() {
-    QDirIterator iter("app/native/assets/migrations", QDirIterator::NoIteratorFlags);
+    QDirIterator iter(MIGRATIONS_PATH, QDirIterator::NoIteratorFlags);
     int startVersion = 0;
     while (iter.hasNext()) {
         QString path = iter.next();

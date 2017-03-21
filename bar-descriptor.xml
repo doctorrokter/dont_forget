@@ -148,7 +148,6 @@
 	<invoke-target id="chachkouski.DontForget.search.extended">
    		<invoke-target-type>application</invoke-target-type>
    		<icon>
-   			<!--<image>icon.png</image>-->
    			<image public="true">icon.png</image>
    		</icon>
    		<filter>
@@ -161,7 +160,6 @@
    		<invoke-target-type>application</invoke-target-type>
    		<icon>
    			<image public="true">icon_small.png</image>
-   			<!--<image public="true">icon.png</image>-->
    		</icon>
    		<filter>
       		<action>bb.action.SEARCH.SOURCE</action>
