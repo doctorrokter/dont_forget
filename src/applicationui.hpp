@@ -56,6 +56,9 @@ public:
     ApplicationUI();
     virtual ~ApplicationUI();
 
+    Q_INVOKABLE void openCalendarEvent(const int eventId);
+    Q_INVOKABLE void openRememberNote(const QString& rememberId);
+
 Q_SIGNALS:
     void taskSheetRequested(const QString& data);
     void tasksReceived();

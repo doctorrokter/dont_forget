@@ -8,7 +8,7 @@
 #include "Task.hpp"
 #include <QVariantList>
 
-Task::Task(QObject* parent) : QObject(parent), m_id(0), m_name(""), m_description(""), m_type("FOLDER"), m_parentId(0), m_deadline(0), m_important(false), m_closed(false), m_expanded(true) {}
+Task::Task(QObject* parent) : QObject(parent), m_id(0), m_name(""), m_description(""), m_type("FOLDER"), m_parentId(0), m_deadline(0), m_important(false), m_closed(false), m_expanded(true), m_rememberId(""), m_calendarId(0) {}
 
 Task::Task(const Task& task) : QObject(task.parent()) {
     if (this != &task) {
@@ -91,6 +91,12 @@ void Task::setRememberId(const QString& rememberId) {
     emit rememberIdChanged(m_rememberId);
 }
 
+int Task::getCalendarId() const { return m_calendarId; }
+void Task::setCalendarId(const int calendarId) {
+    m_calendarId = calendarId;
+    emit calendarIdChanged(m_calendarId);
+}
+
 const QList<Task>& Task::getChildren() const { return m_children; }
 void Task::setChildren(const QList<Task>& children) {
     m_children = children;
@@ -117,6 +123,8 @@ void Task::swap(const Task& task) {
     QString rememberId = task.getRememberId();
     this->setRememberId(rememberId);
 
+    this->setCalendarId(task.getCalendarId());
+
     QList<Task> children = task.getChildren();
     this->setChildren(children);
 }
@@ -133,6 +141,7 @@ QVariantMap Task::toMap() const {
     map.insert("closed", this->isClosed());
     map.insert("expanded", this->isExpanded());
     map.insert("rememberId", this->getRememberId());
+    map.insert("calendarId", this->getCalendarId());
 
     QVariantList children;
     for (int i = 0; i < m_children.size(); i++) {
@@ -154,6 +163,7 @@ QVariantMap Task::toJson() const {
     map.insert("closed", this->isClosed() ? 1 : 0);
     map.insert("expanded", this->isExpanded() ? 1 : 0);
     map.insert("remember_id", this->getRememberId());
+    map.insert("calendar_id", this->getCalendarId());
     return map;
 }
 
@@ -168,6 +178,7 @@ void Task::fromMap(const QVariantMap taskMap) {
     this->setClosed(taskMap.value("closed").toBool());
     this->setExpanded(taskMap.value("expanded").toBool());
     this->setRememberId(taskMap.value("remember_id", "").toString());
+    this->setCalendarId(taskMap.value("calendar_id", "0").toInt());
 }
 
 void Task::addChild(Task& task) {

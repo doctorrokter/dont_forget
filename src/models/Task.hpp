@@ -24,6 +24,7 @@ class Task: public QObject {
     Q_PROPERTY(bool closed READ isClosed WRITE setClosed NOTIFY closedChanged)
     Q_PROPERTY(bool expanded READ isExpanded WRITE setExpanded NOTIFY expandedChanged)
     Q_PROPERTY(QString rememberId READ getRememberId WRITE setRememberId NOTIFY rememberIdChanged)
+    Q_PROPERTY(int calendarId READ getCalendarId WRITE setCalendarId NOTIFY calendarIdChanged)
     Q_PROPERTY(QList<Task> children READ getChildren WRITE setChildren NOTIFY childrenChanged)
 public:
     Task(QObject* parent = 0);
@@ -64,6 +65,9 @@ public:
     Q_INVOKABLE const QString& getRememberId() const;
     Q_INVOKABLE void setRememberId(const QString& rememberId);
 
+    Q_INVOKABLE int getCalendarId() const;
+    Q_INVOKABLE void setCalendarId(const int calendarId);
+
     Q_INVOKABLE const QList<Task>& getChildren() const;
     Q_INVOKABLE void setChildren(const QList<Task>& children);
 
@@ -84,6 +88,7 @@ Q_SIGNALS:
     void closedChanged(const bool closed);
     void expandedChanged(const bool expanded);
     void rememberIdChanged(const QString& rememberId);
+    void calendarIdChanged(const int calendarId);
     void childrenChanged(const QList<Task>& children);
 
 private:
@@ -97,6 +102,7 @@ private:
     bool m_closed;
     bool m_expanded;
     QString m_rememberId;
+    int m_calendarId;
     QList<Task> m_children;
 
     void swap(const Task& task);

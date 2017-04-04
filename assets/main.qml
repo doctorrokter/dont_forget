@@ -338,14 +338,36 @@ NavigationPane {
                 id: multiselectActionItem
                 title: {
                     if (main.multiselectMode) {
-                        return qsTr("Single select mode") + Retranslate.onLocaleOrLanguageChanged;
+                        return qsTr("Single select") + Retranslate.onLocaleOrLanguageChanged;
                     }
-                    return qsTr("Multiselect mode") + Retranslate.onLocaleOrLanguageChanged;
+                    return qsTr("Select more") + Retranslate.onLocaleOrLanguageChanged;
                 }
                 imageSource: "asset:///images/ic_select_more.png"
                 
                 onTriggered: {
                     _tasksService.multiselectMode = !_tasksService.multiselectMode;
+                }
+            },
+            
+            ActionItem {
+                id: openCalendar
+                title: qsTr("Open in Calendar") + Retranslate.onLocaleOrLanguageChanged
+                imageSource: "asset:///images/ic_calendar.png"
+                enabled: _tasksService.activeTask !== null && _tasksService.activeTask.calendarId !== 0;
+                
+                onTriggered: {
+                    _app.openCalendarEvent(_tasksService.activeTask.calendarId);
+                }
+            },
+            
+            ActionItem {
+                id: openRemember
+                title: qsTr("Open in Remember") + Retranslate.onLocaleOrLanguageChanged
+                imageSource: "asset:///images/ic_notes.png"
+                enabled: _tasksService.activeTask !== null && _tasksService.activeTask.rememberId !== "";
+                
+                onTriggered: {
+                    _app.openRememberNote(_tasksService.activeTask.rememberId);
                 }
             }
         ]
@@ -593,6 +615,7 @@ NavigationPane {
         newTask.important = t.important;
         newTask.deadline = t.deadline;
         newTask.rememberId = t.remember_id;
+        newTask.calendarId = t.calendar_id;
         newTask.parentId = t.parent_id;
         newTask.taskViewRequested.connect(function() {
             viewActionItem.triggered();

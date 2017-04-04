@@ -15,7 +15,8 @@ Container {
     property bool selected: _tasksService.isTaskSelected(taskId)
     property int deadline: 0
     property string parentId: ""
-    property string rememberId: ""
+    property string rememberId: "sdf"
+    property int calendarId: 0
     property string type: "TASK"
     property string name: "Projects"
     
@@ -204,7 +205,7 @@ Container {
             
             Container {
                 horizontalAlignment: HorizontalAlignment.Right
-                rightPadding: rememberId === "" ? ui.du(2.5) : ui.du(0)
+                rightPadding: rememberId === "" && calendarId === "" ? ui.du(2.5) : ui.du(0)
                 
                 layout: StackLayout {
                     orientation: LayoutOrientation.LeftToRight
@@ -252,6 +253,15 @@ Container {
                         }
                     ]            
                 }    
+                
+                Container {
+                    visible: calendarId !== 0
+                    background: Color.create("#779933")
+                    minWidth: ui.du(0.5)
+                    maxWidth: ui.du(0.5)
+                    minHeight: ui.du(5)
+                    maxHeight: ui.du(5)
+                }
                 
                 Container {
                     visible: rememberId !== ""
@@ -306,6 +316,7 @@ Container {
             task.closed = updatedTask.closed === 1;
             task.deadline = updatedTask.deadline === "" ? 0 : updatedTask.deadline;
             task.rememberId = updatedTask.remember_id;
+            task.calendarId = updatedTask.calendar_id;
             task.type = updatedTask.type;
             task.name = updatedTask.name;
             task.expandable = isExpandable(updatedTask);

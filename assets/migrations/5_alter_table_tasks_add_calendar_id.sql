@@ -1,0 +1,1 @@
+ALTER TABLE tasks ADD COLUMN calendar_id TEXT DEFAULT NULL;

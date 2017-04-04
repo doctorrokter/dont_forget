@@ -31,11 +31,13 @@ NavigationPane {
                 title: qsTr("OK") + Retranslate.onLocaleOrLanguageChanged
                 
                 onTriggered: {
+                    var files = [];
                     var deadline = deadLineToggleButton.checked ? new Date(deadLineContainer.result).getTime() / 1000 : 0;
                     var important = importantToggleButton.checked ? 1 : 0;
                     var createInRemember = rememberToggleButton.checked ? 1 : 0;
+                    var createInCalendar = deadLineToggleButton.checked && calendarToggleButton.checked ? 1 : 0;
                     
-                    _tasksService.createTask(taskName.result.trim(), description.result.trim(), "TASK", deadline, important, createInRemember);
+                    _tasksService.createTask(taskName.result.trim(), description.result.trim(), "TASK", deadline, important, createInRemember, files, createInCalendar);
                     toast.show();
                 }
             }
@@ -110,6 +112,12 @@ NavigationPane {
                     id: deadLineContainer
                     visible: deadLineToggleButton.checked
                     date: root.currDatePlus2Hourse();
+                }
+                
+                ToggleBlock {
+                    id: calendarToggleButton
+                    title: qsTr("Add to Calendar") + Retranslate.onLocaleOrLanguageChanged
+                    visible: deadLineToggleButton.checked
                 }
                 
                 ToggleBlock {

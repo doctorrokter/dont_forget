@@ -57,6 +57,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/grey_pellet.png) \
         $$quote($$BASEDIR/assets/images/ic_add.png) \
         $$quote($$BASEDIR/assets/images/ic_attach.png) \
+        $$quote($$BASEDIR/assets/images/ic_calendar.png) \
         $$quote($$BASEDIR/assets/images/ic_clear.png) \
         $$quote($$BASEDIR/assets/images/ic_compose.png) \
         $$quote($$BASEDIR/assets/images/ic_delete.png) \
@@ -77,6 +78,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/ic_history.png) \
         $$quote($$BASEDIR/assets/images/ic_list.png) \
         $$quote($$BASEDIR/assets/images/ic_minus.png) \
+        $$quote($$BASEDIR/assets/images/ic_notes.png) \
         $$quote($$BASEDIR/assets/images/ic_plus.png) \
         $$quote($$BASEDIR/assets/images/ic_search.png) \
         $$quote($$BASEDIR/assets/images/ic_select_more.png) \
@@ -96,6 +98,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/migrations/2_create_table_tasks.sql) \
         $$quote($$BASEDIR/assets/migrations/3_create_table_df_users.sql) \
         $$quote($$BASEDIR/assets/migrations/4_create_table_attachments.sql) \
+        $$quote($$BASEDIR/assets/migrations/5_alter_table_tasks_add_calendar_id.sql) \
         $$quote($$BASEDIR/assets/pages/ContactsPage.qml) \
         $$quote($$BASEDIR/assets/pages/HelpPage.qml) \
         $$quote($$BASEDIR/assets/pages/MoveTaskPage.qml) \
@@ -122,7 +125,7 @@ config_pri_source_group1 {
         $$quote($$BASEDIR/src/services/SearchService.cpp) \
         $$quote($$BASEDIR/src/services/TasksService.cpp) \
         $$quote($$BASEDIR/src/services/UsersService.cpp) \
-        $$quote($$BASEDIR/src/util/Calendar.cpp) \
+        $$quote($$BASEDIR/src/util/CalendarUtil.cpp) \
         $$quote($$BASEDIR/src/util/Signal.cpp) \
         $$quote($$BASEDIR/src/vendor/Console.cpp)
 
@@ -137,7 +140,7 @@ config_pri_source_group1 {
         $$quote($$BASEDIR/src/services/SearchService.hpp) \
         $$quote($$BASEDIR/src/services/TasksService.hpp) \
         $$quote($$BASEDIR/src/services/UsersService.hpp) \
-        $$quote($$BASEDIR/src/util/Calendar.hpp) \
+        $$quote($$BASEDIR/src/util/CalendarUtil.hpp) \
         $$quote($$BASEDIR/src/util/Signal.hpp) \
         $$quote($$BASEDIR/src/vendor/Console.hpp)
 }

@@ -135,6 +135,10 @@
         <source>Task created!</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Add to Calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CreateTaskFromUrlCard</name>
@@ -176,6 +180,10 @@
     </message>
     <message>
         <source>Task created!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add to Calendar</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -476,6 +484,10 @@
         <source>Attachment</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Add to Calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TaskViewPage</name>
@@ -549,6 +561,10 @@
         <source>Task updated!</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Add to Calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>main</name>
@@ -613,11 +629,19 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Multiselect mode</source>
+        <source>Open in Calendar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Single select mode</source>
+        <source>Open in Remember</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Single select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select more</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

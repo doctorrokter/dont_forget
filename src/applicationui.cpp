@@ -31,8 +31,11 @@
 #include <bb/platform/Notification>
 #include <bb/platform/NotificationPriorityPolicy>
 #include <QtConcurrentRun>
+#include <bb/pim/calendar/CalendarEvent>
+#include <bb/PpsObject>
 
 #include "models/Task.hpp"
+#include "util/CalendarUtil.hpp"
 
 #define INVOKE_SEARCH_SOURCE "chachkouski.DontForget.search.asyoutype"
 #define INVOKE_SEARCH_EXTENDED "chachkouski.DontForget.search.extended"
@@ -46,6 +49,7 @@ using namespace bb::network;
 using namespace bb::system;
 using namespace bb::data;
 using namespace bb::platform;
+using namespace bb::pim::calendar;
 
 ApplicationUI::ApplicationUI() : QObject() {
     m_pTranslator = new QTranslator(this);
@@ -115,9 +119,34 @@ ApplicationUI::~ApplicationUI() {
     clear();
 }
 
+void ApplicationUI::openCalendarEvent(const int eventId) {
+    InvokeRequest req;
+    req.setMimeType("text/calendar");
+    req.setTarget("sys.pim.calendar.viewer.eventcreate");
+    req.setAction("bb.calendar.EDIT");
+
+    QVariantMap data;
+    CalendarUtil calendar;
+    CalendarEvent ev = calendar.findEventById(eventId);
+
+    data["accountId"] = ev.accountId();
+    data["eventId"] = ev.id();
+    data["folder"] = ev.folderId();
+
+    req.setData(bb::PpsObject::encode(data));
+    m_pInvokeManager->invoke(req);
+}
+
+void ApplicationUI::openRememberNote(const QString& rememberId) {
+    InvokeRequest req;
+    req.setTarget("sys.pim.remember.composer");
+    req.setAction("bb.action.EDIT");
+    req.setUri("pim:application/vnd.blackberry.notebookentry:" + rememberId);
+    m_pInvokeManager->invoke(req);
+}
+
 void ApplicationUI::onSystemLanguageChanged() {
     QCoreApplication::instance()->removeTranslator(m_pTranslator);
-    // Initiate, load and install the application translation files.
     QString locale_string = QLocale().name();
     QString file_name = QString("DontForget_%1").arg(locale_string);
     if (m_pTranslator->load(file_name, "app/native/qm")) {
@@ -186,7 +215,7 @@ void ApplicationUI::processTasksContent(const QString& tasksContent) {
 
         processReceivedTaskMap(dataMap, 0);
 
-        Notification* p_notification = new Notification(this);
+        bb::platform::Notification* p_notification = new bb::platform::Notification(this);
         p_notification->setTitle("Don't Forget");
         p_notification->setBody(tr("Tasks received!"));
         p_notification->setIconUrl(QUrl("file://" + QDir::currentPath() + "/app/public/icon.png"));

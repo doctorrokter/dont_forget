@@ -36,6 +36,7 @@ Sheet {
                     var important = importantToggleButton.checked ? 1 : 0;
                     var createInRemember = rememberToggleButton.checked ? 1 : 0;
                     var closed = closeTaskCheckbox.checked ? 1 : 0;
+                    var createInCalendar = deadLineToggleButton.checked && calendarToggleButton.checked ? 1 : 0;
                     
                     var files = [];
                     for (var i = 0; i < attachmentsContainer.attachments.length; i++) {
@@ -45,10 +46,10 @@ Sheet {
                     if (taskSheet.mode === taskSheet.modes.CREATE) {
                         var names = taskName.result.split(";;");
                         names.forEach(function(name) {
-                            _tasksService.createTask(name.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, files);
+                                _tasksService.createTask(name.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, files, createInCalendar);
                         });
                     } else {
-                        _tasksService.updateTask(taskName.result.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, closed, files);
+                        _tasksService.updateTask(taskName.result.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, closed, files, createInCalendar);
                     }
                     taskSheet.close();    
                 }
@@ -141,6 +142,12 @@ Sheet {
                 }
                 
                 ToggleBlock {
+                    id: calendarToggleButton
+                    title: qsTr("Add to Calendar") + Retranslate.onLocaleOrLanguageChanged
+                    visible: deadLineToggleButton.checked
+                }
+                
+                ToggleBlock {
                     id: rememberToggleButton
                     title: qsTr("Create in Remember") + Retranslate.onLocaleOrLanguageChanged
                 }
@@ -201,6 +208,15 @@ Sheet {
         }
     }
     
+    function adjustCreateInCalendar() {
+        if (taskSheet.mode === taskSheet.modes.CREATE) {
+            calendarToggleButton.checked = false;
+        } else {
+            var c = _tasksService.activeTask.calendarId;
+            calendarToggleButton.checked = _tasksService.activeTask.calendarId !== 0;
+        }
+    }
+    
     function adjustDeadline() {
         if (taskSheet.mode === taskSheet.modes.CREATE) {
             deadLineContainer.date = currDatePlus2Hourse();
@@ -241,10 +257,13 @@ Sheet {
         }
         importantToggleButton.checked = false;
         deadLineToggleButton.checked = false;
+        calendarToggleButton.checked = false;
         deadLineContainer.date = currDatePlus2Hourse();
         description.resetText();
         adjustFolderOption();
         adjustTaskOption();
+        adjustCreateInRemember();
+        adjustCreateInCalendar();
         adjustAttachments();
     }
     
@@ -265,6 +284,7 @@ Sheet {
             initialState();
         }
         adjustCreateInRemember();
+        adjustCreateInCalendar();
         adjustDeadline();
         adjustClosedTask();
         adjustAttachments();

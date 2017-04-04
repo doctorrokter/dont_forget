@@ -16,6 +16,7 @@
 #include <bb/pim/notebook/NotebookEntryDescription>
 #include <bb/pim/notebook/NotebookEntryId>
 #include <limits>
+#include "../util/CalendarUtil.hpp"
 
 using namespace std;
 
@@ -121,9 +122,10 @@ void TasksService::setActiveTask(const int id) {
     emit activeTaskChanged(m_pActiveTask);
 }
 
-void TasksService::createTask(const QString name, const QString description, const QString type, const int deadline, const int important, const int createInRemember, const QVariantList attachments) {
+void TasksService::createTask(const QString name, const QString description, const QString type, const int deadline, const int important, const int createInRemember, const QVariantList attachments, const int createInCalendar) {
     QString parentId = m_pActiveTask == NULL ? NULL : QString::number(m_pActiveTask->getId());
     QString rememberId = NULL;
+    int calendarEventId = 0;
 
     if (createInRemember) {
         NotebookEntry* note = createNotebookEntry(name, description, deadline);
@@ -133,8 +135,14 @@ void TasksService::createTask(const QString name, const QString description, con
         note = NULL;
     }
 
-    QString query = "INSERT INTO tasks (name, description, type, deadline, important, parent_id, remember_id, closed, expanded) "
-                    "VALUES (:name, :description, :type, :deadline, :important, :parent_id, :remember_id, :closed, :expanded)";
+    if (deadline != 0 && createInCalendar != 0) {
+        CalendarUtil calendar;
+        CalendarEvent ev = calendar.createEvent(name, description, QDateTime::fromTime_t(deadline));
+        calendarEventId = ev.id();
+    }
+
+    QString query = "INSERT INTO tasks (name, description, type, deadline, important, parent_id, remember_id, closed, expanded, calendar_id) "
+                    "VALUES (:name, :description, :type, :deadline, :important, :parent_id, :remember_id, :closed, :expanded, :calendar_id)";
     QVariantMap values;
     values["name"] = name;
     values["description"] = description;
@@ -145,6 +153,7 @@ void TasksService::createTask(const QString name, const QString description, con
     values["remember_id"] = rememberId;
     values["closed"] = 0;
     values["expanded"] = 1;
+    values["calendar_id"] = calendarEventId;
 
     m_pDbConfig->connection()->execute(query, values);
     QVariantMap newTask = lastCreated();
@@ -172,8 +181,9 @@ void TasksService::createFolderQuick(const QString& name) {
     emit taskCreated(newTask);
 }
 
-void TasksService::updateTask(const QString name, const QString description, const QString type, const int deadline, const int important, const int createInRemember, const int closed, const QVariantList attachments) {
+void TasksService::updateTask(const QString name, const QString description, const QString type, const int deadline, const int important, const int createInRemember, const int closed, const QVariantList attachments, const int createInCalendar) {
     QString rememberId = NULL;
+    int calendarEventId = 0;
 
     if (createInRemember) {
         if (m_pActiveTask->getRememberId().isEmpty()) {
@@ -194,7 +204,22 @@ void TasksService::updateTask(const QString name, const QString description, con
         }
     }
 
-    QString query = "UPDATE tasks SET name = :name, description = :description, type = :type, deadline = :deadline, important = :important, remember_id = :remember_id, closed = :closed WHERE id = :id";
+    CalendarUtil calendar;
+    if (deadline != 0 && createInCalendar != 0) {
+        CalendarEvent ev;
+        if (m_pActiveTask->getCalendarId() == 0) {
+            ev = calendar.createEvent(name, description, QDateTime::fromTime_t(deadline));
+        } else {
+            ev = calendar.updateEvent(m_pActiveTask->getCalendarId(), name, description, QDateTime::fromTime_t(deadline));
+        }
+        calendarEventId = ev.id();
+    } else if (deadline != 0 && createInCalendar == 0) {
+        if (m_pActiveTask->getCalendarId() != 0) {
+            calendar.deleteEvent(m_pActiveTask->getCalendarId());
+        }
+    }
+
+    QString query = "UPDATE tasks SET name = :name, description = :description, type = :type, deadline = :deadline, important = :important, remember_id = :remember_id, closed = :closed, calendar_id = :calendar_id WHERE id = :id";
     QVariantMap values;
     values["name"] = name;
     values["description"] = description;
@@ -204,7 +229,9 @@ void TasksService::updateTask(const QString name, const QString description, con
     values["remember_id"] = rememberId;
     values["closed"] = closed;
     values["id"] = m_pActiveTask->getId();
+    values["calendar_id"] = calendarEventId;
 
+    qDebug() << query << " " << values << endl;
     m_pDbConfig->connection()->execute(query, values);
 
     QVariantMap taskMap = findById(m_pActiveTask->getId());
@@ -239,6 +266,10 @@ void TasksService::deleteTask(const int id) {
         if (id == m_pActiveTask->getId()) {
             if (!m_pActiveTask->getRememberId().isEmpty()) {
                 deleteNotebookEntry(m_pActiveTask->getRememberId());
+            }
+            if (m_pActiveTask->getCalendarId() != 0) {
+                CalendarUtil calendar;
+                calendar.deleteEvent(m_pActiveTask->getCalendarId());
             }
             query = query.arg(m_pActiveTask->getId());
 

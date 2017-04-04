@@ -1,5 +1,5 @@
 1
-71
+74
 cards/CreateTaskFromTextCard.qml
 cards/CreateTaskFromUrlCard.qml
 cards/TestCard.qml
@@ -21,6 +21,7 @@ images/generic_icon_big_512x512.png
 images/grey_pellet.png
 images/ic_add.png
 images/ic_attach.png
+images/ic_calendar.png
 images/ic_clear.png
 images/ic_compose.png
 images/ic_delete.png
@@ -41,6 +42,7 @@ images/ic_forward.png
 images/ic_history.png
 images/ic_list.png
 images/ic_minus.png
+images/ic_notes.png
 images/ic_plus.png
 images/ic_search.png
 images/ic_select_more.png
@@ -60,6 +62,7 @@ migrations/1_create_schema_version_table.sql
 migrations/2_create_table_tasks.sql
 migrations/3_create_table_df_users.sql
 migrations/4_create_table_attachments.sql
+migrations/5_alter_table_tasks_add_calendar_id.sql
 pages/ContactsPage.qml
 pages/HelpPage.qml
 pages/MoveTaskPage.qml
