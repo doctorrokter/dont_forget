@@ -6,14 +6,11 @@
  */
 
 #include "CalendarUtil.hpp"
-#include <bb/pim/calendar/CalendarEvent>
 #include <QPair>
 
 CalendarUtil::CalendarUtil(QObject* parent) :QObject(parent), m_pCalendarService(new CalendarService()) {}
 
 CalendarUtil::~CalendarUtil() {
-//    delete m_pCalendarService;
-//    m_pCalendarService = NULL;
     m_pCalendarService->deleteLater();
 }
 
@@ -55,5 +52,7 @@ void CalendarUtil::deleteEvent(const int id) {
 
 CalendarEvent CalendarUtil::findEventById(const int id) {
     QPair<AccountId, FolderId> pair = m_pCalendarService->defaultCalendarFolder();
-    return m_pCalendarService->event(pair.first, id);
+    Result::Type* r = new Result::Type();
+    CalendarEvent ev = m_pCalendarService->event(pair.first, id, r);
+    return ev;
 }

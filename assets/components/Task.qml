@@ -400,6 +400,12 @@ Container {
         }
     }
     
+    function dropCalendarId(id) {
+        if (taskId === id) {
+            calendarId = 0;
+        }
+    }
+    
     onParentIdChanged: {
         divider.visible = parentId === "";
     }
@@ -422,6 +428,7 @@ Container {
         _tasksService.taskDeselected.connect(task.select);
         _tasksService.multiselectModeChanged.connect(task.handleMultiselectModeChanged);
         _tasksService.droppedRememberId.connect(task.dropRememberId);
+        _tasksService.droppedCalendarId.connect(task.dropCalendarId);
     }
     
     onControlRemoved: {

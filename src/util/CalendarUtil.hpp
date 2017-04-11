@@ -11,6 +11,7 @@
 #include <QtCore/QObject>
 #include <bb/pim/calendar/CalendarService>
 #include <bb/pim/calendar/CalendarEvent>
+#include <bb/pim/calendar/Result>
 
 using namespace bb::pim::calendar;
 

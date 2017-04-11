@@ -79,6 +79,7 @@ Q_SIGNALS:
     void taskDeselected(const int id);
     void taskMovedInBulk();
     void droppedRememberId(const int taskId);
+    void droppedCalendarId(const int taskId);
 
 private Q_SLOTS:
     void processMultiselectMode(const bool multiselectMode);
@@ -99,6 +100,8 @@ private:
     NotebookEntry updateNotebookEntry(const QString& rememberId, const QString& name, const QString& description = "", const int deadline = 0);
     void deleteNotebookEntry(const QString& rememberId);
     void sync();
+    void syncRememberTasks();
+    void syncCalendarTasks();
 };
 
 #endif /* TASKSSERVICE_HPP_ */
