@@ -38,7 +38,6 @@ NavigationPane {
                     var createInCalendar = deadLineToggleButton.checked && calendarToggleButton.checked ? 1 : 0;
                     
                     _tasksService.createTask(taskName.result.trim(), description.result.trim(), "TASK", deadline, important, createInRemember, files, createInCalendar);
-                    toast.show();
                 }
             }
         }
@@ -134,6 +133,10 @@ NavigationPane {
         
         function currDatePlus2Hourse() {
             return new Date(new Date().getTime() + 7200000);
+        }
+        
+        onCreationCompleted: {
+            _tasksService.taskCreated.connect(toast.show);
         }
         
         attachedObjects: [

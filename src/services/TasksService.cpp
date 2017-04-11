@@ -178,7 +178,7 @@ void TasksService::createFolderQuick(const QString& name) {
     m_pDbConfig->connection()->execute(query, values);
     QVariantMap newTask = lastCreated();
 
-    emit taskCreated(newTask);
+    emit quickFolderCreated(newTask);
 }
 
 void TasksService::updateTask(const QString name, const QString description, const QString type, const int deadline, const int important, const int createInRemember, const int closed, const QVariantList attachments, const int createInCalendar) {
@@ -408,6 +408,7 @@ void TasksService::sync() {
     if (!rememberTasks.isEmpty()) {
         for (int i = 0; i < rememberTasks.size(); i++) {
             QVariantMap taskMap = rememberTasks.at(i).toMap();
+            int id = taskMap.value("id").toInt();
             NotebookEntry note = findNotebookEntry(taskMap.value("remember_id").toString());
             if (note.isValid()) {
                 QString query = "UPDATE tasks SET name = :name, description = :description, deadline = :deadline, closed = :closed WHERE id = :id";
@@ -424,8 +425,9 @@ void TasksService::sync() {
 
                 m_pDbConfig->connection()->execute(query, values);
             } else {
-                QString query = QString::fromLatin1("UPDATE tasks SET remember_id = NULL WHERE id = %1").arg(taskMap.value("id").toInt());
+                QString query = QString::fromLatin1("UPDATE tasks SET remember_id = NULL WHERE id = %1").arg(id);
                 m_pDbConfig->connection()->execute(query);
+                emit droppedRememberId(id);
             }
          }
      }

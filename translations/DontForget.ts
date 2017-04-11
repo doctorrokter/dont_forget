@@ -179,11 +179,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Task created!</source>
+        <source>Add to Calendar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Add to Calendar</source>
+        <source>Task created!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

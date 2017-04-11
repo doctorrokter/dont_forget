@@ -15,8 +15,8 @@ Container {
     property bool selected: _tasksService.isTaskSelected(taskId)
     property int deadline: 0
     property string parentId: ""
-    property string rememberId: "sdf"
-    property int calendarId: 0
+    property string rememberId: ""
+    property int calendarId: 87687687
     property string type: "TASK"
     property string name: "Projects"
     
@@ -235,6 +235,15 @@ Container {
                     checked: task.closed
                     navigation.defaultHighlightEnabled: false
                     navigation.focusPolicy: NavigationFocusPolicy.NotFocusable
+                    margin.rightOffset: {
+                        if (calendarId === 0 && rememberId === "") {
+                            return ui.du(3);
+                        } else if (calendarId === 0 || rememberId === "") {
+                            return ui.du(0.5);
+                        } else {
+                            return 0;
+                        }
+                    }
                     
                     gestureHandlers: [
                         TapHandler {
@@ -385,6 +394,12 @@ Container {
         }
     }
     
+    function dropRememberId(id) {
+        if (taskId === id) {
+            rememberId = "";
+        }
+    }
+    
     onParentIdChanged: {
         divider.visible = parentId === "";
     }
@@ -406,6 +421,7 @@ Container {
         _tasksService.taskSelected.connect(task.select);
         _tasksService.taskDeselected.connect(task.select);
         _tasksService.multiselectModeChanged.connect(task.handleMultiselectModeChanged);
+        _tasksService.droppedRememberId.connect(task.dropRememberId);
     }
     
     onControlRemoved: {

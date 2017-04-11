@@ -67,6 +67,7 @@ public:
 Q_SIGNALS:
     void activeTaskChanged(Task* newActiveTask);
     void taskCreated(QVariantMap newTask);
+    void quickFolderCreated(QVariantMap newTask);
     void taskUpdated(QVariantMap updatedTask);
     void taskDeleted(const int id);
     void allTasksExpanded();
@@ -77,6 +78,7 @@ Q_SIGNALS:
     void taskSelected(const int id);
     void taskDeselected(const int id);
     void taskMovedInBulk();
+    void droppedRememberId(const int taskId);
 
 private Q_SLOTS:
     void processMultiselectMode(const bool multiselectMode);

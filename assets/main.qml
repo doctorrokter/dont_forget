@@ -615,7 +615,7 @@ NavigationPane {
         newTask.important = t.important;
         newTask.deadline = t.deadline;
         newTask.rememberId = t.remember_id;
-        newTask.calendarId = t.calendar_id;
+        newTask.calendarId = parseInt(t.calendar_id);
         newTask.parentId = t.parent_id;
         newTask.taskViewRequested.connect(function() {
             viewActionItem.triggered();
@@ -700,9 +700,12 @@ NavigationPane {
         }
         renderTree();
         _tasksService.taskCreated.connect(navigation.onTaskCreated);
+        _tasksService.quickFolderCreated.connect(navigation.onTaskCreated);
         _tasksService.taskMoved.connect(navigation.renderTree);
         _tasksService.taskMovedInBulk.connect(navigation.renderTree);
         _app.taskSheetRequested.connect(navigation.openTaskSheetEditMode);
         _app.tasksReceived.connect(navigation.renderTree);
+        _app.taskCardDone.connect(navigation.renderTree);
+        _app.taskCreatedFromExternal.connect(navigation.renderTree);
     }
 }

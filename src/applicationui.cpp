@@ -28,6 +28,7 @@
 #include <QVariantMap>
 #include <bb/system/InvokeRequest>
 #include <bb/data/JsonDataAccess>
+#include <bb/data/XmlDataAccess>
 #include <bb/platform/Notification>
 #include <bb/platform/NotificationPriorityPolicy>
 #include <QtConcurrentRun>
@@ -55,7 +56,6 @@ ApplicationUI::ApplicationUI() : QObject() {
     m_pTranslator = new QTranslator(this);
     m_pLocaleHandler = new LocaleHandler(this);
 
-    m_running = false;
     m_pDbConfig = new DBConfig(this);
 
     m_pAttachmentsService = new AttachmentsService(this, m_pDbConfig);
@@ -64,10 +64,7 @@ ApplicationUI::ApplicationUI() : QObject() {
     m_pPushService->initPushService();
 
     m_pTasksService = new TasksService(this, m_pDbConfig, m_pAttachmentsService);
-    QtConcurrent::run(m_pTasksService, &TasksService::init);
-
     m_pSearchService = new SearchService(this, m_pTasksService);
-    QtConcurrent::run(m_pSearchService, &SearchService::init);
 
     m_pUsersService = new UsersService(this, m_pDbConfig);
     m_pDropboxService = new DropboxService(this);
@@ -104,7 +101,10 @@ ApplicationUI::ApplicationUI() : QObject() {
     switch (m_pInvokeManager->startupMode()) {
         case ApplicationStartupMode::LaunchApplication:
             m_startupMode = "Launch";
+            m_running = true;
             initFullUI();
+            QtConcurrent::run(m_pTasksService, &TasksService::init);
+            QtConcurrent::run(m_pSearchService, &SearchService::init);
             break;
         case ApplicationStartupMode::InvokeApplication:
             m_startupMode = "Invoke";
@@ -145,6 +145,11 @@ void ApplicationUI::openRememberNote(const QString& rememberId) {
     m_pInvokeManager->invoke(req);
 }
 
+QVariant ApplicationUI::loadHtmlAsObject(const QString& html) {
+    XmlDataAccess xml;
+    return xml.loadFromBuffer(html);
+}
+
 void ApplicationUI::onSystemLanguageChanged() {
     QCoreApplication::instance()->removeTranslator(m_pTranslator);
     QString locale_string = QLocale().name();
@@ -161,6 +166,7 @@ void ApplicationUI::cardDone(const QString& msg) {
     message.setReason(tr("Success!"));
 
     m_pInvokeManager->sendCardDone(message);
+    emit taskCardDone();
 }
 
 void ApplicationUI::initFullUI() {
@@ -177,7 +183,6 @@ void ApplicationUI::initFullUI() {
     rootContext->setContextProperty("_attachmentsService", m_pAttachmentsService);
     rootContext->setContextProperty("_signal", m_pSignal);
     rootContext->setContextProperty("_hasSharedFilesPermission", m_pDbConfig->hasSharedFilesPermission());
-    m_running = true;
 
     AbstractPane *root = qml->createRootObject<AbstractPane>();
     Application::instance()->setScene(root);
@@ -185,8 +190,6 @@ void ApplicationUI::initFullUI() {
 
 void ApplicationUI::initComposerUI(const QString& pathToPage, const QString& data, const QString& mimeType) {
     QmlDocument *qml = QmlDocument::create(pathToPage);
-    qml->setContextProperty("_app", this);
-
     QDeclarativeEngine* engine = QmlDocument::defaultDeclarativeEngine();
     QDeclarativeContext* rootContext = engine->rootContext();
     rootContext->setContextProperty("_app", this);

@@ -12,8 +12,9 @@
 CalendarUtil::CalendarUtil(QObject* parent) :QObject(parent), m_pCalendarService(new CalendarService()) {}
 
 CalendarUtil::~CalendarUtil() {
-    delete m_pCalendarService;
-    m_pCalendarService = NULL;
+//    delete m_pCalendarService;
+//    m_pCalendarService = NULL;
+    m_pCalendarService->deleteLater();
 }
 
 CalendarEvent CalendarUtil::createEvent(const QString& name, const QString& body, QDateTime dateTime) {

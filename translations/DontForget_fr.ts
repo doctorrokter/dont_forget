@@ -48,12 +48,12 @@
 <context>
     <name>ApplicationUI</name>
     <message>
-        <location filename="../src/applicationui.cpp" line="161"/>
+        <location filename="../src/applicationui.cpp" line="166"/>
         <source>Success!</source>
         <translation type="unfinished">Réussite!</translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="220"/>
+        <location filename="../src/applicationui.cpp" line="223"/>
         <source>Tasks received!</source>
         <translation type="unfinished">Tâches reçue!</translation>
     </message>
@@ -132,42 +132,42 @@
         <translation type="unfinished">OK</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="74"/>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="73"/>
         <source>Create in: </source>
         <translation type="unfinished">Créer dans:</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="81"/>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="80"/>
         <source>Root</source>
         <translation type="unfinished">Racine</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="96"/>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="95"/>
         <source>Change placement</source>
         <translation type="unfinished">Changer d&apos;endroit</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="108"/>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="107"/>
         <source>Deadline</source>
         <translation type="unfinished">Date de fin</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="119"/>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="118"/>
         <source>Add to Calendar</source>
         <translation type="unfinished">Ajouter au calendrier</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="125"/>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="124"/>
         <source>Create in Remember</source>
         <translation type="unfinished">Créer dans Remember</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="130"/>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="129"/>
         <source>Important</source>
         <translation type="unfinished">Important</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="153"/>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="156"/>
         <source>Task created!</source>
         <translation type="unfinished">Tâche créée!</translation>
     </message>
@@ -175,57 +175,57 @@
 <context>
     <name>CreateTaskFromUrlCard</name>
     <message>
-        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="21"/>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="20"/>
         <source>Create task</source>
         <translation type="unfinished">Créer tâche</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="24"/>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="23"/>
         <source>Cancel</source>
         <translation type="unfinished">Annuler</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="32"/>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="31"/>
         <source>OK</source>
         <translation type="unfinished">OK</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="88"/>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="86"/>
         <source>Create in: </source>
         <translation type="unfinished">Créer dans:</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="95"/>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="93"/>
         <source>Root</source>
         <translation type="unfinished">Racine</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="110"/>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="108"/>
         <source>Change placement</source>
         <translation type="unfinished">Changer d&apos;endroit</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="122"/>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="120"/>
         <source>Deadline</source>
         <translation type="unfinished">Date de fin</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="133"/>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="131"/>
         <source>Add to Calendar</source>
         <translation type="unfinished">Ajouter au calendrier</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="139"/>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="137"/>
         <source>Create in Remember</source>
         <translation type="unfinished">Créer dans Remember</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="144"/>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="142"/>
         <source>Important</source>
         <translation type="unfinished">Important</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="203"/>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="212"/>
         <source>Task created!</source>
         <translation type="unfinished">Tâche créée!</translation>
     </message>

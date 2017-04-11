@@ -222,7 +222,7 @@ Page {
         } else {
             root.tasks = tasksArray;
         }
-        _tasksService.taskCreated.connect(root.addNewFolder);
+        _tasksService.quickFolderCreated.connect(root.addNewFolder);
     }
     
     onTasksChanged: {

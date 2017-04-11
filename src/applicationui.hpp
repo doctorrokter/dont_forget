@@ -18,6 +18,7 @@
 #define ApplicationUI_HPP_
 
 #include <QObject>
+#include <QVariant>
 #include <QList>
 #include <bb/system/InvokeManager>
 #include <bb/system/InvokeRequest>
@@ -58,10 +59,13 @@ public:
 
     Q_INVOKABLE void openCalendarEvent(const int eventId);
     Q_INVOKABLE void openRememberNote(const QString& rememberId);
+    Q_INVOKABLE QVariant loadHtmlAsObject(const QString& html);
 
 Q_SIGNALS:
     void taskSheetRequested(const QString& data);
     void tasksReceived();
+    void taskCardDone();
+    void taskCreatedFromExternal();
 
 public Q_SLOTS:
     void onInvoked(const bb::system::InvokeRequest& request);

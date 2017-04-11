@@ -1,6 +1,5 @@
 import bb.cascades 1.4
 import bb.system 1.2
-import WebPageComponent 1.0
 import "../components"
 import "../pages"
 
@@ -43,7 +42,6 @@ NavigationPane {
                     var createInCalendar = deadLineToggleButton.checked && calendarToggleButton.checked ? 1 : 0;
                     
                     _tasksService.createTask(taskName.result.trim(), description.result.trim(), "TASK", deadline, important, createInRemember, files, createInCalendar);
-                    toast.show();
                 }
             }
         }
@@ -180,10 +178,21 @@ NavigationPane {
         onCreationCompleted: {
             if (!_mimeType || _mimeType.trim() === "") {
                 description.value = _data;
-                webPage.url = _data;
+                
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", _data, true);
+                xhr.onreadystatechange = function () {
+                    if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                        var title = /<title>(.*?)<\/title>/g.exec(xhr.responseText);
+                        root.setTitle(title[1] || "");
+                    }
+                };
+                xhr.send();
+                
             } else {
                 processAttachments();
             }
+            _tasksService.taskCreated.connect(toast.show);
         }
         
         attachedObjects: [
@@ -203,15 +212,8 @@ NavigationPane {
                 body: qsTr("Task created!") + Retranslate.onLocaleOrLanguageChanged
                 
                 onFinished: {
+                    _app.taskCreatedFromExternal();
                     navigation.quit();
-                }
-            },
-            
-            WebPage {
-                id: webPage
-                
-                onTitleChanged: {
-                    root.setTitle(title);
                 }
             }
         ]
