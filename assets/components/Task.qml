@@ -18,7 +18,7 @@ Container {
     property string rememberId: ""
     property int calendarId: 87687687
     property string type: "TASK"
-    property string name: "Projects"
+    property string name: "RELAX ~ Zdravnisko £ spricevalo & < > \" kartica"
     
     property variant taskType: {
         FOLDER: "FOLDER",
@@ -80,11 +80,16 @@ Container {
     }
     
     function getTaskName() {
+        var n = task.name
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/\"/g, "&quot;");
         var name = "<html>";
         if (task.closed) {
-            name += "<span style=\"text-decoration: line-through;\">" + task.name +"</span>";
+            name += "<span style=\"text-decoration: line-through;\">" + n +"</span>";
         } else {
-            name += task.name;
+            name += n;
         }
         
         if (task.important) {
