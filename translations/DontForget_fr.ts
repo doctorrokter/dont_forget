@@ -53,7 +53,7 @@
         <translation type="unfinished">Réussite!</translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="223"/>
+        <location filename="../src/applicationui.cpp" line="224"/>
         <source>Tasks received!</source>
         <translation type="unfinished">Tâches reçue!</translation>
     </message>
@@ -776,48 +776,48 @@
         <translation type="unfinished">Trier</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="400"/>
-        <location filename="../assets/main.qml" line="577"/>
+        <location filename="../assets/main.qml" line="410"/>
+        <location filename="../assets/main.qml" line="587"/>
         <source>All Tasks</source>
         <translation type="unfinished">Toutes les tâches</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="501"/>
+        <location filename="../assets/main.qml" line="511"/>
         <source>Permission required</source>
         <translation type="unfinished">Permission demandée</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="502"/>
+        <location filename="../assets/main.qml" line="512"/>
         <source>Looks like you didn&apos;t grant permission for shared files. &quot;Don&apos;t Forget&quot; cannot work without this permission since the app stores own database in external resources. In order to use this app you should grant permissions in Settings, then restart the app.</source>
         <translation type="unfinished">Il semblerait que vous n&apos;avez pas accepter la permission de partage de fichiers. &quot;Don&apos;t Forget&quot; ne peut fonctionner sans cette permission. Pour utiliser cette application vous devez autoriser cette permission dans les paramètres du téléphone, puis redémarrer l&apos;application.</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="505"/>
+        <location filename="../assets/main.qml" line="515"/>
         <source>Settings</source>
         <translation type="unfinished">Paramètres</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="550"/>
+        <location filename="../assets/main.qml" line="560"/>
         <source>Descending order</source>
         <translation type="unfinished">Ordre décroissant</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="546"/>
+        <location filename="../assets/main.qml" line="556"/>
         <source>Sort by</source>
         <translation type="unfinished">Trier par</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="592"/>
+        <location filename="../assets/main.qml" line="602"/>
         <source>Creation</source>
         <translation type="unfinished">Créer</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="593"/>
+        <location filename="../assets/main.qml" line="603"/>
         <source>Name</source>
         <translation type="unfinished">Nom</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="594"/>
+        <location filename="../assets/main.qml" line="604"/>
         <source>Deadline</source>
         <translation type="unfinished">Date de fin</translation>
     </message>

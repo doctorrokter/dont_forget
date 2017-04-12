@@ -64,7 +64,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="223"/>
+        <location filename="../src/applicationui.cpp" line="224"/>
         <source>Tasks received!</source>
         <translation type="unfinished">Получены новые задачи!</translation>
     </message>
@@ -800,8 +800,8 @@
         <translation type="unfinished">Выбрать еще</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="400"/>
-        <location filename="../assets/main.qml" line="577"/>
+        <location filename="../assets/main.qml" line="410"/>
+        <location filename="../assets/main.qml" line="587"/>
         <source>All Tasks</source>
         <translation type="unfinished">Все задачи</translation>
     </message>
@@ -888,42 +888,42 @@
         <translation type="unfinished">Сортировать</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="501"/>
+        <location filename="../assets/main.qml" line="511"/>
         <source>Permission required</source>
         <translation type="unfinished">Требуются права</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="502"/>
+        <location filename="../assets/main.qml" line="512"/>
         <source>Looks like you didn&apos;t grant permission for shared files. &quot;Don&apos;t Forget&quot; cannot work without this permission since the app stores own database in external resources. In order to use this app you should grant permissions in Settings, then restart the app.</source>
         <translation type="unfinished">Похоже Вы не дали права на использование общих файлов приложением. &quot;Don&apos;t Forget&quot; не может работать без этих прав, так как хранит собственную базу данных во внешних ресурсах. Для того, чтобы пользоваться этим приложением, Вам необходимо добавить права в Настройках, затем перезапустить приложение.</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="505"/>
+        <location filename="../assets/main.qml" line="515"/>
         <source>Settings</source>
         <translation type="unfinished">Настройки</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="550"/>
+        <location filename="../assets/main.qml" line="560"/>
         <source>Descending order</source>
         <translation type="unfinished">Нисходящий порядок</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="546"/>
+        <location filename="../assets/main.qml" line="556"/>
         <source>Sort by</source>
         <translation type="unfinished">Сортировка по</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="592"/>
+        <location filename="../assets/main.qml" line="602"/>
         <source>Creation</source>
         <translation type="unfinished">Дате создания</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="593"/>
+        <location filename="../assets/main.qml" line="603"/>
         <source>Name</source>
         <translation type="unfinished">Имени</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="594"/>
+        <location filename="../assets/main.qml" line="604"/>
         <source>Deadline</source>
         <translation type="unfinished">Сроку выполнения</translation>
     </message>

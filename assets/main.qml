@@ -380,6 +380,16 @@ NavigationPane {
                 onTriggered: {
                     sortingDialog.show();
                 }
+                
+                shortcuts: [
+                    Shortcut {
+                        key: "o"
+                        
+                        onTriggered: {
+                            openSortingDialog.triggered();
+                        }
+                    }
+                ]
             }
         ]
         
