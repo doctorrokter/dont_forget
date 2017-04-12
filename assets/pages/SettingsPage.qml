@@ -89,34 +89,40 @@ Page {
                     }
                 }  
                 
-                Container {
-                    horizontalAlignment: HorizontalAlignment.Fill
-                    topPadding: ui.du(2.5)
-                    leftPadding: ui.du(2.5)
-                    rightPadding: ui.du(2.5)
-                    DropDown {
-                        title: qsTr("Sort by") + Retranslate.onLocaleOrLanguageChanged
-                        
-                        options: [
-                            Option {
-                                id: sortByNameOption
-                                text: qsTr("Name") + Retranslate.onLocaleOrLanguageChanged
-                                value: "name"
-                            },
-                            
-                            Option {
-                                id: sortByCreationOption
-                                text: qsTr("Creation") + Retranslate.onLocaleOrLanguageChanged
-                                value: "id"
-                            }
-                        ]
-                        
-                        onSelectedOptionChanged: {
-                            _appConfig.set("sort_by", selectedOption.value);
-                            root.sortByChanged();
-                        }
-                    }
-                }
+//                Container {
+//                    horizontalAlignment: HorizontalAlignment.Fill
+//                    topPadding: ui.du(2.5)
+//                    leftPadding: ui.du(2.5)
+//                    rightPadding: ui.du(2.5)
+//                    DropDown {
+//                        title: qsTr("Sort by") + Retranslate.onLocaleOrLanguageChanged
+//                        
+//                        options: [
+//                            Option {
+//                                id: sortByNameOption
+//                                text: qsTr("Name") + Retranslate.onLocaleOrLanguageChanged
+//                                value: "name"
+//                            },
+//                            
+//                            Option {
+//                                id: sortByCreationOption
+//                                text: qsTr("Creation") + Retranslate.onLocaleOrLanguageChanged
+//                                value: "id"
+//                            },
+//                            
+//                            Option {
+//                                id: sortByDeadlineOption
+//                                text: qsTr("Deadline") + Retranslate.onLocaleOrLanguageChanged
+//                                value: "deadline"
+//                            }
+//                        ]
+//                        
+//                        onSelectedOptionChanged: {
+//                            _appConfig.set("sort_by", selectedOption.value);
+//                            root.sortByChanged();
+//                        }
+//                    }
+//                }
                 
                 Container {
                     horizontalAlignment: HorizontalAlignment.Fill
@@ -370,11 +376,11 @@ Page {
         vibrateOnSelect.checked = vibro && vibro === "true";
     }
     
-    function adjustSortBy() {
-        var sortBy = _appConfig.get("sort_by");
-        sortByNameOption.selected = sortBy === "" || sortBy === "name";
-        sortByCreationOption.selected = sortBy === "id";
-    }
+//    function adjustSortBy() {
+//        var sortBy = _appConfig.get("sort_by");
+//        sortByNameOption.selected = sortBy === "" || sortBy === "name";
+//        sortByCreationOption.selected = sortBy === "id";
+//    }
     
     function adjustDefaultTaskType() {
         var defaultTaskType = _appConfig.get("default_task_type");
@@ -440,7 +446,7 @@ Page {
     onCreationCompleted: {
         adjustTheme();
         adjustAskBeforeDeleting();
-        adjustSortBy();
+//        adjustSortBy();
         adjustDefaultTaskType();
         adjustPushEnabledLabel();
         adjustPushServiceButton();

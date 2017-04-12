@@ -8,6 +8,7 @@
 #include "AppConfig.hpp"
 #include <QUrl>
 #include <QDir>
+#include <QDebug>
 
 bool AppConfig::USING_PUBLIC_PPG = true;
 //QString AppConfig::PROVIDER_APP_ID = "300065-910B145627tryr34c5425h82824k3s724";

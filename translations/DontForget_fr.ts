@@ -391,112 +391,113 @@
         <translation type="unfinished">Ne pas demander avant la suppression</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="98"/>
         <source>Sort by</source>
-        <translation type="unfinished">Trier par</translation>
+        <translation type="obsolete">Trier par</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="103"/>
         <source>Name</source>
-        <translation type="unfinished">Nom</translation>
+        <translation type="obsolete">Nom</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="109"/>
         <source>Creation</source>
-        <translation type="unfinished">Créer</translation>
+        <translation type="obsolete">Créer</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="128"/>
+        <source>Deadline</source>
+        <translation type="obsolete">Date de fin</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/SettingsPage.qml" line="134"/>
         <source>Default task type</source>
         <translation type="unfinished">Type de tâche par défaut</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="133"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="139"/>
         <source>Folder</source>
         <translation type="unfinished">Dossier</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="139"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="145"/>
         <source>Task</source>
         <translation type="unfinished">Tâche</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="159"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="165"/>
         <source>System sound on selection</source>
         <translation type="unfinished">Son sur sélection</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="188"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="194"/>
         <source>Vibrate on selection</source>
         <translation type="unfinished">Vibreur sur sélection</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="215"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="221"/>
         <source>Notification sound</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="220"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="226"/>
         <source>Standard Theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="230"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="236"/>
         <source>Don&apos;t Forget Theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="264"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="270"/>
         <source>Network</source>
         <translation type="unfinished">Réseau</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="309"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="315"/>
         <source>Check your network connection</source>
         <translation type="unfinished">Vérifiez votre connexion réseau</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="394"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="400"/>
         <source>Enabled</source>
         <translation type="unfinished">Activée</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="396"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="402"/>
         <source>Disabled</source>
         <translation type="unfinished">Désactivée</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="403"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="409"/>
         <source>Disable</source>
         <translation type="unfinished">Désactiver</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="405"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="411"/>
         <source>Enable</source>
         <translation type="unfinished">Activer</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="430"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="436"/>
         <source>Failed to enable Push Service</source>
         <translation type="unfinished">Impossible d&apos;activer Push Service</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="327"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="333"/>
         <source>If this setting is turned on you can send/receive tasks to/from your colleague or someone else using PIN. To achieve this goal app uses BlackBerry Push Service</source>
         <translation type="unfinished">Si ce paramètre est activé, vous pouvez envoyer / recevoir des tâches à / de votre collègue ou quelqu&apos;un d&apos;autre utilisant le NIP. Pour atteindre cet objectif, l&apos;application utilise BlackBerry Push Service</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="412"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="418"/>
         <source>Push Service enabled</source>
         <translation type="unfinished">Push Service activée</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="421"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="427"/>
         <source>Push Service disabled</source>
         <translation type="unfinished">Push Service désactivée</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="275"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="281"/>
         <source>Receive push notifications</source>
         <translation type="unfinished">Recevoir des notifications push</translation>
     </message>
@@ -770,25 +771,55 @@
         <translation type="unfinished">Ouvrir dans Remember</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="389"/>
-        <location filename="../assets/main.qml" line="537"/>
+        <location filename="../assets/main.qml" line="377"/>
+        <source>Sort</source>
+        <translation type="unfinished">Trier</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="400"/>
+        <location filename="../assets/main.qml" line="577"/>
         <source>All Tasks</source>
         <translation type="unfinished">Toutes les tâches</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="490"/>
+        <location filename="../assets/main.qml" line="501"/>
         <source>Permission required</source>
         <translation type="unfinished">Permission demandée</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="491"/>
+        <location filename="../assets/main.qml" line="502"/>
         <source>Looks like you didn&apos;t grant permission for shared files. &quot;Don&apos;t Forget&quot; cannot work without this permission since the app stores own database in external resources. In order to use this app you should grant permissions in Settings, then restart the app.</source>
         <translation type="unfinished">Il semblerait que vous n&apos;avez pas accepter la permission de partage de fichiers. &quot;Don&apos;t Forget&quot; ne peut fonctionner sans cette permission. Pour utiliser cette application vous devez autoriser cette permission dans les paramètres du téléphone, puis redémarrer l&apos;application.</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="494"/>
+        <location filename="../assets/main.qml" line="505"/>
         <source>Settings</source>
         <translation type="unfinished">Paramètres</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="550"/>
+        <source>Descending order</source>
+        <translation type="unfinished">Ordre décroissant</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="546"/>
+        <source>Sort by</source>
+        <translation type="unfinished">Trier par</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="592"/>
+        <source>Creation</source>
+        <translation type="unfinished">Créer</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="593"/>
+        <source>Name</source>
+        <translation type="unfinished">Nom</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="594"/>
+        <source>Deadline</source>
+        <translation type="unfinished">Date de fin</translation>
     </message>
 </context>
 </TS>

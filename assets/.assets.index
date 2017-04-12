@@ -1,5 +1,5 @@
 1
-74
+75
 cards/CreateTaskFromTextCard.qml
 cards/CreateTaskFromUrlCard.qml
 cards/TestCard.qml
@@ -48,6 +48,7 @@ images/ic_search.png
 images/ic_select_more.png
 images/ic_send.png
 images/ic_share.png
+images/ic_sort.png
 images/ic_watch.png
 images/js_icon_big_512x512.png
 images/pdf_icon.png

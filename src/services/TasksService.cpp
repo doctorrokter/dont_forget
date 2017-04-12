@@ -50,7 +50,17 @@ QVariantList TasksService::findAll() const {
         sortBy = "name";
     }
 
-    QVariantList tasks = m_pDbConfig->connection()->execute("SELECT * FROM tasks ORDER BY parent_id, type, " + sortBy).toList();
+    QString desc = AppConfig::getStatic("desc_order").toString();
+    if (!desc.isEmpty() && desc.compare("true") == 0) {
+        desc = "DESC";
+    } else {
+        desc = "ASC";
+    }
+
+    QString query = QString("SELECT * FROM tasks ORDER BY parent_id, type, %1 %2").arg(sortBy).arg(desc);
+//    qDebug() << "===>>> SQL: " << query << endl;
+
+    QVariantList tasks = m_pDbConfig->connection()->execute(query).toList();
 
     for (int i = 0; i < tasks.size(); i++) {
         QVariantMap taskMap = tasks.at(i).toMap();

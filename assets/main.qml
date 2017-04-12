@@ -369,6 +369,17 @@ NavigationPane {
                 onTriggered: {
                     _app.openRememberNote(_tasksService.activeTask.rememberId);
                 }
+            },
+            
+            ActionItem {
+                id: openSortingDialog
+                
+                title: qsTr("Sort") + Retranslate.onLocaleOrLanguageChanged
+                imageSource: "asset:///images/ic_sort.png"
+                
+                onTriggered: {
+                    sortingDialog.show();
+                }
             }
         ]
         
@@ -527,6 +538,35 @@ NavigationPane {
             
             SystemToast {
                 id: toast
+            },
+            
+            SystemListDialog {
+                id: sortingDialog
+                
+                title: qsTr("Sort by") + Retranslate.onLocaleOrLanguageChanged + ": "
+                autoUpdateEnabled: true
+                
+                includeRememberMe: true
+                rememberMeText: qsTr("Descending order") + Retranslate.onLocaleOrLanguageChanged
+                rememberMeChecked: main.isDescOrder();
+                
+                onFinished: {
+                    if (value === 2) {
+                        var i = sortingDialog.selectedIndices[0];
+                        switch (i) {
+                            case 0: _appConfig.set("sort_by", "id"); break;
+                            case 1: _appConfig.set("sort_by", "name"); break;
+                            case 2: _appConfig.set("sort_by", "deadline"); break;
+                        }
+                        
+                        var descOrder = sortingDialog.rememberMeSelection();
+                        _appConfig.set("desc_order", descOrder + "");
+                        
+                        navigation.renderTree();
+                        sortingDialog.rememberMeChecked = main.isDescOrder();
+                        main.renderSortingItems();
+                    }
+                }                
             }
         ]
         
@@ -546,6 +586,22 @@ NavigationPane {
             main.multiselectMode = multiselectMode;
         }
         
+        function renderSortingItems() {
+            var sortBy = _appConfig.get("sort_by");
+            sortingDialog.clearList();
+            sortingDialog.appendItem(qsTr("Creation") + Retranslate.onLocaleOrLanguageChanged, true, sortBy === "id");
+            sortingDialog.appendItem(qsTr("Name") + Retranslate.onLocaleOrLanguageChanged, true, sortBy === "name");
+            sortingDialog.appendItem(qsTr("Deadline") + Retranslate.onLocaleOrLanguageChanged, true, sortBy === "deadline");
+        }
+        
+        function isDescOrder() {
+            var descOrder = _appConfig.get("desc_order");
+            if (descOrder !== "" && descOrder === "true") {
+                return true;
+            }
+            return false;
+        }
+        
         onCreationCompleted: {
             if (!_hasSharedFilesPermission) {
                 permissionDialog.show();
@@ -553,6 +609,8 @@ NavigationPane {
             _tasksService.activeTaskChanged.connect(main.updateTitleBar);
             _tasksService.viewModeChanged.connect(main.changeViewMode);
             _tasksService.multiselectModeChanged.connect(main.changeMultiselectMode);
+            
+            main.renderSortingItems();
         }
     }
     

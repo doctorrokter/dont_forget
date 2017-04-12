@@ -84,6 +84,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/ic_select_more.png) \
         $$quote($$BASEDIR/assets/images/ic_send.png) \
         $$quote($$BASEDIR/assets/images/ic_share.png) \
+        $$quote($$BASEDIR/assets/images/ic_sort.png) \
         $$quote($$BASEDIR/assets/images/ic_watch.png) \
         $$quote($$BASEDIR/assets/images/js_icon_big_512x512.png) \
         $$quote($$BASEDIR/assets/images/pdf_icon.png) \

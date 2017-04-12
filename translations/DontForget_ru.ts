@@ -434,112 +434,113 @@
         <translation type="unfinished">Не спрашивать перед удалением</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="98"/>
         <source>Sort by</source>
-        <translation type="unfinished">Сортировка по</translation>
+        <translation type="obsolete">Сортировка по</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="103"/>
         <source>Name</source>
-        <translation type="unfinished">Названию</translation>
+        <translation type="obsolete">Названию</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="109"/>
         <source>Creation</source>
-        <translation type="unfinished">Созданию</translation>
+        <translation type="obsolete">Созданию</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="128"/>
+        <source>Deadline</source>
+        <translation type="obsolete">Срок выполнения</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/SettingsPage.qml" line="134"/>
         <source>Default task type</source>
         <translation type="unfinished">Тип задачи по-умолчанию</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="133"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="139"/>
         <source>Folder</source>
         <translation type="unfinished">Папка</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="139"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="145"/>
         <source>Task</source>
         <translation type="unfinished">Задача</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="159"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="165"/>
         <source>System sound on selection</source>
         <translation type="unfinished">Звук при выборе</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="188"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="194"/>
         <source>Vibrate on selection</source>
         <translation type="unfinished">Вибрация при выборе</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="215"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="221"/>
         <source>Notification sound</source>
         <translation type="unfinished">Звук уведомлений</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="220"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="226"/>
         <source>Standard Theme</source>
         <translation type="unfinished">Стандартная тема</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="230"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="236"/>
         <source>Don&apos;t Forget Theme</source>
         <translation type="unfinished">Тема Don&apos;t Forget</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="264"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="270"/>
         <source>Network</source>
         <translation type="unfinished">Сеть</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="309"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="315"/>
         <source>Check your network connection</source>
         <translation type="unfinished">Проверьте интернет-соединение</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="394"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="400"/>
         <source>Enabled</source>
         <translation type="unfinished">Включено</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="396"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="402"/>
         <source>Disabled</source>
         <translation type="unfinished">Отключено</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="403"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="409"/>
         <source>Disable</source>
         <translation type="unfinished">Отключить</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="405"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="411"/>
         <source>Enable</source>
         <translation type="unfinished">Включить</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="430"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="436"/>
         <source>Failed to enable Push Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="327"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="333"/>
         <source>If this setting is turned on you can send/receive tasks to/from your colleague or someone else using PIN. To achieve this goal app uses BlackBerry Push Service</source>
         <translation type="unfinished">Если эта опция включена, вы можете отправлять/получать задачи кому-либо или от кого-либо, используя PIN. Для достижения этой цели используется Push-сервис BlackBerry</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="412"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="418"/>
         <source>Push Service enabled</source>
         <translation type="unfinished">Push-сервис включен</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="421"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="427"/>
         <source>Push Service disabled</source>
         <translation type="unfinished">Push-сервис отключен</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="275"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="281"/>
         <source>Receive push notifications</source>
         <translation type="unfinished">Получение push-нотификаций</translation>
     </message>
@@ -799,8 +800,8 @@
         <translation type="unfinished">Выбрать еще</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="389"/>
-        <location filename="../assets/main.qml" line="537"/>
+        <location filename="../assets/main.qml" line="400"/>
+        <location filename="../assets/main.qml" line="577"/>
         <source>All Tasks</source>
         <translation type="unfinished">Все задачи</translation>
     </message>
@@ -882,19 +883,49 @@
         <translation type="unfinished">Открыть в Remember</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="490"/>
+        <location filename="../assets/main.qml" line="377"/>
+        <source>Sort</source>
+        <translation type="unfinished">Сортировать</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="501"/>
         <source>Permission required</source>
         <translation type="unfinished">Требуются права</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="491"/>
+        <location filename="../assets/main.qml" line="502"/>
         <source>Looks like you didn&apos;t grant permission for shared files. &quot;Don&apos;t Forget&quot; cannot work without this permission since the app stores own database in external resources. In order to use this app you should grant permissions in Settings, then restart the app.</source>
         <translation type="unfinished">Похоже Вы не дали права на использование общих файлов приложением. &quot;Don&apos;t Forget&quot; не может работать без этих прав, так как хранит собственную базу данных во внешних ресурсах. Для того, чтобы пользоваться этим приложением, Вам необходимо добавить права в Настройках, затем перезапустить приложение.</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="494"/>
+        <location filename="../assets/main.qml" line="505"/>
         <source>Settings</source>
         <translation type="unfinished">Настройки</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="550"/>
+        <source>Descending order</source>
+        <translation type="unfinished">Нисходящий порядок</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="546"/>
+        <source>Sort by</source>
+        <translation type="unfinished">Сортировка по</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="592"/>
+        <source>Creation</source>
+        <translation type="unfinished">Дате создания</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="593"/>
+        <source>Name</source>
+        <translation type="unfinished">Имени</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="594"/>
+        <source>Deadline</source>
+        <translation type="unfinished">Сроку выполнения</translation>
     </message>
 </context>
 </TS>
