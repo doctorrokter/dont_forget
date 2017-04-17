@@ -246,29 +246,24 @@
 <context>
     <name>DeleteTaskDialog</name>
     <message>
-        <location filename="../assets/components/DeleteTaskDialog.qml" line="32"/>
         <source>Confirm the deleting</source>
-        <translation type="unfinished">Confirmer la suppression</translation>
+        <translation type="obsolete">Confirmer la suppression</translation>
     </message>
     <message>
-        <location filename="../assets/components/DeleteTaskDialog.qml" line="46"/>
         <source>This action cannot be undone. Also, task may contain children. All these will be deleted. Continue?</source>
-        <translation type="unfinished">Cette action ne peut pas être effectuée. La tâche peut être liée à d&apos;autres. L&apos;ensemble va être supprimer. Continuer?</translation>
+        <translation type="obsolete">Cette action ne peut pas être effectuée. La tâche peut être liée à d&apos;autres. L&apos;ensemble va être supprimer. Continuer?</translation>
     </message>
     <message>
-        <location filename="../assets/components/DeleteTaskDialog.qml" line="60"/>
         <source>Don&apos;t ask again</source>
-        <translation type="unfinished">Ne plus demander</translation>
+        <translation type="obsolete">Ne plus demander</translation>
     </message>
     <message>
-        <location filename="../assets/components/DeleteTaskDialog.qml" line="79"/>
         <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
+        <translation type="obsolete">Annuler</translation>
     </message>
     <message>
-        <location filename="../assets/components/DeleteTaskDialog.qml" line="88"/>
         <source>OK</source>
-        <translation type="unfinished">OK</translation>
+        <translation type="obsolete">OK</translation>
     </message>
 </context>
 <context>
@@ -734,7 +729,7 @@
         <translation type="unfinished">Editer</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="282"/>
+        <location filename="../assets/main.qml" line="283"/>
         <source>View</source>
         <translation type="unfinished">Regarder</translation>
     </message>
@@ -744,98 +739,113 @@
         <translation type="unfinished">Supprimer</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="245"/>
+        <location filename="../assets/main.qml" line="246"/>
         <source>Move</source>
         <translation type="unfinished">Déplacer</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="269"/>
+        <location filename="../assets/main.qml" line="270"/>
         <source>Send</source>
         <translation type="unfinished">Envoyer</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="306"/>
+        <location filename="../assets/main.qml" line="307"/>
         <source>Hide closed</source>
         <translation type="unfinished">Cacher terminer</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="308"/>
+        <location filename="../assets/main.qml" line="309"/>
         <source>Show all</source>
         <translation type="unfinished">Tout afficher</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="323"/>
+        <location filename="../assets/main.qml" line="324"/>
         <source>Search</source>
         <translation type="unfinished">Rechercher</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="345"/>
+        <location filename="../assets/main.qml" line="346"/>
         <source>Single select</source>
         <translation type="unfinished">Single select</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="347"/>
+        <location filename="../assets/main.qml" line="348"/>
         <source>Select more</source>
         <translation type="unfinished">Sélectionnez plus</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="358"/>
+        <location filename="../assets/main.qml" line="359"/>
         <source>Open in Calendar</source>
         <translation type="unfinished">Ouvrir dans le Calendrier</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="369"/>
+        <location filename="../assets/main.qml" line="370"/>
         <source>Open in Remember</source>
         <translation type="unfinished">Ouvrir dans Remember</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="381"/>
+        <location filename="../assets/main.qml" line="382"/>
         <source>Sort</source>
         <translation type="unfinished">Trier</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="414"/>
-        <location filename="../assets/main.qml" line="596"/>
+        <location filename="../assets/main.qml" line="415"/>
+        <location filename="../assets/main.qml" line="610"/>
         <source>All Tasks</source>
         <translation type="unfinished">Toutes les tâches</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="515"/>
+        <location filename="../assets/main.qml" line="516"/>
         <source>Permission required</source>
         <translation type="unfinished">Permission demandée</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="516"/>
+        <location filename="../assets/main.qml" line="517"/>
         <source>Looks like you didn&apos;t grant permission for shared files. &quot;Don&apos;t Forget&quot; cannot work without this permission since the app stores own database in external resources. In order to use this app you should grant permissions in Settings, then restart the app.</source>
         <translation type="unfinished">Il semblerait que vous n&apos;avez pas accepter la permission de partage de fichiers. &quot;Don&apos;t Forget&quot; ne peut fonctionner sans cette permission. Pour utiliser cette application vous devez autoriser cette permission dans les paramètres du téléphone, puis redémarrer l&apos;application.</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="519"/>
+        <location filename="../assets/main.qml" line="520"/>
         <source>Settings</source>
         <translation type="unfinished">Paramètres</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="564"/>
+        <location filename="../assets/main.qml" line="544"/>
+        <source>Confirm the deleting</source>
+        <translation type="unfinished">Confirmer la suppression</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="545"/>
+        <source>This action cannot be undone. Also, task may contain children. All these will be deleted. Continue?</source>
+        <translation type="unfinished">Cette action ne peut pas être effectuée. La tâche peut être liée à d&apos;autres. L&apos;ensemble va être supprimer. Continuer?</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="548"/>
+        <source>Don&apos;t ask again</source>
+        <translation type="unfinished">Ne plus demander</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="578"/>
         <source>Descending order</source>
         <translation type="unfinished">Ordre décroissant</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="560"/>
+        <location filename="../assets/main.qml" line="574"/>
         <source>Sort by</source>
         <translation type="unfinished">Trier par</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="611"/>
+        <location filename="../assets/main.qml" line="625"/>
         <source>Creation</source>
         <translation type="unfinished">Créer</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="612"/>
+        <location filename="../assets/main.qml" line="626"/>
         <source>Name</source>
         <translation type="unfinished">Nom</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="613"/>
+        <location filename="../assets/main.qml" line="627"/>
         <source>Deadline</source>
         <translation type="unfinished">Date de fin</translation>
     </message>

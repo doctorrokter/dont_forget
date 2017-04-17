@@ -42,7 +42,6 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/cards/UpdateTaskCard.qml) \
         $$quote($$BASEDIR/assets/components/AttachmentsContainer.qml) \
         $$quote($$BASEDIR/assets/components/CustomTitleBar.qml) \
-        $$quote($$BASEDIR/assets/components/DeleteTaskDialog.qml) \
         $$quote($$BASEDIR/assets/components/ExpandableButton.qml) \
         $$quote($$BASEDIR/assets/components/InputTitleBar.qml) \
         $$quote($$BASEDIR/assets/components/OkButton.qml) \

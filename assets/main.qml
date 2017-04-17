@@ -223,7 +223,8 @@ NavigationPane {
                             deleteTask(id, tasksContainer);
                         }
                     } else {
-                        deleteTaskDialog.open();
+//                        deleteTaskDialog.open();
+                        deleteTaskDialog.show();
                     }
                 }
                 
@@ -533,25 +534,38 @@ NavigationPane {
                 }
             },
             
-            DeleteTaskDialog {
-                id: deleteTaskDialog
-                
-                onConfirm: {
-                    if (_tasksService.multiselectMode) {
-                        var ids = _tasksService.deleteBulk();
-                        ids.forEach(function(id) {
-                            deleteTask(id, tasksContainer);
-                        });
-                    } else {
-                        var id = _tasksService.activeTask.id;
-                        _tasksService.deleteTask(id);
-                        deleteTask(id, tasksContainer);
-                    }
-                }
-            },
-            
             SystemToast {
                 id: toast
+            },
+            
+            SystemDialog {
+                id: deleteTaskDialog
+                
+                title: qsTr("Confirm the deleting") + Retranslate.onLocaleOrLanguageChanged
+                body: qsTr("This action cannot be undone. Also, task may contain children. All these will be deleted. Continue?") + Retranslate.onLocaleOrLanguageChanged
+                
+                includeRememberMe: true
+                rememberMeText: qsTr("Don't ask again") + Retranslate.onLocaleOrLanguageChanged
+                rememberMeChecked: {
+                    var dontAsk = _appConfig.get("do_not_ask_before_deleting");
+                    return dontAsk !== "" && dontAsk === "true";
+                }
+                
+                onFinished: {
+                    if (value === 2) {
+                        _appConfig.set("do_not_ask_before_deleting", deleteTaskDialog.rememberMeSelection() + "");
+                        if (_tasksService.multiselectMode) {
+                            var ids = _tasksService.deleteBulk();
+                            ids.forEach(function(id) {
+                                    deleteTask(id, tasksContainer);
+                            });
+                        } else {
+                            var id = _tasksService.activeTask.id;
+                            _tasksService.deleteTask(id);
+                            deleteTask(id, tasksContainer);
+                        }
+                    }
+                }
             },
             
             SystemListDialog {
