@@ -101,6 +101,10 @@ NavigationPane {
                 
                 scrollRole: ScrollRole.Main
                 
+                scrollViewProperties {
+                    scrollMode: ScrollMode.Vertical
+                }
+                
                 Container {
                     horizontalAlignment: HorizontalAlignment.Fill
                     verticalAlignment: VerticalAlignment.Fill
@@ -577,6 +581,11 @@ NavigationPane {
                         main.renderSortingItems();
                     }
                 }                
+            },
+            
+            ComponentDefinition {
+                id: debugPage
+                DebugPage {}
             }
         ]
         
@@ -748,6 +757,9 @@ NavigationPane {
             });
         }
         loading.running = false;
+        
+        var dp = debugPage.createObject();
+        navigation.push(dp);
     }
     
     function openTaskSheetEditMode(data) {
@@ -771,6 +783,7 @@ NavigationPane {
         _tasksService.quickFolderCreated.connect(navigation.onTaskCreated);
         _tasksService.taskMoved.connect(navigation.renderTree);
         _tasksService.taskMovedInBulk.connect(navigation.renderTree);
+        _tasksService.parentIdChangedInDebug.connect(navigation.renderTree);
         _app.taskSheetRequested.connect(navigation.openTaskSheetEditMode);
         _app.tasksReceived.connect(navigation.renderTree);
         _app.taskCardDone.connect(navigation.renderTree);

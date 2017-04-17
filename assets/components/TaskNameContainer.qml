@@ -15,6 +15,14 @@ Container {
         textField.requestFocus();
     }
     
+    function isValid() {
+        return textField.validator.state === ValidationState.Valid;
+    }
+    
+    function validate() {
+        textField.validator.validate();
+    }
+    
     Container {
         leftPadding: ui.du(2.5)
         topPadding: ui.du(2.5)
@@ -27,6 +35,18 @@ Container {
         id: textField
         text: value
         inputMode: TextFieldInputMode.Text
+        
+        validator: Validator {
+            errorMessage: qsTr("This field cannot be empty") + Retranslate.onLocaleOrLanguageChanged
+            mode: ValidationMode.Custom
+            onValidate: {
+                if (root.result.trim() === "") {
+                    state = ValidationState.Invalid;
+                } else {
+                    state = ValidationState.Valid;
+                }
+            }
+        }
         
         onTextChanging: {
             root.result = text;

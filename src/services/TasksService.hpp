@@ -31,6 +31,7 @@ public:
     virtual ~TasksService();
 
     void init();
+    void processCollisions();
 
     Q_INVOKABLE QVariantList findAll() const;
     Q_INVOKABLE QVariantMap findById(const int id);
@@ -38,6 +39,7 @@ public:
     Q_INVOKABLE QVariantList findSiblings(const int parentId);
     Q_INVOKABLE QVariantMap lastCreated();
     Q_INVOKABLE bool isExists(const int id);
+    Q_INVOKABLE bool hasChildren(const int id);
 
     Q_INVOKABLE void changeClosed(const int id, const bool closed);
     Q_INVOKABLE void changeExpanded(const int id, const bool expanded);
@@ -51,6 +53,7 @@ public:
     Q_INVOKABLE void deleteTask(const int id);
     Q_INVOKABLE void moveTask(const int parentId = 0);
     Q_INVOKABLE void copyTask(const Task& task);
+    Q_INVOKABLE void changeParentIdInDebug(const int id, const int parentId);
 
     Q_INVOKABLE void expandAll();
     Q_INVOKABLE void unexpandAll();
@@ -80,6 +83,7 @@ Q_SIGNALS:
     void taskMovedInBulk();
     void droppedRememberId(const int taskId);
     void droppedCalendarId(const int taskId);
+    void parentIdChangedInDebug(const int id);
 
 private Q_SLOTS:
     void processMultiselectMode(const bool multiselectMode);

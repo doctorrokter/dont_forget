@@ -45,6 +45,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/components/DeleteTaskDialog.qml) \
         $$quote($$BASEDIR/assets/components/ExpandableButton.qml) \
         $$quote($$BASEDIR/assets/components/InputTitleBar.qml) \
+        $$quote($$BASEDIR/assets/components/OkButton.qml) \
         $$quote($$BASEDIR/assets/components/Task.qml) \
         $$quote($$BASEDIR/assets/components/TaskDeadlineContainer.qml) \
         $$quote($$BASEDIR/assets/components/TaskDescriptionContainer.qml) \
@@ -87,6 +88,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/ic_sort.png) \
         $$quote($$BASEDIR/assets/images/ic_watch.png) \
         $$quote($$BASEDIR/assets/images/js_icon_big_512x512.png) \
+        $$quote($$BASEDIR/assets/images/ok_button.png) \
         $$quote($$BASEDIR/assets/images/pdf_icon.png) \
         $$quote($$BASEDIR/assets/images/pdf_icon_big.png) \
         $$quote($$BASEDIR/assets/images/ppt_icon_big_512x512.png) \
@@ -100,7 +102,11 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/migrations/3_create_table_df_users.sql) \
         $$quote($$BASEDIR/assets/migrations/4_create_table_attachments.sql) \
         $$quote($$BASEDIR/assets/migrations/5_alter_table_tasks_add_calendar_id.sql) \
+        $$quote($$BASEDIR/assets/migrations/6_create_index_parent_id_type.sql) \
+        $$quote($$BASEDIR/assets/migrations/7_create_index_parent_id.sql) \
+        $$quote($$BASEDIR/assets/migrations/8_create_index_type.sql) \
         $$quote($$BASEDIR/assets/pages/ContactsPage.qml) \
+        $$quote($$BASEDIR/assets/pages/DebugPage.qml) \
         $$quote($$BASEDIR/assets/pages/HelpPage.qml) \
         $$quote($$BASEDIR/assets/pages/MoveTaskPage.qml) \
         $$quote($$BASEDIR/assets/pages/SettingsPage.qml) \

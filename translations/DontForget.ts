@@ -188,6 +188,17 @@
     </message>
 </context>
 <context>
+    <name>DebugPage</name>
+    <message>
+        <source>Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Root</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DeleteTaskDialog</name>
     <message>
         <source>Confirm the deleting</source>
@@ -415,6 +426,10 @@
     <name>TaskNameContainer</name>
     <message>
         <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This field cannot be empty</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -59,6 +59,9 @@ ApplicationUI::ApplicationUI() : QObject() {
 
     m_pDbConfig = new DBConfig(this);
 
+    // TODO: DELETE THIS!!!
+//    m_pDbConfig->execute("UPDATE tasks SET parent_id = NULL WHERE id = 221");
+
     m_pAttachmentsService = new AttachmentsService(this, m_pDbConfig);
 
     m_pPushService = new PushNotificationService(this);
@@ -70,6 +73,8 @@ ApplicationUI::ApplicationUI() : QObject() {
     m_pUsersService = new UsersService(this, m_pDbConfig);
     m_pDropboxService = new DropboxService(this);
     m_pSignal = new Signal(this);
+
+    m_pTasksService->processCollisions();
 
     bool res = QObject::connect(m_pDropboxService, SIGNAL(fileLoaded(const QString&)), this, SLOT(processTasksContent(const QString&)));
     Q_ASSERT(res);

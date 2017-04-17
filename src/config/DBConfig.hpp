@@ -11,6 +11,9 @@
 #include <QtCore/QObject>
 #include <bb/data/SqlDataAccess>
 #include <QtSql/QtSql>
+#include <QVariant>
+#include <QVariantMap>
+#include <QVariantList>
 
 using namespace bb::data;
 
@@ -19,6 +22,10 @@ class DBConfig: public QObject {
 public:
     DBConfig(QObject* parent = 0);
     virtual ~DBConfig();
+
+    QVariant execute(const QString& query);
+    QVariant execute(const QString& query, const QVariantMap& data);
+    QVariant execute(const QString& query, const QVariantList& data);
 
     SqlDataAccess* connection();
     bool isNewDb() const;

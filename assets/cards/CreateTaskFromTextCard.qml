@@ -37,7 +37,11 @@ NavigationPane {
                     var createInRemember = rememberToggleButton.checked ? 1 : 0;
                     var createInCalendar = deadLineToggleButton.checked && calendarToggleButton.checked ? 1 : 0;
                     
-                    _tasksService.createTask(taskName.result.trim(), description.result.trim(), "TASK", deadline, important, createInRemember, files, createInCalendar);
+                    taskName.validate();
+                    if (taskName.isValid()) {
+                        _tasksService.createTask(taskName.result.trim(), description.result.trim(), "TASK", deadline, important, createInRemember, files, createInCalendar);
+                    }
+                    
                 }
             }
         }

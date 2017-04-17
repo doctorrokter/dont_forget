@@ -1,5 +1,5 @@
 1
-75
+81
 cards/CreateTaskFromTextCard.qml
 cards/CreateTaskFromUrlCard.qml
 cards/TestCard.qml
@@ -9,6 +9,7 @@ components/CustomTitleBar.qml
 components/DeleteTaskDialog.qml
 components/ExpandableButton.qml
 components/InputTitleBar.qml
+components/OkButton.qml
 components/Task.qml
 components/TaskDeadlineContainer.qml
 components/TaskDescriptionContainer.qml
@@ -51,6 +52,7 @@ images/ic_share.png
 images/ic_sort.png
 images/ic_watch.png
 images/js_icon_big_512x512.png
+images/ok_button.png
 images/pdf_icon.png
 images/pdf_icon_big.png
 images/ppt_icon_big_512x512.png
@@ -64,7 +66,11 @@ migrations/2_create_table_tasks.sql
 migrations/3_create_table_df_users.sql
 migrations/4_create_table_attachments.sql
 migrations/5_alter_table_tasks_add_calendar_id.sql
+migrations/6_create_index_parent_id_type.sql
+migrations/7_create_index_parent_id.sql
+migrations/8_create_index_type.sql
 pages/ContactsPage.qml
+pages/DebugPage.qml
 pages/HelpPage.qml
 pages/MoveTaskPage.qml
 pages/SettingsPage.qml

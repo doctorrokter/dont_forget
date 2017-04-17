@@ -1,0 +1,1 @@
+CREATE INDEX IF NOT EXISTS parent_id_type ON tasks(parent_id, type);

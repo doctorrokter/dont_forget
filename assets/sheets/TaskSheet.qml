@@ -29,6 +29,7 @@ Sheet {
             }
             
             submitAction: ActionItem {
+                id: createTaskAction
                 title: qsTr("OK") + Retranslate.onLocaleOrLanguageChanged
                 
                 onTriggered: {
@@ -43,123 +44,154 @@ Sheet {
                         files.push(attachmentsContainer.attachments[i]);
                     }
                     
-                    if (taskSheet.mode === taskSheet.modes.CREATE) {
-                        var names = taskName.result.split(";;");
-                        names.forEach(function(name) {
-                            _tasksService.createTask(name.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, files, createInCalendar);
-                        });
-                    } else {
-                        _tasksService.updateTask(taskName.result.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, closed, files, createInCalendar);
+                    taskName.validate();
+                    if (taskName.isValid()) {
+                        if (taskSheet.mode === taskSheet.modes.CREATE) {
+                            var names = taskName.result.split(";;");
+                            names.forEach(function(name) {
+                                    _tasksService.createTask(name.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, files, createInCalendar);
+                            });
+                        } else {
+                            _tasksService.updateTask(taskName.result.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, closed, files, createInCalendar);
+                        }
+                        taskSheet.close();
                     }
-                    taskSheet.close();    
                 }
             }
+            
+            attachedObjects: [
+                LayoutUpdateHandler {
+                    id: titleLUH
+                }
+            ]
         }
         
         actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
         actionBarVisibility: ChromeVisibility.Overlay
         
-        ScrollView {
-            scrollRole: ScrollRole.Main
+        Container {
+            layout: DockLayout {}
             
-            Container {
-                horizontalAlignment: HorizontalAlignment.Fill
+            ScrollView {
+                scrollRole: ScrollRole.Main
                 
-                TaskNameContainer {
-                    id: taskName
-                }
-                
-                TaskDescriptionContainer {
-                    id: description
-                }
-                
-                AttachmentsContainer {
-                    id: attachmentsContainer
-                }
-                
-                Container {
-                    visible: taskSheet.mode === taskSheet.modes.UPDATE
-                    leftPadding: ui.du(2.5)
-                    topPadding: ui.du(2.5)
-                    rightPadding: ui.du(2.5)
-                    horizontalAlignment: HorizontalAlignment.Fill
+                onViewableAreaChanging: {
                     
-                    layout: DockLayout {}
-                    
-                    Label {
-                        horizontalAlignment: HorizontalAlignment.Left
-                        text: qsTr("Task done") + Retranslate.onLocaleOrLanguageChanged
+                    if (viewableArea.y > titleLUH.layoutFrame.height) {
+                        okButton.show();
+                    } else {
+                        okButton.hide();
                     }
-                    
-                    CheckBox {
-                        id: closeTaskCheckbox
-                        checked: false
-                        horizontalAlignment: HorizontalAlignment.Right
-                    }
-                }
-                
-                Container {
-                    leftPadding: ui.du(2.5)
-                    topPadding: ui.du(2.5)
-                    rightPadding: ui.du(2.5)
-                    DropDown {
-                        id: taskType
-                        
-                        title: qsTr("Type") + Retranslate.onLocaleOrLanguageChanged
-                        
-                        options: [
-                            Option {
-                                id: folderOption
-                                text: qsTr("Folder") + Retranslate.onLocaleOrLanguageChanged
-                                value: "FOLDER"
-                            },
-                            
-                            Option {
-                                id: listOption
-                                text: qsTr("List") + Retranslate.onLocaleOrLanguageChanged
-                                value: "LIST"
-                            },
-                            
-                            Option {
-                                id: taskOption
-                                text: qsTr("Task") + Retranslate.onLocaleOrLanguageChanged
-                                value: "TASK"
-                            }
-                        ]
-                    }
-                }
-                
-                
-                ToggleBlock {
-                    id: deadLineToggleButton
-                    title: qsTr("Deadline") + Retranslate.onLocaleOrLanguageChanged
-                }
-                
-                TaskDeadlineContainer {
-                    id: deadLineContainer
-                    visible: deadLineToggleButton.checked
-                    date: currDatePlus2Hourse();
-                }
-                
-                ToggleBlock {
-                    id: calendarToggleButton
-                    title: qsTr("Add to Calendar") + Retranslate.onLocaleOrLanguageChanged
-                    visible: deadLineToggleButton.checked
-                }
-                
-                ToggleBlock {
-                    id: rememberToggleButton
-                    title: qsTr("Create in Remember") + Retranslate.onLocaleOrLanguageChanged
-                }
-                
-                ToggleBlock {
-                    id: importantToggleButton
-                    title: qsTr("Important") + Retranslate.onLocaleOrLanguageChanged
                 }
                 
                 Container {
                     horizontalAlignment: HorizontalAlignment.Fill
-                    preferredHeight: ui.du(12)
+                    
+                    TaskNameContainer {
+                        id: taskName
+                    }
+                    
+                    TaskDescriptionContainer {
+                        id: description
+                    }
+                    
+                    AttachmentsContainer {
+                        id: attachmentsContainer
+                    }
+                    
+                    Container {
+                        visible: taskSheet.mode === taskSheet.modes.UPDATE
+                        leftPadding: ui.du(2.5)
+                        topPadding: ui.du(2.5)
+                        rightPadding: ui.du(2.5)
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        
+                        layout: DockLayout {}
+                        
+                        Label {
+                            horizontalAlignment: HorizontalAlignment.Left
+                            text: qsTr("Task done") + Retranslate.onLocaleOrLanguageChanged
+                        }
+                        
+                        CheckBox {
+                            id: closeTaskCheckbox
+                            checked: false
+                            horizontalAlignment: HorizontalAlignment.Right
+                        }
+                    }
+                    
+                    Container {
+                        leftPadding: ui.du(2.5)
+                        topPadding: ui.du(2.5)
+                        rightPadding: ui.du(2.5)
+                        DropDown {
+                            id: taskType
+                            
+                            title: qsTr("Type") + Retranslate.onLocaleOrLanguageChanged
+                            
+                            options: [
+                                Option {
+                                    id: folderOption
+                                    text: qsTr("Folder") + Retranslate.onLocaleOrLanguageChanged
+                                    value: "FOLDER"
+                                },
+                                
+                                Option {
+                                    id: listOption
+                                    text: qsTr("List") + Retranslate.onLocaleOrLanguageChanged
+                                    value: "LIST"
+                                },
+                                
+                                Option {
+                                    id: taskOption
+                                    text: qsTr("Task") + Retranslate.onLocaleOrLanguageChanged
+                                    value: "TASK"
+                                }
+                            ]
+                        }
+                    }
+                    
+                    
+                    ToggleBlock {
+                        id: deadLineToggleButton
+                        title: qsTr("Deadline") + Retranslate.onLocaleOrLanguageChanged
+                    }
+                    
+                    TaskDeadlineContainer {
+                        id: deadLineContainer
+                        visible: deadLineToggleButton.checked
+                        date: currDatePlus2Hourse();
+                    }
+                    
+                    ToggleBlock {
+                        id: calendarToggleButton
+                        title: qsTr("Add to Calendar") + Retranslate.onLocaleOrLanguageChanged
+                        visible: deadLineToggleButton.checked
+                    }
+                    
+                    ToggleBlock {
+                        id: rememberToggleButton
+                        title: qsTr("Create in Remember") + Retranslate.onLocaleOrLanguageChanged
+                    }
+                    
+                    ToggleBlock {
+                        id: importantToggleButton
+                        title: qsTr("Important") + Retranslate.onLocaleOrLanguageChanged
+                    }
+                    
+                    Container {
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        preferredHeight: ui.du(12)
+                    }
+                }
+            }
+            
+            OkButton {
+                id: okButton
+                
+                horizontalAlignment: HorizontalAlignment.Right
+                onTriggered: {
+                    createTaskAction.triggered();
                 }
             }
         }
