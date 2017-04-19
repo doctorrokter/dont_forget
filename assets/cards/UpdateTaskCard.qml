@@ -28,9 +28,13 @@ NavigationPane {
             }
             
             submitAction: ActionItem {
+                id: createTaskAction
                 title: qsTr("OK") + Retranslate.onLocaleOrLanguageChanged
+                enabled: true
                 
                 onTriggered: {
+                    createTaskAction.enabled = false;
+                    
                     var files = [];
                     var deadline = deadLineToggleButton.checked ? new Date(deadLineContainer.result).getTime() / 1000 : 0;
                     var important = importantToggleButton.checked ? 1 : 0;
@@ -173,6 +177,21 @@ NavigationPane {
                     var id = _tasksService.activeTask.id;
                     _tasksService.deleteTask(id);
                     deleteTask(id, tasksContainer);
+                }
+            }
+        ]
+        
+        actions: [
+            ActionItem {
+                id: okAction
+                title: qsTr("OK") + Retranslate.onLocaleOrLanguageChanged
+                ActionBar.placement: ActionBarPlacement.Signature
+                imageSource: "asset:///images/ic_done.png"
+                enabled: createTaskAction.enabled
+                
+                onTriggered: {
+                    createTaskAction.triggered();
+                    createTaskAction.enabled = false;
                 }
             }
         ]

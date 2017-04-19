@@ -772,8 +772,8 @@ NavigationPane {
         }
         loading.running = false;
         
-        var dp = debugPage.createObject();
-        navigation.push(dp);
+//        var dp = debugPage.createObject();
+//        navigation.push(dp);
     }
     
     function openTaskSheetEditMode(data) {

@@ -28,9 +28,14 @@ NavigationPane {
             }
             
             submitAction: ActionItem {
+                id: createTaskAction
+                enabled: true
+                
                 title: qsTr("OK") + Retranslate.onLocaleOrLanguageChanged
                 
                 onTriggered: {
+                    createTaskAction.enabled = false;
+                    
                     var files = [];
                     var deadline = deadLineToggleButton.checked ? new Date(deadLineContainer.result).getTime() / 1000 : 0;
                     var important = importantToggleButton.checked ? 1 : 0;
@@ -161,6 +166,21 @@ NavigationPane {
                 
                 onFinished: {
                     navigation.quit();
+                }
+            }
+        ]
+        
+        actions: [
+            ActionItem {
+                id: okAction
+                title: qsTr("OK") + Retranslate.onLocaleOrLanguageChanged
+                ActionBar.placement: ActionBarPlacement.Signature
+                imageSource: "asset:///images/ic_done.png"
+                enabled: createTaskAction.enabled
+                
+                onTriggered: {
+                    createTaskAction.triggered();
+                    createTaskAction.enabled = false;
                 }
             }
         ]

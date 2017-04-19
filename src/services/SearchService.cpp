@@ -61,9 +61,35 @@ void SearchService::init() {
 
         if (m_pTaskService != NULL) {
             QVariantList tasks = m_pTaskService->findAll();
+//            QString query1("INSERT INTO search_info (rowid, icon_path, uri, timestamp, group_id, task_id, parent_id) ");
+//            QString query2("INSERT INTO search (docid, title, description) ");
             for (int i = 0; i < tasks.size(); i++) {
                 addTask(tasks.at(i).toMap());
+
+//                QVariantMap taskMap = tasks.at(i).toMap();
+//                Task task;
+//                task.fromMap(tasks.at(i).toMap());
+//
+//                QString parentId = NULL;
+//                if (!taskMap.value("parent_id").toString().isEmpty()) {
+//                    parentId = taskMap.value("parent_id").toString();
+//                }
+//
+//                QString taskId = QString::number(task.getId());
+//                if (i == 0) {
+//                    query1.append("SELECT '" + taskId + "' AS 'rowid', '' AS 'icon_path', '' AS 'uri', '0' AS 'timestamp', '" + taskId + "' AS 'group_id', '" + taskId + "' AS 'task_id', '" + parentId + "' AS 'parent_id' ");
+//                    query2.append("SELECT '" + taskId + "' AS 'docid', '" + task.getName() + "' AS 'title', '" + task.getDescription() + "' AS 'description' ");
+//                } else {
+//                    query1.append("UNION ALL SELECT '" + taskId + "', '', '', '0', '" + taskId + "', '" + taskId + "', '" + parentId + "' ");
+//                    query2.append("UNION ALL SELECT '" + taskId + "', '" + task.getName() + "', '" + task.getDescription() + "' ");
+//                }
             }
+
+//            qDebug() << query1 << endl;
+//            qDebug() << query2 << endl;
+//
+//            m_pSda->execute(query1);
+//            m_pSda->execute(query2);
 //            AppConfig::setStatic("search_db_indexed", "true");
         }
 //    } else {

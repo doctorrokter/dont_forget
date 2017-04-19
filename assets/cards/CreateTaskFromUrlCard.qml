@@ -28,9 +28,13 @@ NavigationPane {
             }
             
             submitAction: ActionItem {
+                id: createTaskAction
                 title: qsTr("OK") + Retranslate.onLocaleOrLanguageChanged
+                enabled: true
                 
                 onTriggered: {
+                    createTaskAction.enabled = false;
+                    
                     var files = [];
                     for (var i = 0; i < attachmentsContainer.attachments.length; i++) {
                         files.push(attachmentsContainer.attachments[i]);
@@ -160,6 +164,21 @@ NavigationPane {
                 minWidth: ui.du(10)
             }
         }
+        
+        actions: [
+            ActionItem {
+                id: okAction
+                title: qsTr("OK") + Retranslate.onLocaleOrLanguageChanged
+                ActionBar.placement: ActionBarPlacement.Signature
+                imageSource: "asset:///images/ic_done.png"
+                enabled: createTaskAction.enabled
+                
+                onTriggered: {
+                    createTaskAction.triggered();
+                    createTaskAction.enabled = false;
+                }
+            }
+        ]
         
         function setTitle(title) {
             taskName.value = title;

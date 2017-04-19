@@ -12,6 +12,8 @@ Sheet {
     }
     
     Page {
+        id: page
+        
         titleBar: CustomTitleBar {
             title: {
                 if (taskSheet.mode === taskSheet.modes.CREATE) {
@@ -31,8 +33,11 @@ Sheet {
             submitAction: ActionItem {
                 id: createTaskAction
                 title: qsTr("OK") + Retranslate.onLocaleOrLanguageChanged
+                enabled: true
                 
                 onTriggered: {
+                    createTaskAction = false;
+                    
                     var deadline = deadLineToggleButton.checked ? new Date(deadLineContainer.result).getTime() / 1000 : 0;
                     var important = importantToggleButton.checked ? 1 : 0;
                     var createInRemember = rememberToggleButton.checked ? 1 : 0;
@@ -58,12 +63,6 @@ Sheet {
                     }
                 }
             }
-            
-            attachedObjects: [
-                LayoutUpdateHandler {
-                    id: titleLUH
-                }
-            ]
         }
         
         actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
@@ -74,15 +73,6 @@ Sheet {
             
             ScrollView {
                 scrollRole: ScrollRole.Main
-                
-                onViewableAreaChanging: {
-                    
-                    if (viewableArea.y > titleLUH.layoutFrame.height) {
-                        okButton.show();
-                    } else {
-                        okButton.hide();
-                    }
-                }
                 
                 Container {
                     horizontalAlignment: HorizontalAlignment.Fill
@@ -185,15 +175,6 @@ Sheet {
                     }
                 }
             }
-            
-            OkButton {
-                id: okButton
-                
-                horizontalAlignment: HorizontalAlignment.Right
-                onTriggered: {
-                    createTaskAction.triggered();
-                }
-            }
         }
         
         shortcuts: [
@@ -215,6 +196,19 @@ Sheet {
                 
                 onTriggered: {
                     filePickersSheet.open();
+                }
+            },
+            
+            ActionItem {
+                id: okAction
+                title: qsTr("OK") + Retranslate.onLocaleOrLanguageChanged
+                ActionBar.placement: ActionBarPlacement.Signature
+                imageSource: "asset:///images/ic_done.png"
+                enabled: createTaskAction.enabled
+                
+                onTriggered: {
+                    createTaskAction.triggered();
+                    createTaskAction.enabled = false;
                 }
             }
         ]
@@ -304,6 +298,7 @@ Sheet {
     }
     
     onOpened: {
+        createTaskAction.enabled = true;
         if (taskSheet.mode === taskSheet.modes.UPDATE) {
             importantToggleButton.checked = _tasksService.activeTask.important;
             deadLineToggleButton.checked = _tasksService.activeTask.deadline !== 0;

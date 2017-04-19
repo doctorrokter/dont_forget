@@ -1,12 +1,11 @@
 1
-81
+80
 cards/CreateTaskFromTextCard.qml
 cards/CreateTaskFromUrlCard.qml
 cards/TestCard.qml
 cards/UpdateTaskCard.qml
 components/AttachmentsContainer.qml
 components/CustomTitleBar.qml
-components/DeleteTaskDialog.qml
 components/ExpandableButton.qml
 components/InputTitleBar.qml
 components/OkButton.qml
