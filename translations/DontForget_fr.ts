@@ -560,57 +560,57 @@
     </message>
     <message>
         <location filename="../assets/sheets/TaskSheet.qml" line="35"/>
-        <location filename="../assets/sheets/TaskSheet.qml" line="204"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="229"/>
         <source>OK</source>
         <translation type="unfinished">OK</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="103"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="104"/>
         <source>Task done</source>
         <translation type="unfinished">Tâche effectuée</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="120"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="121"/>
         <source>Type</source>
         <translation type="unfinished">Type</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="125"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="126"/>
         <source>Folder</source>
         <translation type="unfinished">Dossier</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="131"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="138"/>
         <source>List</source>
         <translation type="unfinished">Liste</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="137"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="150"/>
         <source>Task</source>
         <translation type="unfinished">Tâche</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="147"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="172"/>
         <source>Deadline</source>
         <translation type="unfinished">Date de fin</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="158"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="183"/>
         <source>Add to Calendar</source>
         <translation type="unfinished">Ajouter au calendrier</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="164"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="189"/>
         <source>Create in Remember</source>
         <translation type="unfinished">Créer dans Remember</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="169"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="194"/>
         <source>Important</source>
         <translation type="unfinished">Important</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="193"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="218"/>
         <source>Attachment</source>
         <translation type="unfinished">Image</translation>
     </message>
@@ -631,27 +631,27 @@
 <context>
     <name>TasksListPage</name>
     <message>
-        <location filename="../assets/pages/TasksListPage.qml" line="75"/>
+        <location filename="../assets/pages/TasksListPage.qml" line="91"/>
         <source>Choose a folder</source>
         <translation type="unfinished">Choisir un dossier</translation>
     </message>
     <message>
-        <location filename="../assets/pages/TasksListPage.qml" line="96"/>
+        <location filename="../assets/pages/TasksListPage.qml" line="112"/>
         <source>Create a folder</source>
         <translation type="unfinished">Créer un dossier</translation>
     </message>
     <message>
-        <location filename="../assets/pages/TasksListPage.qml" line="113"/>
+        <location filename="../assets/pages/TasksListPage.qml" line="129"/>
         <source>Search</source>
         <translation type="unfinished">Rechercher</translation>
     </message>
     <message>
-        <location filename="../assets/pages/TasksListPage.qml" line="134"/>
+        <location filename="../assets/pages/TasksListPage.qml" line="150"/>
         <source>Create</source>
         <translation type="unfinished">Créer</translation>
     </message>
     <message>
-        <location filename="../assets/pages/TasksListPage.qml" line="198"/>
+        <location filename="../assets/pages/TasksListPage.qml" line="214"/>
         <source>Root</source>
         <translation type="unfinished">Racine</translation>
     </message>

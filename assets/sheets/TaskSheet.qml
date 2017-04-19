@@ -43,6 +43,7 @@ Sheet {
                     var createInRemember = rememberToggleButton.checked ? 1 : 0;
                     var closed = closeTaskCheckbox.checked ? 1 : 0;
                     var createInCalendar = deadLineToggleButton.checked && calendarToggleButton.checked ? 1 : 0;
+                    var color = palette.visible ? palette.color : "";
                     
                     var files = [];
                     for (var i = 0; i < attachmentsContainer.attachments.length; i++) {
@@ -54,10 +55,10 @@ Sheet {
                         if (taskSheet.mode === taskSheet.modes.CREATE) {
                             var names = taskName.result.split(";;");
                             names.forEach(function(name) {
-                                    _tasksService.createTask(name.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, files, createInCalendar);
+                                    _tasksService.createTask(name.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, files, createInCalendar, color);
                             });
                         } else {
-                            _tasksService.updateTask(taskName.result.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, closed, files, createInCalendar);
+                            _tasksService.updateTask(taskName.result.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, closed, files, createInCalendar, color);
                         }
                         taskSheet.close();
                     }
@@ -124,12 +125,24 @@ Sheet {
                                     id: folderOption
                                     text: qsTr("Folder") + Retranslate.onLocaleOrLanguageChanged
                                     value: "FOLDER"
+                                    
+                                    onSelectedChanged: {
+                                        if (selected) {
+                                            palette.color = palette.colors.BLUE;
+                                        }
+                                    }
                                 },
                                 
                                 Option {
                                     id: listOption
                                     text: qsTr("List") + Retranslate.onLocaleOrLanguageChanged
                                     value: "LIST"
+                                    
+                                    onSelectedChanged: {
+                                        if (selected) {
+                                            palette.color = palette.colors.GREEN;
+                                        }
+                                    }
                                 },
                                 
                                 Option {
@@ -141,6 +154,18 @@ Sheet {
                         }
                     }
                     
+                    Palette {
+                        id: palette
+                        
+                        horizontalAlignment: HorizontalAlignment.Center
+                        visible: folderOption.selected || listOption.selected
+                        
+                        color: palette.colors.BLUE;
+                        
+                        leftPadding: ui.du(2.5)
+                        topPadding: ui.du(2.5)
+                        rightPadding: ui.du(2.5)
+                    }
                     
                     ToggleBlock {
                         id: deadLineToggleButton

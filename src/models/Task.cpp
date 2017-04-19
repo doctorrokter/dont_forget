@@ -8,7 +8,9 @@
 #include "Task.hpp"
 #include <QVariantList>
 
-Task::Task(QObject* parent) : QObject(parent), m_id(0), m_name(""), m_description(""), m_type("FOLDER"), m_parentId(0), m_deadline(0), m_important(false), m_closed(false), m_expanded(true), m_rememberId(""), m_calendarId(0) {}
+Task::Task(QObject* parent) : QObject(parent), m_id(0), m_name(""), m_description(""), m_type("FOLDER"), m_parentId(0),
+    m_deadline(0), m_important(false), m_closed(false), m_expanded(true), m_rememberId(""),
+    m_calendarId(0), m_color("") {}
 
 Task::Task(const Task& task) : QObject(task.parent()) {
     if (this != &task) {
@@ -97,6 +99,12 @@ void Task::setCalendarId(const int calendarId) {
     emit calendarIdChanged(m_calendarId);
 }
 
+const QString& Task::getColor() const { return m_color; }
+void Task::setColor(const QString& color) {
+    m_color = color;
+    emit colorChanged(m_color);
+}
+
 const QList<Task>& Task::getChildren() const { return m_children; }
 void Task::setChildren(const QList<Task>& children) {
     m_children = children;
@@ -142,6 +150,7 @@ QVariantMap Task::toMap() const {
     map.insert("expanded", this->isExpanded());
     map.insert("rememberId", this->getRememberId());
     map.insert("calendarId", this->getCalendarId());
+    map.insert("color", this->getColor());
 
     QVariantList children;
     for (int i = 0; i < m_children.size(); i++) {
@@ -164,6 +173,7 @@ QVariantMap Task::toJson() const {
     map.insert("expanded", this->isExpanded() ? 1 : 0);
     map.insert("remember_id", this->getRememberId());
     map.insert("calendar_id", this->getCalendarId());
+    map.insert("color", this->getColor());
     return map;
 }
 
@@ -179,6 +189,7 @@ void Task::fromMap(const QVariantMap taskMap) {
     this->setExpanded(taskMap.value("expanded").toBool());
     this->setRememberId(taskMap.value("remember_id", "").toString());
     this->setCalendarId(taskMap.value("calendar_id", "0").toInt());
+    this->setColor(taskMap.value("color", "").toString());
 }
 
 void Task::addChild(Task& task) {

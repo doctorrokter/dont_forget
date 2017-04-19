@@ -41,10 +41,12 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/cards/TestCard.qml) \
         $$quote($$BASEDIR/assets/cards/UpdateTaskCard.qml) \
         $$quote($$BASEDIR/assets/components/AttachmentsContainer.qml) \
+        $$quote($$BASEDIR/assets/components/ColorControl.qml) \
         $$quote($$BASEDIR/assets/components/CustomTitleBar.qml) \
         $$quote($$BASEDIR/assets/components/ExpandableButton.qml) \
         $$quote($$BASEDIR/assets/components/InputTitleBar.qml) \
         $$quote($$BASEDIR/assets/components/OkButton.qml) \
+        $$quote($$BASEDIR/assets/components/Palette.qml) \
         $$quote($$BASEDIR/assets/components/Task.qml) \
         $$quote($$BASEDIR/assets/components/TaskDeadlineContainer.qml) \
         $$quote($$BASEDIR/assets/components/TaskDescriptionContainer.qml) \
@@ -104,6 +106,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/migrations/6_create_index_parent_id_type.sql) \
         $$quote($$BASEDIR/assets/migrations/7_create_index_parent_id.sql) \
         $$quote($$BASEDIR/assets/migrations/8_create_index_type.sql) \
+        $$quote($$BASEDIR/assets/migrations/9_add_column_color_into_tasks.sql) \
         $$quote($$BASEDIR/assets/pages/ContactsPage.qml) \
         $$quote($$BASEDIR/assets/pages/DebugPage.qml) \
         $$quote($$BASEDIR/assets/pages/HelpPage.qml) \
@@ -139,6 +142,7 @@ config_pri_source_group1 {
         $$quote($$BASEDIR/src/applicationui.hpp) \
         $$quote($$BASEDIR/src/config/AppConfig.hpp) \
         $$quote($$BASEDIR/src/config/DBConfig.hpp) \
+        $$quote($$BASEDIR/src/const/DFColors.hpp) \
         $$quote($$BASEDIR/src/models/Task.hpp) \
         $$quote($$BASEDIR/src/services/AttachmentsService.hpp) \
         $$quote($$BASEDIR/src/services/DropboxService.hpp) \
@@ -167,6 +171,11 @@ lupdate_inclusion {
         $$quote($$BASEDIR/../src/config/*.cc) \
         $$quote($$BASEDIR/../src/config/*.cpp) \
         $$quote($$BASEDIR/../src/config/*.cxx) \
+        $$quote($$BASEDIR/../src/const/*.c) \
+        $$quote($$BASEDIR/../src/const/*.c++) \
+        $$quote($$BASEDIR/../src/const/*.cc) \
+        $$quote($$BASEDIR/../src/const/*.cpp) \
+        $$quote($$BASEDIR/../src/const/*.cxx) \
         $$quote($$BASEDIR/../src/models/*.c) \
         $$quote($$BASEDIR/../src/models/*.c++) \
         $$quote($$BASEDIR/../src/models/*.cc) \

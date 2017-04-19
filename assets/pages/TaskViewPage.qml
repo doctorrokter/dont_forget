@@ -213,10 +213,15 @@ Page {
     
     function getTaskName(task) {
         var name = "<html>";
+        var n = task.name
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/\"/g, "&quot;");
         if (task.closed) {
-            name += "<span style=\"text-decoration: line-through;\">" + task.name +"</span>";
+            name += "<span style=\"text-decoration: line-through;\">" + n +"</span>";
         } else {
-            name += task.name;
+            name += n;
         }
         
         if (task.important) {
@@ -234,6 +239,7 @@ Page {
         siblings.forEach(function(sibling) {
             var siblingContainer = childTask.createObject(this);
             siblingContainer.name = getTaskName(sibling);
+            siblingContainer.opacity = sibling.closed ? 0.7 : 1.0;
             children.add(siblingContainer);
             attachments = attachments.concat(_attachmentsService.findByTaskId(sibling.id));
         });

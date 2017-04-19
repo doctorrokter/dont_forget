@@ -43,11 +43,27 @@ Page {
                         
                         ImageView {
                             imageSource: ListItemData.type === "FOLDER" ? "asset:///images/ic_folder.png" : "asset:///images/ic_list.png"
-                            filterColor: ListItemData.type === "FOLDER" ? ui.palette.primary : Color.create("#779933");
+                            filterColor: getIconColor()
                             maxWidth: ui.du(8)
                             maxHeight: ui.du(6.5)
                             layoutProperties: StackLayoutProperties {
                                 spaceQuota: -1
+                            }
+                            
+                            function getIconColor() {
+                                var type = ListItemData.type;
+                                var color = ListItemData.color;
+                                if (type === "FOLDER") {
+                                    if (color !== "") {
+                                        return Color.create(color);
+                                    }
+                                    return ui.palette.primary;
+                                } else {
+                                    if (color !== "") {
+                                        return Color.create(color);
+                                    }
+                                    return Color.create("#779933");
+                                }
                             }
                         }
                         

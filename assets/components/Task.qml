@@ -17,7 +17,8 @@ Container {
     property string parentId: ""
     property string rememberId: ""
     property int calendarId: 87687687
-    property string type: "TASK"
+    property string color: "#FF3333"
+    property string type: "FOLDER"
     property string name: "RELAX ~ Zdravnisko £ spricevalo & < > \" kartica"
     
     property variant taskType: {
@@ -60,8 +61,14 @@ Container {
     
     function getTaskIconColor() {
         if (task.type === taskType.FOLDER) {
+            if (task.color !== "") {
+                return Color.create(task.color);
+            }
             return ui.palette.primary;
         } else if (task.type === taskType.LIST) {
+            if (task.color !== "") {
+                return Color.create(task.color);
+            }
             return Color.create("#779933");
         } else {
             if (task.closed) {
@@ -333,6 +340,7 @@ Container {
             task.calendarId = updatedTask.calendar_id;
             task.type = updatedTask.type;
             task.name = updatedTask.name;
+            task.color = updatedTask.color;
             task.expandable = isExpandable(updatedTask);
         }
     }

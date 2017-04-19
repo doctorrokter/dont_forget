@@ -1,14 +1,16 @@
 1
-80
+83
 cards/CreateTaskFromTextCard.qml
 cards/CreateTaskFromUrlCard.qml
 cards/TestCard.qml
 cards/UpdateTaskCard.qml
 components/AttachmentsContainer.qml
+components/ColorControl.qml
 components/CustomTitleBar.qml
 components/ExpandableButton.qml
 components/InputTitleBar.qml
 components/OkButton.qml
+components/Palette.qml
 components/Task.qml
 components/TaskDeadlineContainer.qml
 components/TaskDescriptionContainer.qml
@@ -68,6 +70,7 @@ migrations/5_alter_table_tasks_add_calendar_id.sql
 migrations/6_create_index_parent_id_type.sql
 migrations/7_create_index_parent_id.sql
 migrations/8_create_index_type.sql
+migrations/9_add_column_color_into_tasks.sql
 pages/ContactsPage.qml
 pages/DebugPage.qml
 pages/HelpPage.qml

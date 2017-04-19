@@ -147,7 +147,8 @@ void TasksService::setActiveTask(const int id) {
     emit activeTaskChanged(m_pActiveTask);
 }
 
-void TasksService::createTask(const QString name, const QString description, const QString type, const int deadline, const int important, const int createInRemember, const QVariantList attachments, const int createInCalendar) {
+void TasksService::createTask(const QString name, const QString description, const QString type, const int deadline, const int important, const int createInRemember,
+        const QVariantList attachments, const int createInCalendar, const QString& color) {
     QString parentId = m_pActiveTask == NULL ? NULL : QString::number(m_pActiveTask->getId());
     QString rememberId = NULL;
     int calendarEventId = 0;
@@ -166,8 +167,8 @@ void TasksService::createTask(const QString name, const QString description, con
         calendarEventId = ev.id();
     }
 
-    QString query = "INSERT INTO tasks (name, description, type, deadline, important, parent_id, remember_id, closed, expanded, calendar_id) "
-                    "VALUES (:name, :description, :type, :deadline, :important, :parent_id, :remember_id, :closed, :expanded, :calendar_id)";
+    QString query = "INSERT INTO tasks (name, description, type, deadline, important, parent_id, remember_id, closed, expanded, calendar_id, color) "
+                    "VALUES (:name, :description, :type, :deadline, :important, :parent_id, :remember_id, :closed, :expanded, :calendar_id, :color)";
     QVariantMap values;
     values["name"] = name;
     values["description"] = description;
@@ -179,6 +180,7 @@ void TasksService::createTask(const QString name, const QString description, con
     values["closed"] = 0;
     values["expanded"] = 1;
     values["calendar_id"] = calendarEventId;
+    values["color"] = color;
 
     m_pDbConfig->execute(query, values);
     QVariantMap newTask = lastCreated();
@@ -204,7 +206,8 @@ void TasksService::createFolderQuick(const QString& name) {
     emit quickFolderCreated(newTask);
 }
 
-void TasksService::updateTask(const QString name, const QString description, const QString type, const int deadline, const int important, const int createInRemember, const int closed, const QVariantList attachments, const int createInCalendar) {
+void TasksService::updateTask(const QString name, const QString description, const QString type, const int deadline, const int important, const int createInRemember,
+        const int closed, const QVariantList attachments, const int createInCalendar, const QString& color) {
     QString rememberId = NULL;
     int calendarEventId = 0;
 
@@ -242,7 +245,8 @@ void TasksService::updateTask(const QString name, const QString description, con
         }
     }
 
-    QString query = "UPDATE tasks SET name = :name, description = :description, type = :type, deadline = :deadline, important = :important, remember_id = :remember_id, closed = :closed, calendar_id = :calendar_id WHERE id = :id";
+    QString query = "UPDATE tasks SET name = :name, description = :description, type = :type, deadline = :deadline, important = :important, "
+            "remember_id = :remember_id, closed = :closed, calendar_id = :calendar_id, color = :color WHERE id = :id";
     QVariantMap values;
     values["name"] = name;
     values["description"] = description;
@@ -253,6 +257,7 @@ void TasksService::updateTask(const QString name, const QString description, con
     values["closed"] = closed;
     values["id"] = m_pActiveTask->getId();
     values["calendar_id"] = calendarEventId;
+    values["color"] = color;
 
     m_pDbConfig->execute(query, values);
 

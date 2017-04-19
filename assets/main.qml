@@ -708,6 +708,7 @@ NavigationPane {
         newTask.rememberId = t.remember_id;
         newTask.calendarId = parseInt(t.calendar_id);
         newTask.parentId = t.parent_id;
+        newTask.color = t.color;
         newTask.taskViewRequested.connect(function() {
             viewActionItem.triggered();
         });
