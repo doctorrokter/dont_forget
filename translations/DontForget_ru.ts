@@ -411,7 +411,7 @@
         <translation type="unfinished">Выберите папку</translation>
     </message>
     <message>
-        <location filename="../assets/pages/MoveTaskPage.qml" line="153"/>
+        <location filename="../assets/pages/MoveTaskPage.qml" line="159"/>
         <source>Root</source>
         <translation type="unfinished">Сделать корневой задачей</translation>
     </message>
@@ -709,27 +709,27 @@
 <context>
     <name>TasksListPage</name>
     <message>
-        <location filename="../assets/pages/TasksListPage.qml" line="69"/>
+        <location filename="../assets/pages/TasksListPage.qml" line="75"/>
         <source>Choose a folder</source>
         <translation type="unfinished">Выберите папку</translation>
     </message>
     <message>
-        <location filename="../assets/pages/TasksListPage.qml" line="90"/>
+        <location filename="../assets/pages/TasksListPage.qml" line="96"/>
         <source>Create a folder</source>
         <translation type="unfinished">Создать папку</translation>
     </message>
     <message>
-        <location filename="../assets/pages/TasksListPage.qml" line="107"/>
+        <location filename="../assets/pages/TasksListPage.qml" line="113"/>
         <source>Search</source>
         <translation type="unfinished">Поиск</translation>
     </message>
     <message>
-        <location filename="../assets/pages/TasksListPage.qml" line="128"/>
+        <location filename="../assets/pages/TasksListPage.qml" line="134"/>
         <source>Create</source>
         <translation type="unfinished">Создать</translation>
     </message>
     <message>
-        <location filename="../assets/pages/TasksListPage.qml" line="192"/>
+        <location filename="../assets/pages/TasksListPage.qml" line="198"/>
         <source>Root</source>
         <translation type="unfinished">Корень</translation>
     </message>

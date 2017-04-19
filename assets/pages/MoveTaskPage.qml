@@ -57,14 +57,20 @@ Page {
                             ImageView {
                                 imageSource: "asset:///images/ic_folder.png"
                                 filterColor: ui.palette.primary
-                                maxWidth: ui.du(8)
-                                maxHeight: ui.du(6.5)
+                                preferredWidth: ui.du(8)
+                                preferredHeight: ui.du(6.5)
+                                layoutProperties: StackLayoutProperties {
+                                    spaceQuota: -1
+                                }
                             }
                             
                             Label {
                                 verticalAlignment: VerticalAlignment.Center
                                 text: ListItemData.title
                                 textStyle.base: SystemDefaults.TextStyles.PrimaryText
+                                layoutProperties: StackLayoutProperties {
+                                    spaceQuota: 1
+                                }
                             }
                         }
                     }

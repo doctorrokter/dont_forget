@@ -46,12 +46,18 @@ Page {
                             filterColor: ListItemData.type === "FOLDER" ? ui.palette.primary : Color.create("#779933");
                             maxWidth: ui.du(8)
                             maxHeight: ui.du(6.5)
+                            layoutProperties: StackLayoutProperties {
+                                spaceQuota: -1
+                            }
                         }
                         
                         Label {
                             verticalAlignment: VerticalAlignment.Center
                             text: ListItemData.title
                             textStyle.base: SystemDefaults.TextStyles.PrimaryText
+                            layoutProperties: StackLayoutProperties {
+                                spaceQuota: 1
+                            }
                         }
                     }
                 }
