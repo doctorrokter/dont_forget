@@ -606,17 +606,17 @@
         <translation type="unfinished">Отмена</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="192"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="194"/>
         <source>Add to Calendar</source>
         <translation type="unfinished">Добавить в календарь</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="204"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="206"/>
         <source>Account</source>
         <translation type="unfinished">Учетная запись</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="248"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="250"/>
         <source>Attachment</source>
         <translation type="unfinished">Вложение</translation>
     </message>
@@ -626,7 +626,7 @@
     </message>
     <message>
         <location filename="../assets/sheets/TaskSheet.qml" line="35"/>
-        <location filename="../assets/sheets/TaskSheet.qml" line="259"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="261"/>
         <source>OK</source>
         <translation type="unfinished">OK</translation>
     </message>
@@ -639,32 +639,32 @@
         <translation type="obsolete">Описание</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="130"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="132"/>
         <source>Type</source>
         <translation type="unfinished">Тип</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="135"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="137"/>
         <source>Folder</source>
         <translation type="unfinished">Папка</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="113"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="115"/>
         <source>Task done</source>
         <translation type="unfinished">Задача завершена</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="159"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="161"/>
         <source>Task</source>
         <translation type="unfinished">Задача</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="147"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="149"/>
         <source>List</source>
         <translation type="unfinished">Список</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="181"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="183"/>
         <source>Deadline</source>
         <translation type="unfinished">Срок выполнения</translation>
     </message>
@@ -673,12 +673,12 @@
         <translation type="obsolete">Дата</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="210"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="212"/>
         <source>Create in Remember</source>
         <translation type="unfinished">Создать в Remember</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="215"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="217"/>
         <source>Important</source>
         <translation type="unfinished">Важно</translation>
     </message>

@@ -64,7 +64,9 @@ Sheet {
                         if (taskSheet.mode === taskSheet.modes.CREATE) {
                             var names = taskName.result.split(";;");
                             names.forEach(function(name) {
-                                _tasksService.createTask(name.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, files, createInCalendar, folderId, accountId, color);
+                                if (name.trim() !== "") {
+                                    _tasksService.createTask(name.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, files, createInCalendar, folderId, accountId, color);
+                                }
                             });
                         } else {
                             _tasksService.updateTask(taskName.result.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, closed, files, createInCalendar, color);
