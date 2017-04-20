@@ -148,7 +148,7 @@ void TasksService::setActiveTask(const int id) {
 }
 
 void TasksService::createTask(const QString name, const QString description, const QString type, const int deadline, const int important, const int createInRemember,
-        const QVariantList attachments, const int createInCalendar, const QString& color) {
+        const QVariantList attachments, const int createInCalendar, const int folderId, const int accountId, const QString& color) {
     QString parentId = m_pActiveTask == NULL ? NULL : QString::number(m_pActiveTask->getId());
     QString rememberId = NULL;
     int calendarEventId = 0;
@@ -163,7 +163,7 @@ void TasksService::createTask(const QString name, const QString description, con
 
     if (deadline != 0 && createInCalendar != 0) {
         CalendarUtil calendar;
-        CalendarEvent ev = calendar.createEvent(name, description, QDateTime::fromTime_t(deadline));
+        CalendarEvent ev = calendar.createEvent(name, description, QDateTime::fromTime_t(deadline), folderId, accountId);
         calendarEventId = ev.id();
     }
 

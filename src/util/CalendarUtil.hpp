@@ -12,7 +12,10 @@
 #include <bb/pim/calendar/CalendarService>
 #include <bb/pim/calendar/CalendarEvent>
 #include <bb/pim/calendar/Result>
+#include <bb/cascades/DropDown>
+#include <bb/cascades/Option>
 
+using namespace bb::cascades;
 using namespace bb::pim::calendar;
 
 class CalendarUtil: public QObject {
@@ -21,10 +24,11 @@ public:
     CalendarUtil(QObject* parent = 0);
     virtual ~CalendarUtil();
 
-    Q_INVOKABLE CalendarEvent createEvent(const QString& name, const QString& body, QDateTime dateTime);
+    Q_INVOKABLE CalendarEvent createEvent(const QString& name, const QString& body, QDateTime dateTime, const int folderId = 1, const int accountId = 1);
     Q_INVOKABLE CalendarEvent updateEvent(const int id, const QString& name, const QString& body, QDateTime dateTime);
     Q_INVOKABLE void deleteEvent(const int id);
     Q_INVOKABLE CalendarEvent findEventById(const int id);
+    Q_INVOKABLE void initFolders(bb::cascades::DropDown* dropDown, const int folderId = 1, const int accountId = 1);
 
 Q_SIGNALS:
     void eventCreated();

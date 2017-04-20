@@ -33,6 +33,7 @@
 #include "config/AppConfig.hpp"
 #include "config/DBConfig.hpp"
 #include "util/Signal.hpp"
+#include "util/CalendarUtil.hpp"
 
 namespace bb
 {
@@ -89,6 +90,7 @@ private:
     DropboxService* m_pDropboxService;
     AttachmentsService* m_pAttachmentsService;
     Signal* m_pSignal;
+    CalendarUtil* m_pCalendar;
 
     bool m_running;
     QList<QString> m_filesToDelete;

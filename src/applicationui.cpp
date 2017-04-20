@@ -36,7 +36,6 @@
 #include <bb/PpsObject>
 
 #include "models/Task.hpp"
-#include "util/CalendarUtil.hpp"
 
 #define INVOKE_SEARCH_SOURCE "chachkouski.DontForget.search.asyoutype"
 #define INVOKE_SEARCH_EXTENDED "chachkouski.DontForget.search.extended"
@@ -57,11 +56,9 @@ ApplicationUI::ApplicationUI() : QObject() {
     m_pLocaleHandler = new LocaleHandler(this);
     m_running = false;
 
+    m_pCalendar = new CalendarUtil(this);
+
     m_pDbConfig = new DBConfig(this);
-
-    // TODO: DELETE THIS!!!
-//    m_pDbConfig->execute("UPDATE tasks SET parent_id = NULL WHERE id = 221");
-
     m_pAttachmentsService = new AttachmentsService(this, m_pDbConfig);
 
     m_pPushService = new PushNotificationService(this);
@@ -131,8 +128,7 @@ void ApplicationUI::openCalendarEvent(const int eventId) {
     req.setAction("bb.calendar.EDIT");
 
     QVariantMap data;
-    CalendarUtil calendar;
-    CalendarEvent ev = calendar.findEventById(eventId);
+    CalendarEvent ev = m_pCalendar->findEventById(eventId);
 
     data["accountId"] = ev.accountId();
     data["eventId"] = ev.id();
@@ -186,6 +182,7 @@ void ApplicationUI::initFullUI() {
     rootContext->setContextProperty("_pushService", m_pPushService);
     rootContext->setContextProperty("_dropboxService", m_pDropboxService);
     rootContext->setContextProperty("_attachmentsService", m_pAttachmentsService);
+    rootContext->setContextProperty("_calendar", m_pCalendar);
     rootContext->setContextProperty("_signal", m_pSignal);
     rootContext->setContextProperty("_hasSharedFilesPermission", m_pDbConfig->hasSharedFilesPermission());
     m_running = true;
@@ -204,6 +201,7 @@ void ApplicationUI::initComposerUI(const QString& pathToPage, const QString& dat
     rootContext->setContextProperty("_attachmentsService", m_pAttachmentsService);
     rootContext->setContextProperty("_data", data);
     rootContext->setContextProperty("_hasSharedFilesPermission", m_pDbConfig->hasSharedFilesPermission());
+    rootContext->setContextProperty("_calendar", m_pCalendar);
     rootContext->setContextProperty("_mimeType", mimeType);
 
     AbstractPane *root = qml->createRootObject<AbstractPane>();
@@ -348,4 +346,7 @@ void ApplicationUI::clear() {
     m_pUsersService->deleteLater();
     m_pTranslator->deleteLater();
     m_pLocaleHandler->deleteLater();
+    m_pAttachmentsService->deleteLater();
+    m_pSignal->deleteLater();
+    m_pCalendar->deleteLater();
 }

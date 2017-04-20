@@ -7,6 +7,7 @@
 
 #include "CalendarUtil.hpp"
 #include <QPair>
+#include <bb/pim/calendar/CalendarFolder>
 
 CalendarUtil::CalendarUtil(QObject* parent) :QObject(parent), m_pCalendarService(new CalendarService()) {}
 
@@ -14,13 +15,11 @@ CalendarUtil::~CalendarUtil() {
     m_pCalendarService->deleteLater();
 }
 
-CalendarEvent CalendarUtil::createEvent(const QString& name, const QString& body, QDateTime dateTime) {
+CalendarEvent CalendarUtil::createEvent(const QString& name, const QString& body, QDateTime dateTime, const int folderId, const int accountId) {
     CalendarEvent ev;
 
-    QPair<AccountId, FolderId> pair = m_pCalendarService->defaultCalendarFolder();
-
-    ev.setAccountId(pair.first);
-    ev.setFolderId(pair.second);
+    ev.setAccountId(accountId);
+    ev.setFolderId(folderId);
     ev.setStartTime(dateTime);
     ev.setEndTime(dateTime.addSecs(3600));
     ev.setReminder(120);
@@ -55,4 +54,34 @@ CalendarEvent CalendarUtil::findEventById(const int id) {
     Result::Type* r = new Result::Type();
     CalendarEvent ev = m_pCalendarService->event(pair.first, id, r);
     return ev;
+}
+
+void CalendarUtil::initFolders(DropDown* dropDown, const int folderId, const int accountId) {
+    if (!dropDown) {
+        return;
+    }
+
+    dropDown->removeAll();
+
+    foreach (const CalendarFolder &folder, m_pCalendarService->folders()) {
+        if (folder.isReadOnly()) {
+            continue;
+        }
+
+        Option *option = new Option();
+        option->setText(folder.name());
+
+        QVariantMap value;
+        int fid = folder.id();
+        int aid = folder.accountId();
+        value["folderId"] = fid;
+        value["accountId"] = aid;
+        option->setValue(value);
+
+        if (fid == folderId && aid == accountId) {
+            option->setSelected(true);
+        }
+
+        dropDown->add(option);
+    }
 }

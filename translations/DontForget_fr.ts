@@ -48,12 +48,12 @@
 <context>
     <name>ApplicationUI</name>
     <message>
-        <location filename="../src/applicationui.cpp" line="171"/>
+        <location filename="../src/applicationui.cpp" line="167"/>
         <source>Success!</source>
         <translation type="unfinished">Réussite!</translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="229"/>
+        <location filename="../src/applicationui.cpp" line="227"/>
         <source>Tasks received!</source>
         <translation type="unfinished">Tâches reçue!</translation>
     </message>
@@ -467,27 +467,27 @@
         <translation type="unfinished">Vérifiez votre connexion réseau</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="400"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="394"/>
         <source>Enabled</source>
         <translation type="unfinished">Activée</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="402"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="396"/>
         <source>Disabled</source>
         <translation type="unfinished">Désactivée</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="409"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="403"/>
         <source>Disable</source>
         <translation type="unfinished">Désactiver</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="411"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="405"/>
         <source>Enable</source>
         <translation type="unfinished">Activer</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="436"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="430"/>
         <source>Failed to enable Push Service</source>
         <translation type="unfinished">Impossible d&apos;activer Push Service</translation>
     </message>
@@ -497,12 +497,12 @@
         <translation type="unfinished">Si ce paramètre est activé, vous pouvez envoyer / recevoir des tâches à / de votre collègue ou quelqu&apos;un d&apos;autre utilisant le NIP. Pour atteindre cet objectif, l&apos;application utilise BlackBerry Push Service</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="418"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="412"/>
         <source>Push Service enabled</source>
         <translation type="unfinished">Push Service activée</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="427"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="421"/>
         <source>Push Service disabled</source>
         <translation type="unfinished">Push Service désactivée</translation>
     </message>
@@ -560,57 +560,62 @@
     </message>
     <message>
         <location filename="../assets/sheets/TaskSheet.qml" line="35"/>
-        <location filename="../assets/sheets/TaskSheet.qml" line="229"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="259"/>
         <source>OK</source>
         <translation type="unfinished">OK</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="104"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="113"/>
         <source>Task done</source>
         <translation type="unfinished">Tâche effectuée</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="121"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="130"/>
         <source>Type</source>
         <translation type="unfinished">Type</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="126"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="135"/>
         <source>Folder</source>
         <translation type="unfinished">Dossier</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="138"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="147"/>
         <source>List</source>
         <translation type="unfinished">Liste</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="150"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="159"/>
         <source>Task</source>
         <translation type="unfinished">Tâche</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="172"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="181"/>
         <source>Deadline</source>
         <translation type="unfinished">Date de fin</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="183"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="192"/>
         <source>Add to Calendar</source>
         <translation type="unfinished">Ajouter au calendrier</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="189"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="204"/>
+        <source>Account</source>
+        <translation type="unfinished">Compte</translation>
+    </message>
+    <message>
+        <location filename="../assets/sheets/TaskSheet.qml" line="210"/>
         <source>Create in Remember</source>
         <translation type="unfinished">Créer dans Remember</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="194"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="215"/>
         <source>Important</source>
         <translation type="unfinished">Important</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="218"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="248"/>
         <source>Attachment</source>
         <translation type="unfinished">Image</translation>
     </message>

@@ -66,7 +66,7 @@ Page {
                 if (_appConfig.hasNetwork()) {
                     var data = contactsDataModel.data(indexPath);
                     if (_tasksService.activeTask !== null) {
-                        loading.running = true;
+                        loading.start();
                         
                         var collectSiblings = function(rootTask) {
                             rootTask.children = _tasksService.findSiblings(rootTask.id);
@@ -90,7 +90,7 @@ Page {
                             xhr.setRequestHeader("Content-type", "application/json");
                             xhr.onreadystatechange = function() {
                                 if (xhr.readyState == 4) {
-                                    loading.running = false;
+                                    loading.stop();
                                     
                                     var responseStr = xhr.responseText;
                                     console.debug(responseStr);
@@ -110,7 +110,7 @@ Page {
                                         toast.show();
                                     }
                                 } else {
-                                    loading.running = false;
+                                    loading.stop();
                                     console.debug(xhr.responseText);
                                     toast.body = qsTr("Something went wrong with sending push notification...") + Retranslate.onLocaleOrLanguageChanged;
                                     toast.show();

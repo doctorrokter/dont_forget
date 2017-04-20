@@ -36,6 +36,8 @@ Sheet {
                 enabled: true
                 
                 onTriggered: {
+                    spinner.start();
+                    
                     createTaskAction = false;
                     
                     var deadline = deadLineToggleButton.checked ? new Date(deadLineContainer.result).getTime() / 1000 : 0;
@@ -44,6 +46,13 @@ Sheet {
                     var closed = closeTaskCheckbox.checked ? 1 : 0;
                     var createInCalendar = deadLineToggleButton.checked && calendarToggleButton.checked ? 1 : 0;
                     var color = palette.visible ? palette.color : "";
+                    
+                    var folderId = 1;
+                    var accountId = 1;
+                    if (createInCalendar === 1) {
+                        folderId = calendarAccounts.selectedValue.folderId;
+                        accountId = calendarAccounts.selectedValue.accountId;
+                    }
                     
                     var files = [];
                     for (var i = 0; i < attachmentsContainer.attachments.length; i++) {
@@ -55,7 +64,7 @@ Sheet {
                         if (taskSheet.mode === taskSheet.modes.CREATE) {
                             var names = taskName.result.split(";;");
                             names.forEach(function(name) {
-                                    _tasksService.createTask(name.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, files, createInCalendar, color);
+                                _tasksService.createTask(name.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, files, createInCalendar, folderId, accountId, color);
                             });
                         } else {
                             _tasksService.updateTask(taskName.result.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, closed, files, createInCalendar, color);
@@ -184,6 +193,18 @@ Sheet {
                         visible: deadLineToggleButton.checked
                     }
                     
+                    Container {
+                        leftPadding: ui.du(2.5)
+                        topPadding: ui.du(2.5)
+                        rightPadding: ui.du(2.5)
+//                        visible: calendarToggleButton.checked && taskSheet.modes.CREATE
+                        visible: false
+                        DropDown {
+                            id: calendarAccounts
+                            title: qsTr("Account") + Retranslate.onLocaleOrLanguageChanged
+                        }
+                    }
+                    
                     ToggleBlock {
                         id: rememberToggleButton
                         title: qsTr("Create in Remember") + Retranslate.onLocaleOrLanguageChanged
@@ -199,6 +220,15 @@ Sheet {
                         preferredHeight: ui.du(12)
                     }
                 }
+            }
+            
+            ActivityIndicator {
+                id: spinner
+                
+                minWidth: ui.du(10)
+                
+                verticalAlignment: VerticalAlignment.Center
+                horizontalAlignment: HorizontalAlignment.Center
             }
         }
         
@@ -298,6 +328,19 @@ Sheet {
         }
     }
     
+    function adjustPalette() {
+        var active = _tasksService.activeTask;
+        if (active.color !== "") {
+            palette.color = active.color;
+        } else {
+            if (active.type === "FOLDER") {
+                palette.color = palette.colors.BLUE;
+            } else if (active.type === "LIST") {
+                palette.color = palette.colors.GREEN;
+            }
+        }
+    }
+    
     function currDatePlus2Hourse() {
         return new Date(new Date().getTime() + 7200000);
     }
@@ -332,6 +375,7 @@ Sheet {
             listOption.selected = _tasksService.activeTask.type === listOption.value;
             taskName.value = _tasksService.activeTask.name;
             description.value = _tasksService.activeTask.description;
+            adjustPalette();
         } else {
             initialState();
         }
@@ -341,6 +385,7 @@ Sheet {
         adjustClosedTask();
         adjustAttachments();
         taskName.requestFocus();
+        spinner.running = false;
     }
     
     onClosed: {
@@ -348,9 +393,14 @@ Sheet {
         taskSheet.mode = taskSheet.modes.CREATE;
         closeTaskCheckbox.checked = false;
         initialState();
+        spinner.stop();
     }
     
     onDataChanged: {
         taskName.value = taskSheet.data;
+    }
+    
+    onCreationCompleted: {
+        _calendar.initFolders(calendarAccounts);
     }
 }

@@ -742,7 +742,7 @@ NavigationPane {
     }
     
     function renderTree(tasksToRender) {
-        loading.running = true;
+        loading.start();
         deleteAllTasks();
         
         var allTasks = tasksToRender;
@@ -771,7 +771,7 @@ NavigationPane {
                 addTask(tasksContainer, t);
             });
         }
-        loading.running = false;
+        loading.stop();
         
 //        var dp = debugPage.createObject();
 //        navigation.push(dp);

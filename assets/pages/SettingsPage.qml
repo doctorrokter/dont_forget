@@ -376,12 +376,6 @@ Page {
         vibrateOnSelect.checked = vibro && vibro === "true";
     }
     
-//    function adjustSortBy() {
-//        var sortBy = _appConfig.get("sort_by");
-//        sortByNameOption.selected = sortBy === "" || sortBy === "name";
-//        sortByCreationOption.selected = sortBy === "id";
-//    }
-    
     function adjustDefaultTaskType() {
         var defaultTaskType = _appConfig.get("default_task_type");
         folderOption.selected = defaultTaskType === "FOLDER";
@@ -446,7 +440,6 @@ Page {
     onCreationCompleted: {
         adjustTheme();
         adjustAskBeforeDeleting();
-//        adjustSortBy();
         adjustDefaultTaskType();
         adjustPushEnabledLabel();
         adjustPushServiceButton();
