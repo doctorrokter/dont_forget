@@ -137,6 +137,11 @@ NavigationPane {
                     id: importantToggleButton
                     title: qsTr("Important") + Retranslate.onLocaleOrLanguageChanged
                 }
+                
+                Container {
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    preferredHeight: ui.du(12)
+                }
             }
         }
         

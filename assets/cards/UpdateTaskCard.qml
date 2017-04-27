@@ -155,7 +155,7 @@ NavigationPane {
                 
                 Container {
                     horizontalAlignment: HorizontalAlignment.Fill
-                    minHeight: ui.du(20)
+                    preferredHeight: ui.du(12)
                 }
             }
         }

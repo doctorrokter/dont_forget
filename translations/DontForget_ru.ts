@@ -139,7 +139,7 @@
     </message>
     <message>
         <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="34"/>
-        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="176"/>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="181"/>
         <source>OK</source>
         <translation type="unfinished">OK</translation>
     </message>
@@ -179,7 +179,7 @@
         <translation type="unfinished">Важно</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="165"/>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="170"/>
         <source>Task created!</source>
         <translation type="unfinished">Задача создана!</translation>
     </message>
@@ -611,12 +611,12 @@
         <translation type="unfinished">Добавить в календарь</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="206"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="205"/>
         <source>Account</source>
         <translation type="unfinished">Учетная запись</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="250"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="249"/>
         <source>Attachment</source>
         <translation type="unfinished">Вложение</translation>
     </message>
@@ -626,7 +626,7 @@
     </message>
     <message>
         <location filename="../assets/sheets/TaskSheet.qml" line="35"/>
-        <location filename="../assets/sheets/TaskSheet.qml" line="261"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="260"/>
         <source>OK</source>
         <translation type="unfinished">OK</translation>
     </message>
@@ -673,12 +673,12 @@
         <translation type="obsolete">Дата</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="212"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="211"/>
         <source>Create in Remember</source>
         <translation type="unfinished">Создать в Remember</translation>
     </message>
     <message>
-        <location filename="../assets/sheets/TaskSheet.qml" line="217"/>
+        <location filename="../assets/sheets/TaskSheet.qml" line="216"/>
         <source>Important</source>
         <translation type="unfinished">Важно</translation>
     </message>

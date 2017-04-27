@@ -199,8 +199,7 @@ Sheet {
                         leftPadding: ui.du(2.5)
                         topPadding: ui.du(2.5)
                         rightPadding: ui.du(2.5)
-//                        visible: calendarToggleButton.checked && taskSheet.modes.CREATE
-                        visible: false
+                        visible: calendarToggleButton.checked && taskSheet.modes.CREATE
                         DropDown {
                             id: calendarAccounts
                             title: qsTr("Account") + Retranslate.onLocaleOrLanguageChanged
