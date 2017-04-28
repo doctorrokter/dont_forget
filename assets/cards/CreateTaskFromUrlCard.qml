@@ -33,21 +33,22 @@ NavigationPane {
                 enabled: true
                 
                 onTriggered: {
-                    createTaskAction.enabled = false;
+                    if (!spinner.running) {
+                        var files = [];
+                        for (var i = 0; i < attachmentsContainer.attachments.length; i++) {
+                            files.push(attachmentsContainer.attachments[i]);
+                        }
                     
-                    var files = [];
-                    for (var i = 0; i < attachmentsContainer.attachments.length; i++) {
-                        files.push(attachmentsContainer.attachments[i]);
-                    }
+                        var deadline = deadLineToggleButton.checked ? new Date(deadLineContainer.result).getTime() / 1000 : 0;
+                        var important = importantToggleButton.checked ? 1 : 0;
+                        var createInRemember = rememberToggleButton.checked ? 1 : 0;
+                        var createInCalendar = deadLineToggleButton.checked && calendarToggleButton.checked ? 1 : 0;
                     
-                    var deadline = deadLineToggleButton.checked ? new Date(deadLineContainer.result).getTime() / 1000 : 0;
-                    var important = importantToggleButton.checked ? 1 : 0;
-                    var createInRemember = rememberToggleButton.checked ? 1 : 0;
-                    var createInCalendar = deadLineToggleButton.checked && calendarToggleButton.checked ? 1 : 0;
-                    
-                    taskName.validate();
-                    if (taskName.isValid()) {
-                        _tasksService.createTask(taskName.result.trim(), description.result.trim(), "TASK", deadline, important, createInRemember, files, createInCalendar);
+                        taskName.validate();
+                        if (taskName.isValid()) {
+                            spinner.start();
+                            _tasksService.createTask(taskName.result.trim(), description.result.trim(), "TASK", deadline, important, createInRemember, files, createInCalendar);
+                        }
                     }
                 }
             }
@@ -157,7 +158,7 @@ NavigationPane {
             }
             
             ActivityIndicator {
-                id: loading
+                id: spinner
                 running: false
                 horizontalAlignment: HorizontalAlignment.Center
                 verticalAlignment: VerticalAlignment.Center
@@ -175,7 +176,6 @@ NavigationPane {
                 
                 onTriggered: {
                     createTaskAction.triggered();
-                    createTaskAction.enabled = false;
                 }
             }
         ]

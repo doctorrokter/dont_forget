@@ -36,42 +36,41 @@ Sheet {
                 enabled: true
                 
                 onTriggered: {
-                    spinner.start();
+                    if (!spinner.running) {
+                        var deadline = deadLineToggleButton.checked ? new Date(deadLineContainer.result).getTime() / 1000 : 0;
+                        var important = importantToggleButton.checked ? 1 : 0;
+                        var createInRemember = rememberToggleButton.checked ? 1 : 0;
+                        var closed = closeTaskCheckbox.checked ? 1 : 0;
+                        var createInCalendar = deadLineToggleButton.checked && calendarToggleButton.checked ? 1 : 0;
+                        var color = palette.visible ? palette.color : "";
                     
-                    createTaskAction = false;
-                    
-                    var deadline = deadLineToggleButton.checked ? new Date(deadLineContainer.result).getTime() / 1000 : 0;
-                    var important = importantToggleButton.checked ? 1 : 0;
-                    var createInRemember = rememberToggleButton.checked ? 1 : 0;
-                    var closed = closeTaskCheckbox.checked ? 1 : 0;
-                    var createInCalendar = deadLineToggleButton.checked && calendarToggleButton.checked ? 1 : 0;
-                    var color = palette.visible ? palette.color : "";
-                    
-                    var folderId = 1;
-                    var accountId = 1;
-                    if (createInCalendar === 1) {
-                        folderId = calendarAccounts.selectedValue.folderId;
-                        accountId = calendarAccounts.selectedValue.accountId;
-                    }
-                    
-                    var files = [];
-                    for (var i = 0; i < attachmentsContainer.attachments.length; i++) {
-                        files.push(attachmentsContainer.attachments[i]);
-                    }
-                    
-                    taskName.validate();
-                    if (taskName.isValid()) {
-                        if (taskSheet.mode === taskSheet.modes.CREATE) {
-                            var names = taskName.result.split(";;");
-                            names.forEach(function(name) {
-                                if (name.trim() !== "") {
-                                    _tasksService.createTask(name.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, files, createInCalendar, folderId, accountId, color);
-                                }
-                            });
-                        } else {
-                            _tasksService.updateTask(taskName.result.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, closed, files, createInCalendar, color);
+                        var folderId = 1;
+                        var accountId = 1;
+                        if (createInCalendar === 1) {
+                            folderId = calendarAccounts.selectedValue.folderId;
+                            accountId = calendarAccounts.selectedValue.accountId;
                         }
-                        taskSheet.close();
+                    
+                        var files = [];
+                        for (var i = 0; i < attachmentsContainer.attachments.length; i++) {
+                            files.push(attachmentsContainer.attachments[i]);
+                        }
+                    
+                        taskName.validate();
+                        if (taskName.isValid()) {
+                            spinner.start();
+                            if (taskSheet.mode === taskSheet.modes.CREATE) {
+                                var names = taskName.result.split(";;");
+                                names.forEach(function(name) {
+                                    if (name.trim() !== "") {
+                                        _tasksService.createTask(name.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, files, createInCalendar, folderId, accountId, color);
+                                    }    
+                                });
+                            } else {
+                                _tasksService.updateTask(taskName.result.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, closed, files, createInCalendar, color);
+                            }
+                            taskSheet.close();
+                        } 
                     }
                 }
             }
@@ -264,7 +263,6 @@ Sheet {
                 
                 onTriggered: {
                     createTaskAction.triggered();
-                    createTaskAction.enabled = false;
                 }
             }
         ]

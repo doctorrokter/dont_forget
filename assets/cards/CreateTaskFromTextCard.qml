@@ -34,19 +34,19 @@ NavigationPane {
                 title: qsTr("OK") + Retranslate.onLocaleOrLanguageChanged
                 
                 onTriggered: {
-                    createTaskAction.enabled = false;
+                    if (!spinner.running) {
+                        var files = [];
+                        var deadline = deadLineToggleButton.checked ? new Date(deadLineContainer.result).getTime() / 1000 : 0;
+                        var important = importantToggleButton.checked ? 1 : 0;
+                        var createInRemember = rememberToggleButton.checked ? 1 : 0;
+                        var createInCalendar = deadLineToggleButton.checked && calendarToggleButton.checked ? 1 : 0;
                     
-                    var files = [];
-                    var deadline = deadLineToggleButton.checked ? new Date(deadLineContainer.result).getTime() / 1000 : 0;
-                    var important = importantToggleButton.checked ? 1 : 0;
-                    var createInRemember = rememberToggleButton.checked ? 1 : 0;
-                    var createInCalendar = deadLineToggleButton.checked && calendarToggleButton.checked ? 1 : 0;
-                    
-                    taskName.validate();
-                    if (taskName.isValid()) {
-                        _tasksService.createTask(taskName.result.trim(), description.result.trim(), "TASK", deadline, important, createInRemember, files, createInCalendar);
+                        taskName.validate();
+                        if (taskName.isValid()) {
+                            spinner.start();
+                            _tasksService.createTask(taskName.result.trim(), description.result.trim(), "TASK", deadline, important, createInRemember, files, createInCalendar);
+                        }
                     }
-                    
                 }
             }
         }
@@ -54,94 +54,111 @@ NavigationPane {
         actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
         actionBarVisibility: ChromeVisibility.Overlay
         
-        ScrollView {
-            scrollRole: ScrollRole.Main
+        Container {
+            horizontalAlignment: HorizontalAlignment.Fill
+            verticalAlignment: VerticalAlignment.Fill
             
-            Container {
-                horizontalAlignment: HorizontalAlignment.Fill
+            layout: DockLayout {
                 
-                TaskNameContainer { 
-                    id: taskName 
-                }
-                
-                TaskDescriptionContainer { 
-                    id: description 
-                    value: _data 
-                }
+            }
+            
+            ScrollView {
+                scrollRole: ScrollRole.Main
                 
                 Container {
-                    leftPadding: ui.du(2.5)
-                    topPadding: ui.du(2.5)
-                    rightPadding: ui.du(2.5)
                     horizontalAlignment: HorizontalAlignment.Fill
                     
-                    layout: DockLayout {}
-                    
-                    Label {
-                        horizontalAlignment: HorizontalAlignment.Left
-                        text: qsTr("Create in: ") + Retranslate.onLocaleOrLanguageChanged
+                    TaskNameContainer { 
+                        id: taskName 
                     }
                     
-                    Label {
-                        horizontalAlignment: HorizontalAlignment.Right
-                        text: {
-                            if (!_tasksService.activeTask) {
-                                return qsTr("Root") + Retranslate.onLocaleOrLanguageChanged
-                            }
-                            return _tasksService.activeTask.name;
-                        }
+                    TaskDescriptionContainer { 
+                        id: description 
+                        value: _data 
                     }
-                }
-                
-                Container {
-                    leftPadding: ui.du(2.5)
-                    topPadding: ui.du(2.5)
-                    rightPadding: ui.du(2.5)
-                    horizontalAlignment: HorizontalAlignment.Fill
                     
-                    Button {
+                    Container {
+                        leftPadding: ui.du(2.5)
+                        topPadding: ui.du(2.5)
+                        rightPadding: ui.du(2.5)
                         horizontalAlignment: HorizontalAlignment.Fill
-                        text: qsTr("Change placement") + Retranslate.onLocaleOrLanguageChanged
                         
-                        onClicked: {
-                            var tlp = tasksListPage.createObject(this);
-                            navigation.push(tlp);
-                            navigation.backButtonsVisible = true;
+                        layout: DockLayout {}
+                        
+                        Label {
+                            horizontalAlignment: HorizontalAlignment.Left
+                            text: qsTr("Create in: ") + Retranslate.onLocaleOrLanguageChanged
+                        }
+                        
+                        Label {
+                            horizontalAlignment: HorizontalAlignment.Right
+                            text: {
+                                if (!_tasksService.activeTask) {
+                                    return qsTr("Root") + Retranslate.onLocaleOrLanguageChanged
+                                }
+                                return _tasksService.activeTask.name;
+                            }
                         }
                     }
+                    
+                    Container {
+                        leftPadding: ui.du(2.5)
+                        topPadding: ui.du(2.5)
+                        rightPadding: ui.du(2.5)
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        
+                        Button {
+                            horizontalAlignment: HorizontalAlignment.Fill
+                            text: qsTr("Change placement") + Retranslate.onLocaleOrLanguageChanged
+                            
+                            onClicked: {
+                                var tlp = tasksListPage.createObject(this);
+                                navigation.push(tlp);
+                                navigation.backButtonsVisible = true;
+                            }
+                        }
+                    }
+                    
+                    ToggleBlock {
+                        id: deadLineToggleButton
+                        title: qsTr("Deadline") + Retranslate.onLocaleOrLanguageChanged
+                    }
+                    
+                    TaskDeadlineContainer {
+                        id: deadLineContainer
+                        visible: deadLineToggleButton.checked
+                        date: root.currDatePlus2Hourse();
+                    }
+                    
+                    ToggleBlock {
+                        id: calendarToggleButton
+                        title: qsTr("Add to Calendar") + Retranslate.onLocaleOrLanguageChanged
+                        visible: deadLineToggleButton.checked
+                    }
+                    
+                    ToggleBlock {
+                        id: rememberToggleButton
+                        title: qsTr("Create in Remember") + Retranslate.onLocaleOrLanguageChanged
+                    }
+                    
+                    ToggleBlock {
+                        id: importantToggleButton
+                        title: qsTr("Important") + Retranslate.onLocaleOrLanguageChanged
+                    }
+                    
+                    Container {
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        preferredHeight: ui.du(12)
+                    }
                 }
-                
-                ToggleBlock {
-                    id: deadLineToggleButton
-                    title: qsTr("Deadline") + Retranslate.onLocaleOrLanguageChanged
-                }
-                
-                TaskDeadlineContainer {
-                    id: deadLineContainer
-                    visible: deadLineToggleButton.checked
-                    date: root.currDatePlus2Hourse();
-                }
-                
-                ToggleBlock {
-                    id: calendarToggleButton
-                    title: qsTr("Add to Calendar") + Retranslate.onLocaleOrLanguageChanged
-                    visible: deadLineToggleButton.checked
-                }
-                
-                ToggleBlock {
-                    id: rememberToggleButton
-                    title: qsTr("Create in Remember") + Retranslate.onLocaleOrLanguageChanged
-                }
-                
-                ToggleBlock {
-                    id: importantToggleButton
-                    title: qsTr("Important") + Retranslate.onLocaleOrLanguageChanged
-                }
-                
-                Container {
-                    horizontalAlignment: HorizontalAlignment.Fill
-                    preferredHeight: ui.du(12)
-                }
+            }
+            
+            ActivityIndicator {
+                id: spinner
+                running: false
+                horizontalAlignment: HorizontalAlignment.Center
+                verticalAlignment: VerticalAlignment.Center
+                minWidth: ui.du(10)
             }
         }
         
@@ -185,7 +202,6 @@ NavigationPane {
                 
                 onTriggered: {
                     createTaskAction.triggered();
-                    createTaskAction.enabled = false;
                 }
             }
         ]
