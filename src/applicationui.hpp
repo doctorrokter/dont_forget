@@ -34,6 +34,7 @@
 #include "config/DBConfig.hpp"
 #include "util/Signal.hpp"
 #include "util/CalendarUtil.hpp"
+#include "util/DateUtil.hpp"
 
 namespace bb
 {
@@ -91,6 +92,7 @@ private:
     AttachmentsService* m_pAttachmentsService;
     Signal* m_pSignal;
     CalendarUtil* m_pCalendar;
+    DateUtil* m_pDateUtil;
 
     bool m_running;
     QList<QString> m_filesToDelete;

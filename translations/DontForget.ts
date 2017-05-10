@@ -139,6 +139,10 @@
         <source>Add to Calendar</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Account</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CreateTaskFromUrlCard</name>
@@ -184,6 +188,10 @@
     </message>
     <message>
         <source>Task created!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Account</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -382,6 +390,14 @@
     </message>
     <message>
         <source>Don&apos;t Forget Theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date/time format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Localized</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

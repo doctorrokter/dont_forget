@@ -57,6 +57,7 @@ ApplicationUI::ApplicationUI() : QObject() {
     m_running = false;
 
     m_pCalendar = new CalendarUtil(this);
+    m_pDateUtil = new DateUtil(this);
 
     m_pDbConfig = new DBConfig(this);
     m_pAttachmentsService = new AttachmentsService(this, m_pDbConfig);
@@ -184,6 +185,7 @@ void ApplicationUI::initFullUI() {
     rootContext->setContextProperty("_attachmentsService", m_pAttachmentsService);
     rootContext->setContextProperty("_calendar", m_pCalendar);
     rootContext->setContextProperty("_signal", m_pSignal);
+    rootContext->setContextProperty("_date", m_pDateUtil);
     rootContext->setContextProperty("_hasSharedFilesPermission", m_pDbConfig->hasSharedFilesPermission());
     m_running = true;
 
@@ -202,6 +204,7 @@ void ApplicationUI::initComposerUI(const QString& pathToPage, const QString& dat
     rootContext->setContextProperty("_data", data);
     rootContext->setContextProperty("_hasSharedFilesPermission", m_pDbConfig->hasSharedFilesPermission());
     rootContext->setContextProperty("_calendar", m_pCalendar);
+    rootContext->setContextProperty("_date", m_pDateUtil);
     rootContext->setContextProperty("_mimeType", mimeType);
 
     AbstractPane *root = qml->createRootObject<AbstractPane>();

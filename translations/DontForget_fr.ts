@@ -48,12 +48,12 @@
 <context>
     <name>ApplicationUI</name>
     <message>
-        <location filename="../src/applicationui.cpp" line="167"/>
+        <location filename="../src/applicationui.cpp" line="168"/>
         <source>Success!</source>
         <translation type="unfinished">Réussite!</translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="227"/>
+        <location filename="../src/applicationui.cpp" line="230"/>
         <source>Tasks received!</source>
         <translation type="unfinished">Tâches reçue!</translation>
     </message>
@@ -128,47 +128,52 @@
     </message>
     <message>
         <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="34"/>
-        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="198"/>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="216"/>
         <source>OK</source>
         <translation type="unfinished">OK</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="90"/>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="97"/>
         <source>Create in: </source>
         <translation type="unfinished">Créer dans:</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="97"/>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="104"/>
         <source>Root</source>
         <translation type="unfinished">Racine</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="112"/>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="119"/>
         <source>Change placement</source>
         <translation type="unfinished">Changer d&apos;endroit</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="124"/>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="131"/>
         <source>Deadline</source>
         <translation type="unfinished">Date de fin</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="135"/>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="142"/>
         <source>Add to Calendar</source>
         <translation type="unfinished">Ajouter au calendrier</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="141"/>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="153"/>
+        <source>Account</source>
+        <translation type="unfinished">Compte</translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="159"/>
         <source>Create in Remember</source>
         <translation type="unfinished">Créer dans Remember</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="146"/>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="164"/>
         <source>Important</source>
         <translation type="unfinished">Important</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="187"/>
+        <location filename="../assets/cards/CreateTaskFromTextCard.qml" line="205"/>
         <source>Task created!</source>
         <translation type="unfinished">Tâche créée!</translation>
     </message>
@@ -187,47 +192,52 @@
     </message>
     <message>
         <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="32"/>
-        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="172"/>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="190"/>
         <source>OK</source>
         <translation type="unfinished">OK</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="94"/>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="101"/>
         <source>Create in: </source>
         <translation type="unfinished">Créer dans:</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="101"/>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="108"/>
         <source>Root</source>
         <translation type="unfinished">Racine</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="116"/>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="123"/>
         <source>Change placement</source>
         <translation type="unfinished">Changer d&apos;endroit</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="128"/>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="135"/>
         <source>Deadline</source>
         <translation type="unfinished">Date de fin</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="139"/>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="146"/>
         <source>Add to Calendar</source>
         <translation type="unfinished">Ajouter au calendrier</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="145"/>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="157"/>
+        <source>Account</source>
+        <translation type="unfinished">Compte</translation>
+    </message>
+    <message>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="163"/>
         <source>Create in Remember</source>
         <translation type="unfinished">Créer dans Remember</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="150"/>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="168"/>
         <source>Important</source>
         <translation type="unfinished">Important</translation>
     </message>
     <message>
-        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="234"/>
+        <location filename="../assets/cards/CreateTaskFromUrlCard.qml" line="252"/>
         <source>Task created!</source>
         <translation type="unfinished">Tâche créée!</translation>
     </message>
@@ -432,82 +442,92 @@
         <translation type="unfinished">Tâche</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="165"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="164"/>
+        <source>Date/time format</source>
+        <translation type="unfinished">Format date/heure</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/SettingsPage.qml" line="175"/>
+        <source>Localized</source>
+        <translation type="unfinished">Localisé</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/SettingsPage.qml" line="194"/>
         <source>System sound on selection</source>
         <translation type="unfinished">Son sur sélection</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="194"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="223"/>
         <source>Vibrate on selection</source>
         <translation type="unfinished">Vibreur sur sélection</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="221"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="250"/>
         <source>Notification sound</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="226"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="255"/>
         <source>Standard Theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="236"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="265"/>
         <source>Don&apos;t Forget Theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="270"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="299"/>
         <source>Network</source>
         <translation type="unfinished">Réseau</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="315"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="344"/>
         <source>Check your network connection</source>
         <translation type="unfinished">Vérifiez votre connexion réseau</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="394"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="423"/>
         <source>Enabled</source>
         <translation type="unfinished">Activée</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="396"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="425"/>
         <source>Disabled</source>
         <translation type="unfinished">Désactivée</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="403"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="432"/>
         <source>Disable</source>
         <translation type="unfinished">Désactiver</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="405"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="434"/>
         <source>Enable</source>
         <translation type="unfinished">Activer</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="430"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="465"/>
         <source>Failed to enable Push Service</source>
         <translation type="unfinished">Impossible d&apos;activer Push Service</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="333"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="362"/>
         <source>If this setting is turned on you can send/receive tasks to/from your colleague or someone else using PIN. To achieve this goal app uses BlackBerry Push Service</source>
         <translation type="unfinished">Si ce paramètre est activé, vous pouvez envoyer / recevoir des tâches à / de votre collègue ou quelqu&apos;un d&apos;autre utilisant le NIP. Pour atteindre cet objectif, l&apos;application utilise BlackBerry Push Service</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="412"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="447"/>
         <source>Push Service enabled</source>
         <translation type="unfinished">Push Service activée</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="421"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="456"/>
         <source>Push Service disabled</source>
         <translation type="unfinished">Push Service désactivée</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="281"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="310"/>
         <source>Receive push notifications</source>
         <translation type="unfinished">Recevoir des notifications push</translation>
     </message>
@@ -623,12 +643,12 @@
 <context>
     <name>TaskViewPage</name>
     <message>
-        <location filename="../assets/pages/TaskViewPage.qml" line="89"/>
+        <location filename="../assets/pages/TaskViewPage.qml" line="91"/>
         <source>Child tasks</source>
         <translation type="unfinished">Tâches enfant</translation>
     </message>
     <message>
-        <location filename="../assets/pages/TaskViewPage.qml" line="135"/>
+        <location filename="../assets/pages/TaskViewPage.qml" line="137"/>
         <source>Attachments</source>
         <translation type="unfinished">Pièces jointes</translation>
     </message>
@@ -636,27 +656,27 @@
 <context>
     <name>TasksListPage</name>
     <message>
-        <location filename="../assets/pages/TasksListPage.qml" line="91"/>
+        <location filename="../assets/pages/TasksListPage.qml" line="102"/>
         <source>Choose a folder</source>
         <translation type="unfinished">Choisir un dossier</translation>
     </message>
     <message>
-        <location filename="../assets/pages/TasksListPage.qml" line="112"/>
+        <location filename="../assets/pages/TasksListPage.qml" line="123"/>
         <source>Create a folder</source>
         <translation type="unfinished">Créer un dossier</translation>
     </message>
     <message>
-        <location filename="../assets/pages/TasksListPage.qml" line="129"/>
+        <location filename="../assets/pages/TasksListPage.qml" line="140"/>
         <source>Search</source>
         <translation type="unfinished">Rechercher</translation>
     </message>
     <message>
-        <location filename="../assets/pages/TasksListPage.qml" line="150"/>
+        <location filename="../assets/pages/TasksListPage.qml" line="161"/>
         <source>Create</source>
         <translation type="unfinished">Créer</translation>
     </message>
     <message>
-        <location filename="../assets/pages/TasksListPage.qml" line="214"/>
+        <location filename="../assets/pages/TasksListPage.qml" line="225"/>
         <source>Root</source>
         <translation type="unfinished">Racine</translation>
     </message>
@@ -723,138 +743,138 @@
         <translation type="unfinished">Envoyer un retour d&apos;information</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="89"/>
+        <location filename="../assets/main.qml" line="90"/>
         <source>You have no tasks yet. It&apos;s time to create new one!</source>
         <translation type="unfinished">Vous n&apos;avez pas encore de tâches. Il est temps d&apos;en créer une nouvelle!</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="158"/>
+        <location filename="../assets/main.qml" line="159"/>
         <source>Create</source>
         <translation type="unfinished">Créer</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="182"/>
+        <location filename="../assets/main.qml" line="183"/>
         <source>Edit</source>
         <translation type="unfinished">Editer</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="283"/>
+        <location filename="../assets/main.qml" line="284"/>
         <source>View</source>
         <translation type="unfinished">Regarder</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="208"/>
+        <location filename="../assets/main.qml" line="209"/>
         <source>Delete</source>
         <translation type="unfinished">Supprimer</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="246"/>
+        <location filename="../assets/main.qml" line="247"/>
         <source>Move</source>
         <translation type="unfinished">Déplacer</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="270"/>
+        <location filename="../assets/main.qml" line="271"/>
         <source>Send</source>
         <translation type="unfinished">Envoyer</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="307"/>
+        <location filename="../assets/main.qml" line="308"/>
         <source>Hide closed</source>
         <translation type="unfinished">Cacher terminer</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="309"/>
+        <location filename="../assets/main.qml" line="310"/>
         <source>Show all</source>
         <translation type="unfinished">Tout afficher</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="324"/>
+        <location filename="../assets/main.qml" line="325"/>
         <source>Search</source>
         <translation type="unfinished">Rechercher</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="346"/>
+        <location filename="../assets/main.qml" line="347"/>
         <source>Single select</source>
         <translation type="unfinished">Single select</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="348"/>
+        <location filename="../assets/main.qml" line="349"/>
         <source>Select more</source>
         <translation type="unfinished">Sélectionnez plus</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="359"/>
+        <location filename="../assets/main.qml" line="360"/>
         <source>Open in Calendar</source>
         <translation type="unfinished">Ouvrir dans le Calendrier</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="370"/>
+        <location filename="../assets/main.qml" line="371"/>
         <source>Open in Remember</source>
         <translation type="unfinished">Ouvrir dans Remember</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="382"/>
+        <location filename="../assets/main.qml" line="383"/>
         <source>Sort</source>
         <translation type="unfinished">Trier</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="415"/>
-        <location filename="../assets/main.qml" line="610"/>
+        <location filename="../assets/main.qml" line="416"/>
+        <location filename="../assets/main.qml" line="611"/>
         <source>All Tasks</source>
         <translation type="unfinished">Toutes les tâches</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="516"/>
+        <location filename="../assets/main.qml" line="517"/>
         <source>Permission required</source>
         <translation type="unfinished">Permission demandée</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="517"/>
+        <location filename="../assets/main.qml" line="518"/>
         <source>Looks like you didn&apos;t grant permission for shared files. &quot;Don&apos;t Forget&quot; cannot work without this permission since the app stores own database in external resources. In order to use this app you should grant permissions in Settings, then restart the app.</source>
         <translation type="unfinished">Il semblerait que vous n&apos;avez pas accepter la permission de partage de fichiers. &quot;Don&apos;t Forget&quot; ne peut fonctionner sans cette permission. Pour utiliser cette application vous devez autoriser cette permission dans les paramètres du téléphone, puis redémarrer l&apos;application.</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="520"/>
+        <location filename="../assets/main.qml" line="521"/>
         <source>Settings</source>
         <translation type="unfinished">Paramètres</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="544"/>
+        <location filename="../assets/main.qml" line="545"/>
         <source>Confirm the deleting</source>
         <translation type="unfinished">Confirmer la suppression</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="545"/>
+        <location filename="../assets/main.qml" line="546"/>
         <source>This action cannot be undone. Also, task may contain children. All these will be deleted. Continue?</source>
         <translation type="unfinished">Cette action ne peut pas être effectuée. La tâche peut être liée à d&apos;autres. L&apos;ensemble va être supprimer. Continuer?</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="548"/>
+        <location filename="../assets/main.qml" line="549"/>
         <source>Don&apos;t ask again</source>
         <translation type="unfinished">Ne plus demander</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="578"/>
+        <location filename="../assets/main.qml" line="579"/>
         <source>Descending order</source>
         <translation type="unfinished">Ordre décroissant</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="574"/>
+        <location filename="../assets/main.qml" line="575"/>
         <source>Sort by</source>
         <translation type="unfinished">Trier par</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="625"/>
+        <location filename="../assets/main.qml" line="626"/>
         <source>Creation</source>
         <translation type="unfinished">Créer</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="626"/>
+        <location filename="../assets/main.qml" line="627"/>
         <source>Name</source>
         <translation type="unfinished">Nom</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="627"/>
+        <location filename="../assets/main.qml" line="628"/>
         <source>Deadline</source>
         <translation type="unfinished">Date de fin</translation>
     </message>

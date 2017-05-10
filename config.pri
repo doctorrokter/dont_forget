@@ -98,6 +98,8 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/yellow_pellet.png) \
         $$quote($$BASEDIR/assets/images/zip_icon_big_512x512.png) \
         $$quote($$BASEDIR/assets/main.qml) \
+        $$quote($$BASEDIR/assets/migrations/10_alter_table_tasks_add_account_id.sql) \
+        $$quote($$BASEDIR/assets/migrations/11_alter_table_tasks_add_folder_id.sql) \
         $$quote($$BASEDIR/assets/migrations/1_create_schema_version_table.sql) \
         $$quote($$BASEDIR/assets/migrations/2_create_table_tasks.sql) \
         $$quote($$BASEDIR/assets/migrations/3_create_table_df_users.sql) \
@@ -135,6 +137,7 @@ config_pri_source_group1 {
         $$quote($$BASEDIR/src/services/TasksService.cpp) \
         $$quote($$BASEDIR/src/services/UsersService.cpp) \
         $$quote($$BASEDIR/src/util/CalendarUtil.cpp) \
+        $$quote($$BASEDIR/src/util/DateUtil.cpp) \
         $$quote($$BASEDIR/src/util/Signal.cpp) \
         $$quote($$BASEDIR/src/vendor/Console.cpp)
 
@@ -151,6 +154,7 @@ config_pri_source_group1 {
         $$quote($$BASEDIR/src/services/TasksService.hpp) \
         $$quote($$BASEDIR/src/services/UsersService.hpp) \
         $$quote($$BASEDIR/src/util/CalendarUtil.hpp) \
+        $$quote($$BASEDIR/src/util/DateUtil.hpp) \
         $$quote($$BASEDIR/src/util/Signal.hpp) \
         $$quote($$BASEDIR/src/vendor/Console.hpp)
 }

@@ -40,11 +40,18 @@ NavigationPane {
                         var important = importantToggleButton.checked ? 1 : 0;
                         var createInRemember = rememberToggleButton.checked ? 1 : 0;
                         var createInCalendar = deadLineToggleButton.checked && calendarToggleButton.checked ? 1 : 0;
+                        
+                        var folderId = 1;
+                        var accountId = 1;
+                        if (createInCalendar === 1) {
+                            folderId = calendarAccounts.selectedValue.folderId;
+                            accountId = calendarAccounts.selectedValue.accountId;
+                        }
                     
                         taskName.validate();
                         if (taskName.isValid()) {
                             spinner.start();
-                            _tasksService.createTask(taskName.result.trim(), description.result.trim(), "TASK", deadline, important, createInRemember, files, createInCalendar);
+                            _tasksService.createTask(taskName.result.trim(), description.result.trim(), "TASK", deadline, important, createInRemember, files, createInCalendar, folderId, accountId);
                         }
                     }
                 }
@@ -136,6 +143,17 @@ NavigationPane {
                         visible: deadLineToggleButton.checked
                     }
                     
+                    Container {
+                        leftPadding: ui.du(2.5)
+                        topPadding: ui.du(2.5)
+                        rightPadding: ui.du(2.5)
+                        visible: calendarToggleButton.checked
+                        DropDown {
+                            id: calendarAccounts
+                            title: qsTr("Account") + Retranslate.onLocaleOrLanguageChanged
+                        }
+                    }
+                    
                     ToggleBlock {
                         id: rememberToggleButton
                         title: qsTr("Create in Remember") + Retranslate.onLocaleOrLanguageChanged
@@ -205,5 +223,9 @@ NavigationPane {
                 }
             }
         ]
+    }
+    
+    onCreationCompleted: {
+        _calendar.initFolders(calendarAccounts);
     }
 }

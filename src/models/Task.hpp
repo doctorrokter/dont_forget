@@ -25,6 +25,8 @@ class Task: public QObject {
     Q_PROPERTY(bool expanded READ isExpanded WRITE setExpanded NOTIFY expandedChanged)
     Q_PROPERTY(QString rememberId READ getRememberId WRITE setRememberId NOTIFY rememberIdChanged)
     Q_PROPERTY(int calendarId READ getCalendarId WRITE setCalendarId NOTIFY calendarIdChanged)
+    Q_PROPERTY(int accountId READ getAccountId WRITE setAccountId NOTIFY accountIdChanged)
+    Q_PROPERTY(int folderId READ getFolderId WRITE setFolderId NOTIFY folderIdChanged)
     Q_PROPERTY(QString color READ getColor WRITE setColor NOTIFY colorChanged)
     Q_PROPERTY(QList<Task> children READ getChildren WRITE setChildren NOTIFY childrenChanged)
 public:
@@ -69,6 +71,12 @@ public:
     Q_INVOKABLE int getCalendarId() const;
     Q_INVOKABLE void setCalendarId(const int calendarId);
 
+    Q_INVOKABLE int getAccountId() const;
+    Q_INVOKABLE void setAccountId(const int accountId);
+
+    Q_INVOKABLE int getFolderId() const;
+    Q_INVOKABLE void setFolderId(const int folderId);
+
     Q_INVOKABLE const QString& getColor() const;
     Q_INVOKABLE void setColor(const QString& color);
 
@@ -93,6 +101,8 @@ Q_SIGNALS:
     void expandedChanged(const bool expanded);
     void rememberIdChanged(const QString& rememberId);
     void calendarIdChanged(const int calendarId);
+    void accountIdChanged(const int accountId);
+    void folderIdChanged(const int folderId);
     void colorChanged(const QString& color);
     void childrenChanged(const QList<Task>& children);
 
@@ -108,6 +118,8 @@ private:
     bool m_expanded;
     QString m_rememberId;
     int m_calendarId;
+    int m_accountId;
+    int m_folderId;
     QString m_color;
     QList<Task> m_children;
 

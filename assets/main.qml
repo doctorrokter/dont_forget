@@ -57,6 +57,7 @@ NavigationPane {
         if (page.clear) {
             page.clear();
         }
+        page.destroy();
     }
     
     Page {

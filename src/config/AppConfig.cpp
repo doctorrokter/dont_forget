@@ -54,6 +54,7 @@ QVariant AppConfig::get(const QString name) const {
 
 void AppConfig::set(const QString name, const QVariant value) {
     setStatic(name, value);
+    emit settingsChanged();
 }
 
 bool AppConfig::isUsingPublicPushProxyGateway() const { return USING_PUBLIC_PPG; }

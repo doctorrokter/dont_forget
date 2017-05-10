@@ -167,8 +167,8 @@ void TasksService::createTask(const QString name, const QString description, con
         calendarEventId = ev.id();
     }
 
-    QString query = "INSERT INTO tasks (name, description, type, deadline, important, parent_id, remember_id, closed, expanded, calendar_id, color) "
-                    "VALUES (:name, :description, :type, :deadline, :important, :parent_id, :remember_id, :closed, :expanded, :calendar_id, :color)";
+    QString query = "INSERT INTO tasks (name, description, type, deadline, important, parent_id, remember_id, closed, expanded, calendar_id, account_id, folder_id, color) "
+                    "VALUES (:name, :description, :type, :deadline, :important, :parent_id, :remember_id, :closed, :expanded, :calendar_id, :account_id, :folder_id, :color)";
     QVariantMap values;
     values["name"] = name;
     values["description"] = description;
@@ -180,6 +180,8 @@ void TasksService::createTask(const QString name, const QString description, con
     values["closed"] = 0;
     values["expanded"] = 1;
     values["calendar_id"] = calendarEventId;
+    values["account_id"] = accountId;
+    values["folder_id"] = folderId;
     values["color"] = color;
 
     m_pDbConfig->execute(query, values);
@@ -331,6 +333,7 @@ void TasksService::moveTask(const int parentId) {
 void TasksService::copyTask(const Task& task) {
     QString parentId = task.getParentId() == 0 ? NULL : QString::number(task.getParentId());
     QString rememberId = NULL;
+    int calendarEventId = task.getCalendarId();
 
     bool createInRemember = !task.getRememberId().isEmpty();
     if (createInRemember) {
@@ -341,8 +344,14 @@ void TasksService::copyTask(const Task& task) {
         note = NULL;
     }
 
-    QString query = "INSERT INTO tasks (name, description, type, deadline, important, parent_id, closed, expanded, remember_id) "
-                        "VALUES (:name, :description, :type, :deadline, :important, :parent_id, :closed, :expanded, :remember_id)";
+    if (task.getCalendarId() != 0 && task.getAccountId() == 1 && task.getFolderId() == 1) {
+        CalendarUtil calendar;
+        CalendarEvent ev = calendar.createEvent(task.getName(), task.getDescription(), QDateTime::fromTime_t(task.getDeadline()), task.getFolderId(), task.getAccountId());
+        calendarEventId = ev.id();
+    }
+
+    QString query = "INSERT INTO tasks (name, description, type, deadline, important, parent_id, closed, expanded, remember_id, calendar_id, account_id, folder_id, color) "
+                        "VALUES (:name, :description, :type, :deadline, :important, :parent_id, :closed, :expanded, :remember_id, :calendar_id, :account_id, :folder_id, :color)";
     QVariantMap values;
     values["name"] = task.getName();
     values["description"] = task.getDescription();
@@ -353,6 +362,10 @@ void TasksService::copyTask(const Task& task) {
     values["remember_id"] = rememberId;
     values["closed"] = task.isClosed() ? 1 : 0;
     values["expanded"] = 1;
+    values["calendar_id"] = calendarEventId;
+    values["account_id"] = task.getAccountId();
+    values["folder_id"] = task.getFolderId();
+    values["color"] = task.getColor();
 
     m_pDbConfig->execute(query, values);
 }

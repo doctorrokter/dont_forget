@@ -15,75 +15,86 @@ Page {
     actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
     actionBarVisibility: ChromeVisibility.Overlay
     
-    ListView {
-        id: tasksListView
+    Container {
+        horizontalAlignment: HorizontalAlignment.Fill
+        verticalAlignment: VerticalAlignment.Fill
         
-        scrollRole: ScrollRole.Main
-        
-        dataModel: ArrayDataModel {
-            id: tasksDataModel
-        }
-        
-        listItemComponents: [
-            ListItemComponent {
-                CustomListItem {
-                    horizontalAlignment: HorizontalAlignment.Fill
-                    verticalAlignment: VerticalAlignment.Fill
-                    visible: ListItemData.visible
-                    
-                    Container {
-                        verticalAlignment: VerticalAlignment.Center
+        ListView {
+            id: tasksListView
+            
+            scrollRole: ScrollRole.Main
+            
+            dataModel: ArrayDataModel {
+                id: tasksDataModel
+            }
+            
+            listItemComponents: [
+                ListItemComponent {
+                    CustomListItem {
                         horizontalAlignment: HorizontalAlignment.Fill
+                        verticalAlignment: VerticalAlignment.Fill
+                        visible: ListItemData.visible
                         
-                        layout: StackLayout {
-                            orientation: LayoutOrientation.LeftToRight
-                        }
-                        
-                        leftPadding: ui.du(2.5)
-                        
-                        ImageView {
-                            imageSource: ListItemData.type === "FOLDER" ? "asset:///images/ic_folder.png" : "asset:///images/ic_list.png"
-                            filterColor: getIconColor()
-                            maxWidth: ui.du(8)
-                            maxHeight: ui.du(6.5)
-                            layoutProperties: StackLayoutProperties {
-                                spaceQuota: -1
+                        Container {
+                            verticalAlignment: VerticalAlignment.Center
+                            horizontalAlignment: HorizontalAlignment.Fill
+                            
+                            layout: StackLayout {
+                                orientation: LayoutOrientation.LeftToRight
                             }
                             
-                            function getIconColor() {
-                                var type = ListItemData.type;
-                                var color = ListItemData.color;
-                                if (type === "FOLDER") {
-                                    if (color !== "") {
-                                        return Color.create(color);
+                            leftPadding: ui.du(2.5)
+                            
+                            ImageView {
+                                imageSource: ListItemData.type === "FOLDER" ? "asset:///images/ic_folder.png" : "asset:///images/ic_list.png"
+                                filterColor: getIconColor()
+                                maxWidth: ui.du(8)
+                                maxHeight: ui.du(6.5)
+                                layoutProperties: StackLayoutProperties {
+                                    spaceQuota: -1
+                                }
+                                
+                                function getIconColor() {
+                                    var type = ListItemData.type;
+                                    var color = ListItemData.color;
+                                    if (type === "FOLDER") {
+                                        if (color !== "") {
+                                            return Color.create(color);
+                                        }
+                                        return ui.palette.primary;
+                                    } else {
+                                        if (color !== "") {
+                                            return Color.create(color);
+                                        }
+                                        return Color.create("#779933");
                                     }
-                                    return ui.palette.primary;
-                                } else {
-                                    if (color !== "") {
-                                        return Color.create(color);
-                                    }
-                                    return Color.create("#779933");
                                 }
                             }
-                        }
-                        
-                        Label {
-                            verticalAlignment: VerticalAlignment.Center
-                            text: ListItemData.title
-                            textStyle.base: SystemDefaults.TextStyles.PrimaryText
-                            layoutProperties: StackLayoutProperties {
-                                spaceQuota: 1
+                            
+                            Label {
+                                verticalAlignment: VerticalAlignment.Center
+                                text: ListItemData.title
+                                textStyle.base: SystemDefaults.TextStyles.PrimaryText
+                                layoutProperties: StackLayoutProperties {
+                                    spaceQuota: 1
+                                }
                             }
                         }
                     }
                 }
+            ]
+            
+            onTriggered: {
+                taskChosen(tasksDataModel.data(indexPath));
             }
-        ]
+        }
         
-        onTriggered: {
-            taskChosen(tasksDataModel.data(indexPath));
+        Container {
+            horizontalAlignment: HorizontalAlignment.Fill
+            minHeight: ui.du(12)
         }
     }
+    
     
     attachedObjects: [
         CustomTitleBar {

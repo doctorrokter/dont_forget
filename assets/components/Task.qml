@@ -13,7 +13,7 @@ Container {
     property bool important: false
     property bool closed: true
     property bool selected: _tasksService.isTaskSelected(taskId)
-    property int deadline: 0
+    property int deadline: 1231234235
     property string parentId: ""
     property string rememberId: ""
     property int calendarId: 87687687
@@ -231,7 +231,7 @@ Container {
                     verticalAlignment: VerticalAlignment.Center
                     Label {
                         id: deadlineLabel
-                        text: Qt.formatDateTime(new Date(task.deadline * 1000), "dd.MM.yyyy HH:mm")
+                        text: _date.str(task.deadline);
                         textStyle.base: SystemDefaults.TextStyles.SmallText
                         textStyle.color: {
                             if ((task.deadline * 1000) < new Date().getTime()) {
@@ -397,6 +397,7 @@ Container {
         _tasksService.taskSelected.disconnect(task.select);
         _tasksService.taskDeselected.disconnect(task.select);
         _tasksService.multiselectModeChanged.disconnect(task.handleMultiselectModeChanged);
+        _appConfig.settingsChanged.disconnect(task.handleSettingsChanged);
     }
     
     function handleMultiselectModeChanged(multiselectMode) {
@@ -419,13 +420,17 @@ Container {
         }
     }
     
+    function handleSettingsChanged() {
+        task.deadlineChanged();
+    }
+    
     onParentIdChanged: {
         divider.visible = parentId === "";
     }
     
     onDeadlineChanged: {
         if (deadline !== 0) {
-            deadlineLabel.text = Qt.formatDateTime(new Date(task.deadline * 1000), "dd.MM.yyyy HH:mm");
+            deadlineLabel.text = _date.str(task.deadline);
         } else {
             deadlineLabel.text = "";
         }
@@ -442,6 +447,7 @@ Container {
         _tasksService.multiselectModeChanged.connect(task.handleMultiselectModeChanged);
         _tasksService.droppedRememberId.connect(task.dropRememberId);
         _tasksService.droppedCalendarId.connect(task.dropCalendarId);
+        _appConfig.settingsChanged.connect(task.handleSettingsChanged);
     }
     
     onControlRemoved: {

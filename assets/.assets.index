@@ -1,5 +1,5 @@
 1
-83
+85
 cards/CreateTaskFromTextCard.qml
 cards/CreateTaskFromUrlCard.qml
 cards/TestCard.qml
@@ -62,6 +62,8 @@ images/xls_icon_big_512x512.png
 images/yellow_pellet.png
 images/zip_icon_big_512x512.png
 main.qml
+migrations/10_alter_table_tasks_add_account_id.sql
+migrations/11_alter_table_tasks_add_folder_id.sql
 migrations/1_create_schema_version_table.sql
 migrations/2_create_table_tasks.sql
 migrations/3_create_table_df_users.sql

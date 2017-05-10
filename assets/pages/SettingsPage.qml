@@ -155,6 +155,35 @@ Page {
                 }
                 
                 Container {
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    topPadding: ui.du(2.5)
+                    leftPadding: ui.du(2.5)
+                    rightPadding: ui.du(2.5)
+                    bottomPadding: ui.du(2.5)
+                    DropDown {
+                        title: qsTr("Date/time format") + Retranslate.onLocaleOrLanguageChanged
+                        
+                        options: [
+                            Option {
+                                id: customFormatOption
+                                text: "dd.MM.yyyy, hh:mm"
+                                value: "dd.MM.yyyy, hh:mm"
+                            },
+                            
+                            Option {
+                                id: localizedFormatOption
+                                text: qsTr("Localized") + Retranslate.onLocaleOrLanguageChanged
+                                value: "localized"
+                            }
+                        ]
+                        
+                        onSelectedOptionChanged: {
+                            _appConfig.set("date_format", selectedOption.value);
+                        }
+                    }
+                }
+                
+                Container {
                     layout: DockLayout {}
                     topPadding: ui.du(2)
                     bottomPadding: ui.du(0.5)
@@ -406,6 +435,12 @@ Page {
         }
     }
     
+    function adjustDateTimeFormat() {
+        var df = _appConfig.get("date_format");
+        customFormatOption.selected = (df === "" || df === customFormatOption.value);
+        localizedFormatOption.selected = (df === localizedFormatOption.value);
+    }
+    
     function pushRegistered() {
         _appConfig.set("push_service_registered", "true");
         loading.running = false;
@@ -445,6 +480,7 @@ Page {
         adjustPushServiceButton();
         adjustSoundOnSelect();
         adjustVibrationOnSelect();
+        adjustDateTimeFormat();
 //        adjustNotificationTheme();
         _pushService.channelCreated.connect(root.pushRegistered);
         _pushService.channelDestroyed.connect(root.pushUnregistered);

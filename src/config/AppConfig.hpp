@@ -50,6 +50,9 @@ public:
 
     Q_INVOKABLE QString getPublicAssets() const;
 
+Q_SIGNALS:
+    void settingsChanged();
+
 private Q_SLOTS:
     void onOnlineStatusChanged(bool isOnline);
 

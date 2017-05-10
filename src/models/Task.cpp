@@ -10,7 +10,7 @@
 
 Task::Task(QObject* parent) : QObject(parent), m_id(0), m_name(""), m_description(""), m_type("FOLDER"), m_parentId(0),
     m_deadline(0), m_important(false), m_closed(false), m_expanded(true), m_rememberId(""),
-    m_calendarId(0), m_color("") {}
+    m_calendarId(0), m_accountId(1), m_folderId(1), m_color("") {}
 
 Task::Task(const Task& task) : QObject(task.parent()) {
     if (this != &task) {
@@ -99,6 +99,18 @@ void Task::setCalendarId(const int calendarId) {
     emit calendarIdChanged(m_calendarId);
 }
 
+int Task::getAccountId() const { return m_accountId; }
+void Task::setAccountId(const int accountId) {
+    m_accountId = accountId;
+    emit accountIdChanged(m_accountId);
+}
+
+int Task::getFolderId() const { return m_folderId; }
+void Task::setFolderId(const int folderId) {
+    m_folderId = folderId;
+    emit folderIdChanged(m_folderId);
+}
+
 const QString& Task::getColor() const { return m_color; }
 void Task::setColor(const QString& color) {
     m_color = color;
@@ -132,6 +144,8 @@ void Task::swap(const Task& task) {
     this->setRememberId(rememberId);
 
     this->setCalendarId(task.getCalendarId());
+    this->setAccountId(task.getAccountId());
+    this->setFolderId(task.getFolderId());
 
     QList<Task> children = task.getChildren();
     this->setChildren(children);
@@ -150,6 +164,8 @@ QVariantMap Task::toMap() const {
     map.insert("expanded", this->isExpanded());
     map.insert("rememberId", this->getRememberId());
     map.insert("calendarId", this->getCalendarId());
+    map.insert("accountId", this->getAccountId());
+    map.insert("folderId", this->getFolderId());
     map.insert("color", this->getColor());
 
     QVariantList children;
@@ -173,6 +189,8 @@ QVariantMap Task::toJson() const {
     map.insert("expanded", this->isExpanded() ? 1 : 0);
     map.insert("remember_id", this->getRememberId());
     map.insert("calendar_id", this->getCalendarId());
+    map.insert("account_id", this->getAccountId());
+    map.insert("folder_id", this->getFolderId());
     map.insert("color", this->getColor());
     return map;
 }
@@ -189,6 +207,8 @@ void Task::fromMap(const QVariantMap taskMap) {
     this->setExpanded(taskMap.value("expanded").toBool());
     this->setRememberId(taskMap.value("remember_id", "").toString());
     this->setCalendarId(taskMap.value("calendar_id", "0").toInt());
+    this->setAccountId(taskMap.value("account_id", "1").toInt());
+    this->setFolderId(taskMap.value("folder_id", "1").toInt());
     this->setColor(taskMap.value("color", "").toString());
 }
 

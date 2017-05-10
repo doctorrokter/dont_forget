@@ -69,9 +69,11 @@ Page {
                         }
                         
                         Label {
+                            id: deadline
+                            
                             verticalAlignment: VerticalAlignment.Center
                             text: {
-                                return _tasksService.activeTask !== null ? Qt.formatDateTime(new Date(_tasksService.activeTask.deadline * 1000), "dd.MM.yyyy HH:mm") : "";
+                                return _tasksService.activeTask !== null ? _date.str(_tasksService.activeTask.deadline) : "";
                             }
                             textStyle.base: SystemDefaults.TextStyles.TitleText
                             textStyle.color: Color.create("#779933")
@@ -231,6 +233,16 @@ Page {
         return name;
     }
     
+    function handleSettingsChanged() {
+        if (_tasksService.activeTask.deadline !== 0) {
+            deadline.text = _date.str(_tasksService.activeTask.deadline);
+        }
+    }
+    
+    function clear() {
+        _appConfig.settingsChanged.disconnect(root.handleSettingsChanged);
+    }
+    
     onCreationCompleted: {
         var attachments = _attachmentsService.findByTaskId(_tasksService.activeTask.id);
         
@@ -246,5 +258,7 @@ Page {
         
         attachmentsDataModel.append(attachments);
         adjustListViewHeight();
+        
+        _appConfig.settingsChanged.connect(root.handleSettingsChanged);
     }
 }

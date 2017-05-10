@@ -400,6 +400,10 @@ Sheet {
     }
     
     onCreationCompleted: {
-        _calendar.initFolders(calendarAccounts);
+        if (_tasksService.activeTask !== null) {
+            _calendar.initFolders(calendarAccounts, _tasksService.activeTask.folderId, _tasksService.activeTask.accountId);
+        } else {
+            _calendar.initFolders(calendarAccounts);
+        }
     }
 }
