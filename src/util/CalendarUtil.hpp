@@ -24,10 +24,10 @@ public:
     CalendarUtil(QObject* parent = 0);
     virtual ~CalendarUtil();
 
-    Q_INVOKABLE CalendarEvent createEvent(const QString& name, const QString& body, QDateTime dateTime, const int folderId = 1, const int accountId = 1);
-    Q_INVOKABLE CalendarEvent updateEvent(const int id, const QString& name, const QString& body, QDateTime dateTime);
-    Q_INVOKABLE void deleteEvent(const int id, const int folderId = 1, const int accountId = 1);
-    Q_INVOKABLE CalendarEvent findEventById(const int id, const int folderId = 1, const int accountId = 1);
+    Q_INVOKABLE CalendarEvent createEvent(const QString& name, const QString& body, QDateTime dateTime, const int folderId, const int accountId);
+    Q_INVOKABLE CalendarEvent updateEvent(const int id, const QString& name, const QString& body, QDateTime dateTime, const int folderId, const int accountId);
+    Q_INVOKABLE void deleteEvent(const int id, const int folderId, const int accountId);
+    Q_INVOKABLE CalendarEvent findEventById(const int id, const int folderId, const int accountId);
     Q_INVOKABLE void initFolders(bb::cascades::DropDown* dropDown, const int folderId = 1, const int accountId = 1);
 
 Q_SIGNALS:

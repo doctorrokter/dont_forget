@@ -209,7 +209,7 @@ void TasksService::createFolderQuick(const QString& name) {
 }
 
 void TasksService::updateTask(const QString name, const QString description, const QString type, const int deadline, const int important, const int createInRemember,
-        const int closed, const QVariantList attachments, const int createInCalendar, const QString& color) {
+        const int closed, const QVariantList attachments, const int createInCalendar, const int folderId, const int accountId, const QString& color) {
     QString rememberId = NULL;
     int calendarEventId = 0;
 
@@ -236,19 +236,30 @@ void TasksService::updateTask(const QString name, const QString description, con
     if (deadline != 0 && createInCalendar != 0) {
         CalendarEvent ev;
         if (m_pActiveTask->getCalendarId() == 0) {
-            ev = calendar.createEvent(name, description, QDateTime::fromTime_t(deadline));
+            ev = calendar.createEvent(name, description, QDateTime::fromTime_t(deadline), folderId, accountId);
         } else {
-            ev = calendar.updateEvent(m_pActiveTask->getCalendarId(), name, description, QDateTime::fromTime_t(deadline));
+
+            qDebug() << "curr folder_id: " << m_pActiveTask->getFolderId() << ", curr account_id: " << m_pActiveTask->getAccountId() << endl;
+            qDebug() << "new folder_id: " << folderId << ", new account_id: " << accountId << endl;
+
+            if (m_pActiveTask->getFolderId() != folderId || m_pActiveTask->getAccountId() != accountId) {
+                qDebug() << "SWITCH CALENDAR ACCOUNTS" << endl;
+                calendar.deleteEvent(m_pActiveTask->getCalendarId(), m_pActiveTask->getFolderId(), m_pActiveTask->getAccountId());
+                ev = calendar.createEvent(name, description, QDateTime::fromTime_t(deadline), folderId, accountId);
+            } else {
+                qDebug() << "UPDATE EXISTING CALENDAR EVENT" << endl;
+                ev = calendar.updateEvent(m_pActiveTask->getCalendarId(), name, description, QDateTime::fromTime_t(deadline), folderId, accountId);
+            }
         }
         calendarEventId = ev.id();
     } else if (deadline != 0 && createInCalendar == 0) {
         if (m_pActiveTask->getCalendarId() != 0) {
-            calendar.deleteEvent(m_pActiveTask->getCalendarId());
+            calendar.deleteEvent(m_pActiveTask->getCalendarId(), m_pActiveTask->getFolderId(), m_pActiveTask->getAccountId());
         }
     }
 
     QString query = "UPDATE tasks SET name = :name, description = :description, type = :type, deadline = :deadline, important = :important, "
-            "remember_id = :remember_id, closed = :closed, calendar_id = :calendar_id, color = :color WHERE id = :id";
+            "remember_id = :remember_id, closed = :closed, calendar_id = :calendar_id, folder_id = :folder_id, account_id = :account_id, color = :color WHERE id = :id";
     QVariantMap values;
     values["name"] = name;
     values["description"] = description;
@@ -259,6 +270,8 @@ void TasksService::updateTask(const QString name, const QString description, con
     values["closed"] = closed;
     values["id"] = m_pActiveTask->getId();
     values["calendar_id"] = calendarEventId;
+    values["folder_id"] = folderId;
+    values["account_id"] = accountId;
     values["color"] = color;
 
     m_pDbConfig->execute(query, values);
@@ -283,19 +296,14 @@ void TasksService::updateTask(const QString name, const QString description, con
 void TasksService::deleteTask(const int id) {
     QString query = QString("DELETE FROM tasks WHERE id = %1");
 
-//    if (m_multiselectMode) {
         if (isExists(id)) {
             QVariantMap taskMap = findById(id);
             m_pActiveTask = new Task(this);
             m_pActiveTask->fromMap(taskMap);
         }
-//    }
 
     if (m_pActiveTask != NULL) {
         if (id == m_pActiveTask->getId()) {
-            qDebug() << "ACTIVE TASK" << endl;
-
-
             if (!m_pActiveTask->getRememberId().isEmpty()) {
                 deleteNotebookEntry(m_pActiveTask->getRememberId());
             }
@@ -306,7 +314,6 @@ void TasksService::deleteTask(const int id) {
             query = query.arg(m_pActiveTask->getId());
 
             if (hasChildren(m_pActiveTask->getId())) {
-                qDebug() << "HAS CHILDREN" << endl;
                 QVariantList children = findSiblings(m_pActiveTask->getId());
                 foreach(QVariant taskVar, children) {
                     deleteTask(taskVar.toMap().value("id").toInt());
@@ -317,12 +324,6 @@ void TasksService::deleteTask(const int id) {
 
             flushActiveTask();
             emit activeTaskChanged(m_pActiveTask);
-        } else {
-            qDebug() << "PARASHA" << endl;
-
-            m_pDbConfig->execute("PRAGMA foreign_keys = ON");
-            query = query.arg(id);
-            m_pDbConfig->execute(query);
         }
         emit taskDeleted(id);
     }
@@ -506,11 +507,12 @@ void TasksService::syncCalendarTasks() {
         CalendarUtil calendar;
         foreach(QVariant taskVar, calendarTasks) {
             QVariantMap taskMap = taskVar.toMap();
-            int id = taskMap.value("id").toInt();
-            CalendarEvent ev = calendar.findEventById(taskMap.value("calendar_id").toInt());
+            Task t;
+            t.fromMap(taskMap);
+            CalendarEvent ev = calendar.findEventById(t.getCalendarId(), t.getFolderId(), t.getAccountId());
             if (!ev.isValid()) {
-                m_pDbConfig->execute(QString("UPDATE tasks SET calendar_id = NULL WHERE id = %1").arg(id));
-                emit droppedCalendarId(id);
+                m_pDbConfig->execute(QString("UPDATE tasks SET calendar_id = NULL WHERE id = %1").arg(t.getId()));
+                emit droppedCalendarId(t.getId());
             }
         }
     }

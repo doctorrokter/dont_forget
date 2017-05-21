@@ -67,7 +67,7 @@ Sheet {
                                     }    
                                 });
                             } else {
-                                _tasksService.updateTask(taskName.result.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, closed, files, createInCalendar, color);
+                                _tasksService.updateTask(taskName.result.trim(), description.result.trim(), taskType.selectedValue, deadline, important, createInRemember, closed, files, createInCalendar, folderId, accountId, color);
                             }
                             taskSheet.close();
                         } 
@@ -364,6 +364,16 @@ Sheet {
         closeTaskCheckbox.checked = _tasksService.activeTask !== null && _tasksService.activeTask.closed;
     }
     
+    function adjustCalendarFolders() {
+        calendarAccounts.removeAll();
+        if (_tasksService.activeTask !== null) {
+            console.debug("INIT FOLDERS: ", _tasksService.activeTask.folderId, _tasksService.activeTask.accountId);
+            _calendar.initFolders(calendarAccounts, _tasksService.activeTask.folderId, _tasksService.activeTask.accountId);
+        } else {
+            _calendar.initFolders(calendarAccounts);
+        }
+    }
+    
     onOpened: {
         createTaskAction.enabled = true;
         if (taskSheet.mode === taskSheet.modes.UPDATE) {
@@ -380,6 +390,7 @@ Sheet {
         }
         adjustCreateInRemember();
         adjustCreateInCalendar();
+        adjustCalendarFolders();
         adjustDeadline();
         adjustClosedTask();
         adjustAttachments();
@@ -397,13 +408,5 @@ Sheet {
     
     onDataChanged: {
         taskName.value = taskSheet.data;
-    }
-    
-    onCreationCompleted: {
-        if (_tasksService.activeTask !== null) {
-            _calendar.initFolders(calendarAccounts, _tasksService.activeTask.folderId, _tasksService.activeTask.accountId);
-        } else {
-            _calendar.initFolders(calendarAccounts);
-        }
     }
 }

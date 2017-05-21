@@ -122,14 +122,14 @@ ApplicationUI::~ApplicationUI() {
     clear();
 }
 
-void ApplicationUI::openCalendarEvent(const int eventId) {
+void ApplicationUI::openCalendarEvent(const int eventId, const int folderId, const int accountId) {
     InvokeRequest req;
     req.setMimeType("text/calendar");
     req.setTarget("sys.pim.calendar.viewer.eventcreate");
     req.setAction("bb.calendar.EDIT");
 
     QVariantMap data;
-    CalendarEvent ev = m_pCalendar->findEventById(eventId);
+    CalendarEvent ev = m_pCalendar->findEventById(eventId, folderId, accountId);
 
     data["accountId"] = ev.accountId();
     data["eventId"] = ev.id();

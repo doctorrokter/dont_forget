@@ -51,7 +51,7 @@ public:
             const int createInRemember = 0, const QVariantList attachments = QVariantList(), const int createInCalendar = 0, const int folderId = 1, const int accountId = 1,
             const QString& color = "");
     Q_INVOKABLE void createFolderQuick(const QString& name);
-    Q_INVOKABLE void updateTask(const QString name = "", const QString description = "", const QString type = "TASK", const int deadline = 0, const int important = 0, const int createInRemember = 0, const int closed = 0, const QVariantList attachments = QVariantList(), const int createInCalendar = 0, const QString& color = "");
+    Q_INVOKABLE void updateTask(const QString name = "", const QString description = "", const QString type = "TASK", const int deadline = 0, const int important = 0, const int createInRemember = 0, const int closed = 0, const QVariantList attachments = QVariantList(), const int createInCalendar = 0, const int folderId = 1, const int accountId = 1, const QString& color = "");
     Q_INVOKABLE void deleteTask(const int id);
     Q_INVOKABLE void moveTask(const int parentId = 0);
     Q_INVOKABLE void copyTask(const Task& task);

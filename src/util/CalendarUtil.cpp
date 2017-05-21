@@ -8,6 +8,7 @@
 #include "CalendarUtil.hpp"
 #include <QPair>
 #include <bb/pim/calendar/CalendarFolder>
+#include <QDebug>
 
 CalendarUtil::CalendarUtil(QObject* parent) :QObject(parent), m_pCalendarService(new CalendarService()) {}
 
@@ -31,9 +32,8 @@ CalendarEvent CalendarUtil::createEvent(const QString& name, const QString& body
     return ev;
 }
 
-CalendarEvent CalendarUtil::updateEvent(const int id, const QString& name, const QString& body, QDateTime dateTime) {
-    QPair<AccountId, FolderId> pair = m_pCalendarService->defaultCalendarFolder();
-    CalendarEvent ev = m_pCalendarService->event(pair.first, id);
+CalendarEvent CalendarUtil::updateEvent(const int id, const QString& name, const QString& body, QDateTime dateTime, const int folderId, const int accountId) {
+    CalendarEvent ev = m_pCalendarService->event(accountId, id);
     ev.setStartTime(dateTime);
     ev.setEndTime(dateTime.addSecs(3600));
     ev.setReminder(120);
@@ -44,6 +44,7 @@ CalendarEvent CalendarUtil::updateEvent(const int id, const QString& name, const
 }
 
 void CalendarUtil::deleteEvent(const int id, const int folderId, const int accountId) {
+    qDebug() << "Delete event: " << id << ", folder: " << folderId << ", account: " << accountId << endl;
     CalendarEvent ev = findEventById(id, folderId, accountId);
     m_pCalendarService->deleteEvent(ev);
     emit eventDeleted();

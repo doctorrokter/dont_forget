@@ -59,7 +59,7 @@ public:
     ApplicationUI();
     virtual ~ApplicationUI();
 
-    Q_INVOKABLE void openCalendarEvent(const int eventId);
+    Q_INVOKABLE void openCalendarEvent(const int eventId, const int folderId, const int accountId);
     Q_INVOKABLE void openRememberNote(const QString& rememberId);
     Q_INVOKABLE QVariant loadHtmlAsObject(const QString& html);
 

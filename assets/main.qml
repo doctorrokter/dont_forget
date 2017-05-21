@@ -362,7 +362,7 @@ NavigationPane {
                 enabled: _tasksService.activeTask !== null && _tasksService.activeTask.calendarId !== 0;
                 
                 onTriggered: {
-                    _app.openCalendarEvent(_tasksService.activeTask.calendarId);
+                    _app.openCalendarEvent(_tasksService.activeTask.calendarId, _tasksService.activeTask.folderId, _tasksService.activeTask.accountId);
                 }
             },
             
