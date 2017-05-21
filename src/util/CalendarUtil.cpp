@@ -43,16 +43,15 @@ CalendarEvent CalendarUtil::updateEvent(const int id, const QString& name, const
     return ev;
 }
 
-void CalendarUtil::deleteEvent(const int id) {
-    CalendarEvent ev = findEventById(id);
+void CalendarUtil::deleteEvent(const int id, const int folderId, const int accountId) {
+    CalendarEvent ev = findEventById(id, folderId, accountId);
     m_pCalendarService->deleteEvent(ev);
     emit eventDeleted();
 }
 
-CalendarEvent CalendarUtil::findEventById(const int id) {
-    QPair<AccountId, FolderId> pair = m_pCalendarService->defaultCalendarFolder();
+CalendarEvent CalendarUtil::findEventById(const int id, const int folderId, const int accountId) {
     Result::Type* r = new Result::Type();
-    CalendarEvent ev = m_pCalendarService->event(pair.first, id, r);
+    CalendarEvent ev = m_pCalendarService->event(accountId, id, r);
     return ev;
 }
 

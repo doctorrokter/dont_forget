@@ -283,31 +283,43 @@ void TasksService::updateTask(const QString name, const QString description, con
 void TasksService::deleteTask(const int id) {
     QString query = QString("DELETE FROM tasks WHERE id = %1");
 
-    if (m_multiselectMode) {
+//    if (m_multiselectMode) {
         if (isExists(id)) {
             QVariantMap taskMap = findById(id);
             m_pActiveTask = new Task(this);
             m_pActiveTask->fromMap(taskMap);
         }
-    }
+//    }
 
     if (m_pActiveTask != NULL) {
         if (id == m_pActiveTask->getId()) {
+            qDebug() << "ACTIVE TASK" << endl;
+
+
             if (!m_pActiveTask->getRememberId().isEmpty()) {
                 deleteNotebookEntry(m_pActiveTask->getRememberId());
             }
             if (m_pActiveTask->getCalendarId() != 0) {
                 CalendarUtil calendar;
-                calendar.deleteEvent(m_pActiveTask->getCalendarId());
+                calendar.deleteEvent(m_pActiveTask->getCalendarId(), m_pActiveTask->getFolderId(), m_pActiveTask->getAccountId());
             }
             query = query.arg(m_pActiveTask->getId());
 
+            if (hasChildren(m_pActiveTask->getId())) {
+                qDebug() << "HAS CHILDREN" << endl;
+                QVariantList children = findSiblings(m_pActiveTask->getId());
+                foreach(QVariant taskVar, children) {
+                    deleteTask(taskVar.toMap().value("id").toInt());
+                }
+            }
             m_pDbConfig->execute("PRAGMA foreign_keys = ON");
             m_pDbConfig->execute(query);
 
             flushActiveTask();
             emit activeTaskChanged(m_pActiveTask);
         } else {
+            qDebug() << "PARASHA" << endl;
+
             m_pDbConfig->execute("PRAGMA foreign_keys = ON");
             query = query.arg(id);
             m_pDbConfig->execute(query);
