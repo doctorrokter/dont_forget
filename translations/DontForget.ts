@@ -271,6 +271,26 @@
         <source>&lt;strong&gt;Tap gestures&lt;/strong&gt;&lt;br/&gt;1. &lt;strong&gt;Single tap&lt;/strong&gt; by task&apos;s label in a tasks tree will select this task and mark as &lt;strong&gt;active&lt;/strong&gt;. Task will become highlighted.&lt;br/&gt;2. &lt;strong&gt;Double tap&lt;/strong&gt; by task&apos;s label will open task&apos;s details sheet.&lt;br/&gt;3. If task is expandable (has children or has type Folder) you can expand or narrow task by clicking - or + button near task&apos;s icon.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Common</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Author: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>App name: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>App version: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OS version: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>InputTitleBar</name>

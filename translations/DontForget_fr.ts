@@ -322,42 +322,67 @@
 <context>
     <name>HelpPage</name>
     <message>
-        <location filename="../assets/pages/HelpPage.qml" line="8"/>
+        <location filename="../assets/pages/HelpPage.qml" line="10"/>
         <source>Help/Tutorial Center</source>
         <translation type="unfinished">Aide/Tutoriel</translation>
     </message>
     <message>
-        <location filename="../assets/pages/HelpPage.qml" line="21"/>
+        <location filename="../assets/pages/HelpPage.qml" line="23"/>
+        <source>Common</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/HelpPage.qml" line="36"/>
+        <source>Author: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/HelpPage.qml" line="61"/>
+        <source>App name: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/HelpPage.qml" line="65"/>
+        <source>App version: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/HelpPage.qml" line="69"/>
+        <source>OS version: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/HelpPage.qml" line="77"/>
         <source>Reminders</source>
         <translation type="unfinished">Rappels</translation>
     </message>
     <message>
-        <location filename="../assets/pages/HelpPage.qml" line="31"/>
+        <location filename="../assets/pages/HelpPage.qml" line="87"/>
         <source>Don&apos;t Forget app &lt;strong&gt;does not provide&lt;/strong&gt; own reminder mechanism. Instead of it, app uses Remember as reminder mechanism.&lt;br/&gt;&lt;br/&gt;In order to get notified when task&apos;s deadline is coming you should do the following:&lt;br/&gt;1. Click by &lt;strong&gt;Create&lt;/strong&gt; button.&lt;br/&gt;2. Set &lt;strong&gt;Deadline&lt;/strong&gt;.&lt;br/&gt;3. Set &lt;strong&gt;Create in Remember&lt;/strong&gt;.</source>
         <translation type="unfinished">Ne pas oublier l&apos;application &lt;strong&gt;ne fournit pas&lt;/strong&gt; mécanisme de rappel. A la place, utilisez l&apos;application Remember comme mécanisme de rappel.&lt;br/&gt;&lt;br/&gt;Pour être notifié de la date de fin d&apos;une tâche suivez les étapes suivantes:&lt;br/&gt;1. Cliquez sur &lt;strong&gt;Créer&lt;/strong&gt; Bouton.&lt;br/&gt;2. Activer &lt;strong&gt;Date de fin&lt;/strong&gt;.&lt;br/&gt;3. Activer &lt;strong&gt;Créer dans Remember&lt;/strong&gt;.</translation>
     </message>
     <message>
-        <location filename="../assets/pages/HelpPage.qml" line="43"/>
+        <location filename="../assets/pages/HelpPage.qml" line="99"/>
         <source>Gestures</source>
         <translation type="unfinished">Gestuelles</translation>
     </message>
     <message>
-        <location filename="../assets/pages/HelpPage.qml" line="53"/>
+        <location filename="../assets/pages/HelpPage.qml" line="109"/>
         <source>&lt;strong&gt;Tap gestures&lt;/strong&gt;&lt;br/&gt;1. &lt;strong&gt;Single tap&lt;/strong&gt; by task&apos;s label in a tasks tree will select this task and mark as &lt;strong&gt;active&lt;/strong&gt;. Task will become highlighted.&lt;br/&gt;2. &lt;strong&gt;Double tap&lt;/strong&gt; by task&apos;s label will open task&apos;s details sheet.&lt;br/&gt;3. If task is expandable (has children or has type Folder) you can expand or narrow task by clicking - or + button near task&apos;s icon.</source>
         <translation type="unfinished">&lt;strong&gt;Gestuelles&lt;/strong&gt;&lt;br/&gt;1. &lt;strong&gt;Appui simple &lt;/strong&gt;sur l&apos;étiquette de tâche dans une arborescence de tâches sélectionnera cette et la marquera comme &lt;strong&gt;active&lt;/strong&gt;. La tâche sera en surbrillance.&lt;br/&gt;2. &lt;strong&gt;Double appui &lt;/strong&gt;sur l&apos;étiquette ouvrira le détail de la tâche.&lt;br/&gt;3. Si la tâche est dépliée (parents ou type de dossiers) vous pouvez déplier ou replier la tâche en cliquant sur le bouton - ou + à côté de l&apos;icône.</translation>
     </message>
     <message>
-        <location filename="../assets/pages/HelpPage.qml" line="69"/>
+        <location filename="../assets/pages/HelpPage.qml" line="125"/>
         <source>&lt;strong&gt;Pinch gestures&lt;/strong&gt;&lt;br/&gt;In order to expand or narrow all tasks in a tree you can use pinch gesture.</source>
         <translation type="unfinished">&lt;strong&gt;Gestuelle de pincement&lt;/strong&gt;&lt;br/&gt;Vous pouvez utiliser la gestuelle de pincement pour déplier ou replier toutes les tâches.</translation>
     </message>
     <message>
-        <location filename="../assets/pages/HelpPage.qml" line="78"/>
+        <location filename="../assets/pages/HelpPage.qml" line="134"/>
         <source>Bulk creation</source>
         <translation type="unfinished">Création multiple</translation>
     </message>
     <message>
-        <location filename="../assets/pages/HelpPage.qml" line="87"/>
+        <location filename="../assets/pages/HelpPage.qml" line="143"/>
         <source>In order to create several tasks per one action you can use a special delimeter &lt;strong&gt;;;&lt;/strong&gt; in a &lt;strong&gt;Name&lt;/strong&gt; field during task creation.&lt;br/&gt;&lt;br/&gt;Example:&lt;br/&gt;1. Click by &lt;strong&gt;Create&lt;/strong&gt; button.&lt;br/&gt;2. In a &lt;strong&gt;Name&lt;/strong&gt; field type something like &lt;strong&gt;task1;;task2;;task3&lt;/strong&gt; and click &lt;strong&gt;Save&lt;/strong&gt; button.&lt;br/&gt;3. Result: three separate tasks will be created in a tasks tree.</source>
         <translation type="unfinished">Afin de créer plusieurs tâches en une seule fois vous pouvez utiliser un délimiteur &lt;strong&gt;;;&lt;/strong&gt; dans le champ &lt;strong&gt;Nom&lt;/strong&gt; lors de la création de la tâche.&lt;br/&gt;&lt;br/&gt;Exemple:&lt;br/&gt;1. Cliquer sur le bouton &lt;strong&gt;Créer&lt;/strong&gt;&lt;br/&gt;2. Dans le champ &lt;strong&gt;Nom&lt;/strong&gt; saisissez quelque chose comme &lt;strong&gt;Tâche1;;Tâche2;;Tâche3&lt;/strong&gt; et appuyer sur le bouton &lt;strong&gt;OK&lt;/strong&gt;.&lt;br/&gt;3. Résultat: les trois tâches ont été créées dans l&apos;arborescence.</translation>
     </message>
@@ -462,72 +487,72 @@
         <translation type="unfinished">Vibreur sur sélection</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="250"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="251"/>
         <source>Notification sound</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="255"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="256"/>
         <source>Standard Theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="265"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="266"/>
         <source>Don&apos;t Forget Theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="299"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="291"/>
         <source>Network</source>
         <translation type="unfinished">Réseau</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="344"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="336"/>
         <source>Check your network connection</source>
         <translation type="unfinished">Vérifiez votre connexion réseau</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="423"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="415"/>
         <source>Enabled</source>
         <translation type="unfinished">Activée</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="425"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="417"/>
         <source>Disabled</source>
         <translation type="unfinished">Désactivée</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="432"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="424"/>
         <source>Disable</source>
         <translation type="unfinished">Désactiver</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="434"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="426"/>
         <source>Enable</source>
         <translation type="unfinished">Activer</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="465"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="457"/>
         <source>Failed to enable Push Service</source>
         <translation type="unfinished">Impossible d&apos;activer Push Service</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="362"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="354"/>
         <source>If this setting is turned on you can send/receive tasks to/from your colleague or someone else using PIN. To achieve this goal app uses BlackBerry Push Service</source>
         <translation type="unfinished">Si ce paramètre est activé, vous pouvez envoyer / recevoir des tâches à / de votre collègue ou quelqu&apos;un d&apos;autre utilisant le NIP. Pour atteindre cet objectif, l&apos;application utilise BlackBerry Push Service</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="447"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="439"/>
         <source>Push Service enabled</source>
         <translation type="unfinished">Push Service activée</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="456"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="448"/>
         <source>Push Service disabled</source>
         <translation type="unfinished">Push Service désactivée</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="310"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="302"/>
         <source>Receive push notifications</source>
         <translation type="unfinished">Recevoir des notifications push</translation>
     </message>

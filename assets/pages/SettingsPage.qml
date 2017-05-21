@@ -247,6 +247,7 @@ Page {
                     leftPadding: ui.du(2.5)
                     rightPadding: ui.du(2.5)
                     DropDown {
+                        id: soundDropDown
                         title: qsTr("Notification sound") + Retranslate.onLocaleOrLanguageChanged
                         
                         options: [
@@ -270,17 +271,8 @@ Page {
                                 }
                             }
                         ]
-                        
-                        onSelectedOptionChanged: {
-                            _appConfig.set("notification_theme", selectedOption.value);
-                            if (selectedOption.value === standardTheme.value) {
-                                systemSound.play();
-                            } else {
-                                mediaPlayer.play();
-                            }
-                        }
                     }
-                    
+                                        
                     attachedObjects: [
                         SystemSound {
                             id: systemSound
@@ -470,6 +462,16 @@ Page {
         _pushService.channelCreated.disconnect(root.pushRegistered);
         _pushService.channelDestroyed.disconnect(root.pushUnregistered);
         _pushService.channelCreationFailed.disconnect(root.pushFailed);
+        soundDropDown.selectedOptionChanged.disconnect(root.playSound);
+    }
+    
+    function playSound(selectedOption) {
+        _appConfig.set("notification_theme", soundDropDown.selectedOption.value);
+        if (soundDropDown.selectedOption.value === standardTheme.value) {
+            systemSound.play();
+        } else {
+            mediaPlayer.play();
+        }
     }
     
     onCreationCompleted: {
@@ -481,9 +483,10 @@ Page {
         adjustSoundOnSelect();
         adjustVibrationOnSelect();
         adjustDateTimeFormat();
-//        adjustNotificationTheme();
+        adjustNotificationTheme();
         _pushService.channelCreated.connect(root.pushRegistered);
         _pushService.channelDestroyed.connect(root.pushUnregistered);
         _pushService.channelCreationFailed.connect(root.pushFailed);
+        soundDropDown.selectedOptionChanged.connect(root.playSound);
     }
 }
