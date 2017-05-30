@@ -72,6 +72,7 @@ Container {
                                     return null;
                                 }
                                 imageSource: ListItemData.icon.path
+                                scalingMethod: ScalingMethod.AspectFill
                                 layoutProperties: StackLayoutProperties {
                                     spaceQuota: -1
                                 }

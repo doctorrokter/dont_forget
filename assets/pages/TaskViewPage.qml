@@ -167,6 +167,7 @@ Page {
                                             }
                                             return ListItemData.path;
                                         }
+                                        scalingMethod: ScalingMethod.AspectFill
                                     }
                                     
                                     Container {
