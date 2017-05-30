@@ -161,6 +161,25 @@ Page {
                     rightPadding: ui.du(2.5)
                     bottomPadding: ui.du(2.5)
                     DropDown {
+                        id: calendarAccounts
+                        title: qsTr("Default calendar account") + Retranslate.onLocaleOrLanguageChanged
+                        
+                        onSelectedOptionChanged: {
+                            var folderId = calendarAccounts.selectedValue.folderId;
+                            var accountId = calendarAccounts.selectedValue.accountId;
+                            _appConfig.set("default_account_id", accountId);
+                            _appConfig.set("default_folder_id", folderId);
+                        }
+                    }
+                }
+                
+                Container {
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    topPadding: ui.du(2.5)
+                    leftPadding: ui.du(2.5)
+                    rightPadding: ui.du(2.5)
+                    bottomPadding: ui.du(2.5)
+                    DropDown {
                         title: qsTr("Date/time format") + Retranslate.onLocaleOrLanguageChanged
                         
                         options: [
@@ -248,7 +267,7 @@ Page {
                     rightPadding: ui.du(2.5)
                     DropDown {
                         id: soundDropDown
-                        title: qsTr("Notification sound") + Retranslate.onLocaleOrLanguageChanged
+                        title: qsTr("Push notification sound") + Retranslate.onLocaleOrLanguageChanged
                         
                         options: [
                             Option {
@@ -433,6 +452,16 @@ Page {
         localizedFormatOption.selected = (df === localizedFormatOption.value);
     }
     
+    function adjustCalendarAccounts() {
+        var accountId = _appConfig.get("default_account_id");
+        var folderId = _appConfig.get("default_folder_id");
+        if (accountId === "" || folderId === "") {
+            accountId = 1;
+            folderId = 1;
+        }
+        _calendar.initFolders(calendarAccounts, folderId, accountId);
+    }
+    
     function pushRegistered() {
         _appConfig.set("push_service_registered", "true");
         loading.running = false;
@@ -484,6 +513,7 @@ Page {
         adjustVibrationOnSelect();
         adjustDateTimeFormat();
         adjustNotificationTheme();
+        adjustCalendarAccounts();
         _pushService.channelCreated.connect(root.pushRegistered);
         _pushService.channelDestroyed.connect(root.pushUnregistered);
         _pushService.channelCreationFailed.connect(root.pushFailed);

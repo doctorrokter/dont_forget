@@ -16,6 +16,7 @@
 
 import bb.cascades 1.4
 import bb.system 1.2
+import Const 1.0
 import "./components"
 import "./pages"
 import "./sheets"
@@ -78,9 +79,6 @@ NavigationPane {
         actionBarVisibility: ChromeVisibility.Overlay
         
         Container {
-            
-            layout: DockLayout {}
-            
             Container {
                 id: noTasksContainer
                 visible: false
@@ -90,6 +88,50 @@ NavigationPane {
                     text: qsTr("You have no tasks yet. It's time to create new one!") + Retranslate.onLocaleOrLanguageChanged
                     multiline: true
                 }
+            }
+            
+            Container {
+                id: taskMoving
+                
+                visible: MoveMode.MOVING === _tasksService.getMoveMode();
+                
+                horizontalAlignment: HorizontalAlignment.Fill
+                verticalAlignment: VerticalAlignment.Top
+                
+                margin.topOffset: ui.du(2)
+                
+                Container {
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    
+                    layout: StackLayout {
+                        orientation: LayoutOrientation.LeftToRight
+                    }
+                    
+                    Button {
+                        text: "Cancel"
+                        
+                        margin.leftOffset: ui.du(2)
+                        verticalAlignment: VerticalAlignment.Center
+                        maxWidth: ui.du(20)
+                        
+                        onClicked: {
+                            _tasksService.setMoveMode(MoveMode.NOT_MOVING);
+                        }
+                    }
+                    
+                    Label {
+                        text: "Selected 1"
+                        verticalAlignment: VerticalAlignment.Center
+                    }
+                }
+                
+                Divider {}
+                
+                attachedObjects: [
+                    LayoutUpdateHandler {
+                        id: taskMovingLUH
+                    }
+                ]
             }
             
             ScrollView {
@@ -108,7 +150,7 @@ NavigationPane {
                 
                 Container {
                     horizontalAlignment: HorizontalAlignment.Fill
-                    verticalAlignment: VerticalAlignment.Fill
+                    verticalAlignment: VerticalAlignment.Center
                     
                     layout: StackLayout {
                         orientation: LayoutOrientation.TopToBottom
@@ -142,14 +184,6 @@ NavigationPane {
                         }
                     }
                 ]
-            }
-            
-            ActivityIndicator {
-                id: loading
-                running: false
-                verticalAlignment: VerticalAlignment.Center
-                horizontalAlignment: HorizontalAlignment.Center
-                minWidth: ui.du(10);
             }
         }
         
@@ -251,6 +285,8 @@ NavigationPane {
                 onTriggered: {
                     var mtp = moveTaskPage.createObject(this);
                     navigation.push(mtp);
+//                    console.debug("MOVING MODE: ", MoveMode.MOVING);
+//                    _tasksService.setMoveMode(MoveMode.MOVING);
                 }
                 
                 shortcuts: [
@@ -743,7 +779,7 @@ NavigationPane {
     }
     
     function renderTree(tasksToRender) {
-        loading.start();
+//        loading.start();
         deleteAllTasks();
         
         var allTasks = tasksToRender;
@@ -772,7 +808,7 @@ NavigationPane {
                 addTask(tasksContainer, t);
             });
         }
-        loading.stop();
+//        loading.stop();
         
 //        var dp = debugPage.createObject();
 //        navigation.push(dp);
@@ -785,6 +821,10 @@ NavigationPane {
             taskSheet.data = data;
         }
         taskSheet.open();
+    }
+    
+    function adjustTaskMovingContainer(moveMode) {
+        taskMoving.visible = moveMode === MoveMode.MOVING;
     }
     
     onCreationCompleted: {
@@ -800,6 +840,7 @@ NavigationPane {
         _tasksService.taskMoved.connect(navigation.renderTree);
         _tasksService.taskMovedInBulk.connect(navigation.renderTree);
         _tasksService.parentIdChangedInDebug.connect(navigation.renderTree);
+        _tasksService.moveModeChanged.connect(navigation.adjustTaskMovingContainer);
         _app.taskSheetRequested.connect(navigation.openTaskSheetEditMode);
         _app.tasksReceived.connect(navigation.renderTree);
         _app.taskCardDone.connect(navigation.renderTree);

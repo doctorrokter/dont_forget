@@ -401,10 +401,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Notification sound</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Standard Theme</source>
         <translation type="unfinished"></translation>
     </message>
@@ -418,6 +414,14 @@
     </message>
     <message>
         <source>Localized</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Push notification sound</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default calendar account</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -609,6 +613,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Move</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Hide closed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -617,7 +633,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Move</source>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Single select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select more</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open in Calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open in Remember</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sort</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -637,31 +673,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Send</source>
+        <source>Confirm the deleting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Search</source>
+        <source>This action cannot be undone. Also, task may contain children. All these will be deleted. Continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open in Calendar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open in Remember</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Single select</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select more</source>
+        <source>Don&apos;t ask again</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -669,7 +689,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sort</source>
+        <source>Descending order</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -682,22 +702,6 @@
     </message>
     <message>
         <source>Deadline</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Descending order</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Confirm the deleting</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Don&apos;t ask again</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This action cannot be undone. Also, task may contain children. All these will be deleted. Continue?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -32,6 +32,7 @@
 
 #include "models/Task.hpp"
 #include "const/DFColors.hpp"
+#include "const/TaskMovingMode.hpp"
 #include "util/CalendarUtil.hpp"
 
 using namespace bb::cascades;
@@ -55,6 +56,7 @@ Q_DECL_EXPORT int main(int argc, char **argv) {
     qmlRegisterType<Task>("chachkouski.models", 1, 0, "Task");
     qmlRegisterType<WebPage>("WebPageComponent", 1, 0, "WebPage");
     qmlRegisterType<DFColors>("Const", 1, 0, "DFColors");
+    qmlRegisterType<TaskMovingMode>("Const", 1, 0, "MoveMode");
     qRegisterMetaType<QList<Task> >("QList<Task>");
     qRegisterMetaType<Task*>("Task*");
     qRegisterMetaType<CalendarUtil*>("CalendarUtil*");

@@ -1,6 +1,7 @@
-config-pri.hash=E5AD2475B24BE8DC3F2493B7E938CD27
+config-pri.hash=4DAC98662BBE958369455BE81EBEDA72
 config-pri.version=2.0
 eclipse.preferences.version=1
 white-list._appConfig=
+white-list._calendar=
 white-list._tasksService=
 white-list.main=

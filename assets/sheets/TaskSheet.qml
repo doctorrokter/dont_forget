@@ -367,10 +367,15 @@ Sheet {
     function adjustCalendarFolders() {
         calendarAccounts.removeAll();
         if (_tasksService.activeTask !== null) {
-            console.debug("INIT FOLDERS: ", _tasksService.activeTask.folderId, _tasksService.activeTask.accountId);
             _calendar.initFolders(calendarAccounts, _tasksService.activeTask.folderId, _tasksService.activeTask.accountId);
         } else {
-            _calendar.initFolders(calendarAccounts);
+            var accountId = _appConfig.get("default_account_id");
+            var folderId = _appConfig.get("default_folder_id");
+            if (accountId === "" || folderId === "") {
+                accountId = 1;
+                folderId = 1;
+            }
+            _calendar.initFolders(calendarAccounts, folderId, accountId);
         }
     }
     

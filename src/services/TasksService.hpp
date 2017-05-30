@@ -12,6 +12,7 @@
 #include "../models/Task.hpp"
 #include "../config/DBConfig.hpp"
 #include "AttachmentsService.hpp"
+#include "../const/TaskMovingMode.hpp"
 
 #include <QVariantList>
 #include <QVariantMap>
@@ -69,6 +70,9 @@ public:
     Q_INVOKABLE QVariantList deleteBulk();
     Q_INVOKABLE void moveBulk(const int parentId);
 
+    Q_INVOKABLE int getMoveMode() const;
+    Q_INVOKABLE void setMoveMode(const int& moveMode);
+
 Q_SIGNALS:
     void activeTaskChanged(Task* newActiveTask);
     void taskCreated(QVariantMap newTask);
@@ -86,6 +90,7 @@ Q_SIGNALS:
     void droppedRememberId(const int taskId);
     void droppedCalendarId(const int taskId);
     void parentIdChangedInDebug(const int id);
+    void moveModeChanged(const int& moveMode);
 
 private Q_SLOTS:
     void processMultiselectMode(const bool multiselectMode);
@@ -99,6 +104,8 @@ private:
 
     bool m_multiselectMode;
     QList<int> m_tasksIds;
+
+    int m_moveMode;
 
     void flushActiveTask();
     NotebookEntry findNotebookEntry(const QString& rememberId);

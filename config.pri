@@ -146,6 +146,7 @@ config_pri_source_group1 {
         $$quote($$BASEDIR/src/config/AppConfig.hpp) \
         $$quote($$BASEDIR/src/config/DBConfig.hpp) \
         $$quote($$BASEDIR/src/const/DFColors.hpp) \
+        $$quote($$BASEDIR/src/const/TaskMovingMode.hpp) \
         $$quote($$BASEDIR/src/models/Task.hpp) \
         $$quote($$BASEDIR/src/services/AttachmentsService.hpp) \
         $$quote($$BASEDIR/src/services/DropboxService.hpp) \
