@@ -16,6 +16,8 @@
 #include <bb/pim/notebook/NotebookEntryDescription>
 #include <bb/pim/notebook/NotebookEntryId>
 #include <limits>
+#include <QtConcurrentRun>
+#include <QFuture>
 #include "../util/CalendarUtil.hpp"
 
 using namespace std;
@@ -470,47 +472,66 @@ void TasksService::deleteNotebookEntry(const QString& rememberId) {
 }
 
 void TasksService::sync() {
-    syncRememberTasks();
-    syncCalendarTasks();
+    QFuture<void> rememberFuture = QtConcurrent::run(this, &TasksService::syncRememberTasks);
+    QFuture<void> calendarFuture = QtConcurrent::run(this, &TasksService::syncCalendarTasks);
+//    qDebug() << "Remember sync started: " << rememberFuture.isStarted() << endl;
+//    qDebug() << "Calendar sync started: " << calendarFuture.isStarted() << endl;
+//    qDebug() << "Remember sync running: " << rememberFuture.isRunning() << endl;
+//    qDebug() << "Calendar sync running: " << calendarFuture.isRunning() << endl;
 }
 
 void TasksService::syncRememberTasks() {
+    qDebug() << "===>>> Sync remember tasks" << endl;
     QVariantList rememberTasks = m_pDbConfig->connection()->execute("SELECT * FROM tasks WHERE remember_id IS NOT NULL").toList();
         if (!rememberTasks.isEmpty()) {
             for (int i = 0; i < rememberTasks.size(); i++) {
-                QVariantMap taskMap = rememberTasks.at(i).toMap();
-                int id = taskMap.value("id").toInt();
-                NotebookEntry note = findNotebookEntry(taskMap.value("remember_id").toString());
+                Task task;
+                task.fromMap(rememberTasks.at(i).toMap());
+
+                NotebookEntry note = findNotebookEntry(task.getRememberId());
                 if (note.isValid()) {
-                    QString query = "UPDATE tasks SET name = :name, description = :description, deadline = :deadline, closed = :closed WHERE id = :id";
-                    QVariantMap values;
-                    values["name"] = note.title();
-                    values["description"] = note.description().plainText();
+                    if (!equals(task, note)) {
+                        qDebug() << "Will update task: " << task.getName() << endl;
 
-                    uint maxUint = std::numeric_limits<unsigned int>::max();
-                    uint noteDeadline = note.reminderTime().toTime_t();
-                    values["deadline"] = maxUint == noteDeadline ? 0 : noteDeadline;
+                        QString query = "UPDATE tasks SET name = :name, description = :description, deadline = :deadline, closed = :closed WHERE id = :id";
+                        QVariantMap values;
+                        values["name"] = note.title();
+                        values["description"] = note.description().plainText();
 
-                    values["closed"] = note.status() == NotebookEntryStatus::Completed ? 1 : 0;
-                    values["id"] = taskMap.value("id").toInt();
+                        uint maxUint = std::numeric_limits<unsigned int>::max();
+                        uint noteDeadline = note.reminderTime().toTime_t();
+                        values["deadline"] = maxUint == noteDeadline ? 0 : noteDeadline;
+                        values["closed"] = note.status() == NotebookEntryStatus::Completed ? 1 : 0;
+                        values["id"] = task.getId();
 
-                    m_pDbConfig->execute(query, values);
+                        m_pDbConfig->execute(query, values);
+                        emit changedInRemember(values);
+                    } else {
+                        qDebug() << "Nothing to update for task: " << task.getName() << endl;
+                    }
                 } else {
-                    m_pDbConfig->execute(QString("UPDATE tasks SET remember_id = NULL WHERE id = %1").arg(id));
-                    emit droppedRememberId(id);
+                    m_pDbConfig->execute(QString("UPDATE tasks SET remember_id = NULL WHERE id = %1").arg(task.getId()));
+                    emit droppedRememberId(task.getId());
                 }
              }
          }
 }
 
+bool TasksService::equals(Task& task, NotebookEntry& note) {
+    return task.getName().compare(note.title()) == 0 &&
+            task.getDescription().compare(note.description().plainText()) == 0 &&
+            task.getDeadline() == note.reminderTime().toTime_t() &&
+            task.isClosed() == (note.status() == NotebookEntryStatus::Completed);
+}
+
 void TasksService::syncCalendarTasks() {
+    qDebug() << "===>>> Sync calendar tasks" << endl;
     QVariantList calendarTasks = m_pDbConfig->execute("SELECT * FROM tasks WHERE calendar_id IS NOT NULL").toList();
     if (!calendarTasks.isEmpty()) {
         CalendarUtil calendar;
         foreach(QVariant taskVar, calendarTasks) {
-            QVariantMap taskMap = taskVar.toMap();
             Task t;
-            t.fromMap(taskMap);
+            t.fromMap(taskVar.toMap());
             CalendarEvent ev = calendar.findEventById(t.getCalendarId(), t.getFolderId(), t.getAccountId());
             if (!ev.isValid()) {
                 m_pDbConfig->execute(QString("UPDATE tasks SET calendar_id = NULL WHERE id = %1").arg(t.getId()));

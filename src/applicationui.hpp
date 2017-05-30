@@ -62,6 +62,7 @@ public:
     Q_INVOKABLE void openCalendarEvent(const int eventId, const int folderId, const int accountId);
     Q_INVOKABLE void openRememberNote(const QString& rememberId);
     Q_INVOKABLE QVariant loadHtmlAsObject(const QString& html);
+    Q_INVOKABLE void sync();
 
 Q_SIGNALS:
     void taskSheetRequested(const QString& data);

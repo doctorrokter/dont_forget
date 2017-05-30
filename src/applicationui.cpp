@@ -72,7 +72,7 @@ ApplicationUI::ApplicationUI() : QObject() {
     m_pDropboxService = new DropboxService(this);
     m_pSignal = new Signal(this);
 
-    m_pTasksService->processCollisions();
+//    m_pTasksService->processCollisions();
 
     bool res = QObject::connect(m_pDropboxService, SIGNAL(fileLoaded(const QString&)), this, SLOT(processTasksContent(const QString&)));
     Q_ASSERT(res);
@@ -102,12 +102,14 @@ ApplicationUI::ApplicationUI() : QObject() {
 
     onSystemLanguageChanged();
 
+    QFuture<void> future;
+
     switch (m_pInvokeManager->startupMode()) {
         case ApplicationStartupMode::LaunchApplication:
             m_startupMode = "Launch";
+//            QtConcurrent::run(m_pSearchService, &SearchService::init);
+//            QtConcurrent::run(m_pTasksService, &TasksService::init);
             initFullUI();
-            QtConcurrent::run(m_pTasksService, &TasksService::init);
-            QtConcurrent::run(m_pSearchService, &SearchService::init);
             break;
         case ApplicationStartupMode::InvokeApplication:
             m_startupMode = "Invoke";
@@ -120,6 +122,11 @@ ApplicationUI::ApplicationUI() : QObject() {
 
 ApplicationUI::~ApplicationUI() {
     clear();
+}
+
+void ApplicationUI::sync() {
+    QtConcurrent::run(m_pSearchService, &SearchService::init);
+    QtConcurrent::run(m_pTasksService, &TasksService::init);
 }
 
 void ApplicationUI::openCalendarEvent(const int eventId, const int folderId, const int accountId) {

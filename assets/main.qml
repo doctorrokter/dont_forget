@@ -79,6 +79,10 @@ NavigationPane {
         actionBarVisibility: ChromeVisibility.Overlay
         
         Container {
+            id: mainContainer
+            
+            layout: stackLayout
+            
             Container {
                 id: noTasksContainer
                 visible: false
@@ -93,7 +97,8 @@ NavigationPane {
             Container {
                 id: taskMoving
                 
-                visible: MoveMode.MOVING === _tasksService.getMoveMode();
+//                visible: MoveMode.MOVING === _tasksService.getMoveMode();
+                visible: false
                 
                 horizontalAlignment: HorizontalAlignment.Fill
                 verticalAlignment: VerticalAlignment.Top
@@ -447,6 +452,14 @@ NavigationPane {
         }
         
         attachedObjects: [
+            DockLayout {
+                id: dockLayout
+            },
+            
+            StackLayout {
+                id: stackLayout
+            },
+            
             CustomTitleBar {
                 id: titleBar
                 title: qsTr("All Tasks") + Retranslate.onLocaleOrLanguageChanged
@@ -687,6 +700,9 @@ NavigationPane {
     function onTaskCreated(newTask) {
         newTask.children = [];
         noTasksContainer.visible = false;
+        if (mainContainer.layout !== stackLayout) {
+            mainContainer.layout = stackLayout;
+        }
         createTask(newTask, tasksContainer);
     }   
     
@@ -794,6 +810,7 @@ NavigationPane {
         
         if (allTasks.length === 0) {
             noTasksContainer.visible = true;
+            mainContainer.layout = dockLayout;
         } else {
             noTasksContainer.visible = false;
             var roots = allTasks.filter(function(task) {
@@ -845,5 +862,6 @@ NavigationPane {
         _app.tasksReceived.connect(navigation.renderTree);
         _app.taskCardDone.connect(navigation.renderTree);
         _app.taskCreatedFromExternal.connect(navigation.renderTree);
+        _app.sync();
     }
 }

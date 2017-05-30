@@ -397,6 +397,7 @@ Container {
         _tasksService.taskSelected.disconnect(task.select);
         _tasksService.taskDeselected.disconnect(task.select);
         _tasksService.multiselectModeChanged.disconnect(task.handleMultiselectModeChanged);
+        _tasksService.changedInRemember.disconnect(task.onChangedInRemember);
         _appConfig.settingsChanged.disconnect(task.handleSettingsChanged);
     }
     
@@ -424,6 +425,14 @@ Container {
         task.deadlineChanged();
     }
     
+    function onChangedInRemember(taskMap) {
+        if (task.taskId === taskMap.id) {
+            task.name = taskMap.name;
+            task.deadline = taskMap.deadline;
+            task.closed = taskMap.closed === 1;
+        }
+    }
+    
     onParentIdChanged: {
         divider.visible = parentId === "";
     }
@@ -447,6 +456,7 @@ Container {
         _tasksService.multiselectModeChanged.connect(task.handleMultiselectModeChanged);
         _tasksService.droppedRememberId.connect(task.dropRememberId);
         _tasksService.droppedCalendarId.connect(task.dropCalendarId);
+        _tasksService.changedInRemember.connect(task.onChangedInRemember);
         _appConfig.settingsChanged.connect(task.handleSettingsChanged);
     }
     

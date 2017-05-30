@@ -87,6 +87,7 @@ Q_SIGNALS:
     void taskSelected(const int id);
     void taskDeselected(const int id);
     void taskMovedInBulk();
+    void changedInRemember(const QVariantMap& taskMap);
     void droppedRememberId(const int taskId);
     void droppedCalendarId(const int taskId);
     void parentIdChangedInDebug(const int id);
@@ -115,6 +116,7 @@ private:
     void sync();
     void syncRememberTasks();
     void syncCalendarTasks();
+    bool equals(Task& task, NotebookEntry& note);
 };
 
 #endif /* TASKSSERVICE_HPP_ */
