@@ -5,6 +5,7 @@ TitleBar {
     
     signal cancel();
     signal typing(string text);
+    signal submit(string text);
 
     appearance: TitleBarAppearance.Plain
     kind: TitleBarKind.FreeForm
@@ -31,15 +32,7 @@ TitleBar {
                     keyLayout: KeyLayout.Text
                     submitKey: SubmitKey.EnterKey
                     onSubmitted: {
-                        var inputText = tasksInputField.text;
-                        if (inputText.trim()) {
-                            var names = tasksInputField.text.split(";;");
-                            names.forEach(function(name) {
-                                    _tasksService.createTask(name.trim(), "", "TASK");
-                            });
-                            root.cancel();
-                        }
-                        tasksInputField.resetText();
+                        root.submit(tasksInputField.text.trim());
                     }
                 }
                 textStyle.color: ui.palette.textOnPrimary
@@ -50,8 +43,8 @@ TitleBar {
             }
             
             Button {
-                text: qsTr("Cancel") + Retranslate.onLocaleOrLanguageChanged
-                maxWidth: ui.du(20)
+                text: "X"
+                maxWidth: ui.du(5)
                 color: ui.palette.primary
                 
                 onClicked: {

@@ -51,13 +51,35 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/components/TaskDeadlineContainer.qml) \
         $$quote($$BASEDIR/assets/components/TaskDescriptionContainer.qml) \
         $$quote($$BASEDIR/assets/components/TaskNameContainer.qml) \
+        $$quote($$BASEDIR/assets/components/TaskTitleBar.qml) \
         $$quote($$BASEDIR/assets/components/ToggleBlock.qml) \
+        $$quote($$BASEDIR/assets/components/v2/DividerListItem.qml) \
+        $$quote($$BASEDIR/assets/components/v2/EmptyListItem.qml) \
+        $$quote($$BASEDIR/assets/components/v2/FolderListItem.qml) \
+        $$quote($$BASEDIR/assets/components/v2/ImportantListItem.qml) \
+        $$quote($$BASEDIR/assets/components/v2/ListListItem.qml) \
+        $$quote($$BASEDIR/assets/components/v2/ReceivedListItem.qml) \
+        $$quote($$BASEDIR/assets/components/v2/TaskListItem.qml) \
+        $$quote($$BASEDIR/assets/components/v2/TodayListItem.qml) \
         $$quote($$BASEDIR/assets/images/apk_icon_big_512x512.png) \
         $$quote($$BASEDIR/assets/images/audio_icon_big_512x512.png) \
+        $$quote($$BASEDIR/assets/images/backgrounds/AndroidXWallpaper(Wall2mob.com)_40131.jpg) \
+        $$quote($$BASEDIR/assets/images/backgrounds/AndroidXWallpaper(Wall2mob.com)_40171.jpg) \
+        $$quote($$BASEDIR/assets/images/backgrounds/AppleOnGroundWallpaper(Wall2mob.com)_38614.jpg) \
+        $$quote($$BASEDIR/assets/images/backgrounds/BeautifulSnowflakeDesktopBackground(Wall2mob.com)_40259.jpg) \
+        $$quote($$BASEDIR/assets/images/backgrounds/BeautifulViewWallpaper(Wall2mob.com)_38808.jpg) \
+        $$quote($$BASEDIR/assets/images/backgrounds/BeautyOfNature(Wall2mob.com)_33585.jpg) \
+        $$quote($$BASEDIR/assets/images/backgrounds/BlueFlowerWallpaper(Wall2mob.com)_38565.jpg) \
+        $$quote($$BASEDIR/assets/images/backgrounds/CSRoW(Wall2mob.com)_39695.jpg) \
+        $$quote($$BASEDIR/assets/images/backgrounds/CityRoadWallpaper(Wall2mob.com)_38766.jpg) \
+        $$quote($$BASEDIR/assets/images/backgrounds/CupOfCoffeeWallpaper(Wall2mob.com)_33798.jpg) \
+        $$quote($$BASEDIR/assets/images/backgrounds/Earth(Wall2mob.com)_39765.jpg) \
+        $$quote($$BASEDIR/assets/images/calendar.png) \
         $$quote($$BASEDIR/assets/images/doc_icon_big_512x512.png) \
         $$quote($$BASEDIR/assets/images/generic_icon_big_512x512.png) \
         $$quote($$BASEDIR/assets/images/grey_pellet.png) \
         $$quote($$BASEDIR/assets/images/ic_add.png) \
+        $$quote($$BASEDIR/assets/images/ic_add_folder.png) \
         $$quote($$BASEDIR/assets/images/ic_attach.png) \
         $$quote($$BASEDIR/assets/images/ic_calendar.png) \
         $$quote($$BASEDIR/assets/images/ic_clear.png) \
@@ -78,16 +100,21 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/ic_folder.png) \
         $$quote($$BASEDIR/assets/images/ic_forward.png) \
         $$quote($$BASEDIR/assets/images/ic_history.png) \
+        $$quote($$BASEDIR/assets/images/ic_important.png) \
+        $$quote($$BASEDIR/assets/images/ic_inbox.png) \
         $$quote($$BASEDIR/assets/images/ic_list.png) \
         $$quote($$BASEDIR/assets/images/ic_minus.png) \
         $$quote($$BASEDIR/assets/images/ic_notes.png) \
         $$quote($$BASEDIR/assets/images/ic_plus.png) \
+        $$quote($$BASEDIR/assets/images/ic_rename.png) \
         $$quote($$BASEDIR/assets/images/ic_search.png) \
         $$quote($$BASEDIR/assets/images/ic_select_more.png) \
         $$quote($$BASEDIR/assets/images/ic_send.png) \
         $$quote($$BASEDIR/assets/images/ic_share.png) \
         $$quote($$BASEDIR/assets/images/ic_sort.png) \
+        $$quote($$BASEDIR/assets/images/ic_view_list.png) \
         $$quote($$BASEDIR/assets/images/ic_watch.png) \
+        $$quote($$BASEDIR/assets/images/ic_white_pellet.png) \
         $$quote($$BASEDIR/assets/images/js_icon_big_512x512.png) \
         $$quote($$BASEDIR/assets/images/ok_button.png) \
         $$quote($$BASEDIR/assets/images/pdf_icon.png) \
@@ -97,7 +124,9 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/xls_icon_big_512x512.png) \
         $$quote($$BASEDIR/assets/images/yellow_pellet.png) \
         $$quote($$BASEDIR/assets/images/zip_icon_big_512x512.png) \
+        $$quote($$BASEDIR/assets/js/Const.js) \
         $$quote($$BASEDIR/assets/main.qml) \
+        $$quote($$BASEDIR/assets/main_old.qml) \
         $$quote($$BASEDIR/assets/migrations/10_alter_table_tasks_add_account_id.sql) \
         $$quote($$BASEDIR/assets/migrations/11_alter_table_tasks_add_folder_id.sql) \
         $$quote($$BASEDIR/assets/migrations/1_create_schema_version_table.sql) \
@@ -111,11 +140,15 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/migrations/9_add_column_color_into_tasks.sql) \
         $$quote($$BASEDIR/assets/pages/ContactsPage.qml) \
         $$quote($$BASEDIR/assets/pages/DebugPage.qml) \
+        $$quote($$BASEDIR/assets/pages/FolderPage.qml) \
         $$quote($$BASEDIR/assets/pages/HelpPage.qml) \
+        $$quote($$BASEDIR/assets/pages/ListPage.qml) \
         $$quote($$BASEDIR/assets/pages/MoveTaskPage.qml) \
         $$quote($$BASEDIR/assets/pages/SettingsPage.qml) \
+        $$quote($$BASEDIR/assets/pages/TaskPage.qml) \
         $$quote($$BASEDIR/assets/pages/TaskViewPage.qml) \
         $$quote($$BASEDIR/assets/pages/TasksListPage.qml) \
+        $$quote($$BASEDIR/assets/pages/settings_components/BackupAndRecovery.qml) \
         $$quote($$BASEDIR/assets/sheets/AddContactSheet.qml) \
         $$quote($$BASEDIR/assets/sheets/FilePickersSheet.qml) \
         $$quote($$BASEDIR/assets/sheets/TaskSheet.qml) \
@@ -125,12 +158,14 @@ config_pri_assets {
 
 config_pri_source_group1 {
     SOURCES += \
+        $$quote($$BASEDIR/src/Logger.cpp) \
         $$quote($$BASEDIR/src/applicationui.cpp) \
         $$quote($$BASEDIR/src/config/AppConfig.cpp) \
         $$quote($$BASEDIR/src/config/DBConfig.cpp) \
         $$quote($$BASEDIR/src/main.cpp) \
         $$quote($$BASEDIR/src/models/Task.cpp) \
         $$quote($$BASEDIR/src/services/AttachmentsService.cpp) \
+        $$quote($$BASEDIR/src/services/BackupService.cpp) \
         $$quote($$BASEDIR/src/services/DropboxService.cpp) \
         $$quote($$BASEDIR/src/services/PushNotificationService.cpp) \
         $$quote($$BASEDIR/src/services/SearchService.cpp) \
@@ -142,6 +177,7 @@ config_pri_source_group1 {
         $$quote($$BASEDIR/src/vendor/Console.cpp)
 
     HEADERS += \
+        $$quote($$BASEDIR/src/Logger.hpp) \
         $$quote($$BASEDIR/src/applicationui.hpp) \
         $$quote($$BASEDIR/src/config/AppConfig.hpp) \
         $$quote($$BASEDIR/src/config/DBConfig.hpp) \
@@ -149,6 +185,7 @@ config_pri_source_group1 {
         $$quote($$BASEDIR/src/const/TaskMovingMode.hpp) \
         $$quote($$BASEDIR/src/models/Task.hpp) \
         $$quote($$BASEDIR/src/services/AttachmentsService.hpp) \
+        $$quote($$BASEDIR/src/services/BackupService.hpp) \
         $$quote($$BASEDIR/src/services/DropboxService.hpp) \
         $$quote($$BASEDIR/src/services/PushNotificationService.hpp) \
         $$quote($$BASEDIR/src/services/SearchService.hpp) \
@@ -210,15 +247,27 @@ lupdate_inclusion {
         $$quote($$BASEDIR/../assets/components/*.qml) \
         $$quote($$BASEDIR/../assets/components/*.js) \
         $$quote($$BASEDIR/../assets/components/*.qs) \
+        $$quote($$BASEDIR/../assets/components/v2/*.qml) \
+        $$quote($$BASEDIR/../assets/components/v2/*.js) \
+        $$quote($$BASEDIR/../assets/components/v2/*.qs) \
         $$quote($$BASEDIR/../assets/images/*.qml) \
         $$quote($$BASEDIR/../assets/images/*.js) \
         $$quote($$BASEDIR/../assets/images/*.qs) \
+        $$quote($$BASEDIR/../assets/images/backgrounds/*.qml) \
+        $$quote($$BASEDIR/../assets/images/backgrounds/*.js) \
+        $$quote($$BASEDIR/../assets/images/backgrounds/*.qs) \
+        $$quote($$BASEDIR/../assets/js/*.qml) \
+        $$quote($$BASEDIR/../assets/js/*.js) \
+        $$quote($$BASEDIR/../assets/js/*.qs) \
         $$quote($$BASEDIR/../assets/migrations/*.qml) \
         $$quote($$BASEDIR/../assets/migrations/*.js) \
         $$quote($$BASEDIR/../assets/migrations/*.qs) \
         $$quote($$BASEDIR/../assets/pages/*.qml) \
         $$quote($$BASEDIR/../assets/pages/*.js) \
         $$quote($$BASEDIR/../assets/pages/*.qs) \
+        $$quote($$BASEDIR/../assets/pages/settings_components/*.qml) \
+        $$quote($$BASEDIR/../assets/pages/settings_components/*.js) \
+        $$quote($$BASEDIR/../assets/pages/settings_components/*.qs) \
         $$quote($$BASEDIR/../assets/sheets/*.qml) \
         $$quote($$BASEDIR/../assets/sheets/*.js) \
         $$quote($$BASEDIR/../assets/sheets/*.qs) \

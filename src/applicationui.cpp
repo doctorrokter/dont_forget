@@ -51,6 +51,8 @@ using namespace bb::data;
 using namespace bb::platform;
 using namespace bb::pim::calendar;
 
+Logger ApplicationUI::logger = Logger::getLogger("ApplicationUI");
+
 ApplicationUI::ApplicationUI() : QObject() {
     m_pTranslator = new QTranslator(this);
     m_pLocaleHandler = new LocaleHandler(this);
@@ -127,6 +129,10 @@ ApplicationUI::~ApplicationUI() {
 void ApplicationUI::sync() {
     QtConcurrent::run(m_pSearchService, &SearchService::init);
     QtConcurrent::run(m_pTasksService, &TasksService::init);
+}
+
+void ApplicationUI::openFolder(const int& taskId, const QString& path) {
+    emit folderPageRequested(taskId, path);
 }
 
 void ApplicationUI::openCalendarEvent(const int eventId, const int folderId, const int accountId) {
@@ -225,10 +231,10 @@ void ApplicationUI::processTasksContent(const QString& tasksContent) {
     JsonDataAccess jda;
     QVariant dataVar = jda.loadFromBuffer(tasksContent);
     if (!jda.hasError()) {
-        qDebug() << tasksContent << endl;
+        logger.info(tasksContent);
 
         QVariantMap dataMap = dataVar.toMap();
-        qDebug() << dataMap << endl;
+        logger.info(dataMap);
 
         processReceivedTaskMap(dataMap, 0);
 
@@ -247,7 +253,7 @@ void ApplicationUI::processTasksContent(const QString& tasksContent) {
 
         emit tasksReceived();
     } else {
-        qDebug() << jda.error() << endl;
+        logger.error(jda.error().errorMessage());
     }
     if (!m_running) {
         clear();
@@ -283,7 +289,7 @@ void ApplicationUI::processReceivedTaskMap(const QVariantMap& taskMap, const int
                 attachment.close();
                 m_pAttachmentsService->add(task.getId(), name, "file:///accounts/1000" + partialPath + name, attMap.value("mime_type").toString());
             } else {
-                qDebug() << "Cannot open a file: " << name << " " << attachment.errorString() << endl;
+                logger.error(QString("Cannot open a file: ").append(name).append(" ").append(attachment.errorString()));
             }
         }
     }
@@ -301,9 +307,9 @@ void ApplicationUI::onInvoked(const bb::system::InvokeRequest& request) {
     QString target = request.target();
     QString mimeType = request.mimeType();
 
-    qDebug() << "action: " << action << endl;
-    qDebug() << "target: " << target << endl;
-    qDebug() << "mimeType: " << mimeType << endl;
+    logger.info(QString("action: ").append(action));
+    logger.info(QString("target: ").append(target));
+    logger.info(QString("mimeType: ").append(mimeType));
 
     if (target == INVOKE_SEARCH_SOURCE) {
         int id = QString::fromUtf8(request.data()).toInt();
@@ -339,7 +345,7 @@ void ApplicationUI::onInvoked(const bb::system::InvokeRequest& request) {
                 m_pDropboxService->loadFile(bodyMap.value("link").toString());
                 m_filesToDelete.append(bodyMap.value("metadata").toMap().value("path_display").toString());
             } else {
-                qDebug() << jda.error() << endl;
+                logger.error(jda.error().errorMessage());
             }
         }
     }

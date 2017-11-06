@@ -14,6 +14,7 @@
 #include <QVariant>
 #include <QVariantMap>
 #include <QVariantList>
+#include "../Logger.hpp"
 
 using namespace bb::data;
 
@@ -36,6 +37,8 @@ private:
     SqlDataAccess* m_pSda;
     bool m_hasSharedFilesPermission;
     bool m_newDb;
+
+    static Logger logger;
 
     void runMigration(const QString& path);
     bool hasVersion(const int version);

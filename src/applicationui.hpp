@@ -35,6 +35,7 @@
 #include "util/Signal.hpp"
 #include "util/CalendarUtil.hpp"
 #include "util/DateUtil.hpp"
+#include "Logger.hpp"
 
 namespace bb
 {
@@ -59,6 +60,7 @@ public:
     ApplicationUI();
     virtual ~ApplicationUI();
 
+    Q_INVOKABLE void openFolder(const int& taskId, const QString& path);
     Q_INVOKABLE void openCalendarEvent(const int eventId, const int folderId, const int accountId);
     Q_INVOKABLE void openRememberNote(const QString& rememberId);
     Q_INVOKABLE QVariant loadHtmlAsObject(const QString& html);
@@ -69,6 +71,7 @@ Q_SIGNALS:
     void tasksReceived();
     void taskCardDone();
     void taskCreatedFromExternal();
+    void folderPageRequested(const int& taskId, const QString& path);
 
 public Q_SLOTS:
     void onInvoked(const bb::system::InvokeRequest& request);
@@ -98,6 +101,8 @@ private:
     bool m_running;
     QList<QString> m_filesToDelete;
     NotificationDefaultApplicationSettings m_notifSettings;
+
+    static Logger logger;
 
     void initFullUI();
     void initComposerUI(const QString& pathToPage, const QString& data = "", const QString& mimeType = "");

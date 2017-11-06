@@ -2,9 +2,21 @@ import bb.cascades 1.4
 import bb.system 1.2
 import bb.multimedia 1.4
 import "../components"
+import "./settings_components"
 
 Page {
     id: root
+    
+    property variant settings: {
+        THEME: "theme",
+        BACKUP_ENABLED: "backup_enabled",
+        BACKUP_EVERY: "backup_every",
+        BACKUPS_NUMBER: "backups_number",
+        DO_NOT_ASK_BEFORE_DELETING: "do_not_ask_before_deleting",
+        DEFAULT_TASK_TYPE: "default_task_type",
+        DEFAULT_ACCOUNT_ID: "default_account_id",
+        DEFAULT_FOLDER_ID: "default_folder_id"
+    }
     
     signal sortByChanged();
     signal defaultTaskTypeChanged();
@@ -49,13 +61,17 @@ Page {
                         onCheckedChanged: {
                             if (checked) {
                                 Application.themeSupport.setVisualStyle(VisualStyle.Dark);
-                                _appConfig.set("theme", "DARK");
+                                _appConfig.set(root.settings.THEME, "DARK");
                             } else {
                                 Application.themeSupport.setVisualStyle(VisualStyle.Bright);
-                                _appConfig.set("theme", "BRIGHT");
+                                _appConfig.set(root.settings.THEME, "BRIGHT");
                             }
                         }
                     }
+                }
+                
+                BackupAndRecovery {
+                    id: backupAndRecoverySection
                 }
                 
                 Header {
@@ -81,48 +97,13 @@ Page {
                         
                         onCheckedChanged: {
                             if (checked) {
-                                _appConfig.set("do_not_ask_before_deleting", "true");
+                                _appConfig.set(root.settings.DO_NOT_ASK_BEFORE_DELETING, "true");
                             } else {
-                                _appConfig.set("do_not_ask_before_deleting", "false");
+                                _appConfig.set(root.settings.DO_NOT_ASK_BEFORE_DELETING, "false");
                             }
                         }
                     }
                 }  
-                
-//                Container {
-//                    horizontalAlignment: HorizontalAlignment.Fill
-//                    topPadding: ui.du(2.5)
-//                    leftPadding: ui.du(2.5)
-//                    rightPadding: ui.du(2.5)
-//                    DropDown {
-//                        title: qsTr("Sort by") + Retranslate.onLocaleOrLanguageChanged
-//                        
-//                        options: [
-//                            Option {
-//                                id: sortByNameOption
-//                                text: qsTr("Name") + Retranslate.onLocaleOrLanguageChanged
-//                                value: "name"
-//                            },
-//                            
-//                            Option {
-//                                id: sortByCreationOption
-//                                text: qsTr("Creation") + Retranslate.onLocaleOrLanguageChanged
-//                                value: "id"
-//                            },
-//                            
-//                            Option {
-//                                id: sortByDeadlineOption
-//                                text: qsTr("Deadline") + Retranslate.onLocaleOrLanguageChanged
-//                                value: "deadline"
-//                            }
-//                        ]
-//                        
-//                        onSelectedOptionChanged: {
-//                            _appConfig.set("sort_by", selectedOption.value);
-//                            root.sortByChanged();
-//                        }
-//                    }
-//                }
                 
                 Container {
                     horizontalAlignment: HorizontalAlignment.Fill
@@ -148,7 +129,7 @@ Page {
                         ]
                         
                         onSelectedOptionChanged: {
-                            _appConfig.set("default_task_type", selectedOption.value);
+                            _appConfig.set(root.settings.DEFAULT_TASK_TYPE, selectedOption.value);
                             root.defaultTaskTypeChanged();
                         }
                     }
@@ -167,8 +148,8 @@ Page {
                         onSelectedOptionChanged: {
                             var folderId = calendarAccounts.selectedValue.folderId;
                             var accountId = calendarAccounts.selectedValue.accountId;
-                            _appConfig.set("default_account_id", accountId);
-                            _appConfig.set("default_folder_id", folderId);
+                            _appConfig.set(root.settings.DEFAULT_ACCOUNT_ID, accountId);
+                            _appConfig.set(root.settings.DEFAULT_FOLDER_ID, folderId);
                         }
                     }
                 }
@@ -392,6 +373,11 @@ Page {
         attachedObjects: [
             SystemToast {
                 id: systemToast
+            },
+            
+            ComponentDefinition {
+                id: option
+                Option {}
             }
         ]
     }

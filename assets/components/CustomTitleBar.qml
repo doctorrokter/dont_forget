@@ -87,7 +87,12 @@ TitleBar {
             }
             
             Container {
-                horizontalAlignment: HorizontalAlignment.Center
+                horizontalAlignment: {
+                    if (root.cancelAction) {
+                        return HorizontalAlignment.Center;
+                    }
+                    return HorizontalAlignment.Left;
+                }
                 verticalAlignment: VerticalAlignment.Center
                 maxWidth: ui.du(50)
                 Label {

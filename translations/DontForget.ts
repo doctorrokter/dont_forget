@@ -55,6 +55,25 @@
     </message>
 </context>
 <context>
+    <name>BackupAndRecovery</name>
+    <message>
+        <source>Backup &amp; Recovery</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable backup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Backup every (days)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number of saved backups</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ContactsPage</name>
     <message>
         <source>Edit</source>
@@ -238,6 +257,21 @@
     </message>
 </context>
 <context>
+    <name>FolderPage</name>
+    <message>
+        <source>Create folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create list</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>HelpPage</name>
     <message>
         <source>Help/Tutorial Center</source>
@@ -293,9 +327,16 @@
     </message>
 </context>
 <context>
-    <name>InputTitleBar</name>
+    <name>ImportantListItem</name>
     <message>
-        <source>Cancel</source>
+        <source>Important</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ListPage</name>
+    <message>
+        <source>Create task</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -311,17 +352,28 @@
     </message>
 </context>
 <context>
+    <name>ReceivedListItem</name>
+    <message>
+        <source>Received</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SettingsPage</name>
+    <message>
+        <source></source>
+        <translation></translation>
+    </message>
     <message>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Dark theme</source>
+        <source>Look and Feel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Look and Feel</source>
+        <source>Dark theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -345,27 +397,51 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Network</source>
+        <source>Default calendar account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source></source>
-        <translation></translation>
+        <source>Date/time format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Localized</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>System sound on selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vibrate on selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Push notification sound</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Standard Theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t Forget Theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Network</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Receive push notifications</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Check your network connection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>If this setting is turned on you can send/receive tasks to/from your colleague or someone else using PIN. To achieve this goal app uses BlackBerry Push Service</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Push Service enabled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Push Service disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -385,43 +461,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Push Service enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Push Service disabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Failed to enable Push Service</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Check your network connection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>System sound on selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Vibrate on selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Standard Theme</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Don&apos;t Forget Theme</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Date/time format</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Localized</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Push notification sound</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default calendar account</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -435,7 +483,7 @@
 <context>
     <name>TaskDescriptionContainer</name>
     <message>
-        <source>Description</source>
+        <source>Notes...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -447,6 +495,41 @@
     </message>
     <message>
         <source>This field cannot be empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskPage</name>
+    <message>
+        <source>Deadline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add to Calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add to Remember</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Important</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Attachment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rename</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -514,6 +597,13 @@
     </message>
 </context>
 <context>
+    <name>TaskTitleBar</name>
+    <message>
+        <source>Enter name or names: Task1;;Task2;;Task3</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TaskViewPage</name>
     <message>
         <source>Child tasks</source>
@@ -544,6 +634,13 @@
     </message>
     <message>
         <source>Create a folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TodayListItem</name>
+    <message>
+        <source>Today</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -592,6 +689,29 @@
 </context>
 <context>
     <name>main</name>
+    <message>
+        <source>Send feedback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dashboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>main_old</name>
     <message>
         <source>Send feedback</source>
         <translation type="unfinished"></translation>

@@ -13,6 +13,7 @@
 #include "../config/DBConfig.hpp"
 #include "AttachmentsService.hpp"
 #include "../const/TaskMovingMode.hpp"
+#include "../Logger.hpp"
 
 #include <QVariantList>
 #include <QVariantMap>
@@ -35,62 +36,56 @@ public:
     void processCollisions();
 
     Q_INVOKABLE QVariantList findAll() const;
-    Q_INVOKABLE QVariantMap findById(const int id);
+    Q_INVOKABLE QVariantMap findById(const int& id);
     Q_INVOKABLE QVariantList findByType(const QString& type);
-    Q_INVOKABLE QVariantList findSiblings(const int parentId);
+    Q_INVOKABLE QVariantList findByType(const QString& type, const int& parentId);
+    Q_INVOKABLE QVariantList findSiblings(const int& parentId = 0);
     Q_INVOKABLE QVariantMap lastCreated();
-    Q_INVOKABLE bool isExists(const int id);
-    Q_INVOKABLE bool hasChildren(const int id);
+    Q_INVOKABLE bool isExists(const int& id);
+    Q_INVOKABLE bool hasChildren(const int& id);
+    Q_INVOKABLE int countChildren(const int& id);
 
-    Q_INVOKABLE void changeClosed(const int id, const bool closed);
-    Q_INVOKABLE void changeExpanded(const int id, const bool expanded);
+    Q_INVOKABLE void changeClosed(const int& id, const bool& closed, const int& parentId = 0);
 
     Q_INVOKABLE Task* getActiveTask() const;
-    Q_INVOKABLE void setActiveTask(const int id);
+    Q_INVOKABLE void setActiveTask(const int& id);
 
-    Q_INVOKABLE void createTask(const QString name = "", const QString description = "", const QString type = "TASK", const int deadline = 0, const int important = 0,
-            const int createInRemember = 0, const QVariantList attachments = QVariantList(), const int createInCalendar = 0, const int folderId = 1, const int accountId = 1,
-            const QString& color = "");
-    Q_INVOKABLE void createFolderQuick(const QString& name);
-    Q_INVOKABLE void updateTask(const QString name = "", const QString description = "", const QString type = "TASK", const int deadline = 0, const int important = 0, const int createInRemember = 0, const int closed = 0, const QVariantList attachments = QVariantList(), const int createInCalendar = 0, const int folderId = 1, const int accountId = 1, const QString& color = "");
-    Q_INVOKABLE void deleteTask(const int id);
-    Q_INVOKABLE void moveTask(const int parentId = 0);
+    Q_INVOKABLE void createTask(const QString& name, const QString& type, const int& parentId = 0);
+    Q_INVOKABLE void updateTask(const QString& name, const QString& description = "", const int& deadline = 0, const int& important = 0, const int& createInRemember = 0, const QVariantList& attachments = QVariantList(), const int& createInCalendar = 0, const int& folderId = 1, const int& accountId = 1, const QString& color = "");
+    Q_INVOKABLE void deleteTask(const int& id);
+    Q_INVOKABLE void moveTask(const int& parentId = 0);
     Q_INVOKABLE void copyTask(const Task& task);
-    Q_INVOKABLE void changeParentIdInDebug(const int id, const int parentId);
-
-    Q_INVOKABLE void expandAll();
-    Q_INVOKABLE void unexpandAll();
+    Q_INVOKABLE void changeParentIdInDebug(const int& id, const int& parentId);
 
     Q_INVOKABLE void changeViewMode(const QString& viewMode);
     Q_INVOKABLE bool isMultiselectMode() const;
-    Q_INVOKABLE void setMultiselectMode(const bool multiselectMode);
-    Q_INVOKABLE void selectTask(const int id);
-    Q_INVOKABLE void deselectTask(const int id);
-    Q_INVOKABLE bool isTaskSelected(const int id);
+    Q_INVOKABLE void setMultiselectMode(const bool& multiselectMode);
+    Q_INVOKABLE void selectTask(const int& id);
+    Q_INVOKABLE void deselectTask(const int& id);
+    Q_INVOKABLE bool isTaskSelected(const int& id);
     Q_INVOKABLE QVariantList deleteBulk();
-    Q_INVOKABLE void moveBulk(const int parentId);
+    Q_INVOKABLE void moveBulk(const int& parentId);
 
     Q_INVOKABLE int getMoveMode() const;
     Q_INVOKABLE void setMoveMode(const int& moveMode);
+    Q_INVOKABLE void flushActiveTask();
 
 Q_SIGNALS:
     void activeTaskChanged(Task* newActiveTask);
-    void taskCreated(QVariantMap newTask);
-    void quickFolderCreated(QVariantMap newTask);
-    void taskUpdated(QVariantMap updatedTask);
-    void taskDeleted(const int id);
-    void allTasksExpanded();
-    void allTasksUnexpanded();
+    void taskCreated(const QVariantMap& newTask, const int& parentId, const int& parentParentId);
+    void taskUpdated(const QVariantMap& updatedTask, const int& parentId);
+    void taskDeleted(const int& id, const int& parentId, const int& parentParentId);
+    void taskClosedChanged(const int& id, const bool& closed, const int& parentId);
     void viewModeChanged(const QString& viewMode);
     void taskMoved(const int id, const int parentId);
     void multiselectModeChanged(const bool multiselectMode);
-    void taskSelected(const int id);
-    void taskDeselected(const int id);
+    void taskSelected(const int& id);
+    void taskDeselected(const int& id);
     void taskMovedInBulk();
     void changedInRemember(const QVariantMap& taskMap);
-    void droppedRememberId(const int taskId);
-    void droppedCalendarId(const int taskId);
-    void parentIdChangedInDebug(const int id);
+    void droppedRememberId(const int& taskId);
+    void droppedCalendarId(const int& taskId);
+    void parentIdChangedInDebug(const int& id);
     void moveModeChanged(const int& moveMode);
 
 private Q_SLOTS:
@@ -108,7 +103,8 @@ private:
 
     int m_moveMode;
 
-    void flushActiveTask();
+    static Logger logger;
+
     NotebookEntry findNotebookEntry(const QString& rememberId);
     NotebookEntry* createNotebookEntry(const QString& name, const QString& description = "", const int deadline = 0);
     NotebookEntry updateNotebookEntry(const QString& rememberId, const QString& name, const QString& description = "", const int deadline = 0);

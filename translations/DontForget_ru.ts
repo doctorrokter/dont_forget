@@ -59,12 +59,12 @@
 <context>
     <name>ApplicationUI</name>
     <message>
-        <location filename="../src/applicationui.cpp" line="175"/>
+        <location filename="../src/applicationui.cpp" line="181"/>
         <source>Success!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="237"/>
+        <location filename="../src/applicationui.cpp" line="243"/>
         <source>Tasks received!</source>
         <translation type="unfinished">Получены новые задачи!</translation>
     </message>
@@ -75,6 +75,29 @@
         <location filename="../assets/components/AttachmentsContainer.qml" line="12"/>
         <source>Attachments</source>
         <translation type="unfinished">Вложения</translation>
+    </message>
+</context>
+<context>
+    <name>BackupAndRecovery</name>
+    <message>
+        <location filename="../assets/pages/settings_components/BackupAndRecovery.qml" line="13"/>
+        <source>Backup &amp; Recovery</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/settings_components/BackupAndRecovery.qml" line="25"/>
+        <source>Enable backup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/settings_components/BackupAndRecovery.qml" line="56"/>
+        <source>Backup every (days)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/settings_components/BackupAndRecovery.qml" line="84"/>
+        <source>Number of saved backups</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -355,6 +378,24 @@
     </message>
 </context>
 <context>
+    <name>FolderPage</name>
+    <message>
+        <location filename="../assets/pages/FolderPage.qml" line="286"/>
+        <source>Create folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/FolderPage.qml" line="297"/>
+        <source>Create task</source>
+        <translation type="unfinished">Создать задачу</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/FolderPage.qml" line="308"/>
+        <source>Create list</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>HelpPage</name>
     <message>
         <location filename="../assets/pages/HelpPage.qml" line="10"/>
@@ -423,11 +464,26 @@
     </message>
 </context>
 <context>
+    <name>ImportantListItem</name>
+    <message>
+        <location filename="../assets/components/v2/ImportantListItem.qml" line="33"/>
+        <source>Important</source>
+        <translation type="unfinished">Важно</translation>
+    </message>
+</context>
+<context>
     <name>InputTitleBar</name>
     <message>
-        <location filename="../assets/components/InputTitleBar.qml" line="53"/>
         <source>Cancel</source>
-        <translation type="unfinished">Отмена</translation>
+        <translation type="obsolete">Отмена</translation>
+    </message>
+</context>
+<context>
+    <name>ListPage</name>
+    <message>
+        <location filename="../assets/pages/ListPage.qml" line="114"/>
+        <source>Create task</source>
+        <translation type="unfinished">Создать задачу</translation>
     </message>
 </context>
 <context>
@@ -452,29 +508,37 @@
     </message>
 </context>
 <context>
+    <name>ReceivedListItem</name>
+    <message>
+        <location filename="../assets/components/v2/ReceivedListItem.qml" line="33"/>
+        <source>Received</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SettingsPage</name>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="16"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="28"/>
         <source>Settings</source>
         <translation type="unfinished">Настройки</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="29"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="41"/>
         <source>Look and Feel</source>
         <translation type="unfinished">Внешний вид</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="40"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="52"/>
         <source>Dark theme</source>
         <translation type="unfinished">Тёмная тема</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="62"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="78"/>
         <source>Behavior</source>
         <translation type="unfinished">Поведение</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="73"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="89"/>
         <source>Don&apos;t ask before deleting</source>
         <translation type="unfinished">Не спрашивать перед удалением</translation>
     </message>
@@ -495,112 +559,112 @@
         <translation type="obsolete">Срок выполнения</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="134"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="115"/>
         <source>Default task type</source>
         <translation type="unfinished">Тип задачи по-умолчанию</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="139"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="120"/>
         <source>Folder</source>
         <translation type="unfinished">Папка</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="145"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="126"/>
         <source>Task</source>
         <translation type="unfinished">Задача</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="165"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="146"/>
         <source>Default calendar account</source>
         <translation type="unfinished">Календарь по-умолчанию</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="183"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="164"/>
         <source>Date/time format</source>
         <translation type="unfinished">Формат даты/времени</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="194"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="175"/>
         <source>Localized</source>
         <translation type="unfinished">Локализованный</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="213"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="194"/>
         <source>System sound on selection</source>
         <translation type="unfinished">Звук при выборе</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="242"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="223"/>
         <source>Vibrate on selection</source>
         <translation type="unfinished">Вибрация при выборе</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="270"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="251"/>
         <source>Push notification sound</source>
         <translation type="unfinished">Звук push-уведомлений</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="275"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="256"/>
         <source>Standard Theme</source>
         <translation type="unfinished">Стандартная тема</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="285"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="266"/>
         <source>Don&apos;t Forget Theme</source>
         <translation type="unfinished">Тема Don&apos;t Forget</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="310"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="291"/>
         <source>Network</source>
         <translation type="unfinished">Сеть</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="355"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="336"/>
         <source>Check your network connection</source>
         <translation type="unfinished">Проверьте интернет-соединение</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="434"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="420"/>
         <source>Enabled</source>
         <translation type="unfinished">Включено</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="436"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="422"/>
         <source>Disabled</source>
         <translation type="unfinished">Отключено</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="443"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="429"/>
         <source>Disable</source>
         <translation type="unfinished">Отключить</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="445"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="431"/>
         <source>Enable</source>
         <translation type="unfinished">Включить</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="486"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="472"/>
         <source>Failed to enable Push Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="373"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="354"/>
         <source>If this setting is turned on you can send/receive tasks to/from your colleague or someone else using PIN. To achieve this goal app uses BlackBerry Push Service</source>
         <translation type="unfinished">Если эта опция включена, вы можете отправлять/получать задачи кому-либо или от кого-либо, используя PIN. Для достижения этой цели используется Push-сервис BlackBerry</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="468"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="454"/>
         <source>Push Service enabled</source>
         <translation type="unfinished">Push-сервис включен</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="477"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="463"/>
         <source>Push Service disabled</source>
         <translation type="unfinished">Push-сервис отключен</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="321"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="302"/>
         <source>Receive push notifications</source>
         <translation type="unfinished">Получение push-нотификаций</translation>
     </message>
@@ -620,9 +684,13 @@
 <context>
     <name>TaskDescriptionContainer</name>
     <message>
-        <location filename="../assets/components/TaskDescriptionContainer.qml" line="22"/>
         <source>Description</source>
-        <translation type="unfinished">Описание</translation>
+        <translation type="obsolete">Описание</translation>
+    </message>
+    <message>
+        <location filename="../assets/components/TaskDescriptionContainer.qml" line="25"/>
+        <source>Notes...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -636,6 +704,53 @@
         <location filename="../assets/components/TaskNameContainer.qml" line="40"/>
         <source>This field cannot be empty</source>
         <translation type="unfinished">Это поле не может быть пустым</translation>
+    </message>
+</context>
+<context>
+    <name>TaskPage</name>
+    <message>
+        <location filename="../assets/pages/TaskPage.qml" line="19"/>
+        <source>Deadline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/TaskPage.qml" line="31"/>
+        <source>Add to Calendar</source>
+        <translation type="unfinished">Добавить в календарь</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/TaskPage.qml" line="43"/>
+        <source>Account</source>
+        <translation type="unfinished">Учетная запись</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/TaskPage.qml" line="49"/>
+        <source>Add to Remember</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/TaskPage.qml" line="115"/>
+        <source>Rename</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/TaskPage.qml" line="137"/>
+        <source>Attachment</source>
+        <translation type="unfinished">Вложение</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/TaskPage.qml" line="158"/>
+        <source>OK</source>
+        <translation type="unfinished">OK</translation>
+    </message>
+    <message>
+        <source>Create in Remember</source>
+        <translation type="obsolete">Создать в Remember</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/TaskPage.qml" line="55"/>
+        <source>Important</source>
+        <translation type="unfinished">Важно</translation>
     </message>
 </context>
 <context>
@@ -734,6 +849,18 @@
     </message>
 </context>
 <context>
+    <name>TaskTitleBar</name>
+    <message>
+        <source>Cancel</source>
+        <translation type="obsolete">Отмена</translation>
+    </message>
+    <message>
+        <location filename="../assets/components/TaskTitleBar.qml" line="31"/>
+        <source>Enter name or names: Task1;;Task2;;Task3</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TaskViewPage</name>
     <message>
         <location filename="../assets/pages/TaskViewPage.qml" line="91"/>
@@ -787,6 +914,14 @@
         <location filename="../assets/pages/TasksListPage.qml" line="225"/>
         <source>Root</source>
         <translation type="unfinished">Корень</translation>
+    </message>
+</context>
+<context>
+    <name>TodayListItem</name>
+    <message>
+        <location filename="../assets/components/v2/TodayListItem.qml" line="33"/>
+        <source>Today</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -862,40 +997,33 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../assets/main.qml" line="46"/>
+        <location filename="../assets/main.qml" line="31"/>
         <source>Send feedback</source>
         <translation type="unfinished">Обратная связь</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="390"/>
         <source>Select more</source>
-        <translation type="unfinished">Выбрать еще</translation>
+        <translation type="obsolete">Выбрать еще</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="465"/>
-        <location filename="../assets/main.qml" line="660"/>
         <source>All Tasks</source>
-        <translation type="unfinished">Все задачи</translation>
+        <translation type="obsolete">Все задачи</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="92"/>
         <source>You have no tasks yet. It&apos;s time to create new one!</source>
-        <translation type="unfinished">У вас пока нет ни одной задачи. Самое время создать!</translation>
+        <translation type="obsolete">У вас пока нет ни одной задачи. Самое время создать!</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="198"/>
         <source>Create</source>
-        <translation type="unfinished">Создать</translation>
+        <translation type="obsolete">Создать</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="222"/>
         <source>Edit</source>
-        <translation type="unfinished">Изменить</translation>
+        <translation type="obsolete">Изменить</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="248"/>
         <source>Delete</source>
-        <translation type="unfinished">Удалить</translation>
+        <translation type="obsolete">Удалить</translation>
     </message>
     <message>
         <source>Share</source>
@@ -910,109 +1038,268 @@
         <translation type="obsolete">Задача отправлена!</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="349"/>
         <source>Hide closed</source>
-        <translation type="unfinished">Не показывать закрытые</translation>
+        <translation type="obsolete">Не показывать закрытые</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="351"/>
         <source>Show all</source>
-        <translation type="unfinished">Показать все</translation>
+        <translation type="obsolete">Показать все</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="286"/>
+        <source>Move</source>
+        <translation type="obsolete">Переместить</translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="obsolete">Просмотреть</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation type="obsolete">Переслать</translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="obsolete">Поиск</translation>
+    </message>
+    <message>
+        <source>Single select</source>
+        <translation type="obsolete">Одиночный выбор</translation>
+    </message>
+    <message>
+        <source>Open in Calendar</source>
+        <translation type="obsolete">Открыть в Календаре</translation>
+    </message>
+    <message>
+        <source>Open in Remember</source>
+        <translation type="obsolete">Открыть в Remember</translation>
+    </message>
+    <message>
+        <source>Sort</source>
+        <translation type="obsolete">Сортировать</translation>
+    </message>
+    <message>
+        <source>Permission required</source>
+        <translation type="obsolete">Требуются права</translation>
+    </message>
+    <message>
+        <source>Looks like you didn&apos;t grant permission for shared files. &quot;Don&apos;t Forget&quot; cannot work without this permission since the app stores own database in external resources. In order to use this app you should grant permissions in Settings, then restart the app.</source>
+        <translation type="obsolete">Похоже Вы не дали права на использование общих файлов приложением. &quot;Don&apos;t Forget&quot; не может работать без этих прав, так как хранит собственную базу данных во внешних ресурсах. Для того, чтобы пользоваться этим приложением, Вам необходимо добавить права в Настройках, затем перезапустить приложение.</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="obsolete">Настройки</translation>
+    </message>
+    <message>
+        <source>Confirm the deleting</source>
+        <translation type="obsolete">Подтвердите удаление</translation>
+    </message>
+    <message>
+        <source>This action cannot be undone. Also, task may contain children. All these will be deleted. Continue?</source>
+        <translation type="obsolete">Это действие не может быть отменено. Задача также может содержать дочерние задачи, все они будут удалены. Продолжаем?</translation>
+    </message>
+    <message>
+        <source>Don&apos;t ask again</source>
+        <translation type="obsolete">Больше не спрашивать</translation>
+    </message>
+    <message>
+        <source>Descending order</source>
+        <translation type="obsolete">Нисходящий порядок</translation>
+    </message>
+    <message>
+        <source>Sort by</source>
+        <translation type="obsolete">Сортировка по</translation>
+    </message>
+    <message>
+        <source>Creation</source>
+        <translation type="obsolete">Дате создания</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="obsolete">Имени</translation>
+    </message>
+    <message>
+        <source>Deadline</source>
+        <translation type="obsolete">Сроку выполнения</translation>
+    </message>
+    <message>
+        <source>Folder</source>
+        <translation type="obsolete">Папка</translation>
+    </message>
+    <message>
+        <source>Task</source>
+        <translation type="obsolete">Задача</translation>
+    </message>
+    <message>
+        <source>List</source>
+        <translation type="obsolete">Список</translation>
+    </message>
+    <message>
+        <source>Important</source>
+        <translation type="obsolete">Важно</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="317"/>
+        <source>Create folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="328"/>
+        <source>Create task</source>
+        <translation type="unfinished">Создать задачу</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="339"/>
+        <source>Create list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="407"/>
+        <source>Dashboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>main_old</name>
+    <message>
+        <location filename="../assets/main_old.qml" line="46"/>
+        <source>Send feedback</source>
+        <translation type="unfinished">Обратная связь</translation>
+    </message>
+    <message>
+        <location filename="../assets/main_old.qml" line="92"/>
+        <source>You have no tasks yet. It&apos;s time to create new one!</source>
+        <translation type="unfinished">У вас пока нет ни одной задачи. Самое время создать!</translation>
+    </message>
+    <message>
+        <location filename="../assets/main_old.qml" line="198"/>
+        <source>Create</source>
+        <translation type="unfinished">Создать</translation>
+    </message>
+    <message>
+        <location filename="../assets/main_old.qml" line="222"/>
+        <source>Edit</source>
+        <translation type="unfinished">Изменить</translation>
+    </message>
+    <message>
+        <location filename="../assets/main_old.qml" line="248"/>
+        <source>Delete</source>
+        <translation type="unfinished">Удалить</translation>
+    </message>
+    <message>
+        <location filename="../assets/main_old.qml" line="286"/>
         <source>Move</source>
         <translation type="unfinished">Переместить</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="325"/>
-        <source>View</source>
-        <translation type="unfinished">Просмотреть</translation>
-    </message>
-    <message>
-        <location filename="../assets/main.qml" line="312"/>
+        <location filename="../assets/main_old.qml" line="312"/>
         <source>Send</source>
         <translation type="unfinished">Переслать</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="366"/>
+        <location filename="../assets/main_old.qml" line="325"/>
+        <source>View</source>
+        <translation type="unfinished">Просмотреть</translation>
+    </message>
+    <message>
+        <location filename="../assets/main_old.qml" line="349"/>
+        <source>Hide closed</source>
+        <translation type="unfinished">Не показывать закрытые</translation>
+    </message>
+    <message>
+        <location filename="../assets/main_old.qml" line="351"/>
+        <source>Show all</source>
+        <translation type="unfinished">Показать все</translation>
+    </message>
+    <message>
+        <location filename="../assets/main_old.qml" line="366"/>
         <source>Search</source>
         <translation type="unfinished">Поиск</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="388"/>
+        <location filename="../assets/main_old.qml" line="388"/>
         <source>Single select</source>
         <translation type="unfinished">Одиночный выбор</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="401"/>
+        <location filename="../assets/main_old.qml" line="390"/>
+        <source>Select more</source>
+        <translation type="unfinished">Выбрать еще</translation>
+    </message>
+    <message>
+        <location filename="../assets/main_old.qml" line="401"/>
         <source>Open in Calendar</source>
         <translation type="unfinished">Открыть в Календаре</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="412"/>
+        <location filename="../assets/main_old.qml" line="412"/>
         <source>Open in Remember</source>
         <translation type="unfinished">Открыть в Remember</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="424"/>
+        <location filename="../assets/main_old.qml" line="424"/>
         <source>Sort</source>
         <translation type="unfinished">Сортировать</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="566"/>
+        <location filename="../assets/main_old.qml" line="465"/>
+        <location filename="../assets/main_old.qml" line="660"/>
+        <source>All Tasks</source>
+        <translation type="unfinished">Все задачи</translation>
+    </message>
+    <message>
+        <location filename="../assets/main_old.qml" line="566"/>
         <source>Permission required</source>
         <translation type="unfinished">Требуются права</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="567"/>
+        <location filename="../assets/main_old.qml" line="567"/>
         <source>Looks like you didn&apos;t grant permission for shared files. &quot;Don&apos;t Forget&quot; cannot work without this permission since the app stores own database in external resources. In order to use this app you should grant permissions in Settings, then restart the app.</source>
         <translation type="unfinished">Похоже Вы не дали права на использование общих файлов приложением. &quot;Don&apos;t Forget&quot; не может работать без этих прав, так как хранит собственную базу данных во внешних ресурсах. Для того, чтобы пользоваться этим приложением, Вам необходимо добавить права в Настройках, затем перезапустить приложение.</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="570"/>
+        <location filename="../assets/main_old.qml" line="570"/>
         <source>Settings</source>
         <translation type="unfinished">Настройки</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="594"/>
+        <location filename="../assets/main_old.qml" line="594"/>
         <source>Confirm the deleting</source>
         <translation type="unfinished">Подтвердите удаление</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="595"/>
+        <location filename="../assets/main_old.qml" line="595"/>
         <source>This action cannot be undone. Also, task may contain children. All these will be deleted. Continue?</source>
         <translation type="unfinished">Это действие не может быть отменено. Задача также может содержать дочерние задачи, все они будут удалены. Продолжаем?</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="598"/>
+        <location filename="../assets/main_old.qml" line="598"/>
         <source>Don&apos;t ask again</source>
         <translation type="unfinished">Больше не спрашивать</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="628"/>
-        <source>Descending order</source>
-        <translation type="unfinished">Нисходящий порядок</translation>
-    </message>
-    <message>
-        <location filename="../assets/main.qml" line="624"/>
+        <location filename="../assets/main_old.qml" line="624"/>
         <source>Sort by</source>
         <translation type="unfinished">Сортировка по</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="675"/>
+        <location filename="../assets/main_old.qml" line="628"/>
+        <source>Descending order</source>
+        <translation type="unfinished">Нисходящий порядок</translation>
+    </message>
+    <message>
+        <location filename="../assets/main_old.qml" line="675"/>
         <source>Creation</source>
-        <translation type="unfinished">Дате создания</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="676"/>
+        <location filename="../assets/main_old.qml" line="676"/>
         <source>Name</source>
-        <translation type="unfinished">Имени</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="677"/>
+        <location filename="../assets/main_old.qml" line="677"/>
         <source>Deadline</source>
-        <translation type="unfinished">Сроку выполнения</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

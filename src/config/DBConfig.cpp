@@ -16,6 +16,8 @@
 #define COPY_DB_NAME "dont_forget_copy.db"
 #define MIGRATIONS_PATH "app/native/assets/migrations"
 
+Logger DBConfig::logger = Logger::getLogger("DBConfig");
+
 DBConfig::DBConfig(QObject* parent) : QObject(parent) {
     QDir dbdir(DB_PATH);
     m_newDb = !dbdir.exists();
@@ -29,16 +31,16 @@ DBConfig::DBConfig(QObject* parent) : QObject(parent) {
             QFile dbfile(QString::fromLatin1(DB_PATH).append("/").append(DB_NAME));
 
             bool copied = dbfile.copy(QString::fromLatin1(DB_PATH).append("/").append(DB_NAME), QString::fromLatin1(DB_PATH).append("/").append(COPY_DB_NAME));
-            qDebug() << "DB copied successfully: " << copied << endl;
+            logger.info("DB copied successfully: " + copied);
 
             if (copied) {
                 bool removed = dbfile.remove();
-                qDebug() << "Old db file removed successfully: " << removed << endl;
+                logger.info("Old db file removed successfully: " + removed);
 
                 if(removed) {
                     QFile newDbfile(QString::fromLatin1(DB_PATH).append("/").append(COPY_DB_NAME));
                     bool renamed = newDbfile.rename(QString::fromLatin1(DB_PATH).append("/").append(COPY_DB_NAME), QString::fromLatin1(DB_PATH).append("/").append(DB_NAME));
-                    qDebug() << "New DB file renamed successfully: " << renamed << endl;
+                    logger.info("New DB file renamed successfully: " + renamed);
                 }
             }
          }
@@ -56,17 +58,17 @@ DBConfig::DBConfig(QObject* parent) : QObject(parent) {
      m_pSda = new SqlDataAccess(dbpath);
      m_pSda->execute("PRAGMA encoding = \"UTF-8\"");
      if (m_newDb) {
-         qDebug() << "Create DB from scratch" << endl;
+         logger.info("Create DB from scratch");
          migrate();
      } else {
-         qDebug() << "DB already exists. Use one." << endl;
+         logger.info("DB already exists. Use one.");
          if (AppConfig::getStatic("db_migrated").toString().isEmpty()) {
-             qDebug() << "Start DB migration" << endl;
+             logger.info("Start DB migration");
              if (!hasSchemaVersionTable()) {
-                 qDebug() << "No schema version table! Will create it" << endl;
+                 logger.info("No schema version table! Will create it");
                  runMigration("1_create_schema_version_table.sql");
                  setVersion(2);
-                 qDebug() << "Current schema_version is " << getVersion() << endl;
+                 logger.info("Current schema_version is " + getVersion());
              }
              migrate();
              AppConfig::setStatic("db_migrated", "true");
@@ -75,9 +77,9 @@ DBConfig::DBConfig(QObject* parent) : QObject(parent) {
          if (maxMigrationVersion() > getVersion()) {
              migrate();
          } else {
-             qDebug() << "DB versions matches!" << endl;
+             logger.info("DB versions matches!");
          }
-         qDebug() << "Current DB version is: " << getVersion() << endl;
+         logger.info("Current DB version is: " + getVersion());
      }
 }
 
@@ -88,17 +90,17 @@ DBConfig::~DBConfig() {
 }
 
 QVariant DBConfig::execute(const QString& query) {
-//    qDebug() << "===>>> SQL: " << query << endl;
+    qDebug() << "===>>> SQL: " << query << endl;
     return m_pSda->execute(query);
 }
 
 QVariant DBConfig::execute(const QString& query, const QVariantMap& data) {
-//    qDebug() << "===>>> SQL: " << query << ", DATA: " << data << endl;
+    qDebug() << "===>>> SQL: " << query << ", DATA: " << data << endl;
     return m_pSda->execute(query, data);
 }
 
 QVariant DBConfig::execute(const QString& query, const QVariantList& data) {
-//    qDebug() << "===>>> SQL: " << query << ", DATA: " << data << endl;
+    qDebug() << "===>>> SQL: " << query << ", DATA: " << data << endl;
     return m_pSda->execute(query, data);
 }
 
@@ -110,13 +112,13 @@ bool DBConfig::isNewDb() const { return m_newDb; }
 bool DBConfig::hasSharedFilesPermission() const { return m_hasSharedFilesPermission; }
 
 void DBConfig::runMigration(const QString& path) {
-    qDebug() << "Process migration: " << path << endl;
+    logger.info("Process migration: " + path);
     int version = getMigrationVersion(path);
 
     QFile migration(QString::fromLatin1(MIGRATIONS_PATH).append("/").append(path));
     migration.open(QIODevice::ReadOnly);
     QString data = migration.readAll();
-    qDebug() << data << endl;
+    logger.info(data);
 
     QStringList statements = data.split(";");
     foreach(QString stmt, statements) {
@@ -161,10 +163,10 @@ void DBConfig::migrate() {
 
     QStringList paths = dir.entryList();
     foreach(QString path, paths) {
-        qDebug() << path << endl;
+        logger.info(path);
         if (path.endsWith(".sql")) {
             if (getMigrationVersion(path) > currVersion) {
-                qDebug() << "Found new migration" << endl;
+                logger.info("Found new migration");
                 runMigration(path);
             }
         }

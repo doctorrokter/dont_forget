@@ -22,6 +22,8 @@
 
 using namespace std;
 
+Logger TasksService::logger = Logger::getLogger("TasksService");
+
 TasksService::TasksService(QObject* parent, DBConfig* dbConfig, AttachmentsService* attachmentsService) : QObject(parent),
         m_pDbConfig(dbConfig),
         m_pAttachmentsService(attachmentsService),
@@ -51,7 +53,7 @@ void TasksService::init() {
 void TasksService::processCollisions() {
     QVariantList collisions = m_pDbConfig->execute("SELECT * FROM tasks WHERE id = parent_id").toList();
     if (!collisions.isEmpty()) {
-        qDebug() << "FOUND COLLISIONS!" << endl;
+        logger.info("FOUND COLLISIONS!");
         foreach(QVariant taskVar, collisions) {
             Task t;
             t.fromMap(taskVar.toMap());
@@ -85,7 +87,7 @@ QVariantList TasksService::findAll() const {
     return tasks;
 }
 
-QVariantMap TasksService::findById(const int id) {
+QVariantMap TasksService::findById(const int& id) {
     return m_pDbConfig->execute(QString("SELECT * FROM tasks WHERE id = %1").arg(id)).toList().at(0).toMap();
 }
 
@@ -93,31 +95,86 @@ QVariantList TasksService::findByType(const QString& type) {
     return m_pDbConfig->execute(QString("SELECT * FROM tasks WHERE type = '%1'").arg(type)).toList();
 }
 
-QVariantList TasksService::findSiblings(const int parentId) {
-    return m_pDbConfig->execute(QString("SELECT * FROM tasks WHERE parent_id = %1").arg(parentId)).toList();
+QVariantList TasksService::findByType(const QString& type, const int& parentId) {
+    QVariantMap values;
+
+    QString query = "SELECT * FROM tasks WHERE";
+    if (parentId == 0) {
+        query = query.append(" parent_id IS NULL");
+    } else {
+        query = query.append(" parent_id = :parent_id");
+        values["parent_id"] = parentId;
+    }
+    query = query.append(" AND type = :type");
+    values["type"] = type;
+
+    QVariantList tasks = m_pDbConfig->execute(query, values).toList();
+    if (type.compare("TASK") == 0) {
+        QVariantList::Iterator iter;
+        for (iter = tasks.begin(); iter != tasks.end(); iter++) {
+            QVariantMap taskMap = iter->toMap();
+            taskMap["attachments"] = m_pAttachmentsService->findByTaskId(taskMap.value("id").toInt());
+            *iter = taskMap;
+        }
+    } else {
+        QVariantList::Iterator iter;
+        for (iter = tasks.begin(); iter != tasks.end(); iter++) {
+            QVariantMap taskMap = iter->toMap();
+            taskMap["count"] = countChildren(taskMap.value("id").toInt());
+            *iter = taskMap;
+        }
+    }
+
+    return tasks;
+}
+
+QVariantList TasksService::findSiblings(const int& parentId) {
+    QVariantMap values;
+    QString query = "SELECT * FROM tasks WHERE";
+    if (parentId == 0) {
+        query = query.append(" parent_id IS NULL");
+    } else {
+        query = query.append(" parent_id = :parent_id");
+        values["parent_id"] = parentId;
+    }
+    query = query.append(" ORDER BY type, closed");
+
+    QVariantList tasks = m_pDbConfig->execute(query, values).toList();
+
+    QVariantList::Iterator iter;
+    for (iter = tasks.begin(); iter != tasks.end(); iter++) {
+        QVariantMap taskMap = iter->toMap();
+        if (taskMap.value("type").toString().compare("TASK") == 0) {
+            taskMap["attachments"] = m_pAttachmentsService->findByTaskId(taskMap.value("id").toInt());
+        } else {
+            taskMap["count"] = countChildren(taskMap.value("id").toInt());
+        }
+        *iter = taskMap;
+    }
+    return tasks;
 }
 
 QVariantMap TasksService::lastCreated() {
     return m_pDbConfig->execute("SELECT * FROM tasks ORDER BY id DESC LIMIT 1").toList().at(0).toMap();
 }
 
-bool TasksService::isExists(const int id) {
+bool TasksService::isExists(const int& id) {
     return m_pDbConfig->execute(QString("SELECT EXISTS (SELECT 1 FROM tasks WHERE id = %1) AS present").arg(id)).toList().at(0).toMap().value("present").toBool();
 }
 
-bool TasksService::hasChildren(const int id) {
+bool TasksService::hasChildren(const int& id) {
     return m_pDbConfig->execute(QString("SELECT EXISTS (SELECT 1 FROM tasks WHERE parent_id = %1) AS present").arg(id)).toList().at(0).toMap().value("present").toBool();
 }
 
-void TasksService::changeClosed(const int id, const bool closed) {
+int TasksService::countChildren(const int& id) {
+    return m_pDbConfig->execute(QString("SELECT COUNT(*) AS count FROM tasks WHERE parent_id = %1").arg(QString::number(id))).toList().at(0).toMap().value("count").toInt();
+}
+
+void TasksService::changeClosed(const int& id, const bool& closed, const int& parentId) {
     int state = closed ? 1 : 0;
     QString query = QString("UPDATE tasks SET closed = %1 WHERE id = %2").arg(state).arg(id);
 
     m_pDbConfig->execute(query);
-    if (m_pActiveTask != NULL) {
-        m_pActiveTask->setClosed(closed);
-        emit activeTaskChanged(m_pActiveTask);
-    }
 
     Task task;
     task.fromMap(findById(id));
@@ -129,15 +186,12 @@ void TasksService::changeClosed(const int id, const bool closed) {
             m_pNotebookService->updateNotebookEntry(note);
         }
     }
-}
 
-void TasksService::changeExpanded(const int id, const bool expanded) {
-    int state = expanded ? 1 : 0;
-    m_pDbConfig->execute(QString("UPDATE tasks SET expanded = %1 WHERE id = %2").arg(state).arg(id));
+    emit taskClosedChanged(task.getId(), closed, parentId);
 }
 
 Task* TasksService::getActiveTask() const { return m_pActiveTask; }
-void TasksService::setActiveTask(const int id) {
+void TasksService::setActiveTask(const int& id) {
     if (id != 0) {
         QVariantMap taskMap = findById(id);
 
@@ -151,69 +205,40 @@ void TasksService::setActiveTask(const int id) {
     emit activeTaskChanged(m_pActiveTask);
 }
 
-void TasksService::createTask(const QString name, const QString description, const QString type, const int deadline, const int important, const int createInRemember,
-        const QVariantList attachments, const int createInCalendar, const int folderId, const int accountId, const QString& color) {
-    QString parentId = m_pActiveTask == NULL ? NULL : QString::number(m_pActiveTask->getId());
-    QString rememberId = NULL;
-    int calendarEventId = 0;
-
-    if (createInRemember) {
-        NotebookEntry* note = createNotebookEntry(name, description, deadline);
-        rememberId = note->id().toString();
-
-        delete note;
-        note = NULL;
-    }
-
-    if (deadline != 0 && createInCalendar != 0) {
-        CalendarUtil calendar;
-        CalendarEvent ev = calendar.createEvent(name, description, QDateTime::fromTime_t(deadline), folderId, accountId);
-        calendarEventId = ev.id();
-    }
-
-    QString query = "INSERT INTO tasks (name, description, type, deadline, important, parent_id, remember_id, closed, expanded, calendar_id, account_id, folder_id, color) "
-                    "VALUES (:name, :description, :type, :deadline, :important, :parent_id, :remember_id, :closed, :expanded, :calendar_id, :account_id, :folder_id, :color)";
+void TasksService::createTask(const QString& name, const QString& type, const int& parentId) {
     QVariantMap values;
     values["name"] = name;
-    values["description"] = description;
     values["type"] = type;
-    values["deadline"] = deadline;
-    values["important"] = important;
-    values["parent_id"] = parentId;
-    values["remember_id"] = rememberId;
-    values["closed"] = 0;
-    values["expanded"] = 1;
-    values["calendar_id"] = calendarEventId;
-    values["account_id"] = accountId;
-    values["folder_id"] = folderId;
-    values["color"] = color;
+
+    QString query = "INSERT INTO tasks";
+    if (parentId == 0) {
+        query = query.append(" (name, type) VALUES (:name, :type)");
+    } else {
+        query = query.append(" (name, type, parent_id) VALUES (:name, :type, :parent_id)");
+        values["parent_id"] = parentId;
+    }
 
     m_pDbConfig->execute(query, values);
-    QVariantMap newTask = lastCreated();
 
-    if (!attachments.isEmpty()) {
-        foreach(QVariant attVar, attachments) {
-            QVariantMap attMap = attVar.toMap();
-            m_pAttachmentsService->add(newTask.value("id").toInt(), attMap.value("name").toString(), attMap.value("path").toString(), attMap.value("mime_type").toString());
-        }
+    QVariantMap task = lastCreated();
+    if (type.compare("TASK") != 0) {
+        task["count"] = 0;
+    } else {
+        QVariantList list;
+        task["attachments"] = list;
     }
 
-    emit taskCreated(newTask);
+    int parentParentId = 0;
+    if (parentId != 0) {
+        QVariantMap parent = findById(parentId);
+        parentParentId = parent.value("parent_id").toInt();
+    }
+
+    emit taskCreated(task, parentId, parentParentId);
 }
 
-void TasksService::createFolderQuick(const QString& name) {
-    QVariantMap values;
-    values["name"] = name;
-    values["type"] = "FOLDER";
-
-    m_pDbConfig->execute("INSERT INTO tasks (name, type, expanded) VALUES (:name, :type, 1)", values);
-    QVariantMap newTask = lastCreated();
-
-    emit quickFolderCreated(newTask);
-}
-
-void TasksService::updateTask(const QString name, const QString description, const QString type, const int deadline, const int important, const int createInRemember,
-        const int closed, const QVariantList attachments, const int createInCalendar, const int folderId, const int accountId, const QString& color) {
+void TasksService::updateTask(const QString& name, const QString& description, const int& deadline, const int& important, const int& createInRemember,
+        const QVariantList& attachments, const int& createInCalendar, const int& folderId, const int& accountId, const QString& color) {
     QString rememberId = NULL;
     int calendarEventId = 0;
 
@@ -243,15 +268,15 @@ void TasksService::updateTask(const QString name, const QString description, con
             ev = calendar.createEvent(name, description, QDateTime::fromTime_t(deadline), folderId, accountId);
         } else {
 
-            qDebug() << "curr folder_id: " << m_pActiveTask->getFolderId() << ", curr account_id: " << m_pActiveTask->getAccountId() << endl;
-            qDebug() << "new folder_id: " << folderId << ", new account_id: " << accountId << endl;
+            logger.info(QString("curr folder_id: ").append(m_pActiveTask->getFolderId()).append(", curr account_id: ").append(m_pActiveTask->getAccountId()));
+            logger.info(QString("new folder_id: ").append(folderId).append(", new account_id: ").append(accountId));
 
             if (m_pActiveTask->getFolderId() != folderId || m_pActiveTask->getAccountId() != accountId) {
-                qDebug() << "SWITCH CALENDAR ACCOUNTS" << endl;
+                logger.info("SWITCH CALENDAR ACCOUNTS");
                 calendar.deleteEvent(m_pActiveTask->getCalendarId(), m_pActiveTask->getFolderId(), m_pActiveTask->getAccountId());
                 ev = calendar.createEvent(name, description, QDateTime::fromTime_t(deadline), folderId, accountId);
             } else {
-                qDebug() << "UPDATE EXISTING CALENDAR EVENT" << endl;
+                logger.info("UPDATE EXISTING CALENDAR EVENT");
                 ev = calendar.updateEvent(m_pActiveTask->getCalendarId(), name, description, QDateTime::fromTime_t(deadline), folderId, accountId);
             }
         }
@@ -262,16 +287,14 @@ void TasksService::updateTask(const QString name, const QString description, con
         }
     }
 
-    QString query = "UPDATE tasks SET name = :name, description = :description, type = :type, deadline = :deadline, important = :important, "
-            "remember_id = :remember_id, closed = :closed, calendar_id = :calendar_id, folder_id = :folder_id, account_id = :account_id, color = :color WHERE id = :id";
+    QString query = "UPDATE tasks SET name = :name, description = :description, deadline = :deadline, important = :important, "
+            "remember_id = :remember_id, calendar_id = :calendar_id, folder_id = :folder_id, account_id = :account_id WHERE id = :id";
     QVariantMap values;
     values["name"] = name;
     values["description"] = description;
-    values["type"] = type;
     values["deadline"] = deadline;
     values["important"] = important;
     values["remember_id"] = rememberId;
-    values["closed"] = closed;
     values["id"] = m_pActiveTask->getId();
     values["calendar_id"] = calendarEventId;
     values["folder_id"] = folderId;
@@ -293,47 +316,49 @@ void TasksService::updateTask(const QString name, const QString description, con
         }
     }
 
-    emit taskUpdated(taskMap);
+    taskMap["attachments"] = m_pAttachmentsService->findByTaskId(taskMap.value("id").toInt());
+
+    emit taskUpdated(taskMap, m_pActiveTask->getParentId());
     emit activeTaskChanged(m_pActiveTask);
 }
 
-void TasksService::deleteTask(const int id) {
-    QString query = QString("DELETE FROM tasks WHERE id = %1");
+void TasksService::deleteTask(const int& id) {
+    if (isExists(id)) {
+        QVariantMap taskMap = findById(id);
+        Task task;
+        task.fromMap(taskMap);
 
-        if (isExists(id)) {
-            QVariantMap taskMap = findById(id);
-            m_pActiveTask = new Task(this);
-            m_pActiveTask->fromMap(taskMap);
+        int parentId = task.getParentId();
+        int parentParentId = 0;
+        if (parentId != 0) {
+            QVariantMap parent = findById(parentId);
+            parentParentId = parent.value("parent_id").toInt();
         }
 
-    if (m_pActiveTask != NULL) {
-        if (id == m_pActiveTask->getId()) {
-            if (!m_pActiveTask->getRememberId().isEmpty()) {
-                deleteNotebookEntry(m_pActiveTask->getRememberId());
+        if (id == task.getId()) {
+            if (!task.getRememberId().isEmpty()) {
+                deleteNotebookEntry(task.getRememberId());
             }
-            if (m_pActiveTask->getCalendarId() != 0) {
+            if (task.getCalendarId() != 0) {
                 CalendarUtil calendar;
-                calendar.deleteEvent(m_pActiveTask->getCalendarId(), m_pActiveTask->getFolderId(), m_pActiveTask->getAccountId());
+                calendar.deleteEvent(task.getCalendarId(), task.getFolderId(), task.getAccountId());
             }
-            query = query.arg(m_pActiveTask->getId());
+            QString query = QString("DELETE FROM tasks WHERE id = %1").arg(id);
 
-            if (hasChildren(m_pActiveTask->getId())) {
-                QVariantList children = findSiblings(m_pActiveTask->getId());
+            if (hasChildren(id)) {
+                QVariantList children = findSiblings(id);
                 foreach(QVariant taskVar, children) {
                     deleteTask(taskVar.toMap().value("id").toInt());
                 }
             }
             m_pDbConfig->execute("PRAGMA foreign_keys = ON");
             m_pDbConfig->execute(query);
-
-            flushActiveTask();
-            emit activeTaskChanged(m_pActiveTask);
         }
-        emit taskDeleted(id);
+        emit taskDeleted(id, parentId, parentParentId);
     }
 }
 
-void TasksService::moveTask(const int parentId) {
+void TasksService::moveTask(const int& parentId) {
     QString parent = NULL;
     if (parentId != 0) {
         parent = QString::number(parentId);
@@ -387,7 +412,7 @@ void TasksService::copyTask(const Task& task) {
     m_pDbConfig->execute(query, values);
 }
 
-void TasksService::changeParentIdInDebug(const int id, const int parentId) {
+void TasksService::changeParentIdInDebug(const int& id, const int& parentId) {
     QString parent = NULL;
     if (parentId != 0) {
         parent = QString::number(parentId);
@@ -399,18 +424,6 @@ void TasksService::changeParentIdInDebug(const int id, const int parentId) {
 
     m_pDbConfig->execute("UPDATE tasks SET parent_id = :parent_id WHERE id = :id", data);
     emit parentIdChangedInDebug(id);
-}
-
-void TasksService::expandAll() {
-    m_pDbConfig->execute("UPDATE tasks SET expanded = 1");
-    emit allTasksExpanded();
-}
-
-void TasksService::unexpandAll() {
-    m_pDbConfig->execute("UPDATE tasks SET expanded = 0");
-    flushActiveTask();
-    emit allTasksUnexpanded();
-    emit activeTaskChanged(m_pActiveTask);
 }
 
 void TasksService::changeViewMode(const QString& viewMode) {
@@ -474,14 +487,14 @@ void TasksService::deleteNotebookEntry(const QString& rememberId) {
 void TasksService::sync() {
     QFuture<void> rememberFuture = QtConcurrent::run(this, &TasksService::syncRememberTasks);
     QFuture<void> calendarFuture = QtConcurrent::run(this, &TasksService::syncCalendarTasks);
-//    qDebug() << "Remember sync started: " << rememberFuture.isStarted() << endl;
-//    qDebug() << "Calendar sync started: " << calendarFuture.isStarted() << endl;
-//    qDebug() << "Remember sync running: " << rememberFuture.isRunning() << endl;
-//    qDebug() << "Calendar sync running: " << calendarFuture.isRunning() << endl;
+    qDebug() << "Remember sync started: " << rememberFuture.isStarted() << endl;
+    qDebug() << "Calendar sync started: " << calendarFuture.isStarted() << endl;
+    qDebug() << "Remember sync running: " << rememberFuture.isRunning() << endl;
+    qDebug() << "Calendar sync running: " << calendarFuture.isRunning() << endl;
 }
 
 void TasksService::syncRememberTasks() {
-    qDebug() << "===>>> Sync remember tasks" << endl;
+    logger.info("===>>> Sync remember tasks");
     QVariantList rememberTasks = m_pDbConfig->connection()->execute("SELECT * FROM tasks WHERE remember_id IS NOT NULL").toList();
         if (!rememberTasks.isEmpty()) {
             for (int i = 0; i < rememberTasks.size(); i++) {
@@ -491,7 +504,7 @@ void TasksService::syncRememberTasks() {
                 NotebookEntry note = findNotebookEntry(task.getRememberId());
                 if (note.isValid()) {
                     if (!equals(task, note)) {
-                        qDebug() << "Will update task: " << task.getName() << endl;
+                        logger.info("Will update task: " + task.getName());
 
                         QString query = "UPDATE tasks SET name = :name, description = :description, deadline = :deadline, closed = :closed WHERE id = :id";
                         QVariantMap values;
@@ -507,7 +520,7 @@ void TasksService::syncRememberTasks() {
                         m_pDbConfig->execute(query, values);
                         emit changedInRemember(values);
                     } else {
-                        qDebug() << "Nothing to update for task: " << task.getName() << endl;
+                        logger.info("Nothing to update for task: " + task.getName());
                     }
                 } else {
                     m_pDbConfig->execute(QString("UPDATE tasks SET remember_id = NULL WHERE id = %1").arg(task.getId()));
@@ -525,7 +538,7 @@ bool TasksService::equals(Task& task, NotebookEntry& note) {
 }
 
 void TasksService::syncCalendarTasks() {
-    qDebug() << "===>>> Sync calendar tasks" << endl;
+    logger.info("===>>> Sync calendar tasks");
     QVariantList calendarTasks = m_pDbConfig->execute("SELECT * FROM tasks WHERE calendar_id IS NOT NULL").toList();
     if (!calendarTasks.isEmpty()) {
         CalendarUtil calendar;
@@ -542,29 +555,27 @@ void TasksService::syncCalendarTasks() {
 }
 
 bool TasksService::isMultiselectMode() const { return m_multiselectMode; }
-void TasksService::setMultiselectMode(const bool multiselectMode) {
+void TasksService::setMultiselectMode(const bool& multiselectMode) {
     m_multiselectMode = multiselectMode;
     emit multiselectModeChanged(multiselectMode);
 }
 
-void TasksService::selectTask(const int id) {
+void TasksService::selectTask(const int& id) {
     m_tasksIds.append(id);
-    qDebug() << m_tasksIds << endl;
     emit taskSelected(id);
 }
 
-void TasksService::deselectTask(const int id) {
+void TasksService::deselectTask(const int& id) {
     QMutableListIterator<int> iterator(m_tasksIds);
     while (iterator.hasNext()) {
         if (iterator.next() == id) {
             iterator.remove();
         }
     }
-    qDebug() << m_tasksIds << endl;
     emit taskDeselected(id);
 }
 
-bool TasksService::isTaskSelected(const int id) {
+bool TasksService::isTaskSelected(const int& id) {
     return m_tasksIds.contains(id);
 }
 
@@ -579,7 +590,7 @@ QVariantList TasksService::deleteBulk() {
     return ids;
 }
 
-void TasksService::moveBulk(const int parentId) {
+void TasksService::moveBulk(const int& parentId) {
     foreach(int id, m_tasksIds) {
         if (parentId != id) {
             QString parent = NULL;

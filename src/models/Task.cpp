@@ -200,7 +200,7 @@ void Task::fromMap(const QVariantMap taskMap) {
     this->setName(taskMap.value("name").toString());
     this->setDescription(taskMap.value("description").toString());
     this->setType(taskMap.value("type").toString());
-    this->setParentId(taskMap.value("parent_id").toInt());
+    this->setParentId(taskMap.value("parent_id", 0).toInt());
     this->setDeadline(taskMap.value("deadline").toInt());
     this->setImportant(taskMap.value("important").toBool());
     this->setClosed(taskMap.value("closed").toBool());

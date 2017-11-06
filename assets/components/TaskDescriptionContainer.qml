@@ -15,22 +15,14 @@ Container {
         textArea.requestFocus();
     }
     
-    Container {
-        leftPadding: ui.du(2.5)
-        topPadding: ui.du(2.5)
-        Label {
-            text: qsTr("Description") + Retranslate.onLocaleOrLanguageChanged
-        }
-    }
-    
     TextArea {
         id: textArea
-//        text: value
         textFormat: TextFormat.Auto
         minHeight: ui.du(25)
         autoSize.maxLineCount: 10
         scrollMode: TextAreaScrollMode.Elastic
         inputMode: TextAreaInputMode.Text
+        hintText: qsTr("Notes...") + Retranslate.onLocaleOrLanguageChanged
         
         onTextChanging: {
             root.result = text;
