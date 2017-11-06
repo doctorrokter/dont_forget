@@ -1,4 +1,5 @@
 import bb.cascades 1.4
+import "../"
 
 CustomListItem {
     
@@ -100,7 +101,6 @@ CustomListItem {
         leftPadding: ui.du(2)
         topPadding: ui.du(2)
         rightPadding: ui.du(2)
-        bottomPadding: ui.du(1) 
         
         opacity: root.closed ? 0.75 : 1
         
@@ -261,7 +261,7 @@ CustomListItem {
         Container {
             id: descriptionContainer
             
-            visible: root.description && root.expanded
+            visible: root.description !== "" && root.expanded
             horizontalAlignment: HorizontalAlignment.Fill
             background: ui.palette.background
             
@@ -276,6 +276,14 @@ CustomListItem {
                 textStyle.fontWeight: FontWeight.W100
                 multiline: true
             }
+        }
+        
+        AttachmentsContainer {
+            id: attachmentsContainer
+            attachments: root.attachments
+            background: ui.palette.background
+            fromListItem: true
+            visible: root.attachments.length > 0 && root.expanded
         }
     }
 }

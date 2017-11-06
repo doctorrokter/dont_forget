@@ -70,6 +70,18 @@ Page {
                     root.openList(taskId, root.path);
                 }
                 
+                attachedObjects: [
+                    ListScrollStateHandler {
+                        onAtEndChanged: {
+                            if (atEnd) {
+                                listView.margin.bottomOffset = ui.du(13);
+                            } else {
+                                listView.margin.bottomOffset = ui.du(0);
+                            }
+                        }
+                    }
+                ]
+                
                 contextActions: [
                     ActionSet {
                         DeleteActionItem {
@@ -106,7 +118,7 @@ Page {
                         FolderListItem {
                             taskId: ListItemData.id
                             name: ListItemData.name
-                            count: ListItemData.count
+                            count: ListItemData.count || 0
                             color: ListItemData.color
                             parentId: ListItemData.parent_id
                             
@@ -121,7 +133,7 @@ Page {
                         ListListItem {
                             taskId: ListItemData.id
                             name: ListItemData.name
-                            count: ListItemData.count
+                            count: ListItemData.count || 0
                             color: ListItemData.color
                             parentId: ListItemData.parent_id
                             deadline: ListItemData.deadline
@@ -147,6 +159,7 @@ Page {
                             calendarId: parseInt(ListItemData.calendar_id)
                             attachments: ListItemData.attachments
                             parentId: ListItemData.parent_id
+                            description: ListItemData.description
                             
                             onTaskRemoved: {
                                 ListItem.view.removeById(taskId);
@@ -199,15 +212,19 @@ Page {
     
     function taskCreated(newTask, parentId, parentParentId) {
         if (parentId === root.taskId) {
+            var i = root.firstTaskIndex();
             switch (newTask.type) {
                 case Const.TaskTypes.TASK:
-                    dataModel.append(newTask); 
+                    if (i !== -1) {
+                        dataModel.insert(i, newTask);
+                    } else {
+                        dataModel.append(newTask); 
+                    }
                     break;
                 case Const.TaskTypes.FOLDER:
                     dataModel.insert(3, newTask);
                     break;
                 case Const.TaskTypes.LIST:
-                    var i = root.firstTaskIndex();
                     if (i === -1) {
                         dataModel.append(newTask);
                     } else {
@@ -289,6 +306,16 @@ Page {
             onTriggered: {
                 taskTitleBar.taskType = Const.TaskTypes.FOLDER;
             }
+            
+            shortcuts: [
+                Shortcut {
+                    key: "f"
+                    
+                    onTriggered: {
+                        createFolderActionItem.triggered();
+                    }
+                }
+            ]
         },
         
         ActionItem {
@@ -300,6 +327,16 @@ Page {
             onTriggered: {
                 taskTitleBar.taskType = Const.TaskTypes.TASK;
             }
+            
+            shortcuts: [
+                Shortcut {
+                    key: "c"
+                    
+                    onTriggered: {
+                        createTaskActionItem.triggered();
+                    }
+                }
+            ]
         },
         
         ActionItem {
@@ -311,6 +348,16 @@ Page {
             onTriggered: {
                 taskTitleBar.taskType = Const.TaskTypes.LIST;
             }
+            
+            shortcuts: [
+                Shortcut {
+                    key: "l"
+                    
+                    onTriggered: {
+                        createListActionItem.triggered();
+                    }
+                }
+            ]
         }
     ]
 }

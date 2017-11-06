@@ -55,6 +55,18 @@ Page {
                     root.openTask(taskId);
                 }
                 
+                attachedObjects: [
+                    ListScrollStateHandler {
+                        onAtEndChanged: {
+                            if (atEnd) {
+                                listView.margin.bottomOffset = ui.du(13);
+                            } else {
+                                listView.margin.bottomOffset = ui.du(0);
+                            }
+                        }
+                    }
+                ]
+                
                 contextActions: [
                     ActionSet {
                         DeleteActionItem {
@@ -117,6 +129,37 @@ Page {
             onTriggered: {
                 taskTitleBar.taskType = Const.TaskTypes.TASK;
             }
+            
+            shortcuts: [
+                Shortcut {
+                    key: "c"
+                    
+                    onTriggered: {
+                        createTaskActionItem.triggered();
+                    }
+                }
+            ]
+        },
+        
+        ActionItem {
+            id: editList
+            imageSource: "asset:///images/ic_compose.png"
+            title: qsTr("Edit") + Retranslate.onLocaleOrLanguageChanged
+            ActionBar.placement: ActionBarPlacement.OnBar
+            
+            onTriggered: {
+                root.openTask(root.taskId);
+            }
+            
+            shortcuts: [
+                Shortcut {
+                    key: "e"
+                    
+                    onTriggered: {
+                        editList.triggered();
+                    }
+                }
+            ]
         }
     ]
     
@@ -167,6 +210,9 @@ Page {
             if (i !== -1) {
                 dataModel.replace(i, activeTask);
             }
+        } else if (activeTask.id === root.taskId) {
+            root.path = root.path.replace(root.name, activeTask.name);
+            root.name = activeTask.name;
         }
     }
     

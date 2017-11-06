@@ -113,6 +113,7 @@ private:
     void syncRememberTasks();
     void syncCalendarTasks();
     bool equals(Task& task, NotebookEntry& note);
+    void countOrAttachments(QVariantList& tasks);
 };
 
 #endif /* TASKSSERVICE_HPP_ */

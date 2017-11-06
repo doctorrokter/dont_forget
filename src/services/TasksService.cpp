@@ -105,26 +105,11 @@ QVariantList TasksService::findByType(const QString& type, const int& parentId) 
         query = query.append(" parent_id = :parent_id");
         values["parent_id"] = parentId;
     }
-    query = query.append(" AND type = :type");
+    query = query.append(" AND type = :type ORDER BY closed");
     values["type"] = type;
 
     QVariantList tasks = m_pDbConfig->execute(query, values).toList();
-    if (type.compare("TASK") == 0) {
-        QVariantList::Iterator iter;
-        for (iter = tasks.begin(); iter != tasks.end(); iter++) {
-            QVariantMap taskMap = iter->toMap();
-            taskMap["attachments"] = m_pAttachmentsService->findByTaskId(taskMap.value("id").toInt());
-            *iter = taskMap;
-        }
-    } else {
-        QVariantList::Iterator iter;
-        for (iter = tasks.begin(); iter != tasks.end(); iter++) {
-            QVariantMap taskMap = iter->toMap();
-            taskMap["count"] = countChildren(taskMap.value("id").toInt());
-            *iter = taskMap;
-        }
-    }
-
+    countOrAttachments(tasks);
     return tasks;
 }
 
@@ -140,17 +125,7 @@ QVariantList TasksService::findSiblings(const int& parentId) {
     query = query.append(" ORDER BY type, closed");
 
     QVariantList tasks = m_pDbConfig->execute(query, values).toList();
-
-    QVariantList::Iterator iter;
-    for (iter = tasks.begin(); iter != tasks.end(); iter++) {
-        QVariantMap taskMap = iter->toMap();
-        if (taskMap.value("type").toString().compare("TASK") == 0) {
-            taskMap["attachments"] = m_pAttachmentsService->findByTaskId(taskMap.value("id").toInt());
-        } else {
-            taskMap["count"] = countChildren(taskMap.value("id").toInt());
-        }
-        *iter = taskMap;
-    }
+    countOrAttachments(tasks);
     return tasks;
 }
 
@@ -288,7 +263,7 @@ void TasksService::updateTask(const QString& name, const QString& description, c
     }
 
     QString query = "UPDATE tasks SET name = :name, description = :description, deadline = :deadline, important = :important, "
-            "remember_id = :remember_id, calendar_id = :calendar_id, folder_id = :folder_id, account_id = :account_id WHERE id = :id";
+            "remember_id = :remember_id, calendar_id = :calendar_id, folder_id = :folder_id, account_id = :account_id, color = :color WHERE id = :id";
     QVariantMap values;
     values["name"] = name;
     values["description"] = description;
@@ -626,4 +601,17 @@ int TasksService::getMoveMode() const { return m_moveMode; }
 void TasksService::setMoveMode(const int& moveMode) {
     m_moveMode = moveMode;
     emit moveModeChanged(m_moveMode);
+}
+
+void TasksService::countOrAttachments(QVariantList& tasks) {
+    QVariantList::Iterator iter;
+    for (iter = tasks.begin(); iter != tasks.end(); iter++) {
+        QVariantMap taskMap = iter->toMap();
+        if (taskMap.value("type").toString().compare("TASK") == 0) {
+            taskMap["attachments"] = m_pAttachmentsService->findByTaskId(taskMap.value("id").toInt());
+        } else {
+            taskMap["count"] = countChildren(taskMap.value("id").toInt());
+        }
+        *iter = taskMap;
+    }
 }

@@ -3,6 +3,7 @@ import bb.cascades 1.4
 Container {
     id: root
     
+    property bool fromListItem: false
     property variant attachments: []
     
     visible: false
@@ -120,22 +121,26 @@ Container {
     }
     
     function fill() {
-        root.visible = root.attachments.length !== 0;
-        var newAttachments = root.attachments.map(function(a) {
-            console.debug(a);
-            if (a.mime_type.indexOf("image/") !== -1) {
-                a.icon = {path: a.path, color: ""};
-            } else {
-                var ext = _attachmentsService.getExtension(a.path);
-                var iconAndColor = _attachmentsService.getIconColorMap(ext, a.mime_type);
-                a.icon = {path: "asset:///images/" + iconAndColor.image, color: iconAndColor.color};
+        if (root.attachments !== undefined) {
+            if (!root.fromListItem) {
+                root.visible = root.attachments.length !== 0;
             }
-            return a;
-        });
+            
+            var newAttachments = root.attachments.map(function(a) {
+                    if (a.mime_type.indexOf("image/") !== -1) {
+                        a.icon = {path: a.path, color: ""};
+                    } else {
+                        var ext = _attachmentsService.getExtension(a.path);
+                        var iconAndColor = _attachmentsService.getIconColorMap(ext, a.mime_type);
+                        a.icon = {path: "asset:///images/" + iconAndColor.image, color: iconAndColor.color};
+                    }
+                    return a;
+            });
         
-        attachmentsDataModel.clear();
-        attachmentsDataModel.append(newAttachments);
-        adjustHeight();
+            attachmentsDataModel.clear();
+            attachmentsDataModel.append(newAttachments);
+            adjustHeight();
+        }
     }
     
     function addAttachment(attachment) {

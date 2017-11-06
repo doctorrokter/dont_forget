@@ -104,6 +104,18 @@ NavigationPane {
                     navigationPane.push(lp);
                 }
                 
+                attachedObjects: [
+                    ListScrollStateHandler {
+                        onAtEndChanged: {
+                            if (atEnd) {
+                                listView.margin.bottomOffset = ui.du(13);
+                            } else {
+                                listView.margin.bottomOffset = ui.du(0);
+                            }
+                        }
+                    }
+                ]
+                
                 contextActions: [
                     ActionSet {
                         DeleteActionItem {
@@ -165,7 +177,7 @@ NavigationPane {
                         FolderListItem {
                             taskId: ListItemData.id
                             name: ListItemData.name
-                            count: ListItemData.count
+                            count: ListItemData.count || 0
                             color: ListItemData.color
                             parentId: ListItemData.parent_id || 0
                             
@@ -180,7 +192,7 @@ NavigationPane {
                         ListListItem {
                             taskId: ListItemData.id
                             name: ListItemData.name
-                            count: ListItemData.count
+                            count: ListItemData.count || 0
                             color: ListItemData.color
                             parentId: ListItemData.parent_id || 0
                             deadline: ListItemData.deadline
@@ -241,15 +253,19 @@ NavigationPane {
         
         function taskCreated(newTask, parentId, parentParentId) {
             if (parentId === 0) {
+                var i = root.firstTaskIndex();
                 switch (newTask.type) {
                     case Const.TaskTypes.TASK:
-                        dataModel.append(newTask); 
+                        if (i !== -1) {
+                            dataModel.insert(i, newTask);
+                        } else {
+                            dataModel.append(newTask);                            
+                        }
                         break;
                     case Const.TaskTypes.FOLDER:
                         dataModel.insert(3, newTask);
                         break;
                     case Const.TaskTypes.LIST:
-                        var i = root.firstTaskIndex();
                         if (i === -1) {
                             dataModel.append(newTask);
                         } else {
@@ -320,6 +336,16 @@ NavigationPane {
                 onTriggered: {
                     taskTitleBar.taskType = Const.TaskTypes.FOLDER;
                 }
+                
+                shortcuts: [
+                    Shortcut {
+                        key: "f"
+                        
+                        onTriggered: {
+                            createFolderActionItem.triggered();
+                        }
+                    }
+                ]
             },
             
             ActionItem {
@@ -331,6 +357,16 @@ NavigationPane {
                 onTriggered: {
                     taskTitleBar.taskType = Const.TaskTypes.TASK;
                 }
+                
+                shortcuts: [
+                    Shortcut {
+                        key: "c"
+                        
+                        onTriggered: {
+                            createTaskActionItem.triggered();
+                        }
+                    }
+                ]
             },
             
             ActionItem {
@@ -342,6 +378,16 @@ NavigationPane {
                 onTriggered: {
                     taskTitleBar.taskType = Const.TaskTypes.LIST;
                 }
+                
+                shortcuts: [
+                    Shortcut {
+                        key: "l"
+                        
+                        onTriggered: {
+                            createListActionItem.triggered();
+                        }
+                    }
+                ]
             }
         ]
     }
@@ -367,6 +413,15 @@ NavigationPane {
                     fp.name = folder.name;
                     fp.taskId = taskId;
                     navigationPane.push(fp);
+                }
+                
+                onOpenList: {
+                    var list = _tasksService.findById(taskId);
+                    var lp = listPage.createObject();
+                    lp.name = list.name;
+                    lp.path = path + "/" + list.name;
+                    lp.taskId = taskId;
+                    navigationPane.push(lp);
                 }
                 
                 onOpenTask: {

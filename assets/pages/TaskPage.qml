@@ -1,6 +1,7 @@
 import bb.cascades 1.4
 import "../components"
 import "../sheets"
+import "../js/Const.js" as Const
 
 Page {
     
@@ -64,7 +65,21 @@ Page {
             
             TaskDescriptionContainer {
                 id: description
+                visible: _tasksService.activeTask.type === Const.TaskTypes.TASK
                 value: _tasksService.activeTask.description || ""
+            }
+            
+            Palette {
+                id: palette
+                
+                horizontalAlignment: HorizontalAlignment.Center
+                visible: _tasksService.activeTask.type === Const.TaskTypes.LIST
+                
+                color: _tasksService.activeTask.color === "" ? palette.colors.GREEN : _tasksService.activeTask.color
+                
+                leftPadding: ui.du(2.5)
+                topPadding: ui.du(2.5)
+                rightPadding: ui.du(2.5)
             }
             
             AttachmentsContainer {
@@ -137,6 +152,7 @@ Page {
             title: qsTr("Attachment") + Retranslate.onLocaleOrLanguageChanged
             imageSource: "asset:///images/ic_attach.png"
             ActionBar.placement: ActionBarPlacement.OnBar
+            enabled: _tasksService.activeTask.type === Const.TaskTypes.TASK
             
             onTriggered: {
                 filePickersSheet.open();
@@ -178,7 +194,7 @@ Page {
                     }
                     
                     var taskName = _tasksService.activeTask.name;
-                    _tasksService.updateTask(taskName.trim(), description.result.trim(), deadline, important, createInRemember, files, createInCalendar, folderId, accountId);
+                    _tasksService.updateTask(taskName.trim(), description.result.trim(), deadline, important, createInRemember, files, createInCalendar, folderId, accountId, palette.color);
             }
         }
     ]
