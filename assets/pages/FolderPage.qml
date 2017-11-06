@@ -252,6 +252,13 @@ Page {
             if (i !== -1 && closed) {
                 var task = dataModel.value(i);
                 dataModel.removeAt(i);
+                if (task.type === Const.TaskTypes.LIST) {
+                    var index = firstTaskIndex();
+                    if (index !== -1) {
+                        dataModel.insert(index, task);
+                        return;
+                    }
+                }
                 dataModel.append(task);
             }
         }

@@ -146,22 +146,24 @@ int TasksService::countChildren(const int& id) {
 }
 
 void TasksService::changeClosed(const int& id, const bool& closed, const int& parentId) {
-    int state = closed ? 1 : 0;
-    QString query = QString("UPDATE tasks SET closed = %1 WHERE id = %2").arg(state).arg(id);
-
-    m_pDbConfig->execute(query);
-
     Task task;
     task.fromMap(findById(id));
-    if (!task.getRememberId().isEmpty()) {
-        NotebookEntryId entryId(task.getRememberId());
-        NotebookEntry note = m_pNotebookService->notebookEntry(entryId);
-        if (note.isValid()) {
-            note.setStatus(closed ? NotebookEntryStatus::Completed : NotebookEntryStatus::NotCompleted);
-            m_pNotebookService->updateNotebookEntry(note);
+
+    int state = closed ? 1 : 0;
+
+    if (task.getType().compare("TASK") == 0) {
+        QString query = QString("UPDATE tasks SET closed = %1 WHERE id = %2").arg(state).arg(id);
+        m_pDbConfig->execute(query);
+        changeNotebookEntryState(closed, task.getRememberId());
+    } else if (task.getType().compare("LIST") == 0) {
+        QString query = QString("UPDATE tasks SET closed = %1 WHERE id = %2 OR parent_id = %3").arg(state).arg(id).arg(id);
+        m_pDbConfig->execute(query);
+
+        QStringList rememberIds = m_pDbConfig->execute(QString("SELECT remember_id FROM tasks WHERE parent_id = %1").arg(id)).toStringList();
+        foreach(QString rememberId, rememberIds) {
+            changeNotebookEntryState(closed, rememberId);
         }
     }
-
     emit taskClosedChanged(task.getId(), closed, parentId);
 }
 
@@ -450,6 +452,17 @@ NotebookEntry TasksService::updateNotebookEntry(const QString& rememberId, const
         m_pNotebookService->updateNotebookEntry(note);
     }
     return note;
+}
+
+void TasksService::changeNotebookEntryState(const bool& closed, const QString& rememberId) {
+    if (!rememberId.isEmpty()) {
+        NotebookEntryId entryId(rememberId);
+        NotebookEntry note = m_pNotebookService->notebookEntry(entryId);
+        if (note.isValid()) {
+            note.setStatus(closed ? NotebookEntryStatus::Completed : NotebookEntryStatus::NotCompleted);
+            m_pNotebookService->updateNotebookEntry(note);
+        }
+    }
 }
 
 void TasksService::deleteNotebookEntry(const QString& rememberId) {

@@ -108,6 +108,7 @@ private:
     NotebookEntry findNotebookEntry(const QString& rememberId);
     NotebookEntry* createNotebookEntry(const QString& name, const QString& description = "", const int deadline = 0);
     NotebookEntry updateNotebookEntry(const QString& rememberId, const QString& name, const QString& description = "", const int deadline = 0);
+    void changeNotebookEntryState(const bool& closed, const QString& rememberId);
     void deleteNotebookEntry(const QString& rememberId);
     void sync();
     void syncRememberTasks();

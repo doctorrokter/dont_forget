@@ -9,7 +9,7 @@ CustomListItem {
     property int parentId: 0
     property int count: 0
     property string color: ""
-    property int deadline: 1231234235
+    property int deadline: 0
     property bool closed: false
     property int rememberId: 0
     property int calendarId: 0
@@ -49,15 +49,19 @@ CustomListItem {
         
         background: ui.palette.background
         
-        leftPadding: ui.du(2)
-        topPadding: ui.du(1.5)
-        rightPadding: ui.du(2)
+//        leftPadding: ui.du(2)
+//        topPadding: ui.du(1.5)
+//        rightPadding: ui.du(2)
         
         opacity: root.closed ? 0.75 : 1
         
         Container {
             horizontalAlignment: HorizontalAlignment.Fill
             verticalAlignment: VerticalAlignment.Center
+            
+            leftPadding: ui.du(2)
+            topPadding: ui.du(1.5)
+            rightPadding: ui.du(2)
             
             layout: StackLayout {
                 orientation: LayoutOrientation.LeftToRight
@@ -101,7 +105,8 @@ CustomListItem {
                 
                 onCheckedChanged: {
                     if (root.closed !== checked) {
-                        // do work
+                        root.closed = checked;
+                        _tasksService.changeClosed(root.taskId, root.closed, root.parentId);
                     }
                 }
             }
@@ -111,13 +116,16 @@ CustomListItem {
             verticalAlignment: VerticalAlignment.Center
             background: ui.palette.background
             
+            visible: root.deadline !== 0
+            
+            leftPadding: ui.du(2.5)
+            topPadding: ui.du(1.5)
+            rightPadding: ui.du(2)
+            bottomPadding: ui.du(1)
+            
             layout: StackLayout {
                 orientation: LayoutOrientation.LeftToRight
             }
-            
-            leftPadding: ui.du(0.5)
-            rightPadding: ui.du(1)
-            bottomPadding: ui.du(1)
             
             Container {
                 layout: StackLayout {

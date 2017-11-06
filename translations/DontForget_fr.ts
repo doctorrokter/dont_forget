@@ -345,17 +345,17 @@
 <context>
     <name>FolderPage</name>
     <message>
-        <location filename="../assets/pages/FolderPage.qml" line="303"/>
+        <location filename="../assets/pages/FolderPage.qml" line="310"/>
         <source>Create folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/pages/FolderPage.qml" line="324"/>
+        <location filename="../assets/pages/FolderPage.qml" line="331"/>
         <source>Create task</source>
         <translation type="unfinished">Créer tâche</translation>
     </message>
     <message>
-        <location filename="../assets/pages/FolderPage.qml" line="345"/>
+        <location filename="../assets/pages/FolderPage.qml" line="352"/>
         <source>Create list</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1037,22 +1037,22 @@
         <translation type="obsolete">Important</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="333"/>
+        <location filename="../assets/main.qml" line="340"/>
         <source>Create folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="354"/>
+        <location filename="../assets/main.qml" line="361"/>
         <source>Create task</source>
         <translation type="unfinished">Créer tâche</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="375"/>
+        <location filename="../assets/main.qml" line="382"/>
         <source>Create list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="462"/>
+        <location filename="../assets/main.qml" line="469"/>
         <source>Dashboard</source>
         <translation type="unfinished"></translation>
     </message>
