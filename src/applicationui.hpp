@@ -36,6 +36,7 @@
 #include "util/CalendarUtil.hpp"
 #include "util/DateUtil.hpp"
 #include "Logger.hpp"
+#include "UIManager.hpp"
 
 namespace bb
 {
@@ -56,6 +57,7 @@ class QTranslator;
  */
 class ApplicationUI : public QObject {
     Q_OBJECT
+    Q_PROPERTY(QVariantList images READ getImages)
 public:
     ApplicationUI();
     virtual ~ApplicationUI();
@@ -65,6 +67,8 @@ public:
     Q_INVOKABLE void openRememberNote(const QString& rememberId);
     Q_INVOKABLE QVariant loadHtmlAsObject(const QString& html);
     Q_INVOKABLE void sync();
+
+    QVariantList getImages() const;
 
 Q_SIGNALS:
     void taskSheetRequested(const QString& data);
@@ -97,6 +101,7 @@ private:
     Signal* m_pSignal;
     CalendarUtil* m_pCalendar;
     DateUtil* m_pDateUtil;
+    UIManager* m_pUIManager;
 
     bool m_running;
     QList<QString> m_filesToDelete;

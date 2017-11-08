@@ -55,6 +55,13 @@
     </message>
 </context>
 <context>
+    <name>BackgroundPage</name>
+    <message>
+        <source>Choose a background</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>BackupAndRecovery</name>
     <message>
         <source>Backup &amp; Recovery</source>
@@ -268,6 +275,10 @@
     </message>
     <message>
         <source>Create list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -495,6 +506,10 @@
     </message>
     <message>
         <source>Failed to enable Push Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change background</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

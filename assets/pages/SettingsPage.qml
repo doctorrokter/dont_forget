@@ -18,8 +18,9 @@ Page {
         DEFAULT_FOLDER_ID: "default_folder_id"
     }
     
-    signal sortByChanged();
-    signal defaultTaskTypeChanged();
+    signal backgroundPageRequested()
+    signal sortByChanged()
+    signal defaultTaskTypeChanged()
     
     actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
     actionBarVisibility: ChromeVisibility.Overlay
@@ -66,6 +67,22 @@ Page {
                                 Application.themeSupport.setVisualStyle(VisualStyle.Bright);
                                 _appConfig.set(root.settings.THEME, "BRIGHT");
                             }
+                        }
+                    }
+                }
+                
+                Container {
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    topPadding: ui.du(2)
+                    bottomPadding: ui.du(2.5)
+                    leftPadding: ui.du(2.5)
+                    rightPadding: ui.du(2.5)
+                    Button {
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        text: qsTr("Change background") + Retranslate.onLocaleOrLanguageChanged
+                        
+                        onClicked: {
+                            root.backgroundPageRequested();
                         }
                     }
                 }

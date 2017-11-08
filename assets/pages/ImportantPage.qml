@@ -31,7 +31,7 @@ Page {
                 horizontalAlignment: HorizontalAlignment.Fill
                 verticalAlignment: VerticalAlignment.Fill
                 scalingMethod: ScalingMethod.AspectFill
-                imageSource: "asset:///images/backgrounds/earth.jpg"
+                imageSource: _ui.backgroundImage
             }
             
             ListView {

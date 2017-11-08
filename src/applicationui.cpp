@@ -51,6 +51,8 @@ using namespace bb::data;
 using namespace bb::platform;
 using namespace bb::pim::calendar;
 
+#define WALLPAPERS_PATH "app/native/assets/images/backgrounds"
+
 Logger ApplicationUI::logger = Logger::getLogger("ApplicationUI");
 
 ApplicationUI::ApplicationUI() : QObject() {
@@ -73,6 +75,8 @@ ApplicationUI::ApplicationUI() : QObject() {
     m_pUsersService = new UsersService(this, m_pDbConfig);
     m_pDropboxService = new DropboxService(this);
     m_pSignal = new Signal(this);
+
+    m_pUIManager = new UIManager(this);
 
 //    m_pTasksService->processCollisions();
 
@@ -199,6 +203,7 @@ void ApplicationUI::initFullUI() {
     rootContext->setContextProperty("_calendar", m_pCalendar);
     rootContext->setContextProperty("_signal", m_pSignal);
     rootContext->setContextProperty("_date", m_pDateUtil);
+    rootContext->setContextProperty("_ui", m_pUIManager);
     rootContext->setContextProperty("_hasSharedFilesPermission", m_pDbConfig->hasSharedFilesPermission());
     m_running = true;
 
@@ -218,6 +223,7 @@ void ApplicationUI::initComposerUI(const QString& pathToPage, const QString& dat
     rootContext->setContextProperty("_hasSharedFilesPermission", m_pDbConfig->hasSharedFilesPermission());
     rootContext->setContextProperty("_calendar", m_pCalendar);
     rootContext->setContextProperty("_date", m_pDateUtil);
+    rootContext->setContextProperty("_ui", m_pUIManager);
     rootContext->setContextProperty("_mimeType", mimeType);
 
     AbstractPane *root = qml->createRootObject<AbstractPane>();
@@ -365,4 +371,18 @@ void ApplicationUI::clear() {
     m_pAttachmentsService->deleteLater();
     m_pSignal->deleteLater();
     m_pCalendar->deleteLater();
+    m_pUIManager->deleteLater();
+}
+
+QVariantList ApplicationUI::getImages() const {
+    QDir assets(WALLPAPERS_PATH);
+    QStringList files = assets.entryList();
+    QVariantList images;
+
+    foreach(QString f, files) {
+        if (f != "." && f != "..") {
+            images.append(f);
+        }
+    }
+    return images;
 }

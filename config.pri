@@ -67,17 +67,22 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/components/v2/TodayListItem.qml) \
         $$quote($$BASEDIR/assets/images/apk_icon_big_512x512.png) \
         $$quote($$BASEDIR/assets/images/audio_icon_big_512x512.png) \
-        $$quote($$BASEDIR/assets/images/backgrounds/BeautifulViewWallpaper(Wall2mob.com)_38808.jpg) \
-        $$quote($$BASEDIR/assets/images/backgrounds/BeautyOfNature(Wall2mob.com)_33585.jpg) \
-        $$quote($$BASEDIR/assets/images/backgrounds/CSRoW(Wall2mob.com)_39695.jpg) \
         $$quote($$BASEDIR/assets/images/backgrounds/apple.jpg) \
         $$quote($$BASEDIR/assets/images/backgrounds/coffee.jpg) \
         $$quote($$BASEDIR/assets/images/backgrounds/earth.jpg) \
         $$quote($$BASEDIR/assets/images/backgrounds/flower.jpg) \
+        $$quote($$BASEDIR/assets/images/backgrounds/forest.jpg) \
+        $$quote($$BASEDIR/assets/images/backgrounds/galka.jpg) \
+        $$quote($$BASEDIR/assets/images/backgrounds/lava.jpg) \
+        $$quote($$BASEDIR/assets/images/backgrounds/nature.jpg) \
         $$quote($$BASEDIR/assets/images/backgrounds/road.jpg) \
         $$quote($$BASEDIR/assets/images/backgrounds/snowflake.jpg) \
         $$quote($$BASEDIR/assets/images/backgrounds/wall_1.jpg) \
         $$quote($$BASEDIR/assets/images/backgrounds/wall_2.jpg) \
+        $$quote($$BASEDIR/assets/images/backgrounds/wall_3.jpg) \
+        $$quote($$BASEDIR/assets/images/backgrounds/wall_4.jpg) \
+        $$quote($$BASEDIR/assets/images/backgrounds/wall_5.jpg) \
+        $$quote($$BASEDIR/assets/images/backgrounds/wall_6.jpg) \
         $$quote($$BASEDIR/assets/images/calendar.png) \
         $$quote($$BASEDIR/assets/images/doc_icon_big_512x512.png) \
         $$quote($$BASEDIR/assets/images/generic_icon_big_512x512.png) \
@@ -142,6 +147,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/migrations/7_create_index_parent_id.sql) \
         $$quote($$BASEDIR/assets/migrations/8_create_index_type.sql) \
         $$quote($$BASEDIR/assets/migrations/9_add_column_color_into_tasks.sql) \
+        $$quote($$BASEDIR/assets/pages/BackgroundPage.qml) \
         $$quote($$BASEDIR/assets/pages/ContactsPage.qml) \
         $$quote($$BASEDIR/assets/pages/DebugPage.qml) \
         $$quote($$BASEDIR/assets/pages/FolderPage.qml) \
@@ -166,6 +172,7 @@ config_pri_assets {
 config_pri_source_group1 {
     SOURCES += \
         $$quote($$BASEDIR/src/Logger.cpp) \
+        $$quote($$BASEDIR/src/UIManager.cpp) \
         $$quote($$BASEDIR/src/applicationui.cpp) \
         $$quote($$BASEDIR/src/config/AppConfig.cpp) \
         $$quote($$BASEDIR/src/config/DBConfig.cpp) \
@@ -185,6 +192,7 @@ config_pri_source_group1 {
 
     HEADERS += \
         $$quote($$BASEDIR/src/Logger.hpp) \
+        $$quote($$BASEDIR/src/UIManager.hpp) \
         $$quote($$BASEDIR/src/applicationui.hpp) \
         $$quote($$BASEDIR/src/config/AppConfig.hpp) \
         $$quote($$BASEDIR/src/config/DBConfig.hpp) \

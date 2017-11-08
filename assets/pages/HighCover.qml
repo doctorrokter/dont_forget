@@ -11,7 +11,7 @@ Container {
     layout: DockLayout {}
 
     ImageView {
-        imageSource: "asset:///images/backgrounds/earth.jpg"
+        imageSource: _ui.backgroundImage
         scalingMethod: ScalingMethod.AspectFill
         opacity: 0.75
     }    

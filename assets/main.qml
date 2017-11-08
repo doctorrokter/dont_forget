@@ -58,7 +58,7 @@ NavigationPane {
                 horizontalAlignment: HorizontalAlignment.Fill
                 verticalAlignment: VerticalAlignment.Fill
                 scalingMethod: ScalingMethod.AspectFill
-                imageSource: "asset:///images/backgrounds/earth.jpg"
+                imageSource: _ui.backgroundImage
             }
             
             ListView {
@@ -453,8 +453,22 @@ NavigationPane {
         },
         
         ComponentDefinition {
+            id: backgroundPage
+            BackgroundPage {
+                onImageChanged: {
+                    navigationPane.pop();
+                }
+            }    
+        },
+        
+        ComponentDefinition {
             id: settingsPage
-            SettingsPage {}
+            SettingsPage {
+                onBackgroundPageRequested: {
+                    var bg = backgroundPage.createObject();
+                    navigationPane.push(bg);
+                }
+            }
         },
         
         ComponentDefinition {

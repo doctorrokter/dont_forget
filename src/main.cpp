@@ -34,6 +34,7 @@
 #include "const/DFColors.hpp"
 #include "const/TaskMovingMode.hpp"
 #include "util/CalendarUtil.hpp"
+#include "UIManager.hpp"
 
 using namespace bb::cascades;
 using namespace bb::system;
@@ -59,6 +60,7 @@ Q_DECL_EXPORT int main(int argc, char **argv) {
     qmlRegisterType<TaskMovingMode>("Const", 1, 0, "MoveMode");
     qRegisterMetaType<QList<Task> >("QList<Task>");
     qRegisterMetaType<Task*>("Task*");
+    qRegisterMetaType<UIManager*>("UIManager*");
     qRegisterMetaType<CalendarUtil*>("CalendarUtil*");
 
     Application app(argc, argv);

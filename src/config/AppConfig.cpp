@@ -38,8 +38,8 @@ AppConfig::~AppConfig() {
     m_pNetworkConf = NULL;
 }
 
-QVariant AppConfig::getStatic(const QString name) {
-    return CONF.value(name, "");
+QVariant AppConfig::getStatic(const QString& name, const QString& defVal) {
+    return CONF.value(name, defVal);
 }
 
 void AppConfig::setStatic(const QString name, const QVariant value) {
@@ -48,8 +48,8 @@ void AppConfig::setStatic(const QString name, const QVariant value) {
 
 bool AppConfig::hasNetworkStatic() { return isOnline; }
 
-QVariant AppConfig::get(const QString name) const {
-    return getStatic(name);
+QVariant AppConfig::get(const QString& name, const QString& defVal) const {
+    return getStatic(name, defVal);
 }
 
 void AppConfig::set(const QString name, const QVariant value) {

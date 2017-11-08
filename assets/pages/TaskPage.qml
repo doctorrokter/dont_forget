@@ -19,6 +19,7 @@ Page {
                 id: deadLineToggleButton
                 title: qsTr("Deadline") + Retranslate.onLocaleOrLanguageChanged
                 checked: _tasksService.activeTask.deadline !== 0
+                visible: !root.isFolder()
             }
             
             TaskDeadlineContainer {
@@ -49,13 +50,14 @@ Page {
                 id: rememberToggleButton
                 title: qsTr("Add to Remember") + Retranslate.onLocaleOrLanguageChanged
                 checked: _tasksService.activeTask.rememberId !== ""
+                visible: !root.isFolder()
             }
             
             ToggleBlock {
                 id: importantToggleButton
                 title: qsTr("Important") + Retranslate.onLocaleOrLanguageChanged
                 checked: _tasksService.activeTask.important
-                visible: _tasksService.activeTask.type === Const.TaskTypes.TASK
+                visible: root.isTask()
                 
                 onCheckedChanged: {
                     if (checked !== _tasksService.activeTask.important) {
@@ -66,7 +68,7 @@ Page {
             
             TaskDescriptionContainer {
                 id: description
-                visible: _tasksService.activeTask.type === Const.TaskTypes.TASK
+                visible: root.isTask()
                 value: _tasksService.activeTask.description || ""
             }
             
@@ -74,7 +76,7 @@ Page {
                 id: palette
                 
                 horizontalAlignment: HorizontalAlignment.Center
-                visible: _tasksService.activeTask.type === Const.TaskTypes.LIST
+                visible: root.isList()
                 
                 color: _tasksService.activeTask.color === "" ? palette.colors.GREEN : _tasksService.activeTask.color
                 
@@ -93,6 +95,18 @@ Page {
                 preferredHeight: ui.du(12)
             }
         }
+    }
+    
+    function isFolder() {
+        return _tasksService.activeTask.type === Const.TaskTypes.FOLDER;
+    }
+    
+    function isTask() {
+        return _tasksService.activeTask.type === Const.TaskTypes.TASK;
+    }
+    
+    function isList() {
+        return _tasksService.activeTask.type === Const.TaskTypes.LIST;
     }
     
     function getDeadline() {

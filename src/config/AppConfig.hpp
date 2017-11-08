@@ -34,11 +34,11 @@ public:
     static QSettings CONF;
     static bool isOnline;
 
-    static QVariant getStatic(const QString name);
+    static QVariant getStatic(const QString& name, const QString& defVal = "");
     static void setStatic(const QString name, const QVariant value);
     static bool hasNetworkStatic();
 
-    Q_INVOKABLE QVariant get(const QString name) const;
+    Q_INVOKABLE QVariant get(const QString& name, const QString& defVal = "") const;
     Q_INVOKABLE void set(const QString name, const QVariant value);
 
     Q_INVOKABLE bool isUsingPublicPushProxyGateway() const;

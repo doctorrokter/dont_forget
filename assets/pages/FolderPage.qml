@@ -34,7 +34,7 @@ Page {
                 horizontalAlignment: HorizontalAlignment.Fill
                 verticalAlignment: VerticalAlignment.Fill
                 scalingMethod: ScalingMethod.AspectFill
-                imageSource: "asset:///images/backgrounds/earth.jpg"
+                imageSource: _ui.backgroundImage
             }
             
             ListView {
@@ -364,6 +364,26 @@ Page {
                     
                     onTriggered: {
                         createListActionItem.triggered();
+                    }
+                }
+            ]
+        },
+        
+        ActionItem {
+            id: editFolder
+            imageSource: "asset:///images/ic_compose.png"
+            title: qsTr("Edit") + Retranslate.onLocaleOrLanguageChanged
+            
+            onTriggered: {
+                root.openTask(root.taskId);
+            }
+            
+            shortcuts: [
+                Shortcut {
+                    key: "e"
+                    
+                    onTriggered: {
+                        editFolder.triggered();
                     }
                 }
             ]
