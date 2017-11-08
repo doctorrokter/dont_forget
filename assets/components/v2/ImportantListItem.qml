@@ -6,7 +6,18 @@ CustomListItem {
     
     property int count: 0
     
+    signal open()
+    
     dividerVisible: false
+    
+    gestureHandlers: [
+        TapHandler {
+            onTapped: {
+                root.open();
+            }
+        }
+    ]
+    
     Container {
         horizontalAlignment: HorizontalAlignment.Fill
         verticalAlignment: VerticalAlignment.Fill

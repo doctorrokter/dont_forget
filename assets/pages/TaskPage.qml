@@ -55,6 +55,7 @@ Page {
                 id: importantToggleButton
                 title: qsTr("Important") + Retranslate.onLocaleOrLanguageChanged
                 checked: _tasksService.activeTask.important
+                visible: _tasksService.activeTask.type === Const.TaskTypes.TASK
                 
                 onCheckedChanged: {
                     if (checked !== _tasksService.activeTask.important) {

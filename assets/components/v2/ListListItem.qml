@@ -24,6 +24,12 @@ CustomListItem {
             onTapped: {
                 root.openList(root.taskId);
             }    
+        },
+        
+        DoubleTapHandler {
+            onDoubleTapped: {
+                // TODO: make some work
+            }
         }
     ]
     

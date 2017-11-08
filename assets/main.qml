@@ -58,7 +58,7 @@ NavigationPane {
                 horizontalAlignment: HorizontalAlignment.Fill
                 verticalAlignment: VerticalAlignment.Fill
                 scalingMethod: ScalingMethod.AspectFill
-                imageSource: "asset:///images/backgrounds/BeautifulViewWallpaper(Wall2mob.com)_38808.jpg"
+                imageSource: "asset:///images/backgrounds/earth.jpg"
             }
             
             ListView {
@@ -102,6 +102,11 @@ NavigationPane {
                     lp.path = "/" + taskName;
                     lp.taskId = taskId;
                     navigationPane.push(lp);
+                }
+                
+                function openImportant() {
+                    var ip = importantPage.createObject();
+                    navigationPane.push(ip);
                 }
                 
                 attachedObjects: [
@@ -164,6 +169,10 @@ NavigationPane {
                         type: Const.TaskTypes.IMPORTANT
                         ImportantListItem {
                             count: ListItemData.count
+                            
+                            onOpen: {
+                                ListItem.view.openImportant();
+                            }
                         }
                     },
                     
@@ -264,6 +273,7 @@ NavigationPane {
                         break;
                     case Const.TaskTypes.FOLDER:
                         dataModel.insert(3, newTask);
+                        listView.scrollToPosition(ScrollPosition.Beginning, ScrollAnimation.Smooth);
                         break;
                     case Const.TaskTypes.LIST:
                         if (i === -1) {
@@ -286,6 +296,8 @@ NavigationPane {
                     dataModel.replace(i, activeTask);
                 }
             }
+            
+            recount();
         }
         
         function taskClosedChanged(taskId, closed, parentId) {
@@ -293,6 +305,7 @@ NavigationPane {
                 var i = root.taskExists(taskId);
                 if (i !== -1 && closed) {
                     var task = dataModel.value(i);
+                    task.closed = closed;
                     dataModel.removeAt(i);
                     if (task.type === Const.TaskTypes.LIST) {
                         var index = firstTaskIndex();
@@ -310,14 +323,26 @@ NavigationPane {
             if (parentId !== 0) {
                 root.reload();
             }
+            
+            recount();
+        }
+        
+        function recount() {
+            var data = dataModel.value(1);
+            data.count = _tasksService.countTodayTasks();
+            dataModel.replace(1, data);
+            
+            data = dataModel.value(2);
+            data.count = _tasksService.countImportantTasks();
+            dataModel.replace(2, data);
         }
         
         function reload() {
             dataModel.clear();
             var data = [];
             data.push({count: 0, type: Const.TaskTypes.RECEIVED});
-            data.push({count: 0, type: Const.TaskTypes.TODAY});
-            data.push({count: 0, type: Const.TaskTypes.IMPORTANT});
+            data.push({count: _tasksService.countTodayTasks(), type: Const.TaskTypes.TODAY});
+            data.push({count: _tasksService.countImportantTasks(), type: Const.TaskTypes.IMPORTANT});
             data.push({type: "DIVIDER"});
             dataModel.append(data);
             dataModel.append(_tasksService.findSiblings());
@@ -378,7 +403,7 @@ NavigationPane {
             
             ActionItem {
                 id: createListActionItem
-                imageSource: "asset:///images/ic_view_list.png"
+                imageSource: "asset:///images/ic_notes.png"
                 title: qsTr("Create list") + Retranslate.onLocaleOrLanguageChanged
                 ActionBar.placement: ActionBarPlacement.OnBar
                 
@@ -448,6 +473,11 @@ NavigationPane {
                     navigationPane.push(tp);
                 }
             }    
+        },
+        
+        ComponentDefinition {
+             id: importantPage
+             ImportantPage {}   
         },
         
         ComponentDefinition {

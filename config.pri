@@ -59,21 +59,22 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/components/v2/ImportantListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/ListListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/ReceivedListItem.qml) \
+        $$quote($$BASEDIR/assets/components/v2/RichLinkPreview.qml) \
         $$quote($$BASEDIR/assets/components/v2/TaskListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/TodayListItem.qml) \
         $$quote($$BASEDIR/assets/images/apk_icon_big_512x512.png) \
         $$quote($$BASEDIR/assets/images/audio_icon_big_512x512.png) \
-        $$quote($$BASEDIR/assets/images/backgrounds/AndroidXWallpaper(Wall2mob.com)_40131.jpg) \
-        $$quote($$BASEDIR/assets/images/backgrounds/AndroidXWallpaper(Wall2mob.com)_40171.jpg) \
-        $$quote($$BASEDIR/assets/images/backgrounds/AppleOnGroundWallpaper(Wall2mob.com)_38614.jpg) \
-        $$quote($$BASEDIR/assets/images/backgrounds/BeautifulSnowflakeDesktopBackground(Wall2mob.com)_40259.jpg) \
         $$quote($$BASEDIR/assets/images/backgrounds/BeautifulViewWallpaper(Wall2mob.com)_38808.jpg) \
         $$quote($$BASEDIR/assets/images/backgrounds/BeautyOfNature(Wall2mob.com)_33585.jpg) \
-        $$quote($$BASEDIR/assets/images/backgrounds/BlueFlowerWallpaper(Wall2mob.com)_38565.jpg) \
         $$quote($$BASEDIR/assets/images/backgrounds/CSRoW(Wall2mob.com)_39695.jpg) \
-        $$quote($$BASEDIR/assets/images/backgrounds/CityRoadWallpaper(Wall2mob.com)_38766.jpg) \
-        $$quote($$BASEDIR/assets/images/backgrounds/CupOfCoffeeWallpaper(Wall2mob.com)_33798.jpg) \
-        $$quote($$BASEDIR/assets/images/backgrounds/Earth(Wall2mob.com)_39765.jpg) \
+        $$quote($$BASEDIR/assets/images/backgrounds/apple.jpg) \
+        $$quote($$BASEDIR/assets/images/backgrounds/coffee.jpg) \
+        $$quote($$BASEDIR/assets/images/backgrounds/earth.jpg) \
+        $$quote($$BASEDIR/assets/images/backgrounds/flower.jpg) \
+        $$quote($$BASEDIR/assets/images/backgrounds/road.jpg) \
+        $$quote($$BASEDIR/assets/images/backgrounds/snowflake.jpg) \
+        $$quote($$BASEDIR/assets/images/backgrounds/wall_1.jpg) \
+        $$quote($$BASEDIR/assets/images/backgrounds/wall_2.jpg) \
         $$quote($$BASEDIR/assets/images/calendar.png) \
         $$quote($$BASEDIR/assets/images/doc_icon_big_512x512.png) \
         $$quote($$BASEDIR/assets/images/generic_icon_big_512x512.png) \
@@ -142,6 +143,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/pages/DebugPage.qml) \
         $$quote($$BASEDIR/assets/pages/FolderPage.qml) \
         $$quote($$BASEDIR/assets/pages/HelpPage.qml) \
+        $$quote($$BASEDIR/assets/pages/ImportantPage.qml) \
         $$quote($$BASEDIR/assets/pages/ListPage.qml) \
         $$quote($$BASEDIR/assets/pages/MoveTaskPage.qml) \
         $$quote($$BASEDIR/assets/pages/SettingsPage.qml) \

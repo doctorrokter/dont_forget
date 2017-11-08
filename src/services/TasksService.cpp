@@ -145,6 +145,46 @@ int TasksService::countChildren(const int& id) {
     return m_pDbConfig->execute(QString("SELECT COUNT(*) AS count FROM tasks WHERE parent_id = %1").arg(QString::number(id))).toList().at(0).toMap().value("count").toInt();
 }
 
+int TasksService::countImportantTasks() {
+    return m_pDbConfig->execute(QString("SELECT COUNT(*) AS count FROM tasks WHERE type IN ('TASK', 'LIST') AND important = 1 AND closed = 0")).toList().at(0).toMap().value("count").toInt();
+}
+
+int TasksService::countTodayTasks() {
+    QDateTime startOfToday = QDateTime::currentDateTime();
+    QTime beginning;
+    beginning.setHMS(0, 0, 0, 0);
+    startOfToday.setTime(beginning);
+
+    QDateTime endOfToday = QDateTime::currentDateTime();
+    QTime end;
+    end.setHMS(23, 59, 0, 0);
+    endOfToday.setTime(end);
+
+    return m_pDbConfig->execute(QString("SELECT COUNT(*) AS count FROM tasks WHERE type IN ('TASK', 'LIST') AND closed = 0 AND deadline BETWEEN %1 AND %2").arg(startOfToday.toTime_t()).arg(endOfToday.toTime_t())).toList().at(0).toMap().value("count").toInt();
+}
+
+QVariantList TasksService::findImportantTasks() {
+    QVariantList tasks = m_pDbConfig->execute(QString("SELECT * FROM tasks WHERE type IN ('TASK', 'LIST') AND important = 1 AND closed = 0 ORDER BY parent_id")).toList();
+    countOrAttachments(tasks);
+    return tasks;
+}
+
+QVariantList TasksService::findTodayTasks() {
+    QDateTime startOfToday = QDateTime::currentDateTime();
+    QTime beginning;
+    beginning.setHMS(0, 0, 0, 0);
+    startOfToday.setTime(beginning);
+
+    QDateTime endOfToday = QDateTime::currentDateTime();
+    QTime end;
+    end.setHMS(23, 59, 0, 0);
+    endOfToday.setTime(end);
+
+    QVariantList tasks = m_pDbConfig->execute(QString("SELECT * FROM tasks WHERE type IN ('TASK', 'LIST') AND closed = 0 AND deadline BETWEEN %1 AND %2 ORDER BY parent_id").arg(startOfToday.toTime_t()).arg(endOfToday.toTime_t())).toList();
+    countOrAttachments(tasks);
+    return tasks;
+}
+
 void TasksService::changeClosed(const int& id, const bool& closed, const int& parentId) {
     Task task;
     task.fromMap(findById(id));

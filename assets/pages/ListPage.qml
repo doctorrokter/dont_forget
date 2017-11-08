@@ -31,7 +31,7 @@ Page {
                 horizontalAlignment: HorizontalAlignment.Fill
                 verticalAlignment: VerticalAlignment.Fill
                 scalingMethod: ScalingMethod.AspectFill
-                imageSource: "asset:///images/backgrounds/BeautifulViewWallpaper(Wall2mob.com)_38808.jpg"
+                imageSource: "asset:///images/backgrounds/earth.jpg"
             }
             
             ListView {
@@ -201,6 +201,7 @@ Page {
     function taskCreated(newTask, parentId, parentParentId) {
         if (parentId === root.taskId) {
             dataModel.insert(0, newTask);
+            listView.scrollToPosition(ScrollPosition.Beginning, ScrollAnimation.Smooth);
         }
     }
     
@@ -221,6 +222,7 @@ Page {
             var i = root.taskExists(taskId);
             if (i !== -1 && closed) {
                 var task = dataModel.value(i);
+                task.closed = closed;
                 dataModel.removeAt(i);
                 dataModel.append(task);
             }

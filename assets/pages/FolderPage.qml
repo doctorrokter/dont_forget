@@ -34,7 +34,7 @@ Page {
                 horizontalAlignment: HorizontalAlignment.Fill
                 verticalAlignment: VerticalAlignment.Fill
                 scalingMethod: ScalingMethod.AspectFill
-                imageSource: "asset:///images/backgrounds/BeautifulViewWallpaper(Wall2mob.com)_38808.jpg"
+                imageSource: "asset:///images/backgrounds/earth.jpg"
             }
             
             ListView {
@@ -222,7 +222,8 @@ Page {
                     }
                     break;
                 case Const.TaskTypes.FOLDER:
-                    dataModel.insert(3, newTask);
+                    dataModel.insert(0, newTask);
+                    listView.scrollToPosition(ScrollPosition.Beginning, ScrollAnimation.Smooth);
                     break;
                 case Const.TaskTypes.LIST:
                     if (i === -1) {
@@ -251,6 +252,7 @@ Page {
             var i = root.taskExists(taskId);
             if (i !== -1 && closed) {
                 var task = dataModel.value(i);
+                task.closed = closed;
                 dataModel.removeAt(i);
                 if (task.type === Const.TaskTypes.LIST) {
                     var index = firstTaskIndex();
@@ -348,7 +350,7 @@ Page {
         
         ActionItem {
             id: createListActionItem
-            imageSource: "asset:///images/ic_view_list.png"
+            imageSource: "asset:///images/ic_notes.png"
             title: qsTr("Create list") + Retranslate.onLocaleOrLanguageChanged
             ActionBar.placement: ActionBarPlacement.OnBar
             

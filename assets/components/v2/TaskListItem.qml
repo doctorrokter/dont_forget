@@ -273,8 +273,11 @@ CustomListItem {
             
             Label {
                 text: root.description
-                textStyle.fontWeight: FontWeight.W100
                 multiline: true
+            }
+            
+            Container {
+                id: previews
             }
         }
         
@@ -284,6 +287,25 @@ CustomListItem {
             background: ui.palette.background
             fromListItem: true
             visible: root.attachments.length > 0 && root.expanded
+        }
+    }
+    
+    attachedObjects: [
+        ComponentDefinition {
+            id: richLinkPreview
+            RichLinkPreview {}
+        }
+    ]
+    
+    onDescriptionChanged: {
+        previews.removeAll();
+        var urls = description.match(/\bhttps?:\/\/\S+/gi);
+        if (urls) {
+            urls.forEach(function(url) {
+                var preview = richLinkPreview.createObject();
+                preview.url = url;
+                previews.add(preview);
+            });
         }
     }
 }

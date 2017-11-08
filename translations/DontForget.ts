@@ -334,6 +334,17 @@
     </message>
 </context>
 <context>
+    <name>ImportantPage</name>
+    <message>
+        <source>Important</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Root</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ListPage</name>
     <message>
         <source>Create task</source>
