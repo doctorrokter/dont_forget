@@ -57,10 +57,12 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/components/v2/EmptyListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/FolderListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/ImportantListItem.qml) \
+        $$quote($$BASEDIR/assets/components/v2/ListCoverListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/ListItemTaskHeader.qml) \
         $$quote($$BASEDIR/assets/components/v2/ListListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/ReceivedListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/RichLinkPreview.qml) \
+        $$quote($$BASEDIR/assets/components/v2/TaskCoverListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/TaskListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/TodayListItem.qml) \
         $$quote($$BASEDIR/assets/images/apk_icon_big_512x512.png) \
@@ -144,6 +146,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/pages/DebugPage.qml) \
         $$quote($$BASEDIR/assets/pages/FolderPage.qml) \
         $$quote($$BASEDIR/assets/pages/HelpPage.qml) \
+        $$quote($$BASEDIR/assets/pages/HighCover.qml) \
         $$quote($$BASEDIR/assets/pages/ImportantPage.qml) \
         $$quote($$BASEDIR/assets/pages/ListPage.qml) \
         $$quote($$BASEDIR/assets/pages/MoveTaskPage.qml) \

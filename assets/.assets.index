@@ -1,5 +1,5 @@
 1
-122
+125
 cards/CreateTaskFromTextCard.qml
 cards/CreateTaskFromUrlCard.qml
 cards/TestCard.qml
@@ -21,10 +21,12 @@ components/v2/DividerListItem.qml
 components/v2/EmptyListItem.qml
 components/v2/FolderListItem.qml
 components/v2/ImportantListItem.qml
+components/v2/ListCoverListItem.qml
 components/v2/ListItemTaskHeader.qml
 components/v2/ListListItem.qml
 components/v2/ReceivedListItem.qml
 components/v2/RichLinkPreview.qml
+components/v2/TaskCoverListItem.qml
 components/v2/TaskListItem.qml
 components/v2/TodayListItem.qml
 images/apk_icon_big_512x512.png
@@ -108,6 +110,7 @@ pages/ContactsPage.qml
 pages/DebugPage.qml
 pages/FolderPage.qml
 pages/HelpPage.qml
+pages/HighCover.qml
 pages/ImportantPage.qml
 pages/ListPage.qml
 pages/MoveTaskPage.qml

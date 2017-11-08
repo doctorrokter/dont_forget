@@ -361,6 +361,11 @@ NavigationPane {
             dataModel.append(_tasksService.findSiblings());
         }
         
+        function onThumbnail() {
+            highCover.update();
+            Application.setCover(cover);
+        }
+        
         onCreationCompleted: {
             root.reload();
             
@@ -368,7 +373,8 @@ NavigationPane {
             _tasksService.taskUpdated.connect(root.taskUpdated);
             _tasksService.taskClosedChanged.connect(root.taskClosedChanged);
             _tasksService.taskDeleted.connect(root.taskDeleted);
-            _app.folderPageRequested.connect(root.openFolderPage)
+            _app.folderPageRequested.connect(root.openFolderPage);
+            Application.thumbnail.connect(root.onThumbnail);
         }
         
         actions: [
@@ -438,6 +444,14 @@ NavigationPane {
     }
     
     attachedObjects: [
+        SceneCover {
+            id: cover
+            
+            content: HighCover {
+                id: highCover
+            }    
+        },
+        
         ComponentDefinition {
             id: settingsPage
             SettingsPage {}

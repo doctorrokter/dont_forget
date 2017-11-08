@@ -131,6 +131,7 @@ Page {
                         TaskListItem {
                             taskId: ListItemData.id
                             name: ListItemData.name
+                            description: ListItemData.description
                             deadline: ListItemData.deadline
                             important: ListItemData.important
                             closed: ListItemData.closed

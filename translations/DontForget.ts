@@ -327,6 +327,13 @@
     </message>
 </context>
 <context>
+    <name>HighCover</name>
+    <message>
+        <source>No tasks for today</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ImportantListItem</name>
     <message>
         <source>Important</source>

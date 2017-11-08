@@ -464,6 +464,14 @@
     </message>
 </context>
 <context>
+    <name>HighCover</name>
+    <message>
+        <location filename="../assets/pages/HighCover.qml" line="58"/>
+        <source>No tasks for today</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ImportantListItem</name>
     <message>
         <location filename="../assets/components/v2/ImportantListItem.qml" line="44"/>
@@ -497,12 +505,12 @@
 <context>
     <name>ListPage</name>
     <message>
-        <location filename="../assets/pages/ListPage.qml" line="126"/>
+        <location filename="../assets/pages/ListPage.qml" line="127"/>
         <source>Create task</source>
         <translation type="unfinished">Создать задачу</translation>
     </message>
     <message>
-        <location filename="../assets/pages/ListPage.qml" line="147"/>
+        <location filename="../assets/pages/ListPage.qml" line="148"/>
         <source>Edit</source>
         <translation type="unfinished">Изменить</translation>
     </message>
@@ -1171,22 +1179,22 @@
         <translation type="obsolete">Важно</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="378"/>
+        <location filename="../assets/main.qml" line="384"/>
         <source>Create folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="399"/>
+        <location filename="../assets/main.qml" line="405"/>
         <source>Create task</source>
         <translation type="unfinished">Создать задачу</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="420"/>
+        <location filename="../assets/main.qml" line="426"/>
         <source>Create list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="527"/>
+        <location filename="../assets/main.qml" line="541"/>
         <source>Dashboard</source>
         <translation type="unfinished"></translation>
     </message>

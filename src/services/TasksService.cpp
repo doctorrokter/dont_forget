@@ -180,7 +180,7 @@ QVariantList TasksService::findTodayTasks() {
     end.setHMS(23, 59, 0, 0);
     endOfToday.setTime(end);
 
-    QVariantList tasks = m_pDbConfig->execute(QString("SELECT * FROM tasks WHERE type IN ('TASK', 'LIST') AND closed = 0 AND deadline BETWEEN %1 AND %2 ORDER BY parent_id").arg(startOfToday.toTime_t()).arg(endOfToday.toTime_t())).toList();
+    QVariantList tasks = m_pDbConfig->execute(QString("SELECT * FROM tasks WHERE type IN ('TASK', 'LIST') AND closed = 0 AND deadline BETWEEN %1 AND %2 ORDER BY parent_id, type").arg(startOfToday.toTime_t()).arg(endOfToday.toTime_t())).toList();
     countOrAttachments(tasks);
     return tasks;
 }
