@@ -57,6 +57,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/components/v2/EmptyListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/FolderListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/ImportantListItem.qml) \
+        $$quote($$BASEDIR/assets/components/v2/ListItemTaskHeader.qml) \
         $$quote($$BASEDIR/assets/components/v2/ListListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/ReceivedListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/RichLinkPreview.qml) \

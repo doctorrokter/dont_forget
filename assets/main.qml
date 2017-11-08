@@ -83,9 +83,7 @@ NavigationPane {
                 }
                 
                 function openTask(taskId) {
-                    _tasksService.setActiveTask(taskId);
-                    var tp = taskPage.createObject();
-                    navigationPane.push(tp);
+                    navigationPane.openTask(taskId);
                 }
                 
                 function openFolder(taskId, taskName) {
@@ -317,11 +315,17 @@ NavigationPane {
                     dataModel.append(task);
                 }
             }
+            recount();
         }
         
         function taskDeleted(taskId, parentId, parentParentId) {
             if (parentId !== 0) {
                 root.reload();
+            } else {
+                var i = root.taskExists(taskId);
+                if (i !== -1) {
+                    dataModel.removeAt(i);
+                }
             }
             
             recount();
@@ -439,27 +443,15 @@ NavigationPane {
             id: folderPage
             FolderPage {
                 onOpenFolder: {
-                    var fp = folderPage.createObject();
-                    var folder = _tasksService.findById(taskId);
-                    fp.path = path + "/" + folder.name;
-                    fp.name = folder.name;
-                    fp.taskId = taskId;
-                    navigationPane.push(fp);
+                    navigationPane.openFolder(taskId, path);
                 }
                 
                 onOpenList: {
-                    var list = _tasksService.findById(taskId);
-                    var lp = listPage.createObject();
-                    lp.name = list.name;
-                    lp.path = path + "/" + list.name;
-                    lp.taskId = taskId;
-                    navigationPane.push(lp);
+                    navigationPane.openList(taskId, path);
                 }
                 
                 onOpenTask: {
-                    _tasksService.setActiveTask(taskId);
-                    var tp = taskPage.createObject();
-                    navigationPane.push(tp);
+                    navigationPane.openTask(taskId);
                 }
             }    
         },
@@ -468,16 +460,26 @@ NavigationPane {
             id: listPage
             ListPage {
                 onOpenTask: {
-                    _tasksService.setActiveTask(taskId);
-                    var tp = taskPage.createObject();
-                    navigationPane.push(tp);
+                    navigationPane.openTask(taskId);
                 }
             }    
         },
         
         ComponentDefinition {
              id: importantPage
-             ImportantPage {}   
+             ImportantPage {
+                 onOpenFolder: {
+                     navigationPane.openFolder(taskId, "");
+                 }
+                 
+                 onOpenList: {
+                     navigationPane.openList(taskId, "");
+                 }
+                 
+                 onOpenTask: {
+                     navigationPane.openTask(taskId);
+                 }
+             }   
         },
         
         ComponentDefinition {
@@ -519,6 +521,30 @@ NavigationPane {
             }
         }
     ]
+    
+    function openFolder(taskId, path) {
+        var fp = folderPage.createObject();
+        var folder = _tasksService.findById(taskId);
+        fp.path = path + "/" + folder.name;
+        fp.name = folder.name;
+        fp.taskId = taskId;
+        navigationPane.push(fp);
+    }
+    
+    function openList(taskId, path) {
+        var list = _tasksService.findById(taskId);
+        var lp = listPage.createObject();
+        lp.name = list.name;
+        lp.path = path + "/" + list.name;
+        lp.taskId = taskId;
+        navigationPane.push(lp);
+    }
+    
+    function openTask(taskId) {
+        _tasksService.setActiveTask(taskId);
+        var tp = taskPage.createObject();
+        navigationPane.push(tp);
+    }
     
     onPopTransitionEnded: {
         Application.menuEnabled = true;

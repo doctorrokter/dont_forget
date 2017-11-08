@@ -10,6 +10,8 @@ Page {
     property string path: "/"
     property int taskId: 0
     
+    signal openFolder(int taskId)
+    signal openList(int taskId)
     signal openTask(int taskId)
     
     titleBar: CustomTitleBar {
@@ -47,12 +49,17 @@ Page {
                     headerMode: ListHeaderMode.Sticky
                 }
                 
-                function removeById(taskId) {
-                    var i = root.taskExists(taskId);
-                    if (i !== -1) {
-                        dataModel.removeAt(i);
-                        _tasksService.deleteTask(taskId);
-                    }
+                function removeById(taskId, indexPath) {
+                    dataModel.removeAt(indexPath);
+                    _tasksService.deleteTask(taskId);
+                }
+                
+                function openFolder(taskId) {
+                    root.openFolder(taskId);
+                }
+                
+                function openList(taskId) {
+                    root.openList(taskId);
                 }
                 
                 function openTask(taskId) {
@@ -86,7 +93,7 @@ Page {
                             onTriggered: {
                                 var indexPath = listView.selected();
                                 var data = dataModel.data(indexPath);
-                                dataModel.removeAt(dataModel.indexOf(data));
+                                dataModel.removeAt(indexPath);
                                 _tasksService.deleteTask(data.id);    
                             }
                             
@@ -105,73 +112,18 @@ Page {
                 
                 listItemComponents: [
                     ListItemComponent {
-                        type: "header"    
-                        CustomListItem {
+                        type: "header" 
+                        ListItemTaskHeader {
+                            parentId: ListItemData
                             
-                            property int parentId: ListItemData
-
-                            preferredHeight: ui.du(8)
-                            dividerVisible: false
-                            
-                            margin.topOffset: ui.du(2)
-                            
-                            Container {
-                                horizontalAlignment: HorizontalAlignment.Fill
-                                verticalAlignment: VerticalAlignment.Fill
-                                
-                                background: ui.palette.plain
-                                
-                                layout: StackLayout {
-                                    orientation: LayoutOrientation.LeftToRight
-                                }
-                                
-                                leftPadding: ui.du(1)
-                                topPadding: ui.du(1)
-                                rightPadding: ui.du(1)
-                                bottomPadding: ui.du(1)
-                                
-                                ImageView {
-                                    id: image
-                                    verticalAlignment: VerticalAlignment.Center
-                                    maxWidth: ui.du(6)
-                                    maxHeight: ui.du(6)
-                                }
-                                
-                                Label {
-                                    id: title
-                                    text: ""
-                                    verticalAlignment: VerticalAlignment.Center
-                                    
-                                    layoutProperties: StackLayoutProperties {
-                                        spaceQuota: 1
-                                    }
-                                }
+                            onOpenFolder: {
+                                ListItem.view.openFolder(taskId);
                             }
                             
-                            onParentIdChanged: {
-                                if (parentId !== -1) {
-                                    var task = _tasksService.findById(parentId);
-                                    title.text = task.name;
-                                    if (task.type === Const.TaskTypes.FOLDER) {
-                                        image.imageSource = "asset:///images/ic_folder.png";
-                                        if (task.color !== "") {
-                                            image.filterColor = Color.create(task.color);
-                                        } else {
-                                            image.filterColor = ui.palette.primaryBase;
-                                        }
-                                    } else if (task.type === Const.TaskTypes.LIST) {
-                                        image.imageSource = "asset:///images/ic_notes.png";
-                                        if (task.color !== "") {
-                                            image.filterColor = Color.create(task.color);
-                                        } else {
-                                            image.filterColor = Color.create("#B7B327");
-                                        }
-                                    }
-                                } else {
-                                    title.text = qsTr("Root") + Retranslate.onLocaleOrLanguageChanged                                    
-                                }
+                            onOpenList: {
+                                ListItem.view.openList(taskId);
                             }
-                        }
+                        }   
                     },
                     
                     ListItemComponent {
@@ -188,7 +140,7 @@ Page {
                             parentId: ListItemData.parent_id || 0
                             
                             onTaskRemoved: {
-                                ListItem.view.removeById(taskId);
+                                ListItem.view.removeById(taskId, ListItem.indexPath);
                             }
                             
                             onOpenTask: {
@@ -201,16 +153,8 @@ Page {
         }
     }
     
-    function clear() {
-//        _tasksService.taskCreated.disconnect(root.taskCreated);
-//        _tasksService.taskUpdated.disconnect(root.taskUpdated);
-//        _tasksService.taskClosedChanged.disconnect(root.taskClosedChanged);
-    }
-    
-    onCreationCompleted: {
-//        _tasksService.taskCreated.connect(root.taskCreated);
-//        _tasksService.taskUpdated.connect(root.taskUpdated);
-//        _tasksService.taskClosedChanged.connect(root.taskClosedChanged);
+    function reload() {
+        dataModel.clear();
         var tasks = _tasksService.findImportantTasks().map(function(task) {
             if (task.parent_id === "") {
                 task.parent_id = -1;
@@ -218,5 +162,16 @@ Page {
             return task;
         });
         dataModel.insertList(tasks);
+    }
+    
+    function clear() {
+        _tasksService.taskDeleted.disconnect(root.reload);
+        _tasksService.taskUpdated.disconnect(root.reload);
+    }
+    
+    onCreationCompleted: {
+        _tasksService.taskDeleted.connect(root.reload);
+        _tasksService.taskUpdated.connect(root.reload);
+        reload();
     }
 }

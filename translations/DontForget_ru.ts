@@ -474,14 +474,9 @@
 <context>
     <name>ImportantPage</name>
     <message>
-        <location filename="../assets/pages/ImportantPage.qml" line="16"/>
+        <location filename="../assets/pages/ImportantPage.qml" line="18"/>
         <source>Important</source>
         <translation type="unfinished">Важно</translation>
-    </message>
-    <message>
-        <location filename="../assets/pages/ImportantPage.qml" line="171"/>
-        <source>Root</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -489,6 +484,14 @@
     <message>
         <source>Cancel</source>
         <translation type="obsolete">Отмена</translation>
+    </message>
+</context>
+<context>
+    <name>ListItemTaskHeader</name>
+    <message>
+        <location filename="../assets/components/v2/ListItemTaskHeader.qml" line="83"/>
+        <source>Root</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1156,22 +1159,22 @@
         <translation type="obsolete">Важно</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="365"/>
+        <location filename="../assets/main.qml" line="369"/>
         <source>Create folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="386"/>
+        <location filename="../assets/main.qml" line="390"/>
         <source>Create task</source>
         <translation type="unfinished">Создать задачу</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="407"/>
+        <location filename="../assets/main.qml" line="411"/>
         <source>Create list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="499"/>
+        <location filename="../assets/main.qml" line="501"/>
         <source>Dashboard</source>
         <translation type="unfinished"></translation>
     </message>

@@ -1,5 +1,5 @@
 1
-120
+121
 cards/CreateTaskFromTextCard.qml
 cards/CreateTaskFromUrlCard.qml
 cards/TestCard.qml
@@ -21,6 +21,7 @@ components/v2/DividerListItem.qml
 components/v2/EmptyListItem.qml
 components/v2/FolderListItem.qml
 components/v2/ImportantListItem.qml
+components/v2/ListItemTaskHeader.qml
 components/v2/ListListItem.qml
 components/v2/ReceivedListItem.qml
 components/v2/RichLinkPreview.qml
