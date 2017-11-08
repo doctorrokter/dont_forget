@@ -940,7 +940,19 @@
 <context>
     <name>TodayListItem</name>
     <message>
-        <location filename="../assets/components/v2/TodayListItem.qml" line="33"/>
+        <location filename="../assets/components/v2/TodayListItem.qml" line="44"/>
+        <source>Today</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TodayPage</name>
+    <message>
+        <source>Important</source>
+        <translation type="obsolete">Важно</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/TodayPage.qml" line="18"/>
         <source>Today</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1159,22 +1171,22 @@
         <translation type="obsolete">Важно</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="369"/>
+        <location filename="../assets/main.qml" line="378"/>
         <source>Create folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="390"/>
+        <location filename="../assets/main.qml" line="399"/>
         <source>Create task</source>
         <translation type="unfinished">Создать задачу</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="411"/>
+        <location filename="../assets/main.qml" line="420"/>
         <source>Create list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="501"/>
+        <location filename="../assets/main.qml" line="527"/>
         <source>Dashboard</source>
         <translation type="unfinished"></translation>
     </message>

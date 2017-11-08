@@ -151,6 +151,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/pages/TaskPage.qml) \
         $$quote($$BASEDIR/assets/pages/TaskViewPage.qml) \
         $$quote($$BASEDIR/assets/pages/TasksListPage.qml) \
+        $$quote($$BASEDIR/assets/pages/TodayPage.qml) \
         $$quote($$BASEDIR/assets/pages/settings_components/BackupAndRecovery.qml) \
         $$quote($$BASEDIR/assets/sheets/AddContactSheet.qml) \
         $$quote($$BASEDIR/assets/sheets/FilePickersSheet.qml) \

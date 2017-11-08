@@ -1,5 +1,5 @@
 1
-121
+122
 cards/CreateTaskFromTextCard.qml
 cards/CreateTaskFromUrlCard.qml
 cards/TestCard.qml
@@ -116,6 +116,7 @@ pages/settings_components/BackupAndRecovery.qml
 pages/TaskPage.qml
 pages/TasksListPage.qml
 pages/TaskViewPage.qml
+pages/TodayPage.qml
 sheets/AddContactSheet.qml
 sheets/FilePickersSheet.qml
 sheets/TaskSheet.qml

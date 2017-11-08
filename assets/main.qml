@@ -107,6 +107,11 @@ NavigationPane {
                     navigationPane.push(ip);
                 }
                 
+                function openToday() {
+                    var tp = todayPage.createObject();
+                    navigationPane.push(tp);
+                }
+                
                 attachedObjects: [
                     ListScrollStateHandler {
                         onAtEndChanged: {
@@ -160,6 +165,10 @@ NavigationPane {
                         type: Const.TaskTypes.TODAY
                         TodayListItem {
                             count: ListItemData.count
+                            
+                            onOpen: {
+                                ListItem.view.openToday();
+                            }
                         }
                     },
                     
@@ -480,6 +489,23 @@ NavigationPane {
                      navigationPane.openTask(taskId);
                  }
              }   
+        },
+        
+        ComponentDefinition {
+            id: todayPage
+            TodayPage {
+                onOpenFolder: {
+                    navigationPane.openFolder(taskId, "");
+                }
+                
+                onOpenList: {
+                    navigationPane.openList(taskId, "");
+                }
+                
+                onOpenTask: {
+                    navigationPane.openTask(taskId);
+                }
+            }    
         },
         
         ComponentDefinition {

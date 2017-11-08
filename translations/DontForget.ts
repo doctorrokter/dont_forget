@@ -663,6 +663,13 @@
     </message>
 </context>
 <context>
+    <name>TodayPage</name>
+    <message>
+        <source>Today</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>UpdateTaskCard</name>
     <message>
         <source>Cancel</source>
