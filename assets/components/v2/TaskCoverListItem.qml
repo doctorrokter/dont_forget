@@ -72,7 +72,7 @@ CustomListItem {
                 textStyle.base: SystemDefaults.TextStyles.SmallText
                 textStyle.color: {
                     if ((root.deadline * 1000) < new Date().getTime()) {
-                        return Color.create("#CC3333");
+                        return Color.create(_ui.color.brickRed);
                     }
                     return ui.palette.secondaryTextOnPlain;
                 }

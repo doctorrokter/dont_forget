@@ -191,6 +191,7 @@ Page {
             imageSource: "asset:///images/ic_done.png"
             
             onTriggered: {
+                if (root.titleBar == defaultTitleBar) {
                     var deadline = deadLineToggleButton.checked ? new Date(deadLineContainer.result).getTime() / 1000 : 0;
                     var important = importantToggleButton.checked ? 1 : 0;
                     var createInRemember = rememberToggleButton.checked ? 1 : 0;
@@ -210,6 +211,9 @@ Page {
                     
                     var taskName = _tasksService.activeTask.name;
                     _tasksService.updateTask(taskName.trim(), description.result.trim(), deadline, important, createInRemember, files, createInCalendar, folderId, accountId, palette.color);
+                } else {
+                    inputTitleBar.submitText();
+                }
             }
         }
     ]
@@ -222,6 +226,8 @@ Page {
         
         InputTitleBar {
             id: inputTitleBar
+            
+            value: _tasksService.activeTask.name
             
             onSubmit: {
                 if (text.trim()) {

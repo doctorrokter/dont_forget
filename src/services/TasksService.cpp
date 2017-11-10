@@ -31,7 +31,7 @@ TasksService::TasksService(QObject* parent, DBConfig* dbConfig, AttachmentsServi
         m_pNotebookService(new NotebookService(this)),
         m_multiselectMode(false) {
 
-    m_moveMode = TaskMovingMode::NOT_MOVING;
+    m_moveMode = false;
 
     bool res = QObject::connect(this, SIGNAL(multiselectModeChanged(bool)), this, SLOT(processMultiselectMode(bool)));
     Q_ASSERT(res);
@@ -650,8 +650,8 @@ void TasksService::processMultiselectMode(const bool multiselectMode) {
     }
 }
 
-int TasksService::getMoveMode() const { return m_moveMode; }
-void TasksService::setMoveMode(const int& moveMode) {
+bool TasksService::isMoveMode() const { return m_moveMode; }
+void TasksService::setMoveMode(const bool& moveMode) {
     m_moveMode = moveMode;
     emit moveModeChanged(m_moveMode);
 }

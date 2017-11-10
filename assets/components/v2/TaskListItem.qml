@@ -175,7 +175,7 @@ CustomListItem {
                     maxHeight: ui.du(5)
                     filterColor: {
                         if ((root.deadline * 1000) < new Date().getTime()) {
-                            return Color.create("#CC3333");
+                            return Color.create(_ui.color.brickRed);
                         }
                         return ui.palette.secondaryTextOnPlain;
                     }
@@ -187,7 +187,7 @@ CustomListItem {
                     textStyle.base: SystemDefaults.TextStyles.SubtitleText
                     textStyle.color: {
                         if ((root.deadline * 1000) < new Date().getTime()) {
-                            return Color.create("#CC3333");
+                            return Color.create(_ui.color.brickRed);
                         }
                         return ui.palette.secondaryTextOnPlain;
                     }
@@ -202,7 +202,7 @@ CustomListItem {
                     maxWidth: ui.du(3.5)
                     maxHeight: ui.du(3.5)
                     imageSource: "asset:///images/ic_white_pellet.png"
-                    filterColor: Color.create("#CC3333")
+                    filterColor: Color.create(_ui.color.brickRed)
                 }
             }
             
@@ -224,7 +224,7 @@ CustomListItem {
                     maxWidth: ui.du(3.5)
                     maxHeight: ui.du(3.5)
                     imageSource: "asset:///images/ic_white_pellet.png"
-                    filterColor: Color.create("#5C7829")
+                    filterColor: Color.create(_ui.color.darkGreen)
                 }
             }
             

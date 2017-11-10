@@ -34,88 +34,131 @@ Page {
                 imageSource: _ui.backgroundImage
             }
             
-            ListView {
-                id: listView
-                
-                scrollRole: ScrollRole.Main
-                
-                dataModel: ArrayDataModel {
-                    id: dataModel
+            Container {
+                Mover {
+                    taskId: root.taskId
                 }
                 
-                function removeById(taskId) {
-                    var i = root.taskExists(taskId);
-                    if (i !== -1) {
-                        dataModel.removeAt(i);
-                        _tasksService.deleteTask(taskId);
+                ListView {
+                    id: listView
+                    
+                    scrollRole: ScrollRole.Main
+                    
+                    dataModel: ArrayDataModel {
+                        id: dataModel
                     }
-                }
-                
-                function openTask(taskId) {
-                    root.openTask(taskId);
-                }
-                
-                attachedObjects: [
-                    ListScrollStateHandler {
-                        onAtEndChanged: {
-                            if (atEnd) {
-                                listView.margin.bottomOffset = ui.du(13);
-                            } else {
-                                listView.margin.bottomOffset = ui.du(0);
-                            }
+                    
+                    function removeById(taskId) {
+                        var i = root.taskExists(taskId);
+                        if (i !== -1) {
+                            dataModel.removeAt(i);
+                            _tasksService.deleteTask(taskId);
                         }
                     }
-                ]
-                
-                contextActions: [
-                    ActionSet {
-                        DeleteActionItem {
-                            id: deleteTask
-                            
-                            onTriggered: {
-                                var indexPath = listView.selected();
-                                var data = dataModel.data(indexPath);
-                                dataModel.removeAt(dataModel.indexOf(data));
-                                _tasksService.deleteTask(data.id);    
-                            }
-                            
-                            shortcuts: [
-                                Shortcut {
-                                    key: "d"
-                                    
-                                    onTriggered: {
-                                        deleteTask.triggered();
-                                    }
+                    
+                    function openTask(taskId) {
+                        root.openTask(taskId);
+                    }
+                    
+                    attachedObjects: [
+                        ListScrollStateHandler {
+                            onAtEndChanged: {
+                                if (atEnd) {
+                                    listView.margin.bottomOffset = ui.du(13);
+                                } else {
+                                    listView.margin.bottomOffset = ui.du(0);
                                 }
-                            ]
-                        }
-                    }
-                ]
-                
-                listItemComponents: [
-                    ListItemComponent {
-                        TaskListItem {
-                            taskId: ListItemData.id
-                            name: ListItemData.name
-                            description: ListItemData.description
-                            deadline: ListItemData.deadline
-                            important: ListItemData.important
-                            closed: ListItemData.closed
-                            rememberId: parseInt(ListItemData.remember_id)
-                            calendarId: parseInt(ListItemData.calendar_id)
-                            attachments: ListItemData.attachments
-                            parentId: ListItemData.parent_id
-                            
-                            onTaskRemoved: {
-                                ListItem.view.removeById(taskId);
-                            }
-                            
-                            onOpenTask: {
-                                ListItem.view.openTask(taskId);
                             }
                         }
-                    }
-                ]
+                    ]
+                    
+                    contextActions: [
+                        ActionSet {
+                            DeleteActionItem {
+                                id: deleteTask
+                                
+                                onTriggered: {
+                                    var indexPath = listView.selected();
+                                    var data = dataModel.data(indexPath);
+                                    dataModel.removeAt(dataModel.indexOf(data));
+                                    _tasksService.deleteTask(data.id);    
+                                }
+                                
+                                shortcuts: [
+                                    Shortcut {
+                                        key: "d"
+                                        
+                                        onTriggered: {
+                                            deleteTask.triggered();
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        
+                        ActionSet {
+                            title: qsTr("Integration") + Retranslate.onLocaleOrLanguageChanged
+                            ActionItem {
+                                id: openCalendar
+                                title: qsTr("Open in Calendar") + Retranslate.onLocaleOrLanguageChanged
+                                imageSource: "asset:///images/ic_calendar.png"
+                                enabled: {
+                                    var indexPath = listView.selected();
+                                    var data = dataModel.data(indexPath);
+                                    return (data.type === Const.TaskTypes.LIST || data.type === Const.TaskTypes.TASK) && data.calendar_id !== 0;
+                                }
+                                
+                                onTriggered: {
+                                    var indexPath = listView.selected();
+                                    var data = dataModel.data(indexPath);
+                                    _app.openCalendarEvent(data.calendar_id, data.folder_id, data.account_id);
+                                }
+                            }
+                            
+                            ActionItem {
+                                id: openRemember
+                                title: qsTr("Open in Remember") + Retranslate.onLocaleOrLanguageChanged
+                                imageSource: "asset:///images/ic_notes.png"
+                                enabled: {
+                                    var indexPath = listView.selected();
+                                    var data = dataModel.data(indexPath);
+                                    return (data.type === Const.TaskTypes.LIST || data.type === Const.TaskTypes.TASK) && data.remember_id !== 0;
+                                }
+                                
+                                onTriggered: {
+                                    var indexPath = listView.selected();
+                                    var data = dataModel.data(indexPath);
+                                    _app.openRememberNote(data.remember_id);
+                                }
+                            }
+                        }
+                    ]
+                    
+                    listItemComponents: [
+                        ListItemComponent {
+                            TaskListItem {
+                                taskId: ListItemData.id
+                                name: ListItemData.name
+                                description: ListItemData.description
+                                deadline: ListItemData.deadline
+                                important: ListItemData.important
+                                closed: ListItemData.closed
+                                rememberId: parseInt(ListItemData.remember_id)
+                                calendarId: parseInt(ListItemData.calendar_id)
+                                attachments: ListItemData.attachments
+                                parentId: ListItemData.parent_id
+                                
+                                onTaskRemoved: {
+                                    ListItem.view.removeById(taskId);
+                                }
+                                
+                                onOpenTask: {
+                                    ListItem.view.openTask(taskId);
+                                }
+                            }
+                        }
+                    ]
+                }
             }
         }
     }

@@ -23,7 +23,7 @@ CustomListItem {
         ImageView {
             verticalAlignment: VerticalAlignment.Center
             imageSource: "asset:///images/ic_inbox.png"
-            filterColor: Color.create("#B7B327")
+            filterColor: Color.create(_ui.color.darkYellow)
             maxWidth: ui.du(6)
             maxHeight: ui.du(6)
         }

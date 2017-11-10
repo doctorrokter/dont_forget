@@ -388,22 +388,37 @@
 <context>
     <name>FolderPage</name>
     <message>
-        <location filename="../assets/pages/FolderPage.qml" line="312"/>
+        <location filename="../assets/pages/FolderPage.qml" line="115"/>
+        <source>Integration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/FolderPage.qml" line="118"/>
+        <source>Open in Calendar</source>
+        <translation type="unfinished">Открыть в Календаре</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/FolderPage.qml" line="135"/>
+        <source>Open in Remember</source>
+        <translation type="unfinished">Открыть в Remember</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/FolderPage.qml" line="355"/>
         <source>Create folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/pages/FolderPage.qml" line="333"/>
+        <location filename="../assets/pages/FolderPage.qml" line="376"/>
         <source>Create task</source>
         <translation type="unfinished">Создать задачу</translation>
     </message>
     <message>
-        <location filename="../assets/pages/FolderPage.qml" line="354"/>
+        <location filename="../assets/pages/FolderPage.qml" line="397"/>
         <source>Create list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/pages/FolderPage.qml" line="375"/>
+        <location filename="../assets/pages/FolderPage.qml" line="418"/>
         <source>Edit</source>
         <translation type="unfinished">Изменить</translation>
     </message>
@@ -499,6 +514,21 @@
         <source>Important</source>
         <translation type="unfinished">Важно</translation>
     </message>
+    <message>
+        <location filename="../assets/pages/ImportantPage.qml" line="113"/>
+        <source>Integration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/ImportantPage.qml" line="116"/>
+        <source>Open in Calendar</source>
+        <translation type="unfinished">Открыть в Календаре</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/ImportantPage.qml" line="133"/>
+        <source>Open in Remember</source>
+        <translation type="unfinished">Открыть в Remember</translation>
+    </message>
 </context>
 <context>
     <name>InputTitleBar</name>
@@ -518,12 +548,27 @@
 <context>
     <name>ListPage</name>
     <message>
-        <location filename="../assets/pages/ListPage.qml" line="127"/>
+        <location filename="../assets/pages/ListPage.qml" line="100"/>
+        <source>Integration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/ListPage.qml" line="103"/>
+        <source>Open in Calendar</source>
+        <translation type="unfinished">Открыть в Календаре</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/ListPage.qml" line="120"/>
+        <source>Open in Remember</source>
+        <translation type="unfinished">Открыть в Remember</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/ListPage.qml" line="170"/>
         <source>Create task</source>
         <translation type="unfinished">Создать задачу</translation>
     </message>
     <message>
-        <location filename="../assets/pages/ListPage.qml" line="148"/>
+        <location filename="../assets/pages/ListPage.qml" line="191"/>
         <source>Edit</source>
         <translation type="unfinished">Изменить</translation>
     </message>
@@ -547,6 +592,19 @@
         <location filename="../assets/pages/MoveTaskPage.qml" line="159"/>
         <source>Root</source>
         <translation type="unfinished">Сделать корневой задачей</translation>
+    </message>
+</context>
+<context>
+    <name>Mover</name>
+    <message>
+        <location filename="../assets/components/v2/Mover.qml" line="25"/>
+        <source>Cancel</source>
+        <translation type="unfinished">Отмена</translation>
+    </message>
+    <message>
+        <location filename="../assets/components/v2/Mover.qml" line="36"/>
+        <source>Selected</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -910,14 +968,12 @@
 <context>
     <name>TaskViewPage</name>
     <message>
-        <location filename="../assets/pages/TaskViewPage.qml" line="91"/>
         <source>Child tasks</source>
-        <translation type="unfinished">Дочерние задачи</translation>
+        <translation type="obsolete">Дочерние задачи</translation>
     </message>
     <message>
-        <location filename="../assets/pages/TaskViewPage.qml" line="137"/>
         <source>Attachments</source>
-        <translation type="unfinished">Вложения</translation>
+        <translation type="obsolete">Вложения</translation>
     </message>
 </context>
 <context>
@@ -981,6 +1037,21 @@
         <location filename="../assets/pages/TodayPage.qml" line="18"/>
         <source>Today</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/TodayPage.qml" line="113"/>
+        <source>Integration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/TodayPage.qml" line="116"/>
+        <source>Open in Calendar</source>
+        <translation type="unfinished">Открыть в Календаре</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/TodayPage.qml" line="133"/>
+        <source>Open in Remember</source>
+        <translation type="unfinished">Открыть в Remember</translation>
     </message>
 </context>
 <context>
@@ -1105,8 +1176,9 @@
         <translation type="obsolete">Показать все</translation>
     </message>
     <message>
+        <location filename="../assets/main.qml" line="137"/>
         <source>Move</source>
-        <translation type="obsolete">Переместить</translation>
+        <translation type="unfinished">Переместить</translation>
     </message>
     <message>
         <source>View</source>
@@ -1125,12 +1197,14 @@
         <translation type="obsolete">Одиночный выбор</translation>
     </message>
     <message>
+        <location filename="../assets/main.qml" line="187"/>
         <source>Open in Calendar</source>
-        <translation type="obsolete">Открыть в Календаре</translation>
+        <translation type="unfinished">Открыть в Календаре</translation>
     </message>
     <message>
+        <location filename="../assets/main.qml" line="204"/>
         <source>Open in Remember</source>
-        <translation type="obsolete">Открыть в Remember</translation>
+        <translation type="unfinished">Открыть в Remember</translation>
     </message>
     <message>
         <source>Sort</source>
@@ -1197,22 +1271,31 @@
         <translation type="obsolete">Важно</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="384"/>
+        <source>Cancel</source>
+        <translation type="obsolete">Отмена</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="184"/>
+        <source>Integration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="450"/>
         <source>Create folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="405"/>
+        <location filename="../assets/main.qml" line="471"/>
         <source>Create task</source>
         <translation type="unfinished">Создать задачу</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="426"/>
+        <location filename="../assets/main.qml" line="492"/>
         <source>Create list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="555"/>
+        <location filename="../assets/main.qml" line="621"/>
         <source>Dashboard</source>
         <translation type="unfinished"></translation>
     </message>

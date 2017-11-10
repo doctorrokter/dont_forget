@@ -35,6 +35,7 @@
 #include "const/TaskMovingMode.hpp"
 #include "util/CalendarUtil.hpp"
 #include "UIManager.hpp"
+#include "Color.hpp"
 
 using namespace bb::cascades;
 using namespace bb::system;
@@ -55,12 +56,14 @@ void myMessageOutput(QtMsgType type, const char* msg) {  // <-- ADD THIS
 Q_DECL_EXPORT int main(int argc, char **argv) {
     qmlRegisterType<QTimer>("chachkouski.util", 1, 0, "Timer");
     qmlRegisterType<Task>("chachkouski.models", 1, 0, "Task");
+    qmlRegisterType<Color>("chachkouski.ui", 1, 0, "Color");
     qmlRegisterType<bb::cascades::WebPage>("WebPageComponent", 1, 0, "WebPage");
     qmlRegisterType<DFColors>("Const", 1, 0, "DFColors");
     qmlRegisterType<TaskMovingMode>("Const", 1, 0, "MoveMode");
     qRegisterMetaType<QList<Task> >("QList<Task>");
     qRegisterMetaType<Task*>("Task*");
     qRegisterMetaType<UIManager*>("UIManager*");
+    qRegisterMetaType<Color*>("Color*");
     qRegisterMetaType<CalendarUtil*>("CalendarUtil*");
 
     Application app(argc, argv);

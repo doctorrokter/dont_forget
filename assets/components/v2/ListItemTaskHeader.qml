@@ -76,7 +76,7 @@ CustomListItem {
                 if (root.task.color !== "") {
                     image.filterColor = Color.create(root.task.color);
                 } else {
-                    image.filterColor = Color.create("#B7B327");
+                    image.filterColor = Color.create(_ui.color.darkYellow);
                 }
             }
         } else {

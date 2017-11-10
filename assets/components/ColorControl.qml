@@ -5,7 +5,7 @@ Container {
     
     signal clicked(string color)
     
-    property string color: "#0092CC"
+    property string color: _ui.color.skyBlue
     property bool checked: false
     
     background: Color.create(root.color);

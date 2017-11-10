@@ -49,7 +49,7 @@ CustomListItem {
                     if (root.color !== "") {
                         return Color.create(root.color);
                     }
-                    return Color.create("#B7B327");
+                    return Color.create(_ui.color.darkYellow);
                 }
                 maxWidth: ui.du(4)
                 maxHeight: ui.du(4)
@@ -84,7 +84,7 @@ CustomListItem {
                 textStyle.base: SystemDefaults.TextStyles.SmallText
                 textStyle.color: {
                     if ((root.deadline * 1000) < new Date().getTime()) {
-                        return Color.create("#CC3333");
+                        return Color.create(_ui.color.brickRed);
                     }
                     return ui.palette.secondaryTextOnPlain;
                 }

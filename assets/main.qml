@@ -61,192 +61,258 @@ NavigationPane {
                 imageSource: _ui.backgroundImage
             }
             
-            ListView {
-                id: listView
+            Container {
                 
-                scrollRole: ScrollRole.Main
-                
-                dataModel: ArrayDataModel {
-                    id: dataModel
+                Mover {
+                    taskId: 0
                 }
                 
-                function itemType(data, indexPath) {
-                    return data.type;
-                }
-                
-                function removeById(taskId) {
-                    var i = root.taskExists(taskId);
-                    if (i !== -1) {
-                        dataModel.removeAt(i);
-                        _tasksService.deleteTask(taskId);
+                ListView {
+                    id: listView
+                    
+                    scrollRole: ScrollRole.Main
+                    
+                    dataModel: ArrayDataModel {
+                        id: dataModel
                     }
-                }
-                
-                function openTask(taskId) {
-                    navigationPane.openTask(taskId);
-                }
-                
-                function openFolder(taskId, taskName) {
-                    var fp = folderPage.createObject();
-                    fp.name = taskName;
-                    fp.path = "/" + taskName;
-                    fp.taskId = taskId;
-                    navigationPane.push(fp);
-                }
-                
-                function openList(taskId, taskName) {
-                    var lp = listPage.createObject();
-                    lp.name = taskName;
-                    lp.path = "/" + taskName;
-                    lp.taskId = taskId;
-                    navigationPane.push(lp);
-                }
-                
-                function openImportant() {
-                    var ip = importantPage.createObject();
-                    navigationPane.push(ip);
-                }
-                
-                function openToday() {
-                    var tp = todayPage.createObject();
-                    navigationPane.push(tp);
-                }
-                
-                attachedObjects: [
-                    ListScrollStateHandler {
-                        onAtEndChanged: {
-                            if (atEnd) {
-                                listView.margin.bottomOffset = ui.du(13);
-                            } else {
-                                listView.margin.bottomOffset = ui.du(0);
-                            }
+                    
+                    function itemType(data, indexPath) {
+                        return data.type;
+                    }
+                    
+                    function removeById(taskId) {
+                        var i = root.taskExists(taskId);
+                        if (i !== -1) {
+                            dataModel.removeAt(i);
+                            _tasksService.deleteTask(taskId);
                         }
                     }
-                ]
-                
-                contextActions: [
-                    ActionSet {
-                        DeleteActionItem {
-                            id: deleteTask
+                    
+                    function openTask(taskId) {
+                        navigationPane.openTask(taskId);
+                    }
+                    
+                    function openFolder(taskId, taskName) {
+                        var fp = folderPage.createObject();
+                        fp.name = taskName;
+                        fp.path = "/" + taskName;
+                        fp.taskId = taskId;
+                        navigationPane.push(fp);
+                    }
+                    
+                    function openList(taskId, taskName) {
+                        var lp = listPage.createObject();
+                        lp.name = taskName;
+                        lp.path = "/" + taskName;
+                        lp.taskId = taskId;
+                        navigationPane.push(lp);
+                    }
+                    
+                    function openImportant() {
+                        var ip = importantPage.createObject();
+                        navigationPane.push(ip);
+                    }
+                    
+                    function openToday() {
+                        var tp = todayPage.createObject();
+                        navigationPane.push(tp);
+                    }
+                    
+                    attachedObjects: [
+                        ListScrollStateHandler {
+                            onAtEndChanged: {
+                                if (atEnd) {
+                                    listView.margin.bottomOffset = ui.du(13);
+                                } else {
+                                    listView.margin.bottomOffset = ui.du(0);
+                                }
+                            }
+                        }
+                    ]
+                    
+                    contextActions: [
+                        ActionSet {
+                            ActionItem {
+                                id: moveActionItem
+                                title: qsTr("Move") + Retranslate.onLocaleOrLanguageChanged
+                                imageSource: "asset:///images/ic_forward.png"
+                                
+                                onTriggered: {
+                                    _tasksService.moveMode = true;
+                                }
+                                
+                                shortcuts: [
+                                    Shortcut {
+                                        key: "m"
+                                        
+                                        onTriggered: {
+                                            if (moveActionItem.enabled) {
+                                                moveActionItem.triggered();
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
                             
-                            onTriggered: {
-                                var indexPath = listView.selected();
-                                var data = dataModel.data(indexPath);
-                                if (data.type !== Const.TaskTypes.RECEIVED && 
+                            DeleteActionItem {
+                                id: deleteTask
+                                
+                                onTriggered: {
+                                    var indexPath = listView.selected();
+                                    var data = dataModel.data(indexPath);
+                                    if (data.type !== Const.TaskTypes.RECEIVED && 
                                     data.type !== Const.TaskTypes.TODAY && 
                                     data.type !== Const.TaskTypes.IMPORTANT) {
                                         dataModel.removeAt(dataModel.indexOf(data));
                                         _tasksService.deleteTask(data.id);    
-                                }
-                            }
-                            
-                            shortcuts: [
-                                Shortcut {
-                                    key: "d"
-                                    
-                                    onTriggered: {
-                                        deleteTask.triggered();
                                     }
                                 }
-                            ]
-                        }
-                    }
-                ]
-                
-                listItemComponents: [
-                    ListItemComponent {
-                        type: Const.TaskTypes.RECEIVED
-                        ReceivedListItem {
-                            count: ListItemData.count
-                        }
-                    },
-                    
-                    ListItemComponent {
-                        type: Const.TaskTypes.TODAY
-                        TodayListItem {
-                            count: ListItemData.count
-                            
-                            onOpen: {
-                                ListItem.view.openToday();
+                                
+                                shortcuts: [
+                                    Shortcut {
+                                        key: "d"
+                                        
+                                        onTriggered: {
+                                            deleteTask.triggered();
+                                        }
+                                    }
+                                ]
                             }
-                        }
-                    },
-                    
-                    ListItemComponent {
-                        type: Const.TaskTypes.IMPORTANT
-                        ImportantListItem {
-                            count: ListItemData.count
-                            
-                            onOpen: {
-                                ListItem.view.openImportant();
-                            }
-                        }
-                    },
-                    
-                    ListItemComponent {
-                        type: Const.TaskTypes.DIVIDER
-                        DividerListItem {}    
-                    },
-                    
-                    ListItemComponent {
-                        type: Const.TaskTypes.FOLDER
-                        FolderListItem {
-                            taskId: ListItemData.id
-                            name: ListItemData.name
-                            count: ListItemData.count || 0
-                            color: ListItemData.color
-                            parentId: ListItemData.parent_id || 0
-                            
-                            onOpenFolder: {
-                                ListItem.view.openFolder(taskId, name);
-                            }
-                        }
-                    },
-                    
-                    ListItemComponent {
-                        type: Const.TaskTypes.LIST
-                        ListListItem {
-                            taskId: ListItemData.id
-                            name: ListItemData.name
-                            count: ListItemData.count || 0
-                            color: ListItemData.color
-                            parentId: ListItemData.parent_id || 0
-                            deadline: ListItemData.deadline
-                            closed: ListItemData.closed
-                            rememberId: parseInt(ListItemData.remember_id)
-                            calendarId: parseInt(ListItemData.calendar_id)
-                            
-                            onOpenList: {
-                                ListItem.view.openList(taskId, name);
-                            }
-                        }    
-                    },
-                    
-                    ListItemComponent {
-                        type: Const.TaskTypes.TASK
-                        TaskListItem {
-                            taskId: ListItemData.id
-                            name: ListItemData.name
-                            deadline: ListItemData.deadline
-                            important: ListItemData.important
-                            closed: ListItemData.closed
-                            rememberId: parseInt(ListItemData.remember_id)
-                            calendarId: parseInt(ListItemData.calendar_id)
-                            attachments: ListItemData.attachments
-                            parentId: ListItemData.parent_id || 0
-                            description: ListItemData.description
-                            
-                            onTaskRemoved: {
-                                ListItem.view.removeById(taskId);
+                        },
+                        
+                        ActionSet {
+                            title: qsTr("Integration") + Retranslate.onLocaleOrLanguageChanged
+                            ActionItem {
+                                id: openCalendar
+                                title: qsTr("Open in Calendar") + Retranslate.onLocaleOrLanguageChanged
+                                imageSource: "asset:///images/ic_calendar.png"
+                                enabled: {
+                                    var indexPath = listView.selected();
+                                    var data = dataModel.data(indexPath);
+                                    return (data.type === Const.TaskTypes.LIST || data.type === Const.TaskTypes.TASK) && data.calendar_id !== 0;
+                                }
+                                
+                                onTriggered: {
+                                    var indexPath = listView.selected();
+                                    var data = dataModel.data(indexPath);
+                                    _app.openCalendarEvent(data.calendar_id, data.folder_id, data.account_id);
+                                }
                             }
                             
-                            onOpenTask: {
-                                ListItem.view.openTask(taskId);
+                            ActionItem {
+                                id: openRemember
+                                title: qsTr("Open in Remember") + Retranslate.onLocaleOrLanguageChanged
+                                imageSource: "asset:///images/ic_notes.png"
+                                enabled: {
+                                    var indexPath = listView.selected();
+                                    var data = dataModel.data(indexPath);
+                                    return (data.type === Const.TaskTypes.LIST || data.type === Const.TaskTypes.TASK) && data.remember_id !== 0;
+                                }
+                                
+                                onTriggered: {
+                                    var indexPath = listView.selected();
+                                    var data = dataModel.data(indexPath);
+                                    _app.openRememberNote(data.remember_id);
+                                }
                             }
                         }
-                    }
-                ]
-            }            
+                    ]
+                    
+                    listItemComponents: [
+                        ListItemComponent {
+                            type: Const.TaskTypes.RECEIVED
+                            ReceivedListItem {
+                                count: ListItemData.count
+                            }
+                        },
+                        
+                        ListItemComponent {
+                            type: Const.TaskTypes.TODAY
+                            TodayListItem {
+                                count: ListItemData.count
+                                
+                                onOpen: {
+                                    ListItem.view.openToday();
+                                }
+                            }
+                        },
+                        
+                        ListItemComponent {
+                            type: Const.TaskTypes.IMPORTANT
+                            ImportantListItem {
+                                count: ListItemData.count
+                                
+                                onOpen: {
+                                    ListItem.view.openImportant();
+                                }
+                            }
+                        },
+                        
+                        ListItemComponent {
+                            type: Const.TaskTypes.DIVIDER
+                            DividerListItem {}    
+                        },
+                        
+                        ListItemComponent {
+                            type: Const.TaskTypes.FOLDER
+                            FolderListItem {
+                                taskId: ListItemData.id
+                                name: ListItemData.name
+                                count: ListItemData.count || 0
+                                color: ListItemData.color
+                                parentId: ListItemData.parent_id || 0
+                                
+                                onOpenFolder: {
+                                    ListItem.view.openFolder(taskId, name);
+                                }
+                            }
+                        },
+                        
+                        ListItemComponent {
+                            type: Const.TaskTypes.LIST
+                            ListListItem {
+                                taskId: ListItemData.id
+                                name: ListItemData.name
+                                count: ListItemData.count || 0
+                                color: ListItemData.color
+                                parentId: ListItemData.parent_id || 0
+                                deadline: ListItemData.deadline
+                                closed: ListItemData.closed
+                                rememberId: parseInt(ListItemData.remember_id)
+                                calendarId: parseInt(ListItemData.calendar_id)
+                                
+                                onOpenList: {
+                                    ListItem.view.openList(taskId, name);
+                                }
+                            }    
+                        },
+                        
+                        ListItemComponent {
+                            type: Const.TaskTypes.TASK
+                            TaskListItem {
+                                taskId: ListItemData.id
+                                name: ListItemData.name
+                                deadline: ListItemData.deadline
+                                important: ListItemData.important
+                                closed: ListItemData.closed
+                                rememberId: parseInt(ListItemData.remember_id)
+                                calendarId: parseInt(ListItemData.calendar_id)
+                                attachments: ListItemData.attachments
+                                parentId: ListItemData.parent_id || 0
+                                description: ListItemData.description
+                                
+                                onTaskRemoved: {
+                                    ListItem.view.removeById(taskId);
+                                }
+                                
+                                onOpenTask: {
+                                    ListItem.view.openTask(taskId);
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
         }
         
         function taskExists(taskId) {

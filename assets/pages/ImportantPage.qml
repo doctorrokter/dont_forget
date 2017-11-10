@@ -107,6 +107,43 @@ Page {
                                 }
                             ]
                         }
+                    },
+                    
+                    ActionSet {
+                        title: qsTr("Integration") + Retranslate.onLocaleOrLanguageChanged
+                        ActionItem {
+                            id: openCalendar
+                            title: qsTr("Open in Calendar") + Retranslate.onLocaleOrLanguageChanged
+                            imageSource: "asset:///images/ic_calendar.png"
+                            enabled: {
+                                var indexPath = listView.selected();
+                                var data = dataModel.data(indexPath);
+                                return (data.type === Const.TaskTypes.LIST || data.type === Const.TaskTypes.TASK) && data.calendar_id !== 0;
+                            }
+                            
+                            onTriggered: {
+                                var indexPath = listView.selected();
+                                var data = dataModel.data(indexPath);
+                                _app.openCalendarEvent(data.calendar_id, data.folder_id, data.account_id);
+                            }
+                        }
+                        
+                        ActionItem {
+                            id: openRemember
+                            title: qsTr("Open in Remember") + Retranslate.onLocaleOrLanguageChanged
+                            imageSource: "asset:///images/ic_notes.png"
+                            enabled: {
+                                var indexPath = listView.selected();
+                                var data = dataModel.data(indexPath);
+                                return (data.type === Const.TaskTypes.LIST || data.type === Const.TaskTypes.TASK) && data.remember_id !== 0;
+                            }
+                            
+                            onTriggered: {
+                                var indexPath = listView.selected();
+                                var data = dataModel.data(indexPath);
+                                _app.openRememberNote(data.remember_id);
+                            }
+                        }
                     }
                 ]
                 

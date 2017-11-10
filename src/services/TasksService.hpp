@@ -28,6 +28,7 @@ class TasksService: public QObject {
     Q_OBJECT
     Q_PROPERTY(Task* activeTask READ getActiveTask NOTIFY activeTaskChanged)
     Q_PROPERTY(bool multiselectMode READ isMultiselectMode WRITE setMultiselectMode NOTIFY multiselectModeChanged)
+    Q_PROPERTY(bool moveMode READ isMoveMode WRITE setMoveMode NOTIFY moveModeChanged)
 public:
     TasksService(QObject* parent = 0, DBConfig* dbConfig = 0, AttachmentsService* attachmentsService = 0);
     virtual ~TasksService();
@@ -70,8 +71,8 @@ public:
     Q_INVOKABLE QVariantList deleteBulk();
     Q_INVOKABLE void moveBulk(const int& parentId);
 
-    Q_INVOKABLE int getMoveMode() const;
-    Q_INVOKABLE void setMoveMode(const int& moveMode);
+    Q_INVOKABLE bool isMoveMode() const;
+    Q_INVOKABLE void setMoveMode(const bool& moveMode);
     Q_INVOKABLE void flushActiveTask();
 
 Q_SIGNALS:
@@ -90,7 +91,7 @@ Q_SIGNALS:
     void droppedRememberId(const int& taskId);
     void droppedCalendarId(const int& taskId);
     void parentIdChangedInDebug(const int& id);
-    void moveModeChanged(const int& moveMode);
+    void moveModeChanged(const bool& moveMode);
 
 private Q_SLOTS:
     void processMultiselectMode(const bool multiselectMode);
@@ -103,9 +104,8 @@ private:
     NotebookService* m_pNotebookService;
 
     bool m_multiselectMode;
+    bool m_moveMode;
     QList<int> m_tasksIds;
-
-    int m_moveMode;
 
     static Logger logger;
 

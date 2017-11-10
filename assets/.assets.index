@@ -1,5 +1,5 @@
 1
-131
+129
 cards/CreateTaskFromTextCard.qml
 cards/CreateTaskFromUrlCard.qml
 cards/TestCard.qml
@@ -7,11 +7,8 @@ cards/UpdateTaskCard.qml
 components/AttachmentsContainer.qml
 components/ColorControl.qml
 components/CustomTitleBar.qml
-components/ExpandableButton.qml
 components/InputTitleBar.qml
-components/OkButton.qml
 components/Palette.qml
-components/Task.qml
 components/TaskDeadlineContainer.qml
 components/TaskDescriptionContainer.qml
 components/TaskNameContainer.qml
@@ -24,6 +21,7 @@ components/v2/ImportantListItem.qml
 components/v2/ListCoverListItem.qml
 components/v2/ListItemTaskHeader.qml
 components/v2/ListListItem.qml
+components/v2/Mover.qml
 components/v2/ReceivedListItem.qml
 components/v2/RichLinkPreview.qml
 components/v2/TaskCoverListItem.qml

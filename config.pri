@@ -43,11 +43,8 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/components/AttachmentsContainer.qml) \
         $$quote($$BASEDIR/assets/components/ColorControl.qml) \
         $$quote($$BASEDIR/assets/components/CustomTitleBar.qml) \
-        $$quote($$BASEDIR/assets/components/ExpandableButton.qml) \
         $$quote($$BASEDIR/assets/components/InputTitleBar.qml) \
-        $$quote($$BASEDIR/assets/components/OkButton.qml) \
         $$quote($$BASEDIR/assets/components/Palette.qml) \
-        $$quote($$BASEDIR/assets/components/Task.qml) \
         $$quote($$BASEDIR/assets/components/TaskDeadlineContainer.qml) \
         $$quote($$BASEDIR/assets/components/TaskDescriptionContainer.qml) \
         $$quote($$BASEDIR/assets/components/TaskNameContainer.qml) \
@@ -60,6 +57,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/components/v2/ListCoverListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/ListItemTaskHeader.qml) \
         $$quote($$BASEDIR/assets/components/v2/ListListItem.qml) \
+        $$quote($$BASEDIR/assets/components/v2/Mover.qml) \
         $$quote($$BASEDIR/assets/components/v2/ReceivedListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/RichLinkPreview.qml) \
         $$quote($$BASEDIR/assets/components/v2/TaskCoverListItem.qml) \
@@ -158,7 +156,6 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/pages/MoveTaskPage.qml) \
         $$quote($$BASEDIR/assets/pages/SettingsPage.qml) \
         $$quote($$BASEDIR/assets/pages/TaskPage.qml) \
-        $$quote($$BASEDIR/assets/pages/TaskViewPage.qml) \
         $$quote($$BASEDIR/assets/pages/TasksListPage.qml) \
         $$quote($$BASEDIR/assets/pages/TodayPage.qml) \
         $$quote($$BASEDIR/assets/pages/settings_components/BackupAndRecovery.qml) \
@@ -171,6 +168,7 @@ config_pri_assets {
 
 config_pri_source_group1 {
     SOURCES += \
+        $$quote($$BASEDIR/src/Color.cpp) \
         $$quote($$BASEDIR/src/Logger.cpp) \
         $$quote($$BASEDIR/src/UIManager.cpp) \
         $$quote($$BASEDIR/src/applicationui.cpp) \
@@ -191,6 +189,7 @@ config_pri_source_group1 {
         $$quote($$BASEDIR/src/vendor/Console.cpp)
 
     HEADERS += \
+        $$quote($$BASEDIR/src/Color.hpp) \
         $$quote($$BASEDIR/src/Logger.hpp) \
         $$quote($$BASEDIR/src/UIManager.hpp) \
         $$quote($$BASEDIR/src/applicationui.hpp) \

@@ -34,7 +34,7 @@ CustomListItem {
         ImageView {
             verticalAlignment: VerticalAlignment.Center
             imageSource: "asset:///images/calendar.png"
-            filterColor: Color.create("#779933")
+            filterColor: Color.create(_ui.color.lightGreen)
             maxWidth: ui.du(6)
             maxHeight: ui.du(6)
         }

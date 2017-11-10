@@ -8,13 +8,13 @@ Container {
     property string color: blue.color
     
     property variant colors: {
-        BLUE: "#0092CC",
-        RED: "#FF3333",
-        YELLOW: "#DCD427",
-        GREEN: "#779933",
-        GREY: "#969696",
-        MAGENTA: "#8b008b",
-        BLACK: "#323232"
+        BLUE: _ui.color.skyBlue,
+        RED: _ui.color.hyperRed,
+        YELLOW: _ui.color.lightYellow,
+        GREEN: _ui.color.lightGreen,
+        GREY: _ui.color.grey,
+        MAGENTA: _ui.color.magenta,
+        BLACK: _ui.color.black
     };
     
     horizontalAlignment: HorizontalAlignment.Fill

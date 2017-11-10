@@ -281,6 +281,18 @@
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Integration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open in Calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open in Remember</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>HelpPage</name>
@@ -357,6 +369,18 @@
         <source>Important</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Integration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open in Calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open in Remember</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ListItemTaskHeader</name>
@@ -375,6 +399,18 @@
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Integration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open in Calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open in Remember</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MoveTaskPage</name>
@@ -384,6 +420,17 @@
     </message>
     <message>
         <source>Choose a folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Mover</name>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Selected</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -644,17 +691,6 @@
     </message>
 </context>
 <context>
-    <name>TaskViewPage</name>
-    <message>
-        <source>Child tasks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Attachments</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>TasksListPage</name>
     <message>
         <source>Choose a folder</source>
@@ -688,6 +724,18 @@
     <name>TodayPage</name>
     <message>
         <source>Today</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Integration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open in Calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open in Remember</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -754,6 +802,22 @@
     </message>
     <message>
         <source>Dashboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Integration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open in Calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open in Remember</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

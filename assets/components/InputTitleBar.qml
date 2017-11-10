@@ -3,6 +3,8 @@ import bb.cascades 1.4
 TitleBar {
     id: root
     
+    property string value: ""
+    
     signal cancel();
     signal typing(string text);
     signal submit(string text);
@@ -28,11 +30,13 @@ TitleBar {
                 backgroundVisible: false
                 inputMode: TextFieldInputMode.Text
                 
+                text: root.value
+                
                 input {
                     keyLayout: KeyLayout.Text
                     submitKey: SubmitKey.EnterKey
                     onSubmitted: {
-                        root.submit(tasksInputField.text.trim());
+                        root.submitText();
                     }
                 }
                 textStyle.color: ui.palette.textOnPrimary
@@ -52,6 +56,10 @@ TitleBar {
                 }
             }
         }
+    }
+    
+    function submitText() {
+        root.submit(tasksInputField.text.trim());
     }
     
     function focus() {
