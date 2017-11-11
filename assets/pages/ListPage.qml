@@ -1,4 +1,5 @@
 import bb.cascades 1.4
+import "../actions"
 import "../components"
 import "../components/v2"
 import "../js/Const.js" as Const
@@ -72,68 +73,6 @@ Page {
                         }
                     ]
                     
-                    contextActions: [
-                        ActionSet {
-                            DeleteActionItem {
-                                id: deleteTask
-                                
-                                onTriggered: {
-                                    var indexPath = listView.selected();
-                                    var data = dataModel.data(indexPath);
-                                    dataModel.removeAt(dataModel.indexOf(data));
-                                    _tasksService.deleteTask(data.id);    
-                                }
-                                
-                                shortcuts: [
-                                    Shortcut {
-                                        key: "d"
-                                        
-                                        onTriggered: {
-                                            deleteTask.triggered();
-                                        }
-                                    }
-                                ]
-                            }
-                        },
-                        
-                        ActionSet {
-                            title: qsTr("Integration") + Retranslate.onLocaleOrLanguageChanged
-                            ActionItem {
-                                id: openCalendar
-                                title: qsTr("Open in Calendar") + Retranslate.onLocaleOrLanguageChanged
-                                imageSource: "asset:///images/ic_calendar.png"
-                                enabled: {
-                                    var indexPath = listView.selected();
-                                    var data = dataModel.data(indexPath);
-                                    return (data.type === Const.TaskTypes.LIST || data.type === Const.TaskTypes.TASK) && data.calendar_id !== 0;
-                                }
-                                
-                                onTriggered: {
-                                    var indexPath = listView.selected();
-                                    var data = dataModel.data(indexPath);
-                                    _app.openCalendarEvent(data.calendar_id, data.folder_id, data.account_id);
-                                }
-                            }
-                            
-                            ActionItem {
-                                id: openRemember
-                                title: qsTr("Open in Remember") + Retranslate.onLocaleOrLanguageChanged
-                                imageSource: "asset:///images/ic_notes.png"
-                                enabled: {
-                                    var indexPath = listView.selected();
-                                    var data = dataModel.data(indexPath);
-                                    return (data.type === Const.TaskTypes.LIST || data.type === Const.TaskTypes.TASK) && data.remember_id !== 0;
-                                }
-                                
-                                onTriggered: {
-                                    var indexPath = listView.selected();
-                                    var data = dataModel.data(indexPath);
-                                    _app.openRememberNote(data.remember_id);
-                                }
-                            }
-                        }
-                    ]
-                    
                     listItemComponents: [
                         ListItemComponent {
                             TaskListItem {
@@ -147,6 +86,7 @@ Page {
                                 calendarId: parseInt(ListItemData.calendar_id)
                                 attachments: ListItemData.attachments
                                 parentId: ListItemData.parent_id
+                                selected: _tasksService.isTaskSelected(ListItemData.id)
                                 
                                 onTaskRemoved: {
                                     ListItem.view.removeById(taskId);
@@ -283,14 +223,30 @@ Page {
     }
     
     function reload() {
+        root.clearSelection();
         dataModel.clear();
         dataModel.append(_tasksService.findByType(Const.TaskTypes.TASK, root.taskId));
+    }
+    
+    function tasksMovedInBulk(parentId) {
+        root.reload();
+    }
+    
+    function clearSelection() {
+        listView.clearSelection();
+        for (var i = 0; i < dataModel.size(); i++) {
+            var t = dataModel.value(i);
+            t.selected = false;
+            dataModel.replace(i, t);
+        }
     }
     
     function clear() {
         _tasksService.taskCreated.disconnect(root.taskCreated);
         _tasksService.taskUpdated.disconnect(root.taskUpdated);
         _tasksService.taskClosedChanged.disconnect(root.taskClosedChanged);
+        _tasksService.allTasksDeselected.disconnect(root.clearSelection);
+        _tasksService.taskMovedInBulk.disconnect(root.tasksMovedInBulk);
     }
     
     onTaskIdChanged: {
@@ -302,5 +258,7 @@ Page {
         _tasksService.taskCreated.connect(root.taskCreated);
         _tasksService.taskUpdated.connect(root.taskUpdated);
         _tasksService.taskClosedChanged.connect(root.taskClosedChanged);
+        _tasksService.allTasksDeselected.connect(root.clearSelection);
+        _tasksService.taskMovedInBulk.connect(root.tasksMovedInBulk);
     }
 }

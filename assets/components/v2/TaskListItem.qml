@@ -1,5 +1,6 @@
 import bb.cascades 1.4
 import "../"
+import "../../actions"
 
 CustomListItem {
     
@@ -16,6 +17,8 @@ CustomListItem {
     property int calendarId: 0
     property variant attachments: []
     property bool expanded: false
+    property bool selected: false
+    property ListView listView: ListItem.view
     
     property int startMove: 0
     
@@ -62,6 +65,7 @@ CustomListItem {
     }
     
     dividerVisible: false
+    opacity: ListItem.selected || root.selected ? 0.85 : 1
     
     function getTaskName() {
         var n = root.name
@@ -82,7 +86,9 @@ CustomListItem {
     gestureHandlers: [
         TapHandler {
             onTapped: {
-                root.openTask(root.taskId);
+                if (!root.ListItem.selected && !root.selected) {
+                    root.openTask(root.taskId);
+                }
             }    
         },
         
@@ -308,4 +314,27 @@ CustomListItem {
             });
         }
     }
+    
+    contextActions: [
+        ActionSet {
+            title: qsTr("Actions") + Retranslate.onLocaleOrLanguageChanged
+            MoveActionItem {
+                listView: root.listView
+            }
+            
+            DeleteTaskActionItem {
+                listView: root.listView
+            }
+            
+            RememberActionItem {
+                listView: root.listView
+                enabled: root.rememberId !== 0
+            }
+            
+            CalendarActionItem {
+                listView: root.listView
+                enabled: root.calendarId !== 0
+            }
+        }
+    ]
 }

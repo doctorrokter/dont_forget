@@ -42,6 +42,10 @@ void Logger::info(const QVariantList& list) {
     qDebug() << "[INFO]" << "[" << currDateString() << "] -" << m_class << "-" << list << endl;
 }
 
+void Logger::info(const QList<int>& list) {
+    qDebug() << "[INFO]" << "[" << currDateString() << "] -" << m_class << "-" << list << endl;
+}
+
 void Logger::error(const QNetworkReply::NetworkError e) {
     qDebug() << "[ERROR]" << "[" << currDateString() << "] -" << m_class << "-" << e << endl;
 }

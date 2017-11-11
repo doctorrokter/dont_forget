@@ -78,8 +78,6 @@ ApplicationUI::ApplicationUI() : QObject() {
 
     m_pUIManager = new UIManager(this);
 
-//    m_pTasksService->processCollisions();
-
     bool res = QObject::connect(m_pDropboxService, SIGNAL(fileLoaded(const QString&)), this, SLOT(processTasksContent(const QString&)));
     Q_ASSERT(res);
     Q_UNUSED(res);
@@ -113,8 +111,6 @@ ApplicationUI::ApplicationUI() : QObject() {
     switch (m_pInvokeManager->startupMode()) {
         case ApplicationStartupMode::LaunchApplication:
             m_startupMode = "Launch";
-//            QtConcurrent::run(m_pSearchService, &SearchService::init);
-//            QtConcurrent::run(m_pTasksService, &TasksService::init);
             initFullUI();
             break;
         case ApplicationStartupMode::InvokeApplication:

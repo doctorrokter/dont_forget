@@ -29,6 +29,7 @@ class TasksService: public QObject {
     Q_PROPERTY(Task* activeTask READ getActiveTask NOTIFY activeTaskChanged)
     Q_PROPERTY(bool multiselectMode READ isMultiselectMode WRITE setMultiselectMode NOTIFY multiselectModeChanged)
     Q_PROPERTY(bool moveMode READ isMoveMode WRITE setMoveMode NOTIFY moveModeChanged)
+    Q_PROPERTY(int selectedTasksCount READ getSelectedTasksCount NOTIFY selectedTasksCountChanged)
 public:
     TasksService(QObject* parent = 0, DBConfig* dbConfig = 0, AttachmentsService* attachmentsService = 0);
     virtual ~TasksService();
@@ -65,9 +66,11 @@ public:
     Q_INVOKABLE void changeViewMode(const QString& viewMode);
     Q_INVOKABLE bool isMultiselectMode() const;
     Q_INVOKABLE void setMultiselectMode(const bool& multiselectMode);
-    Q_INVOKABLE void selectTask(const int& id);
+    Q_INVOKABLE void selectTask(const int& id, const QVariantList& indexPath);
     Q_INVOKABLE void deselectTask(const int& id);
+    Q_INVOKABLE void deselectAll();
     Q_INVOKABLE bool isTaskSelected(const int& id);
+    Q_INVOKABLE int getSelectedTasksCount() const;
     Q_INVOKABLE QVariantList deleteBulk();
     Q_INVOKABLE void moveBulk(const int& parentId);
 
@@ -84,14 +87,16 @@ Q_SIGNALS:
     void viewModeChanged(const QString& viewMode);
     void taskMoved(const int id, const int parentId);
     void multiselectModeChanged(const bool multiselectMode);
-    void taskSelected(const int& id);
+    void taskSelected(const int& id, const QVariantList& indexPath);
     void taskDeselected(const int& id);
-    void taskMovedInBulk();
+    void allTasksDeselected();
+    void taskMovedInBulk(const int& parentId);
     void changedInRemember(const QVariantMap& taskMap);
     void droppedRememberId(const int& taskId);
     void droppedCalendarId(const int& taskId);
     void parentIdChangedInDebug(const int& id);
     void moveModeChanged(const bool& moveMode);
+    void selectedTasksCountChanged(const int& selectedTasksCount);
 
 private Q_SLOTS:
     void processMultiselectMode(const bool multiselectMode);

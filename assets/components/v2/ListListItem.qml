@@ -1,4 +1,5 @@
 import bb.cascades 1.4
+import "../../actions"
 
 CustomListItem {
     
@@ -14,15 +15,20 @@ CustomListItem {
     property int rememberId: 0
     property int calendarId: 0
     property bool expanded: false
+    property bool selected: false
+    property ListView listView: ListItem.view
     
     signal openList(int taskId)
     
     dividerVisible: false
+    opacity: ListItem.selected || root.selected ? 0.85 : 1
     
     gestureHandlers: [
         TapHandler {
             onTapped: {
-                root.openList(root.taskId);
+                if (!root.ListItem.selected && !root.selected) {
+                    root.openList(root.taskId);
+                }
             }    
         },
         
@@ -171,4 +177,26 @@ CustomListItem {
         }
     }
     
+    contextActions: [
+        ActionSet {
+            title: qsTr("Actions") + Retranslate.onLocaleOrLanguageChanged
+            MoveActionItem {
+                listView: root.listView
+            }
+            
+            DeleteTaskActionItem {
+                listView: root.listView
+            }
+            
+            RememberActionItem {
+                listView: root.listView
+                enabled: root.rememberId !== 0
+            }
+            
+            CalendarActionItem {
+                listView: root.listView
+                enabled: root.calendarId !== 0
+            }
+        }
+    ]
 }

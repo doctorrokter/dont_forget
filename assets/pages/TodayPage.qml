@@ -115,11 +115,6 @@ Page {
                             id: openCalendar
                             title: qsTr("Open in Calendar") + Retranslate.onLocaleOrLanguageChanged
                             imageSource: "asset:///images/ic_calendar.png"
-                            enabled: {
-                                var indexPath = listView.selected();
-                                var data = dataModel.data(indexPath);
-                                return (data.type === Const.TaskTypes.LIST || data.type === Const.TaskTypes.TASK) && data.calendar_id !== 0;
-                            }
                             
                             onTriggered: {
                                 var indexPath = listView.selected();
@@ -132,11 +127,6 @@ Page {
                             id: openRemember
                             title: qsTr("Open in Remember") + Retranslate.onLocaleOrLanguageChanged
                             imageSource: "asset:///images/ic_notes.png"
-                            enabled: {
-                                var indexPath = listView.selected();
-                                var data = dataModel.data(indexPath);
-                                return (data.type === Const.TaskTypes.LIST || data.type === Const.TaskTypes.TASK) && data.remember_id !== 0;
-                            }
                             
                             onTriggered: {
                                 var indexPath = listView.selected();

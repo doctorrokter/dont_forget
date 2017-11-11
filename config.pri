@@ -36,6 +36,10 @@ simulator {
 
 config_pri_assets {
     OTHER_FILES += \
+        $$quote($$BASEDIR/assets/actions/CalendarActionItem.qml) \
+        $$quote($$BASEDIR/assets/actions/DeleteTaskActionItem.qml) \
+        $$quote($$BASEDIR/assets/actions/MoveActionItem.qml) \
+        $$quote($$BASEDIR/assets/actions/RememberActionItem.qml) \
         $$quote($$BASEDIR/assets/cards/CreateTaskFromTextCard.qml) \
         $$quote($$BASEDIR/assets/cards/CreateTaskFromUrlCard.qml) \
         $$quote($$BASEDIR/assets/cards/TestCard.qml) \
@@ -132,6 +136,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/yellow_pellet.png) \
         $$quote($$BASEDIR/assets/images/zip_icon_big_512x512.png) \
         $$quote($$BASEDIR/assets/js/Const.js) \
+        $$quote($$BASEDIR/assets/js/assign.js) \
         $$quote($$BASEDIR/assets/main.qml) \
         $$quote($$BASEDIR/assets/main_old.qml) \
         $$quote($$BASEDIR/assets/migrations/10_alter_table_tasks_add_account_id.sql) \
@@ -255,6 +260,9 @@ lupdate_inclusion {
         $$quote($$BASEDIR/../assets/*.qml) \
         $$quote($$BASEDIR/../assets/*.js) \
         $$quote($$BASEDIR/../assets/*.qs) \
+        $$quote($$BASEDIR/../assets/actions/*.qml) \
+        $$quote($$BASEDIR/../assets/actions/*.js) \
+        $$quote($$BASEDIR/../assets/actions/*.qs) \
         $$quote($$BASEDIR/../assets/cards/*.qml) \
         $$quote($$BASEDIR/../assets/cards/*.js) \
         $$quote($$BASEDIR/../assets/cards/*.qs) \

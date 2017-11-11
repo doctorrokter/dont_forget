@@ -1,4 +1,5 @@
 import bb.cascades 1.4
+import "../../actions"
 
 CustomListItem {
     
@@ -9,15 +10,20 @@ CustomListItem {
     property int parentId: 0
     property int count: 0
     property string color: ""
+    property ListView listView: ListItem.view
+    property bool selected: false
     
     signal openFolder(int taskId)
     
     dividerVisible: false
+    opacity: ListItem.selected || root.selected ? 0.85 : 1
     
     gestureHandlers: [
         TapHandler {
             onTapped: {
-                root.openFolder(root.taskId);
+                if (!root.ListItem.selected && !root.selected) {
+                    root.openFolder(root.taskId);
+                }
             }    
         }
     ]
@@ -65,4 +71,17 @@ CustomListItem {
             textStyle.color: ui.palette.secondaryTextOnPlain
         }
     }
+    
+    contextActions: [
+        ActionSet {
+            title: qsTr("Actions") + Retranslate.onLocaleOrLanguageChanged
+            MoveActionItem {
+                listView: root.listView
+            }
+            
+            DeleteTaskActionItem {
+                listView: root.listView
+            }
+        }
+    ]
 }

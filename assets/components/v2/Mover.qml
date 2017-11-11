@@ -26,6 +26,7 @@ Container {
         maxWidth: ui.du(17)
         
         onClicked: {
+            _tasksService.deselectAll();
             _tasksService.moveMode = false;
         }
     }
@@ -33,7 +34,7 @@ Container {
     Label {
         horizontalAlignment: HorizontalAlignment.Center
         verticalAlignment: VerticalAlignment.Center
-        text: (qsTr("Selected") + Retranslate.onLocaleOrLanguageChanged) + ": " + 1
+        text: (qsTr("Selected") + Retranslate.onLocaleOrLanguageChanged) + ": " + _tasksService.selectedTasksCount
         layoutProperties: StackLayoutProperties {
             spaceQuota: 1
         }
@@ -44,5 +45,10 @@ Container {
         verticalAlignment: VerticalAlignment.Center
         text: "Ok"
         maxWidth: ui.du(17)
+        
+        onClicked: {
+            _tasksService.moveBulk(root.taskId);
+            _tasksService.moveMode = false;
+        }
     }
 }

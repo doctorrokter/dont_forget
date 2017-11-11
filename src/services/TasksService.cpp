@@ -588,9 +588,14 @@ void TasksService::setMultiselectMode(const bool& multiselectMode) {
     emit multiselectModeChanged(multiselectMode);
 }
 
-void TasksService::selectTask(const int& id) {
-    m_tasksIds.append(id);
-    emit taskSelected(id);
+void TasksService::selectTask(const int& id, const QVariantList& indexPath) {
+    if (!isTaskSelected(id)) {
+        m_tasksIds.append(id);
+        logger.info("Task selected");
+        logger.info(m_tasksIds);
+        emit taskSelected(id, indexPath);
+        emit selectedTasksCountChanged(getSelectedTasksCount());
+    }
 }
 
 void TasksService::deselectTask(const int& id) {
@@ -600,11 +605,24 @@ void TasksService::deselectTask(const int& id) {
             iterator.remove();
         }
     }
+    logger.info("Task deselected");
+    logger.info(m_tasksIds);
     emit taskDeselected(id);
+    emit selectedTasksCountChanged(getSelectedTasksCount());
+}
+
+void TasksService::deselectAll() {
+    m_tasksIds.clear();
+    logger.info("All tasks deselected");
+    emit allTasksDeselected();
 }
 
 bool TasksService::isTaskSelected(const int& id) {
     return m_tasksIds.contains(id);
+}
+
+int TasksService::getSelectedTasksCount() const {
+    return m_tasksIds.size();
 }
 
 QVariantList TasksService::deleteBulk() {
@@ -635,7 +653,8 @@ void TasksService::moveBulk(const int& parentId) {
     }
     m_tasksIds.clear();
     setMultiselectMode(false);
-    emit taskMovedInBulk();
+    emit taskMovedInBulk(parentId);
+    emit allTasksDeselected();
 }
 
 void TasksService::processMultiselectMode(const bool multiselectMode) {

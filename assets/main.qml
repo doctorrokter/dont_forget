@@ -130,94 +130,6 @@ NavigationPane {
                         }
                     ]
                     
-                    contextActions: [
-                        ActionSet {
-                            ActionItem {
-                                id: moveActionItem
-                                title: qsTr("Move") + Retranslate.onLocaleOrLanguageChanged
-                                imageSource: "asset:///images/ic_forward.png"
-                                
-                                onTriggered: {
-                                    _tasksService.moveMode = true;
-                                }
-                                
-                                shortcuts: [
-                                    Shortcut {
-                                        key: "m"
-                                        
-                                        onTriggered: {
-                                            if (moveActionItem.enabled) {
-                                                moveActionItem.triggered();
-                                            }
-                                        }
-                                    }
-                                ]
-                            }
-                            
-                            DeleteActionItem {
-                                id: deleteTask
-                                
-                                onTriggered: {
-                                    var indexPath = listView.selected();
-                                    var data = dataModel.data(indexPath);
-                                    if (data.type !== Const.TaskTypes.RECEIVED && 
-                                    data.type !== Const.TaskTypes.TODAY && 
-                                    data.type !== Const.TaskTypes.IMPORTANT) {
-                                        dataModel.removeAt(dataModel.indexOf(data));
-                                        _tasksService.deleteTask(data.id);    
-                                    }
-                                }
-                                
-                                shortcuts: [
-                                    Shortcut {
-                                        key: "d"
-                                        
-                                        onTriggered: {
-                                            deleteTask.triggered();
-                                        }
-                                    }
-                                ]
-                            }
-                        },
-                        
-                        ActionSet {
-                            title: qsTr("Integration") + Retranslate.onLocaleOrLanguageChanged
-                            ActionItem {
-                                id: openCalendar
-                                title: qsTr("Open in Calendar") + Retranslate.onLocaleOrLanguageChanged
-                                imageSource: "asset:///images/ic_calendar.png"
-                                enabled: {
-                                    var indexPath = listView.selected();
-                                    var data = dataModel.data(indexPath);
-                                    return (data.type === Const.TaskTypes.LIST || data.type === Const.TaskTypes.TASK) && data.calendar_id !== 0;
-                                }
-                                
-                                onTriggered: {
-                                    var indexPath = listView.selected();
-                                    var data = dataModel.data(indexPath);
-                                    _app.openCalendarEvent(data.calendar_id, data.folder_id, data.account_id);
-                                }
-                            }
-                            
-                            ActionItem {
-                                id: openRemember
-                                title: qsTr("Open in Remember") + Retranslate.onLocaleOrLanguageChanged
-                                imageSource: "asset:///images/ic_notes.png"
-                                enabled: {
-                                    var indexPath = listView.selected();
-                                    var data = dataModel.data(indexPath);
-                                    return (data.type === Const.TaskTypes.LIST || data.type === Const.TaskTypes.TASK) && data.remember_id !== 0;
-                                }
-                                
-                                onTriggered: {
-                                    var indexPath = listView.selected();
-                                    var data = dataModel.data(indexPath);
-                                    _app.openRememberNote(data.remember_id);
-                                }
-                            }
-                        }
-                    ]
-                    
                     listItemComponents: [
                         ListItemComponent {
                             type: Const.TaskTypes.RECEIVED
@@ -427,9 +339,17 @@ NavigationPane {
             dataModel.append(_tasksService.findSiblings());
         }
         
+        function tasksMovedInBulk(parentId) {
+            root.reload();
+        }
+        
         function onThumbnail() {
             highCover.update();
             Application.setCover(cover);
+        }
+        
+        function clearSelection() {
+            listView.clearSelection();
         }
         
         onCreationCompleted: {
@@ -439,6 +359,8 @@ NavigationPane {
             _tasksService.taskUpdated.connect(root.taskUpdated);
             _tasksService.taskClosedChanged.connect(root.taskClosedChanged);
             _tasksService.taskDeleted.connect(root.taskDeleted);
+            _tasksService.allTasksDeselected.connect(root.clearSelection);
+            _tasksService.taskMovedInBulk.connect(root.tasksMovedInBulk);
             _app.folderPageRequested.connect(root.openFolderPage);
             Application.thumbnail.connect(root.onThumbnail);
         }

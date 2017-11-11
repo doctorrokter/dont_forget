@@ -12,6 +12,7 @@
 #include <QNetworkReply>
 #include <QVariantMap>
 #include <QVariantList>
+#include <QList>
 
 class Logger: public QObject {
     Q_OBJECT
@@ -28,6 +29,7 @@ public:
     void info(const QUrl& url);
     void info(const QVariantMap& map);
     void info(const QVariantList& list);
+    void info(const QList<int>& list);
     void error(const QNetworkReply::NetworkError e);
     void error(const QString& error);
 

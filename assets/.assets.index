@@ -1,5 +1,9 @@
 1
-129
+133
+actions/CalendarActionItem.qml
+actions/DeleteTaskActionItem.qml
+actions/MoveActionItem.qml
+actions/RememberActionItem.qml
 cards/CreateTaskFromTextCard.qml
 cards/CreateTaskFromUrlCard.qml
 cards/TestCard.qml
@@ -95,6 +99,7 @@ images/video_icon_big_512x512.png
 images/xls_icon_big_512x512.png
 images/yellow_pellet.png
 images/zip_icon_big_512x512.png
+js/assign.js
 js/Const.js
 main.qml
 main_old.qml
@@ -122,7 +127,6 @@ pages/SettingsPage.qml
 pages/settings_components/BackupAndRecovery.qml
 pages/TaskPage.qml
 pages/TasksListPage.qml
-pages/TaskViewPage.qml
 pages/TodayPage.qml
 sheets/AddContactSheet.qml
 sheets/FilePickersSheet.qml

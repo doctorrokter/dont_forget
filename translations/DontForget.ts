@@ -81,6 +81,13 @@
     </message>
 </context>
 <context>
+    <name>CalendarActionItem</name>
+    <message>
+        <source>Open in Calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ContactsPage</name>
     <message>
         <source>Edit</source>
@@ -264,6 +271,13 @@
     </message>
 </context>
 <context>
+    <name>FolderListItem</name>
+    <message>
+        <source>Actions</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>FolderPage</name>
     <message>
         <source>Create folder</source>
@@ -279,18 +293,6 @@
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Integration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open in Calendar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open in Remember</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -390,6 +392,13 @@
     </message>
 </context>
 <context>
+    <name>ListListItem</name>
+    <message>
+        <source>Actions</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ListPage</name>
     <message>
         <source>Create task</source>
@@ -399,16 +408,11 @@
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>MoveActionItem</name>
     <message>
-        <source>Integration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open in Calendar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open in Remember</source>
+        <source>Move</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -438,6 +442,13 @@
     <name>ReceivedListItem</name>
     <message>
         <source>Received</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RememberActionItem</name>
+    <message>
+        <source>Open in Remember</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -571,6 +582,13 @@
     <name>TaskDescriptionContainer</name>
     <message>
         <source>Notes...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskListItem</name>
+    <message>
+        <source>Actions</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -802,22 +820,6 @@
     </message>
     <message>
         <source>Dashboard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Integration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open in Calendar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open in Remember</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Move</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
