@@ -3,6 +3,7 @@ import "../actions"
 import "../components"
 import "../components/v2"
 import "../js/Const.js" as Const
+import "../js/assign.js" as Assign
 
 Page {
     id: root
@@ -205,7 +206,7 @@ Page {
         if (root.taskId === parentId) {
             var i = root.taskExists(taskId);
             if (i !== -1 && closed) {
-                var task = dataModel.value(i);
+                var task = Assign.invoke({}, dataModel.value(i));
                 task.closed = closed;
                 dataModel.removeAt(i);
                 dataModel.append(task);

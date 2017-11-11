@@ -584,12 +584,12 @@
         <translation type="obsolete">Открыть в Remember</translation>
     </message>
     <message>
-        <location filename="../assets/pages/ListPage.qml" line="110"/>
+        <location filename="../assets/pages/ListPage.qml" line="111"/>
         <source>Create task</source>
         <translation type="unfinished">Создать задачу</translation>
     </message>
     <message>
-        <location filename="../assets/pages/ListPage.qml" line="131"/>
+        <location filename="../assets/pages/ListPage.qml" line="132"/>
         <source>Edit</source>
         <translation type="unfinished">Изменить</translation>
     </message>
@@ -634,6 +634,34 @@
         <location filename="../assets/components/v2/Mover.qml" line="37"/>
         <source>Selected</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OverdueListItem</name>
+    <message>
+        <location filename="../assets/components/v2/OverdueListItem.qml" line="43"/>
+        <source>Overdue</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OverduePage</name>
+    <message>
+        <source>Important</source>
+        <translation type="obsolete">Важно</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/OverduePage.qml" line="18"/>
+        <source>Overdue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open in Calendar</source>
+        <translation type="obsolete">Открыть в Календаре</translation>
+    </message>
+    <message>
+        <source>Open in Remember</source>
+        <translation type="obsolete">Открыть в Remember</translation>
     </message>
 </context>
 <context>
@@ -1176,7 +1204,7 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../assets/main.qml" line="31"/>
+        <location filename="../assets/main.qml" line="32"/>
         <source>Send feedback</source>
         <translation type="unfinished">Обратная связь</translation>
     </message>
@@ -1321,22 +1349,22 @@
         <translation type="obsolete">Отмена</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="372"/>
+        <location filename="../assets/main.qml" line="394"/>
         <source>Create folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="393"/>
+        <location filename="../assets/main.qml" line="415"/>
         <source>Create task</source>
         <translation type="unfinished">Создать задачу</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="414"/>
+        <location filename="../assets/main.qml" line="436"/>
         <source>Create list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="543"/>
+        <location filename="../assets/main.qml" line="582"/>
         <source>Dashboard</source>
         <translation type="unfinished"></translation>
     </message>

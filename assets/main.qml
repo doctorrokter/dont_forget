@@ -4,6 +4,7 @@ import "./components"
 import "./components/v2"
 import "./pages"
 import "./js/Const.js" as Const
+import "./js/assign.js" as Assign
 
 NavigationPane {
     
@@ -118,6 +119,11 @@ NavigationPane {
                         navigationPane.push(tp);
                     }
                     
+                    function openOverdue() {
+                        var op = overduePage.createObject();
+                        navigationPane.push(op);
+                    }
+                    
                     attachedObjects: [
                         ListScrollStateHandler {
                             onAtEndChanged: {
@@ -158,6 +164,17 @@ NavigationPane {
                                     ListItem.view.openImportant();
                                 }
                             }
+                        },
+                        
+                        ListItemComponent {
+                            type: Const.TaskTypes.OVERDUE
+                            OverdueListItem {
+                                count: ListItemData.count
+                                
+                                onOpen: {
+                                    ListItem.view.openOverdue();
+                                }
+                            }    
                         },
                         
                         ListItemComponent {
@@ -257,7 +274,7 @@ NavigationPane {
                         }
                         break;
                     case Const.TaskTypes.FOLDER:
-                        dataModel.insert(3, newTask);
+                        dataModel.insert(5, newTask);
                         listView.scrollToPosition(ScrollPosition.Beginning, ScrollAnimation.Smooth);
                         break;
                     case Const.TaskTypes.LIST:
@@ -289,7 +306,7 @@ NavigationPane {
             if (parentId === 0) {
                 var i = root.taskExists(taskId);
                 if (i !== -1 && closed) {
-                    var task = dataModel.value(i);
+                    var task = Assign.invoke({}, dataModel.value(i));
                     task.closed = closed;
                     dataModel.removeAt(i);
                     if (task.type === Const.TaskTypes.LIST) {
@@ -326,6 +343,10 @@ NavigationPane {
             data = dataModel.value(2);
             data.count = _tasksService.countImportantTasks();
             dataModel.replace(2, data);
+
+            data = dataModel.value(3);
+            data.count = _tasksService.countOverdueTasks();
+            dataModel.replace(3, data);
         }
         
         function reload() {
@@ -334,6 +355,7 @@ NavigationPane {
             data.push({count: 0, type: Const.TaskTypes.RECEIVED});
             data.push({count: _tasksService.countTodayTasks(), type: Const.TaskTypes.TODAY});
             data.push({count: _tasksService.countImportantTasks(), type: Const.TaskTypes.IMPORTANT});
+            data.push({count: _tasksService.countOverdueTasks(), type: Const.TaskTypes.OVERDUE});
             data.push({type: "DIVIDER"});
             dataModel.append(data);
             dataModel.append(_tasksService.findSiblings());
@@ -510,6 +532,23 @@ NavigationPane {
         ComponentDefinition {
             id: todayPage
             TodayPage {
+                onOpenFolder: {
+                    navigationPane.openFolder(taskId, "");
+                }
+                
+                onOpenList: {
+                    navigationPane.openList(taskId, "");
+                }
+                
+                onOpenTask: {
+                    navigationPane.openTask(taskId);
+                }
+            }    
+        },
+        
+        ComponentDefinition {
+            id: overduePage
+            OverduePage {
                 onOpenFolder: {
                     navigationPane.openFolder(taskId, "");
                 }

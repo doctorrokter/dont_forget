@@ -439,6 +439,20 @@
     </message>
 </context>
 <context>
+    <name>OverdueListItem</name>
+    <message>
+        <source>Overdue</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OverduePage</name>
+    <message>
+        <source>Overdue</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ReceivedListItem</name>
     <message>
         <source>Received</source>

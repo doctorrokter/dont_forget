@@ -237,7 +237,7 @@ Page {
         if (root.taskId === parentId) {
             var i = root.taskExists(taskId);
             if (i !== -1 && closed) {
-                var task = dataModel.value(i);
+                var task = Assign.invoke({}, dataModel.value(i));
                 task.closed = closed;
                 dataModel.removeAt(i);
                 if (task.type === Const.TaskTypes.LIST) {

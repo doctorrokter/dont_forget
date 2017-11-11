@@ -48,8 +48,10 @@ public:
     Q_INVOKABLE int countChildren(const int& id);
     Q_INVOKABLE int countImportantTasks();
     Q_INVOKABLE int countTodayTasks();
+    Q_INVOKABLE int countOverdueTasks();
     Q_INVOKABLE QVariantList findImportantTasks();
     Q_INVOKABLE QVariantList findTodayTasks();
+    Q_INVOKABLE QVariantList findOverdueTasks();
 
     Q_INVOKABLE void changeClosed(const int& id, const bool& closed, const int& parentId = 0);
 

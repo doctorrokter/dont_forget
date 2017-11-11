@@ -1,5 +1,5 @@
 1
-133
+136
 actions/CalendarActionItem.qml
 actions/DeleteTaskActionItem.qml
 actions/MoveActionItem.qml
@@ -26,6 +26,7 @@ components/v2/ListCoverListItem.qml
 components/v2/ListItemTaskHeader.qml
 components/v2/ListListItem.qml
 components/v2/Mover.qml
+components/v2/OverdueListItem.qml
 components/v2/ReceivedListItem.qml
 components/v2/RichLinkPreview.qml
 components/v2/TaskCoverListItem.qml
@@ -80,6 +81,7 @@ images/ic_inbox.png
 images/ic_list.png
 images/ic_minus.png
 images/ic_notes.png
+images/ic_overdue.png
 images/ic_plus.png
 images/ic_rename.png
 images/ic_search.png
@@ -123,6 +125,7 @@ pages/HighCover.qml
 pages/ImportantPage.qml
 pages/ListPage.qml
 pages/MoveTaskPage.qml
+pages/OverduePage.qml
 pages/SettingsPage.qml
 pages/settings_components/BackupAndRecovery.qml
 pages/TaskPage.qml

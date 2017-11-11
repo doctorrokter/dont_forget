@@ -62,6 +62,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/components/v2/ListItemTaskHeader.qml) \
         $$quote($$BASEDIR/assets/components/v2/ListListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/Mover.qml) \
+        $$quote($$BASEDIR/assets/components/v2/OverdueListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/ReceivedListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/RichLinkPreview.qml) \
         $$quote($$BASEDIR/assets/components/v2/TaskCoverListItem.qml) \
@@ -116,6 +117,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/ic_list.png) \
         $$quote($$BASEDIR/assets/images/ic_minus.png) \
         $$quote($$BASEDIR/assets/images/ic_notes.png) \
+        $$quote($$BASEDIR/assets/images/ic_overdue.png) \
         $$quote($$BASEDIR/assets/images/ic_plus.png) \
         $$quote($$BASEDIR/assets/images/ic_rename.png) \
         $$quote($$BASEDIR/assets/images/ic_search.png) \
@@ -159,6 +161,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/pages/ImportantPage.qml) \
         $$quote($$BASEDIR/assets/pages/ListPage.qml) \
         $$quote($$BASEDIR/assets/pages/MoveTaskPage.qml) \
+        $$quote($$BASEDIR/assets/pages/OverduePage.qml) \
         $$quote($$BASEDIR/assets/pages/SettingsPage.qml) \
         $$quote($$BASEDIR/assets/pages/TaskPage.qml) \
         $$quote($$BASEDIR/assets/pages/TasksListPage.qml) \
