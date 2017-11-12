@@ -6,6 +6,7 @@ TitleBar {
     property ActionItem cancelAction
     property ActionItem submitAction
     property bool clearable: false
+    property string imageSource: ""
     
     appearance: TitleBarAppearance.Plain
     kind: TitleBarKind.FreeForm
@@ -16,25 +17,6 @@ TitleBar {
             leftPadding: ui.du(2)
             rightPadding: ui.du(2)
             layout: DockLayout {}
-            
-            Container {
-                visible: root.clearable
-                horizontalAlignment: HorizontalAlignment.Left
-                verticalAlignment: VerticalAlignment.Center
-                ImageView {
-                    imageSource: "asset:///images/ic_deselect.png"
-                    maxWidth: ui.du(7)
-                    maxHeight: ui.du(7)
-                }
-                
-                gestureHandlers: [
-                    TapHandler {
-                        onTapped: {
-                            _tasksService.setActiveTask(0);
-                        }
-                    }
-                ]
-            }
             
             Container {
                 id: cancelContainer
@@ -87,6 +69,19 @@ TitleBar {
             }
             
             Container {
+                id: imageContainer
+                visible: root.imageSource !== ""
+                horizontalAlignment: HorizontalAlignment.Left
+                verticalAlignment: VerticalAlignment.Center
+                
+                ImageView {
+                    imageSource: root.imageSource
+                    maxWidth: ui.du(6)
+                    maxHeight: ui.du(6)
+                }
+            }
+            
+            Container {
                 horizontalAlignment: {
                     if (root.cancelAction) {
                         return HorizontalAlignment.Center;
@@ -94,7 +89,12 @@ TitleBar {
                     return HorizontalAlignment.Left;
                 }
                 verticalAlignment: VerticalAlignment.Center
-                maxWidth: ui.du(50)
+                margin.leftOffset: {
+                    if (imageContainer.visible) {
+                        return ui.du(8);
+                    }
+                    return 0;
+                }
                 Label {
                     text: title
                     textStyle.base: SystemDefaults.TextStyles.TitleText

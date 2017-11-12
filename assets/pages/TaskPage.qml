@@ -76,7 +76,7 @@ Page {
                 id: palette
                 
                 horizontalAlignment: HorizontalAlignment.Center
-                visible: root.isList()
+                visible: root.isList() || root.isFolder()
                 
                 color: _tasksService.activeTask.color === "" ? palette.colors.GREEN : _tasksService.activeTask.color
                 

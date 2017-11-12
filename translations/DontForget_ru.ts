@@ -117,6 +117,14 @@
     </message>
 </context>
 <context>
+    <name>ChartsPage</name>
+    <message>
+        <location filename="../assets/pages/ChartsPage.qml" line="12"/>
+        <source>Charts</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ContactsPage</name>
     <message>
         <location filename="../assets/pages/ContactsPage.qml" line="52"/>
@@ -412,22 +420,22 @@
         <translation type="obsolete">Открыть в Remember</translation>
     </message>
     <message>
-        <location filename="../assets/pages/FolderPage.qml" line="316"/>
+        <location filename="../assets/pages/FolderPage.qml" line="317"/>
         <source>Create folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/pages/FolderPage.qml" line="337"/>
+        <location filename="../assets/pages/FolderPage.qml" line="338"/>
         <source>Create task</source>
         <translation type="unfinished">Создать задачу</translation>
     </message>
     <message>
-        <location filename="../assets/pages/FolderPage.qml" line="358"/>
+        <location filename="../assets/pages/FolderPage.qml" line="359"/>
         <source>Create list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/pages/FolderPage.qml" line="379"/>
+        <location filename="../assets/pages/FolderPage.qml" line="380"/>
         <source>Edit</source>
         <translation type="unfinished">Изменить</translation>
     </message>
@@ -524,17 +532,17 @@
         <translation type="unfinished">Важно</translation>
     </message>
     <message>
-        <location filename="../assets/pages/ImportantPage.qml" line="113"/>
+        <location filename="../assets/pages/ImportantPage.qml" line="114"/>
         <source>Integration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/pages/ImportantPage.qml" line="116"/>
+        <location filename="../assets/pages/ImportantPage.qml" line="117"/>
         <source>Open in Calendar</source>
         <translation type="unfinished">Открыть в Календаре</translation>
     </message>
     <message>
-        <location filename="../assets/pages/ImportantPage.qml" line="128"/>
+        <location filename="../assets/pages/ImportantPage.qml" line="129"/>
         <source>Open in Remember</source>
         <translation type="unfinished">Открыть в Remember</translation>
     </message>
@@ -1116,17 +1124,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/pages/TodayPage.qml" line="113"/>
+        <location filename="../assets/pages/TodayPage.qml" line="114"/>
         <source>Integration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/pages/TodayPage.qml" line="116"/>
+        <location filename="../assets/pages/TodayPage.qml" line="117"/>
         <source>Open in Calendar</source>
         <translation type="unfinished">Открыть в Календаре</translation>
     </message>
     <message>
-        <location filename="../assets/pages/TodayPage.qml" line="128"/>
+        <location filename="../assets/pages/TodayPage.qml" line="129"/>
         <source>Open in Remember</source>
         <translation type="unfinished">Открыть в Remember</translation>
     </message>
@@ -1364,7 +1372,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="582"/>
+        <location filename="../assets/main.qml" line="457"/>
+        <source>Charts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="613"/>
         <source>Dashboard</source>
         <translation type="unfinished"></translation>
     </message>

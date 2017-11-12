@@ -68,6 +68,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/components/v2/TaskCoverListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/TaskListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/TodayListItem.qml) \
+        $$quote($$BASEDIR/assets/html/charts.html) \
         $$quote($$BASEDIR/assets/images/apk_icon_big_512x512.png) \
         $$quote($$BASEDIR/assets/images/audio_icon_big_512x512.png) \
         $$quote($$BASEDIR/assets/images/backgrounds/apple.jpg) \
@@ -94,6 +95,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/ic_add_folder.png) \
         $$quote($$BASEDIR/assets/images/ic_attach.png) \
         $$quote($$BASEDIR/assets/images/ic_calendar.png) \
+        $$quote($$BASEDIR/assets/images/ic_chart.png) \
         $$quote($$BASEDIR/assets/images/ic_clear.png) \
         $$quote($$BASEDIR/assets/images/ic_compose.png) \
         $$quote($$BASEDIR/assets/images/ic_delete.png) \
@@ -137,6 +139,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/xls_icon_big_512x512.png) \
         $$quote($$BASEDIR/assets/images/yellow_pellet.png) \
         $$quote($$BASEDIR/assets/images/zip_icon_big_512x512.png) \
+        $$quote($$BASEDIR/assets/js/Chart.min.js) \
         $$quote($$BASEDIR/assets/js/Const.js) \
         $$quote($$BASEDIR/assets/js/assign.js) \
         $$quote($$BASEDIR/assets/main.qml) \
@@ -153,6 +156,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/migrations/8_create_index_type.sql) \
         $$quote($$BASEDIR/assets/migrations/9_add_column_color_into_tasks.sql) \
         $$quote($$BASEDIR/assets/pages/BackgroundPage.qml) \
+        $$quote($$BASEDIR/assets/pages/ChartsPage.qml) \
         $$quote($$BASEDIR/assets/pages/ContactsPage.qml) \
         $$quote($$BASEDIR/assets/pages/DebugPage.qml) \
         $$quote($$BASEDIR/assets/pages/FolderPage.qml) \
@@ -275,6 +279,9 @@ lupdate_inclusion {
         $$quote($$BASEDIR/../assets/components/v2/*.qml) \
         $$quote($$BASEDIR/../assets/components/v2/*.js) \
         $$quote($$BASEDIR/../assets/components/v2/*.qs) \
+        $$quote($$BASEDIR/../assets/html/*.qml) \
+        $$quote($$BASEDIR/../assets/html/*.js) \
+        $$quote($$BASEDIR/../assets/html/*.qs) \
         $$quote($$BASEDIR/../assets/images/*.qml) \
         $$quote($$BASEDIR/../assets/images/*.js) \
         $$quote($$BASEDIR/../assets/images/*.qs) \

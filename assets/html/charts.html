@@ -1,0 +1,53 @@
+<html>
+<head>
+</head>
+<body>
+<canvas id="myChart"></canvas>
+<hr/>
+<canvas id="barChart"></canvas>
+
+<script type="text/javascript" src="../js/Chart.min.js"></script>
+<!--<script type="text/javascript">
+navigator.cascades.onmessage = function onmessage(message) {
+    document.body.innerHTML += "<p>You replied: " + message + "</p>";
+    navigator.cascades.postMessage("Anything else?");
+    document.body.innerHTML += "<p>Then I said: Anything else?</p>";
+}
+</script>-->
+<script type="text/javascript">
+	var ctx = document.getElementById('myChart').getContext('2d');
+	var chart = new Chart(ctx, {
+		type: 'doughnut',
+		
+		data: {
+			labels: ['Received', 'Today', 'Important', 'Overdue', 'Closed'],
+			datasets: [{
+				label: 'My first dataset',
+				data: [0, 2, 2, 1, 10],
+				backgroundColor: ['#B7B327', '#779933', '#CC3333', '#0092CC', '#969696']
+			}]
+		},
+		
+		options: {}
+	});
+	
+	var ctx2 = document.getElementById('barChart').getContext('2d');
+	var bar = new Chart(ctx2, {
+    	type: 'horizontalBar',
+    	data: {
+			labels: ['Received', 'Today', 'Important', 'Overdue', 'Closed'],
+			datasets: [{
+				label: 'Timeline',
+				data: [0, 2, 2, 1, 10],
+				backgroundColor: ['#B7B327', '#779933', '#CC3333', '#0092CC', '#969696']
+			}]
+		},
+		
+		options: {
+        	
+    	}
+	});
+</script>
+
+</body>
+</html>

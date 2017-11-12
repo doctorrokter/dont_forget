@@ -1,5 +1,5 @@
 1
-136
+140
 actions/CalendarActionItem.qml
 actions/DeleteTaskActionItem.qml
 actions/MoveActionItem.qml
@@ -32,6 +32,7 @@ components/v2/RichLinkPreview.qml
 components/v2/TaskCoverListItem.qml
 components/v2/TaskListItem.qml
 components/v2/TodayListItem.qml
+html/charts.html
 images/apk_icon_big_512x512.png
 images/audio_icon_big_512x512.png
 images/backgrounds/apple.jpg
@@ -58,6 +59,7 @@ images/ic_add.png
 images/ic_add_folder.png
 images/ic_attach.png
 images/ic_calendar.png
+images/ic_chart.png
 images/ic_clear.png
 images/ic_compose.png
 images/ic_delete.png
@@ -102,6 +104,7 @@ images/xls_icon_big_512x512.png
 images/yellow_pellet.png
 images/zip_icon_big_512x512.png
 js/assign.js
+js/Chart.min.js
 js/Const.js
 main.qml
 main_old.qml
@@ -117,6 +120,7 @@ migrations/7_create_index_parent_id.sql
 migrations/8_create_index_type.sql
 migrations/9_add_column_color_into_tasks.sql
 pages/BackgroundPage.qml
+pages/ChartsPage.qml
 pages/ContactsPage.qml
 pages/DebugPage.qml
 pages/FolderPage.qml

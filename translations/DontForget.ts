@@ -88,6 +88,13 @@
     </message>
 </context>
 <context>
+    <name>ChartsPage</name>
+    <message>
+        <source>Charts</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ContactsPage</name>
     <message>
         <source>Edit</source>
@@ -834,6 +841,10 @@
     </message>
     <message>
         <source>Dashboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Charts</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

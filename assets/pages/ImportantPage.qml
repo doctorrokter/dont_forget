@@ -16,6 +16,7 @@ Page {
     
     titleBar: CustomTitleBar {
         title: qsTr("Important") + Retranslate.onLocaleOrLanguageChanged
+        imageSource: "asset:///images/ic_important.png"
     }
     
     actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll

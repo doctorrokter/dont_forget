@@ -449,7 +449,28 @@ NavigationPane {
                         }
                     }
                 ]
+            },
+            
+            ActionItem {
+                id: chartsActionItem
+                imageSource: "asset:///images/ic_chart.png"
+                title: qsTr("Charts") + Retranslate.onLocaleOrLanguageChanged
+                
+                onTriggered: {
+                    var cp = chartsPage.createObject();
+                    navigationPane.push(cp);
+                }
             }
+            
+//            ActionItem {
+//                id: debugActionItem
+//                title: "Debug"
+//                
+//                onTriggered: {
+//                    var dp = debugPage.createObject();
+//                    navigationPane.push(dp);
+//                }
+//            }
         ]
     }
     
@@ -566,6 +587,16 @@ NavigationPane {
         ComponentDefinition {
             id: taskPage
             TaskPage {}    
+        },
+        
+        ComponentDefinition {
+            id: chartsPage
+            ChartsPage {}    
+        },
+        
+        ComponentDefinition {
+            id: debugPage
+            DebugPage {}    
         },
         
         Invocation {

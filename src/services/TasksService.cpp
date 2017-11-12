@@ -699,6 +699,7 @@ void TasksService::countOrAttachments(QVariantList& tasks) {
     QVariantList::Iterator iter;
     for (iter = tasks.begin(); iter != tasks.end(); iter++) {
         QVariantMap taskMap = iter->toMap();
+        logger.info(taskMap);
         if (taskMap.value("type").toString().compare("TASK") == 0) {
             taskMap["attachments"] = m_pAttachmentsService->findByTaskId(taskMap.value("id").toInt());
         } else {

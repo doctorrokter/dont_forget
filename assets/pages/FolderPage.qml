@@ -165,6 +165,7 @@ Page {
         CustomTitleBar {
             id: defaultTitleBar
             title: root.name
+            imageSource: "asset:///images/ic_folder.png"
         },
         
         TaskTitleBar {
