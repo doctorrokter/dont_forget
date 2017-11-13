@@ -80,8 +80,9 @@ NavigationPane {
                         id: taskName 
                     }
                     
-                    TaskDescriptionContainer { 
-                        id: description 
+                    TaskDescriptionContainer {
+                        id: description
+                        margin.topOffset: ui.du(2)
                     }
                     
                     AttachmentsContainer {

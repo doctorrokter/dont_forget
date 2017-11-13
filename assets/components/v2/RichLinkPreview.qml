@@ -8,7 +8,7 @@ Container {
     property string site: "Onliner.by"
     property string title: ""
     property string description: "The mega description for the super link"
-    property string imageSource: "asset:///images/backgrounds/AndroidXWallpaper(Wall2mob.com)_40131.jpg"
+    property string imageSource: "asset:///images/backgrounds/wall_1.jpg"
     
     horizontalAlignment: HorizontalAlignment.Fill
     
@@ -16,11 +16,16 @@ Container {
     topPadding: ui.du(1)
     rightPadding: ui.du(1)
     
+    onUrlChanged: {
+        urlLabel.text = "<a href=\"" + root.url + "\">" + root.url + "</a>";
+    }
+    
     Container {
         bottomMargin: ui.du(1)
         Label {
-            text: "<a href=\"" + root.url + "\">" + root.url + "</a>"
+            id: urlLabel
             textFormat: TextFormat.Html
+            multiline: true
         }
     }
     
@@ -46,6 +51,7 @@ Container {
                 Label {
                     text: root.site
                     textStyle.color: ui.palette.primaryBase
+                    multiline: true
                 }
             }
             
@@ -61,6 +67,7 @@ Container {
                 Label {
                     text: root.description
                     textFormat: TextFormat.Html
+                    multiline: true
                 }
             }
             
@@ -78,4 +85,55 @@ Container {
             ]
         }
     }
+    
+    function load() {
+        webPage.url = root.url;
+    }
+    
+    attachedObjects: [
+        WebPage {
+            id: webPage
+            
+            onTitleChanged: {
+                root.title = title;
+                
+                var titleScript = 'document.querySelector(\'meta[property="og:title"]\').content';
+                evaluateJavaScript(titleScript, JavaScriptWorld.Normal);
+                
+                var imgScript = 'document.querySelector(\'meta[property="og:image"]\').content';
+                evaluateJavaScript(imgScript, JavaScriptWorld.Normal);
+                
+                var descScript = 'document.querySelector(\'meta[property="og:description"]\').content';
+                evaluateJavaScript(descScript, JavaScriptWorld.Normal);
+            }
+            
+            onJavaScriptResult: {
+                console.debug("===>>> JS");
+                console.debug("id: ", resultId);
+                console.debug("result: ", result);
+            }
+            
+            onLoadingChanged: {
+                if (loadRequest.status == WebLoadStatus.Succeeded) {
+//                    var titleScript = 'document.querySelector(\'meta[property="og:title"]\').content';
+//                    webPage.evaluateJavaScript(titleScript, JavaScriptWorld.Normal);
+//                    
+//                    var imgScript = 'document.querySelector(\'meta[property="og:image"]\').content';
+//                    webPage.evaluateJavaScript(imgScript, JavaScriptWorld.Normal);
+//                    
+//                    var descScript = 'document.querySelector(\'meta[property="og:description"]\').content';
+//                    webPage.evaluateJavaScript(descScript, JavaScriptWorld.Normal);
+                }
+//                if (loadRequest.status == WebLoadStatus.Started) {
+//                    console.debug("Load started.");
+//                }
+//                else if (loadRequest.status == WebLoadStatus.Succeeded) {
+//                    console.debug("Load finished.");
+//                }
+//                else if (loadRequest.status == WebLoadStatus.Failed) {
+//                    console.debug("Load failed.");
+//                }
+            }
+        }
+    ]
 }

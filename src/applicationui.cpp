@@ -17,7 +17,6 @@
 #include "applicationui.hpp"
 
 #include <bb/cascades/Application>
-#include <bb/cascades/QmlDocument>
 #include <bb/cascades/AbstractPane>
 #include <bb/cascades/LocaleHandler>
 #include <bb/cascades/VisualStyle>
@@ -70,6 +69,7 @@ ApplicationUI::ApplicationUI() : QObject() {
     m_pPushService->initPushService();
 
     m_pTasksService = new TasksService(this, m_pDbConfig, m_pAttachmentsService);
+    m_pTasksService->processCollisions();
     m_pSearchService = new SearchService(this, m_pTasksService);
 
     m_pUsersService = new UsersService(this, m_pDbConfig);
@@ -105,8 +105,6 @@ ApplicationUI::ApplicationUI() : QObject() {
     Q_ASSERT(res);
 
     onSystemLanguageChanged();
-
-    QFuture<void> future;
 
     switch (m_pInvokeManager->startupMode()) {
         case ApplicationStartupMode::LaunchApplication:
@@ -188,19 +186,7 @@ void ApplicationUI::initFullUI() {
     QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
     QDeclarativeEngine* engine = QmlDocument::defaultDeclarativeEngine();
     QDeclarativeContext* rootContext = engine->rootContext();
-    rootContext->setContextProperty("_app", this);
-    rootContext->setContextProperty("_currentPath", QDir::currentPath());
-    rootContext->setContextProperty("_appConfig", m_pAppConfig);
-    rootContext->setContextProperty("_tasksService", m_pTasksService);
-    rootContext->setContextProperty("_usersService", m_pUsersService);
-    rootContext->setContextProperty("_pushService", m_pPushService);
-    rootContext->setContextProperty("_dropboxService", m_pDropboxService);
-    rootContext->setContextProperty("_attachmentsService", m_pAttachmentsService);
-    rootContext->setContextProperty("_calendar", m_pCalendar);
-    rootContext->setContextProperty("_signal", m_pSignal);
-    rootContext->setContextProperty("_date", m_pDateUtil);
-    rootContext->setContextProperty("_ui", m_pUIManager);
-    rootContext->setContextProperty("_hasSharedFilesPermission", m_pDbConfig->hasSharedFilesPermission());
+    configureContext(rootContext);
     m_running = true;
 
     AbstractPane *root = qml->createRootObject<AbstractPane>();
@@ -211,15 +197,8 @@ void ApplicationUI::initComposerUI(const QString& pathToPage, const QString& dat
     QmlDocument *qml = QmlDocument::create(pathToPage);
     QDeclarativeEngine* engine = QmlDocument::defaultDeclarativeEngine();
     QDeclarativeContext* rootContext = engine->rootContext();
-    rootContext->setContextProperty("_app", this);
-    rootContext->setContextProperty("_appConfig", m_pAppConfig);
-    rootContext->setContextProperty("_tasksService", m_pTasksService);
-    rootContext->setContextProperty("_attachmentsService", m_pAttachmentsService);
+    configureContext(rootContext);
     rootContext->setContextProperty("_data", data);
-    rootContext->setContextProperty("_hasSharedFilesPermission", m_pDbConfig->hasSharedFilesPermission());
-    rootContext->setContextProperty("_calendar", m_pCalendar);
-    rootContext->setContextProperty("_date", m_pDateUtil);
-    rootContext->setContextProperty("_ui", m_pUIManager);
     rootContext->setContextProperty("_mimeType", mimeType);
 
     AbstractPane *root = qml->createRootObject<AbstractPane>();
@@ -381,4 +360,20 @@ QVariantList ApplicationUI::getImages() const {
         }
     }
     return images;
+}
+
+void ApplicationUI::configureContext(QDeclarativeContext* rootContext) {
+    rootContext->setContextProperty("_app", this);
+    rootContext->setContextProperty("_currentPath", QDir::currentPath());
+    rootContext->setContextProperty("_appConfig", m_pAppConfig);
+    rootContext->setContextProperty("_tasksService", m_pTasksService);
+    rootContext->setContextProperty("_usersService", m_pUsersService);
+    rootContext->setContextProperty("_pushService", m_pPushService);
+    rootContext->setContextProperty("_dropboxService", m_pDropboxService);
+    rootContext->setContextProperty("_attachmentsService", m_pAttachmentsService);
+    rootContext->setContextProperty("_calendar", m_pCalendar);
+    rootContext->setContextProperty("_signal", m_pSignal);
+    rootContext->setContextProperty("_date", m_pDateUtil);
+    rootContext->setContextProperty("_ui", m_pUIManager);
+    rootContext->setContextProperty("_hasSharedFilesPermission", m_pDbConfig->hasSharedFilesPermission());
 }

@@ -51,16 +51,19 @@ void TasksService::init() {
 }
 
 void TasksService::processCollisions() {
-    QVariantList collisions = m_pDbConfig->execute("SELECT * FROM tasks WHERE id = parent_id").toList();
-    if (!collisions.isEmpty()) {
-        logger.info("FOUND COLLISIONS!");
-        foreach(QVariant taskVar, collisions) {
-            Task t;
-            t.fromMap(taskVar.toMap());
-            if (hasChildren(t.getId())) {
-                m_pDbConfig->execute(QString("UPDATE tasks SET parent_id = NULL WHERE id = %1").arg(t.getId()));
+    if (AppConfig::getStatic("collisions_processed").toInt() != 1) {
+        m_pDbConfig->execute("UPDATE tasks SET parent_id = NULL WHERE id = parent_id");
+        QVariantList parents = m_pDbConfig->execute("SELECT id, parent_id FROM tasks WHERE parent_id IS NOT NULL ORDER BY parent_id").toList();
+        if (!parents.isEmpty()) {
+            foreach(QVariant taskVar, parents) {
+                int id = taskVar.toMap().value("id").toInt();
+                int parentId = taskVar.toMap().value("parent_id").toInt();
+                if (!isExists(parentId)) {
+                    m_pDbConfig->execute(QString("UPDATE tasks SET parent_id = NULL WHERE id = %1").arg(id));
+                }
             }
         }
+        AppConfig::setStatic("collisions_processed", 1);
     }
 }
 
@@ -699,7 +702,6 @@ void TasksService::countOrAttachments(QVariantList& tasks) {
     QVariantList::Iterator iter;
     for (iter = tasks.begin(); iter != tasks.end(); iter++) {
         QVariantMap taskMap = iter->toMap();
-        logger.info(taskMap);
         if (taskMap.value("type").toString().compare("TASK") == 0) {
             taskMap["attachments"] = m_pAttachmentsService->findByTaskId(taskMap.value("id").toInt());
         } else {

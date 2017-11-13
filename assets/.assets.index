@@ -1,13 +1,11 @@
 1
-140
+138
 actions/CalendarActionItem.qml
 actions/DeleteTaskActionItem.qml
 actions/MoveActionItem.qml
 actions/RememberActionItem.qml
 cards/CreateTaskFromTextCard.qml
 cards/CreateTaskFromUrlCard.qml
-cards/TestCard.qml
-cards/UpdateTaskCard.qml
 components/AttachmentsContainer.qml
 components/ColorControl.qml
 components/CustomTitleBar.qml

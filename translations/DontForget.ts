@@ -500,18 +500,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Default task type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Task</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Default calendar account</source>
         <translation type="unfinished"></translation>
     </message>
@@ -521,14 +509,6 @@
     </message>
     <message>
         <source>Localized</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>System sound on selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Vibrate on selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -779,49 +759,6 @@
     </message>
 </context>
 <context>
-    <name>UpdateTaskCard</name>
-    <message>
-        <source>Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Deadline</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create in Remember</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Important</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Update task</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Close task</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete task</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Task updated!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add to Calendar</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>main</name>
     <message>
         <source>Send feedback</source>
@@ -841,10 +778,6 @@
     </message>
     <message>
         <source>Dashboard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Charts</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

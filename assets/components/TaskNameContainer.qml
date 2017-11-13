@@ -23,18 +23,11 @@ Container {
         textField.validator.validate();
     }
     
-    Container {
-        leftPadding: ui.du(2.5)
-        topPadding: ui.du(2.5)
-        Label {
-            text: qsTr("Name") + Retranslate.onLocaleOrLanguageChanged
-        }
-    }
-    
     TextField {
         id: textField
         text: value
         inputMode: TextFieldInputMode.Text
+        hintText: qsTr("Name") + Retranslate.onLocaleOrLanguageChanged
         
         validator: Validator {
             errorMessage: qsTr("This field cannot be empty") + Retranslate.onLocaleOrLanguageChanged

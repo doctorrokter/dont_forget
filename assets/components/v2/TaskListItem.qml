@@ -152,6 +152,7 @@ CustomListItem {
         }
         
         Container {
+            visible: root.isAdditionalContainerVisible()
             horizontalAlignment: HorizontalAlignment.Fill
             
             background: ui.palette.background
@@ -296,24 +297,25 @@ CustomListItem {
         }
     }
     
-    attachedObjects: [
-        ComponentDefinition {
-            id: richLinkPreview
-            RichLinkPreview {}
-        }
-    ]
-    
-    onDescriptionChanged: {
-        previews.removeAll();
-        var urls = description.match(/\bhttps?:\/\/\S+/gi);
-        if (urls) {
-            urls.forEach(function(url) {
-                var preview = richLinkPreview.createObject();
-                preview.url = url;
-                previews.add(preview);
-            });
-        }
-    }
+//    attachedObjects: [
+//        ComponentDefinition {
+//            id: richLinkPreview
+//            RichLinkPreview {}
+//        }
+//    ]
+//    
+//    onDescriptionChanged: {
+//        previews.removeAll();
+//        var urls = description.match(/\bhttps?:\/\/\S+/gi);
+//        if (urls) {
+//            urls.forEach(function(url) {
+//                var preview = richLinkPreview.createObject();
+//                preview.url = url;
+//                previews.add(preview);
+//                preview.load();
+//            });
+//        }
+//    }
     
     contextActions: [
         ActionSet {
@@ -337,4 +339,8 @@ CustomListItem {
             }
         }
     ]
+    
+    function isAdditionalContainerVisible() {
+        return root.deadline !== 0 || root.important || (root.rememberId !== "" && root.rememberId !== 0) || root.calendarId !== 0 || root.attachments.length !== 0;
+    }
 }

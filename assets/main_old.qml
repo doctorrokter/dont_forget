@@ -487,9 +487,6 @@ NavigationPane {
             ComponentDefinition {
                 id: settingsPage
                 SettingsPage {
-                    onSortByChanged: {
-                        navigation.renderTree();
-                    }
                 }
             },
             

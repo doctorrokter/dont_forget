@@ -449,18 +449,18 @@ NavigationPane {
                         }
                     }
                 ]
-            },
-            
-            ActionItem {
-                id: chartsActionItem
-                imageSource: "asset:///images/ic_chart.png"
-                title: qsTr("Charts") + Retranslate.onLocaleOrLanguageChanged
-                
-                onTriggered: {
-                    var cp = chartsPage.createObject();
-                    navigationPane.push(cp);
-                }
             }
+            
+//            ActionItem {
+//                id: chartsActionItem
+//                imageSource: "asset:///images/ic_chart.png"
+//                title: qsTr("Charts") + Retranslate.onLocaleOrLanguageChanged
+//                
+//                onTriggered: {
+//                    var cp = chartsPage.createObject();
+//                    navigationPane.push(cp);
+//                }
+//            }
             
 //            ActionItem {
 //                id: debugActionItem

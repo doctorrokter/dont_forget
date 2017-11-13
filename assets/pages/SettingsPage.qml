@@ -13,14 +13,11 @@ Page {
         BACKUP_EVERY: "backup_every",
         BACKUPS_NUMBER: "backups_number",
         DO_NOT_ASK_BEFORE_DELETING: "do_not_ask_before_deleting",
-        DEFAULT_TASK_TYPE: "default_task_type",
         DEFAULT_ACCOUNT_ID: "default_account_id",
         DEFAULT_FOLDER_ID: "default_folder_id"
     }
     
     signal backgroundPageRequested()
-    signal sortByChanged()
-    signal defaultTaskTypeChanged()
     
     actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
     actionBarVisibility: ChromeVisibility.Overlay
@@ -87,9 +84,9 @@ Page {
                     }
                 }
                 
-                BackupAndRecovery {
-                    id: backupAndRecoverySection
-                }
+//                BackupAndRecovery {
+//                    id: backupAndRecoverySection
+//                }
                 
                 Header {
                     title: qsTr("Behavior") + Retranslate.onLocaleOrLanguageChanged
@@ -121,36 +118,6 @@ Page {
                         }
                     }
                 }  
-                
-                Container {
-                    horizontalAlignment: HorizontalAlignment.Fill
-                    topPadding: ui.du(2.5)
-                    leftPadding: ui.du(2.5)
-                    rightPadding: ui.du(2.5)
-                    bottomPadding: ui.du(2.5)
-                    DropDown {
-                        title: qsTr("Default task type") + Retranslate.onLocaleOrLanguageChanged
-                        
-                        options: [
-                            Option {
-                                id: folderOption
-                                text: qsTr("Folder") + Retranslate.onLocaleOrLanguageChanged
-                                value: "FOLDER"
-                            },
-                            
-                            Option {
-                                id: taskOption
-                                text: qsTr("Task") + Retranslate.onLocaleOrLanguageChanged
-                                value: "TASK"
-                            }
-                        ]
-                        
-                        onSelectedOptionChanged: {
-                            _appConfig.set(root.settings.DEFAULT_TASK_TYPE, selectedOption.value);
-                            root.defaultTaskTypeChanged();
-                        }
-                    }
-                }
                 
                 Container {
                     horizontalAlignment: HorizontalAlignment.Fill
@@ -196,64 +163,6 @@ Page {
                         
                         onSelectedOptionChanged: {
                             _appConfig.set("date_format", selectedOption.value);
-                        }
-                    }
-                }
-                
-                Container {
-                    layout: DockLayout {}
-                    topPadding: ui.du(2)
-                    bottomPadding: ui.du(0.5)
-                    leftPadding: ui.du(2.5)
-                    rightPadding: ui.du(2.5)
-                    horizontalAlignment: HorizontalAlignment.Fill
-                    Label {
-                        text: qsTr("System sound on selection") + Retranslate.onLocaleOrLanguageChanged
-                        verticalAlignment: VerticalAlignment.Center
-                        horizontalAlignment: HorizontalAlignment.Left
-                    }
-                    
-                    ToggleButton {
-                        id: soundOnSelect
-                        horizontalAlignment: HorizontalAlignment.Right
-                        
-                        onCheckedChanged: {
-                            if (checked) {
-                                _appConfig.set("sound_on_select", "true");
-                                _signal.setSoundEnabled(true);
-                            } else {
-                                _appConfig.set("sound_on_select", "false");
-                                _signal.setSoundEnabled(false);
-                            }
-                        }
-                    }
-                }  
-            
-                Container {
-                    layout: DockLayout {}
-                    topPadding: ui.du(2)
-                    bottomPadding: ui.du(0.5)
-                    leftPadding: ui.du(2.5)
-                    rightPadding: ui.du(2.5)
-                    horizontalAlignment: HorizontalAlignment.Fill
-                    Label {
-                        text: qsTr("Vibrate on selection") + Retranslate.onLocaleOrLanguageChanged
-                        verticalAlignment: VerticalAlignment.Center
-                        horizontalAlignment: HorizontalAlignment.Left
-                    }
-                    
-                    ToggleButton {
-                        id: vibrateOnSelect
-                        horizontalAlignment: HorizontalAlignment.Right
-                        
-                        onCheckedChanged: {
-                            if (checked) {
-                                _appConfig.set("vibrate_on_select", "true");
-                                _signal.setVibrationEnabled(true);
-                            } else {
-                                _appConfig.set("vibrate_on_select", "false");
-                                _signal.setVibrationEnabled(false);
-                            }
                         }
                     }
                 }
@@ -409,22 +318,6 @@ Page {
         dontAskBeforeDeletingToggle.checked = doNotAsk && doNotAsk === "true";
     }
     
-    function adjustSoundOnSelect() {
-        var sound = _appConfig.get("sound_on_select");
-        soundOnSelect.checked = sound && sound === "true";
-    }
-    
-    function adjustVibrationOnSelect() {
-        var vibro = _appConfig.get("vibrate_on_select");
-        vibrateOnSelect.checked = vibro && vibro === "true";
-    }
-    
-    function adjustDefaultTaskType() {
-        var defaultTaskType = _appConfig.get("default_task_type");
-        folderOption.selected = defaultTaskType === "FOLDER";
-        taskOption.selected = defaultTaskType === "" || defaultTaskType === "TASK";
-    }
-    
     function adjustNotificationTheme() {
         var theme = _appConfig.get("notification_theme");
         standardTheme.selected = theme === "standard_theme" || theme === "";
@@ -509,11 +402,8 @@ Page {
     onCreationCompleted: {
         adjustTheme();
         adjustAskBeforeDeleting();
-        adjustDefaultTaskType();
         adjustPushEnabledLabel();
         adjustPushServiceButton();
-        adjustSoundOnSelect();
-        adjustVibrationOnSelect();
         adjustDateTimeFormat();
         adjustNotificationTheme();
         adjustCalendarAccounts();

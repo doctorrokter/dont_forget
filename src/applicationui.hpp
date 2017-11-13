@@ -23,6 +23,7 @@
 #include <bb/system/InvokeManager>
 #include <bb/system/InvokeRequest>
 #include <bb/platform/NotificationDefaultApplicationSettings>
+#include <bb/cascades/QmlDocument>
 
 #include "services/PushNotificationService.hpp"
 #include "services/TasksService.hpp"
@@ -113,6 +114,7 @@ private:
     void initComposerUI(const QString& pathToPage, const QString& data = "", const QString& mimeType = "");
     void processReceivedTaskMap(const QVariantMap& taskMap, const int parentId);
     void clear();
+    void configureContext(QDeclarativeContext* rootContext);
 };
 
 #endif /* ApplicationUI_HPP_ */
