@@ -86,58 +86,6 @@ Page {
                     }
                 ]
                 
-                contextActions: [
-                    ActionSet {
-                        DeleteActionItem {
-                            id: deleteTask
-                            
-                            onTriggered: {
-                                var indexPath = listView.selected();
-                                var data = dataModel.data(indexPath);
-                                dataModel.removeAt(indexPath);
-                                _tasksService.deleteTask(data.id);    
-                            }
-                            
-                            shortcuts: [
-                                Shortcut {
-                                    key: "d"
-                                    
-                                    onTriggered: {
-                                        deleteTask.triggered();
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    
-                    ActionSet {
-                        title: qsTr("Integration") + Retranslate.onLocaleOrLanguageChanged
-                        ActionItem {
-                            id: openCalendar
-                            title: qsTr("Open in Calendar") + Retranslate.onLocaleOrLanguageChanged
-                            imageSource: "asset:///images/ic_calendar.png"
-                            
-                            onTriggered: {
-                                var indexPath = listView.selected();
-                                var data = dataModel.data(indexPath);
-                                _app.openCalendarEvent(data.calendar_id, data.folder_id, data.account_id);
-                            }
-                        }
-                        
-                        ActionItem {
-                            id: openRemember
-                            title: qsTr("Open in Remember") + Retranslate.onLocaleOrLanguageChanged
-                            imageSource: "asset:///images/ic_notes.png"
-                            
-                            onTriggered: {
-                                var indexPath = listView.selected();
-                                var data = dataModel.data(indexPath);
-                                _app.openRememberNote(data.remember_id);
-                            }
-                        }
-                    }
-                ]
-                
                 listItemComponents: [
                     ListItemComponent {
                         type: "header" 

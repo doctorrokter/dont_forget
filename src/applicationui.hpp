@@ -68,6 +68,7 @@ public:
     Q_INVOKABLE void openRememberNote(const QString& rememberId);
     Q_INVOKABLE QVariant loadHtmlAsObject(const QString& html);
     Q_INVOKABLE void sync();
+    Q_INVOKABLE void createFromExternal();
 
     QVariantList getImages() const;
 
@@ -75,7 +76,7 @@ Q_SIGNALS:
     void taskSheetRequested(const QString& data);
     void tasksReceived();
     void taskCardDone();
-    void taskCreatedFromExternal();
+    void taskCreatedFromExternal(const QVariantMap& taskMap);
     void folderPageRequested(const int& taskId, const QString& path);
 
 public Q_SLOTS:

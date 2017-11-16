@@ -182,6 +182,10 @@ void ApplicationUI::cardDone(const QString& msg) {
     emit taskCardDone();
 }
 
+void ApplicationUI::createFromExternal() {
+    emit taskCreatedFromExternal(m_pTasksService->lastCreated());
+}
+
 void ApplicationUI::initFullUI() {
     QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
     QDeclarativeEngine* engine = QmlDocument::defaultDeclarativeEngine();

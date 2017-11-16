@@ -432,8 +432,8 @@ void TasksService::copyTask(const Task& task) {
         calendarEventId = ev.id();
     }
 
-    QString query = "INSERT INTO tasks (name, description, type, deadline, important, parent_id, closed, expanded, remember_id, calendar_id, account_id, folder_id, color) "
-                        "VALUES (:name, :description, :type, :deadline, :important, :parent_id, :closed, :expanded, :remember_id, :calendar_id, :account_id, :folder_id, :color)";
+    QString query = "INSERT INTO tasks (name, description, type, deadline, important, parent_id, closed, remember_id, calendar_id, account_id, folder_id, color) "
+                        "VALUES (:name, :description, :type, :deadline, :important, :parent_id, :closed, :remember_id, :calendar_id, :account_id, :folder_id, :color)";
     QVariantMap values;
     values["name"] = task.getName();
     values["description"] = task.getDescription();
@@ -443,7 +443,6 @@ void TasksService::copyTask(const Task& task) {
     values["parent_id"] = parentId;
     values["remember_id"] = rememberId;
     values["closed"] = task.isClosed() ? 1 : 0;
-    values["expanded"] = 1;
     values["calendar_id"] = calendarEventId;
     values["account_id"] = task.getAccountId();
     values["folder_id"] = task.getFolderId();

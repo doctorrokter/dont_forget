@@ -148,18 +148,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Create in: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Root</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Change placement</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Deadline</source>
         <translation type="unfinished"></translation>
     </message>
@@ -196,18 +184,6 @@
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create in: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Root</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Change placement</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -743,18 +719,6 @@
     <name>TodayPage</name>
     <message>
         <source>Today</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Integration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open in Calendar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open in Remember</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -2,6 +2,7 @@ import bb.cascades 1.4
 import bb.system 1.2
 import "../components"
 import "../pages"
+import "../js/Const.js" as Const
 
 NavigationPane {
     id: navigation
@@ -24,39 +25,6 @@ NavigationPane {
                 
                 onTriggered: {
                     navigation.quit();
-                }
-            }
-            
-            submitAction: ActionItem {
-                id: createTaskAction
-                title: qsTr("OK") + Retranslate.onLocaleOrLanguageChanged
-                enabled: true
-                
-                onTriggered: {
-                    if (!spinner.running) {
-                        var files = [];
-                        for (var i = 0; i < attachmentsContainer.attachments.length; i++) {
-                            files.push(attachmentsContainer.attachments[i]);
-                        }
-                    
-                        var deadline = deadLineToggleButton.checked ? new Date(deadLineContainer.result).getTime() / 1000 : 0;
-                        var important = importantToggleButton.checked ? 1 : 0;
-                        var createInRemember = rememberToggleButton.checked ? 1 : 0;
-                        var createInCalendar = deadLineToggleButton.checked && calendarToggleButton.checked ? 1 : 0;
-                    
-                        var folderId = 1;
-                        var accountId = 1;
-                        if (createInCalendar === 1) {
-                            folderId = calendarAccounts.selectedValue.folderId;
-                            accountId = calendarAccounts.selectedValue.accountId;
-                        }
-                    
-                        taskName.validate();
-                        if (taskName.isValid()) {
-                            spinner.start();
-                            _tasksService.createTask(taskName.result.trim(), description.result.trim(), "TASK", deadline, important, createInRemember, files, createInCalendar, folderId, accountId);
-                        }
-                    }
                 }
             }
         }
@@ -87,48 +55,6 @@ NavigationPane {
                     
                     AttachmentsContainer {
                         id: attachmentsContainer
-                    }
-                    
-                    Container {
-                        leftPadding: ui.du(2.5)
-                        topPadding: ui.du(2.5)
-                        rightPadding: ui.du(2.5)
-                        horizontalAlignment: HorizontalAlignment.Fill
-                        
-                        layout: DockLayout {}
-                        
-                        Label {
-                            horizontalAlignment: HorizontalAlignment.Left
-                            text: qsTr("Create in: ") + Retranslate.onLocaleOrLanguageChanged
-                        }
-                        
-                        Label {
-                            horizontalAlignment: HorizontalAlignment.Right
-                            text: {
-                                if (!_tasksService.activeTask) {
-                                    return qsTr("Root") + Retranslate.onLocaleOrLanguageChanged
-                                }
-                                return _tasksService.activeTask.name;
-                            }
-                        }
-                    }
-                    
-                    Container {
-                        leftPadding: ui.du(2.5)
-                        topPadding: ui.du(2.5)
-                        rightPadding: ui.du(2.5)
-                        horizontalAlignment: HorizontalAlignment.Fill
-                        
-                        Button {
-                            horizontalAlignment: HorizontalAlignment.Fill
-                            text: qsTr("Change placement") + Retranslate.onLocaleOrLanguageChanged
-                            
-                            onClicked: {
-                                var tlp = tasksListPage.createObject(this);
-                                navigation.push(tlp);
-                                navigation.backButtonsVisible = true;
-                            }
-                        }
                     }
                     
                     ToggleBlock {
@@ -194,7 +120,34 @@ NavigationPane {
                 enabled: createTaskAction.enabled
                 
                 onTriggered: {
-                    createTaskAction.triggered();
+                    if (!spinner.running) {
+                        var files = [];
+                        for (var i = 0; i < attachmentsContainer.attachments.length; i++) {
+                            files.push(attachmentsContainer.attachments[i]);
+                        }
+                        
+                        var deadline = deadLineToggleButton.checked ? new Date(deadLineContainer.result).getTime() / 1000 : 0;
+                        var important = importantToggleButton.checked ? 1 : 0;
+                        var createInRemember = rememberToggleButton.checked ? 1 : 0;
+                        var createInCalendar = deadLineToggleButton.checked && calendarToggleButton.checked ? 1 : 0;
+                        
+                        var folderId = 1;
+                        var accountId = 1;
+                        if (createInCalendar === 1) {
+                            folderId = calendarAccounts.selectedValue.folderId;
+                            accountId = calendarAccounts.selectedValue.accountId;
+                        }
+                        
+                        taskName.validate();
+                        if (taskName.isValid()) {
+                            spinner.start();
+                            _tasksService.createTask(taskName.result.trim(), Const.TaskTypes.TASK);
+                            var newTask = _tasksService.lastCreated();
+                            _tasksService.setActiveTask(newTask.id);
+                            _tasksService.updateTask(newTask.name, description.result.trim(), deadline, important, createInRemember, files, createInCalendar, folderId, accountId);
+                            _tasksService.flushActiveTask();
+                        }
+                    }
                 }
             }
         ]
@@ -233,27 +186,16 @@ NavigationPane {
             } else {
                 processAttachments();
             }
-            _tasksService.taskCreated.connect(toast.show);
+            _tasksService.taskUpdated.connect(toast.show);
         }
         
         attachedObjects: [
-            ComponentDefinition {
-                id: tasksListPage
-                TasksListPage {
-                    onTaskChosen: {
-                        _tasksService.setActiveTask(chosenTask.id);
-                        navigation.pop();
-                        navigation.backButtonsVisible = false;
-                    }
-                }
-            },
-            
             SystemToast {
                 id: toast
                 body: qsTr("Task created!") + Retranslate.onLocaleOrLanguageChanged
                 
                 onFinished: {
-                    _app.taskCreatedFromExternal();
+                    _app.createFromExternal();
                     navigation.quit();
                 }
             }

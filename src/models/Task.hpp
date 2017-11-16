@@ -22,7 +22,6 @@ class Task: public QObject {
     Q_PROPERTY(int deadline READ getDeadline WRITE setDeadline NOTIFY deadlineChanged)
     Q_PROPERTY(bool important READ isImportant WRITE setImportant NOTIFY importantChanged)
     Q_PROPERTY(bool closed READ isClosed WRITE setClosed NOTIFY closedChanged)
-    Q_PROPERTY(bool expanded READ isExpanded WRITE setExpanded NOTIFY expandedChanged)
     Q_PROPERTY(QString rememberId READ getRememberId WRITE setRememberId NOTIFY rememberIdChanged)
     Q_PROPERTY(int calendarId READ getCalendarId WRITE setCalendarId NOTIFY calendarIdChanged)
     Q_PROPERTY(int accountId READ getAccountId WRITE setAccountId NOTIFY accountIdChanged)
@@ -62,9 +61,6 @@ public:
     Q_INVOKABLE bool isClosed() const;
     Q_INVOKABLE void setClosed(const bool closed);
 
-    Q_INVOKABLE bool isExpanded() const;
-    Q_INVOKABLE void setExpanded(const bool expanded);
-
     Q_INVOKABLE const QString& getRememberId() const;
     Q_INVOKABLE void setRememberId(const QString& rememberId);
 
@@ -98,7 +94,6 @@ Q_SIGNALS:
     void deadlineChanged(const int deadline);
     void importantChanged(const bool important);
     void closedChanged(const bool closed);
-    void expandedChanged(const bool expanded);
     void rememberIdChanged(const QString& rememberId);
     void calendarIdChanged(const int calendarId);
     void accountIdChanged(const int accountId);
@@ -115,7 +110,6 @@ private:
     int m_deadline;
     bool m_important;
     bool m_closed;
-    bool m_expanded;
     QString m_rememberId;
     int m_calendarId;
     int m_accountId;

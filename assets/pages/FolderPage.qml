@@ -81,15 +81,20 @@ Page {
                         ListScrollStateHandler {
                             onAtEndChanged: {
                                 if (atEnd) {
-                                    listView.margin.bottomOffset = ui.du(13);
+                                    root.addEmptyItem();
                                 } else {
-                                    listView.margin.bottomOffset = ui.du(0);
+                                    root.removeEmptyItem();
                                 }
                             }
                         }
                     ]
                     
                     listItemComponents: [
+                        ListItemComponent {
+                            type: Const.TaskTypes.EMPTY
+                            EmptyListItem {}  
+                        },
+                        
                         ListItemComponent {
                             type: Const.TaskTypes.DIVIDER
                             DividerListItem {}    
@@ -199,6 +204,7 @@ Page {
     
     function taskCreated(newTask, parentId, parentParentId) {
         if (parentId === root.taskId) {
+            root.removeEmptyItem();
             var i = root.firstTaskIndex();
             switch (newTask.type) {
                 case Const.TaskTypes.TASK:
@@ -247,9 +253,26 @@ Page {
                         dataModel.insert(index, task);
                         return;
                     }
+                } else {
+                    root.removeEmptyItem();
+                    dataModel.append(task);
+                    return;
                 }
-                dataModel.append(task);
             }
+        }
+    }
+    
+    function addEmptyItem() {
+        var data = dataModel.value(dataModel.size() - 1);
+        if (data !== undefined && data.type !== Const.TaskTypes.EMPTY) {
+            dataModel.append({type: Const.TaskTypes.EMPTY});
+        }
+    }
+    
+    function removeEmptyItem() {
+        var data = dataModel.value(dataModel.size() - 1);
+        if (data !== undefined && data.type === Const.TaskTypes.EMPTY) {
+            dataModel.removeAt(dataModel.size() - 1);
         }
     }
     

@@ -9,7 +9,7 @@
 #include <QVariantList>
 
 Task::Task(QObject* parent) : QObject(parent), m_id(0), m_name(""), m_description(""), m_type("FOLDER"), m_parentId(0),
-    m_deadline(0), m_important(false), m_closed(false), m_expanded(true), m_rememberId(""),
+    m_deadline(0), m_important(false), m_closed(false), m_rememberId(""),
     m_calendarId(0), m_accountId(1), m_folderId(1), m_color("") {}
 
 Task::Task(const Task& task) : QObject(task.parent()) {
@@ -81,12 +81,6 @@ void Task::setClosed(const bool closed) {
     emit closedChanged(m_closed);
 }
 
-bool Task::isExpanded() const { return m_expanded; }
-void Task::setExpanded(const bool expanded) {
-    m_expanded = expanded;
-    emit expandedChanged(m_expanded);
-}
-
 const QString& Task::getRememberId() const { return m_rememberId; }
 void Task::setRememberId(const QString& rememberId) {
     m_rememberId = rememberId;
@@ -138,7 +132,6 @@ void Task::swap(const Task& task) {
     this->setDeadline(task.getDeadline());
     this->setImportant(task.isImportant());
     this->setClosed(task.isClosed());
-    this->setExpanded(task.isExpanded());
 
     QString rememberId = task.getRememberId();
     this->setRememberId(rememberId);
@@ -161,7 +154,6 @@ QVariantMap Task::toMap() const {
     map.insert("deadline", this->getDeadline());
     map.insert("important", this->isImportant());
     map.insert("closed", this->isClosed());
-    map.insert("expanded", this->isExpanded());
     map.insert("rememberId", this->getRememberId());
     map.insert("calendarId", this->getCalendarId());
     map.insert("accountId", this->getAccountId());
@@ -186,7 +178,6 @@ QVariantMap Task::toJson() const {
     map.insert("deadline", this->getDeadline());
     map.insert("important", this->isImportant() ? 1 : 0);
     map.insert("closed", this->isClosed() ? 1 : 0);
-    map.insert("expanded", this->isExpanded() ? 1 : 0);
     map.insert("remember_id", this->getRememberId());
     map.insert("calendar_id", this->getCalendarId());
     map.insert("account_id", this->getAccountId());
@@ -204,7 +195,6 @@ void Task::fromMap(const QVariantMap taskMap) {
     this->setDeadline(taskMap.value("deadline").toInt());
     this->setImportant(taskMap.value("important").toBool());
     this->setClosed(taskMap.value("closed").toBool());
-    this->setExpanded(taskMap.value("expanded").toBool());
     this->setRememberId(taskMap.value("remember_id", "").toString());
     this->setCalendarId(taskMap.value("calendar_id", "0").toInt());
     this->setAccountId(taskMap.value("account_id", "1").toInt());
