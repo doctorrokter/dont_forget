@@ -65,6 +65,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/components/v2/RichLinkPreview.qml) \
         $$quote($$BASEDIR/assets/components/v2/TaskCoverListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/TaskListItem.qml) \
+        $$quote($$BASEDIR/assets/components/v2/TasksListView.qml) \
         $$quote($$BASEDIR/assets/components/v2/TodayListItem.qml) \
         $$quote($$BASEDIR/assets/html/charts.html) \
         $$quote($$BASEDIR/assets/images/apk_icon_big_512x512.png) \
@@ -162,11 +163,9 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/pages/HighCover.qml) \
         $$quote($$BASEDIR/assets/pages/ImportantPage.qml) \
         $$quote($$BASEDIR/assets/pages/ListPage.qml) \
-        $$quote($$BASEDIR/assets/pages/MoveTaskPage.qml) \
         $$quote($$BASEDIR/assets/pages/OverduePage.qml) \
         $$quote($$BASEDIR/assets/pages/SettingsPage.qml) \
         $$quote($$BASEDIR/assets/pages/TaskPage.qml) \
-        $$quote($$BASEDIR/assets/pages/TasksListPage.qml) \
         $$quote($$BASEDIR/assets/pages/TodayPage.qml) \
         $$quote($$BASEDIR/assets/pages/settings_components/BackupAndRecovery.qml) \
         $$quote($$BASEDIR/assets/sheets/AddContactSheet.qml) \

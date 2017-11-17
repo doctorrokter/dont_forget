@@ -367,14 +367,6 @@
     </message>
 </context>
 <context>
-    <name>FolderListItem</name>
-    <message>
-        <location filename="../assets/components/v2/FolderListItem.qml" line="77"/>
-        <source>Actions</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>FolderPage</name>
     <message>
         <source>Open in Calendar</source>
@@ -582,14 +574,12 @@
 <context>
     <name>MoveTaskPage</name>
     <message>
-        <location filename="../assets/pages/MoveTaskPage.qml" line="12"/>
         <source>Choose a folder</source>
-        <translation type="unfinished">Choisir un dossier</translation>
+        <translation type="obsolete">Choisir un dossier</translation>
     </message>
     <message>
-        <location filename="../assets/pages/MoveTaskPage.qml" line="159"/>
         <source>Root</source>
-        <translation type="unfinished">Racine</translation>
+        <translation type="obsolete">Racine</translation>
     </message>
 </context>
 <context>
@@ -1000,29 +990,24 @@
 <context>
     <name>TasksListPage</name>
     <message>
-        <location filename="../assets/pages/TasksListPage.qml" line="102"/>
         <source>Choose a folder</source>
-        <translation type="unfinished">Choisir un dossier</translation>
+        <translation type="obsolete">Choisir un dossier</translation>
     </message>
     <message>
-        <location filename="../assets/pages/TasksListPage.qml" line="123"/>
         <source>Create a folder</source>
-        <translation type="unfinished">Créer un dossier</translation>
+        <translation type="obsolete">Créer un dossier</translation>
     </message>
     <message>
-        <location filename="../assets/pages/TasksListPage.qml" line="140"/>
         <source>Search</source>
-        <translation type="unfinished">Rechercher</translation>
+        <translation type="obsolete">Rechercher</translation>
     </message>
     <message>
-        <location filename="../assets/pages/TasksListPage.qml" line="161"/>
         <source>Create</source>
-        <translation type="unfinished">Créer</translation>
+        <translation type="obsolete">Créer</translation>
     </message>
     <message>
-        <location filename="../assets/pages/TasksListPage.qml" line="225"/>
         <source>Root</source>
-        <translation type="unfinished">Racine</translation>
+        <translation type="obsolete">Racine</translation>
     </message>
 </context>
 <context>

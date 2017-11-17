@@ -5,15 +5,17 @@ ActionItem {
     id: root
     
     property ListView listView: undefined
-    property variant indexPath
+    property variant selectionList
     
     title: qsTr("Move") + Retranslate.onLocaleOrLanguageChanged
     imageSource: "asset:///images/ic_forward.png"
     
     onTriggered: {
-        root.indexPath = root.listView.selected();
-        var data = root.listView.dataModel.data(indexPath);
-        _tasksService.selectTask(data.id, indexPath);
+        root.selectionList = root.listView.selectionList();
+        root.selectionList.forEach(function(indexPath) {
+            var data = root.listView.dataModel.data(indexPath);
+            _tasksService.selectTask(data.id, indexPath);
+        });
         _tasksService.moveMode = true;
         timer.timeout.connect(root.select);
         timer.start();
@@ -32,7 +34,9 @@ ActionItem {
     ]
     
     function select() {
-        root.listView.select(root.indexPath);
+        root.selectionList.forEach(function(indexPath) {
+            root.listView.select(indexPath);
+        });
         timer.timeout.disconnect(root.select);    
     }
     

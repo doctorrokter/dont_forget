@@ -74,7 +74,6 @@ CustomListItem {
     
     contextActions: [
         ActionSet {
-            title: qsTr("Actions") + Retranslate.onLocaleOrLanguageChanged
             MoveActionItem {
                 listView: root.listView
             }

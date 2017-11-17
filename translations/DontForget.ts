@@ -254,13 +254,6 @@
     </message>
 </context>
 <context>
-    <name>FolderListItem</name>
-    <message>
-        <source>Actions</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>FolderPage</name>
     <message>
         <source>Create folder</source>
@@ -396,17 +389,6 @@
     <name>MoveActionItem</name>
     <message>
         <source>Move</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MoveTaskPage</name>
-    <message>
-        <source>Root</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Choose a folder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -682,29 +664,6 @@
     <name>TaskTitleBar</name>
     <message>
         <source>Enter name or names: Task1;;Task2;;Task3</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TasksListPage</name>
-    <message>
-        <source>Choose a folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Root</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Search</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create a folder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
