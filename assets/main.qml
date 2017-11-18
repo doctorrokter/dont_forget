@@ -125,15 +125,21 @@ NavigationPane {
                         
                         ListItemComponent {
                             type: Const.TaskTypes.RECEIVED
-                            ReceivedListItem {
+                            ServiceListItem {
+                                title: qsTr("Received") + Retranslate.onLocaleOrLanguageChanged
                                 count: ListItemData.count
+                                imageSource: "asset:///images/ic_inbox.png"
+                                color: _ui.color.darkYellow
                             }
                         },
                         
                         ListItemComponent {
                             type: Const.TaskTypes.TODAY
-                            TodayListItem {
+                            ServiceListItem {
+                                title: qsTr("Today") + Retranslate.onLocaleOrLanguageChanged
                                 count: ListItemData.count
+                                imageSource: "asset:///images/calendar.png"
+                                color: _ui.color.lightGreen
                                 
                                 onOpen: {
                                     ListItem.view.openToday();
@@ -143,8 +149,11 @@ NavigationPane {
                         
                         ListItemComponent {
                             type: Const.TaskTypes.IMPORTANT
-                            ImportantListItem {
+                            ServiceListItem {
+                                title: qsTr("Important") + Retranslate.onLocaleOrLanguageChanged
                                 count: ListItemData.count
+                                imageSource: "asset:///images/ic_important.png"
+                                color: _ui.color.brickRed
                                 
                                 onOpen: {
                                     ListItem.view.openImportant();
@@ -154,13 +163,16 @@ NavigationPane {
                         
                         ListItemComponent {
                             type: Const.TaskTypes.OVERDUE
-                            OverdueListItem {
+                            ServiceListItem {
+                                title: qsTr("Overdue") + Retranslate.onLocaleOrLanguageChanged
                                 count: ListItemData.count
+                                imageSource: "asset:///images/ic_overdue.png"
+                                color: _ui.color.skyBlue
                                 
                                 onOpen: {
                                     ListItem.view.openOverdue();
                                 }
-                            }    
+                            }
                         },
                         
                         ListItemComponent {

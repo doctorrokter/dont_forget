@@ -335,13 +335,6 @@
     </message>
 </context>
 <context>
-    <name>ImportantListItem</name>
-    <message>
-        <source>Important</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>ImportantPage</name>
     <message>
         <source>Important</source>
@@ -392,23 +385,9 @@
     </message>
 </context>
 <context>
-    <name>OverdueListItem</name>
-    <message>
-        <source>Overdue</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>OverduePage</name>
     <message>
         <source>Overdue</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ReceivedListItem</name>
-    <message>
-        <source>Received</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -656,13 +635,6 @@
     </message>
 </context>
 <context>
-    <name>TodayListItem</name>
-    <message>
-        <source>Today</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>TodayPage</name>
     <message>
         <source>Today</source>
@@ -689,6 +661,22 @@
     </message>
     <message>
         <source>Dashboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Received</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Today</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Important</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Overdue</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

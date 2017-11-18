@@ -476,9 +476,8 @@
 <context>
     <name>ImportantListItem</name>
     <message>
-        <location filename="../assets/components/v2/ImportantListItem.qml" line="44"/>
         <source>Important</source>
-        <translation type="unfinished">Important</translation>
+        <translation type="obsolete">Important</translation>
     </message>
 </context>
 <context>
@@ -589,14 +588,6 @@
     </message>
 </context>
 <context>
-    <name>OverdueListItem</name>
-    <message>
-        <location filename="../assets/components/v2/OverdueListItem.qml" line="43"/>
-        <source>Overdue</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>OverduePage</name>
     <message>
         <source>Important</source>
@@ -614,14 +605,6 @@
     <message>
         <source>Open in Remember</source>
         <translation type="obsolete">Ouvrir dans Remember</translation>
-    </message>
-</context>
-<context>
-    <name>ReceivedListItem</name>
-    <message>
-        <location filename="../assets/components/v2/ReceivedListItem.qml" line="33"/>
-        <source>Received</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1004,14 +987,6 @@
     </message>
 </context>
 <context>
-    <name>TodayListItem</name>
-    <message>
-        <location filename="../assets/components/v2/TodayListItem.qml" line="44"/>
-        <source>Today</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>TodayPage</name>
     <message>
         <source>Important</source>
@@ -1202,30 +1177,46 @@
         <translation type="obsolete">Liste</translation>
     </message>
     <message>
+        <location filename="../assets/main.qml" line="153"/>
         <source>Important</source>
-        <translation type="obsolete">Important</translation>
+        <translation type="unfinished">Important</translation>
     </message>
     <message>
         <source>Cancel</source>
         <translation type="obsolete">Annuler</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="404"/>
+        <location filename="../assets/main.qml" line="129"/>
+        <source>Received</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="139"/>
+        <source>Today</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="167"/>
+        <source>Overdue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="416"/>
         <source>Create folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="425"/>
+        <location filename="../assets/main.qml" line="437"/>
         <source>Create task</source>
         <translation type="unfinished">Créer tâche</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="446"/>
+        <location filename="../assets/main.qml" line="458"/>
         <source>Create list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="623"/>
+        <location filename="../assets/main.qml" line="635"/>
         <source>Dashboard</source>
         <translation type="unfinished"></translation>
     </message>

@@ -1,10 +1,12 @@
 import bb.cascades 1.4
 
 CustomListItem {
-    
     id: root
     
     property int count: 0
+    property string imageSource: ""
+    property string title: ""
+    property string color: ""
     
     signal open()
     
@@ -33,15 +35,15 @@ CustomListItem {
         
         ImageView {
             verticalAlignment: VerticalAlignment.Center
-            imageSource: "asset:///images/ic_important.png"
-            filterColor: Color.create(_ui.color.brickRed)
+            imageSource: root.imageSource
+            filterColor: Color.create(root.color)
             maxWidth: ui.du(6)
             maxHeight: ui.du(6)
         }
         
         Label {
             verticalAlignment: VerticalAlignment.Center
-            text: qsTr("Important") + Retranslate.onLocaleOrLanguageChanged
+            text: root.title
             textStyle.base: SystemDefaults.TextStyles.PrimaryText
             
             layoutProperties: StackLayoutProperties {

@@ -1,5 +1,5 @@
 1
-140
+141
 actions/CalendarActionItem.qml
 actions/DeleteTaskActionItem.qml
 actions/MoveActionItem.qml
@@ -31,6 +31,7 @@ components/v2/Mover.qml
 components/v2/OverdueListItem.qml
 components/v2/ReceivedListItem.qml
 components/v2/RichLinkPreview.qml
+components/v2/ServiceListItem.qml
 components/v2/TaskCoverListItem.qml
 components/v2/TaskListItem.qml
 components/v2/TodayListItem.qml

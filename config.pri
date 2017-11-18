@@ -59,17 +59,14 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/components/v2/DividerListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/EmptyListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/FolderListItem.qml) \
-        $$quote($$BASEDIR/assets/components/v2/ImportantListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/ListCoverListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/ListItemTaskHeader.qml) \
         $$quote($$BASEDIR/assets/components/v2/ListListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/Mover.qml) \
-        $$quote($$BASEDIR/assets/components/v2/OverdueListItem.qml) \
-        $$quote($$BASEDIR/assets/components/v2/ReceivedListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/RichLinkPreview.qml) \
+        $$quote($$BASEDIR/assets/components/v2/ServiceListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/TaskCoverListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/TaskListItem.qml) \
-        $$quote($$BASEDIR/assets/components/v2/TodayListItem.qml) \
         $$quote($$BASEDIR/assets/html/charts.html) \
         $$quote($$BASEDIR/assets/images/apk_icon_big_512x512.png) \
         $$quote($$BASEDIR/assets/images/audio_icon_big_512x512.png) \

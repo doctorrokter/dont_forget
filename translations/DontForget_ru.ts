@@ -503,9 +503,8 @@
 <context>
     <name>ImportantListItem</name>
     <message>
-        <location filename="../assets/components/v2/ImportantListItem.qml" line="44"/>
         <source>Important</source>
-        <translation type="unfinished">Важное</translation>
+        <translation type="obsolete">Важное</translation>
     </message>
 </context>
 <context>
@@ -607,9 +606,8 @@
 <context>
     <name>OverdueListItem</name>
     <message>
-        <location filename="../assets/components/v2/OverdueListItem.qml" line="43"/>
         <source>Overdue</source>
-        <translation type="unfinished">Просроченные</translation>
+        <translation type="obsolete">Просроченные</translation>
     </message>
 </context>
 <context>
@@ -631,9 +629,8 @@
 <context>
     <name>ReceivedListItem</name>
     <message>
-        <location filename="../assets/components/v2/ReceivedListItem.qml" line="33"/>
         <source>Received</source>
-        <translation type="unfinished">Полученные</translation>
+        <translation type="obsolete">Полученные</translation>
     </message>
 </context>
 <context>
@@ -642,6 +639,13 @@
         <location filename="../assets/actions/RememberActionItem.qml" line="8"/>
         <source>Open in Remember</source>
         <translation type="unfinished">Открыть в Remember</translation>
+    </message>
+</context>
+<context>
+    <name>ServiceListItem</name>
+    <message>
+        <source>Overdue</source>
+        <translation type="obsolete">Просроченные</translation>
     </message>
 </context>
 <context>
@@ -1000,9 +1004,8 @@
 <context>
     <name>TodayListItem</name>
     <message>
-        <location filename="../assets/components/v2/TodayListItem.qml" line="44"/>
         <source>Today</source>
-        <translation type="unfinished">На сегодня</translation>
+        <translation type="obsolete">На сегодня</translation>
     </message>
 </context>
 <context>
@@ -1161,30 +1164,46 @@
         <translation type="obsolete">Список</translation>
     </message>
     <message>
+        <location filename="../assets/main.qml" line="153"/>
         <source>Important</source>
-        <translation type="obsolete">Важно</translation>
+        <translation type="unfinished">Важно</translation>
     </message>
     <message>
         <source>Cancel</source>
         <translation type="obsolete">Отмена</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="404"/>
+        <location filename="../assets/main.qml" line="129"/>
+        <source>Received</source>
+        <translation type="unfinished">Полученные</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="139"/>
+        <source>Today</source>
+        <translation type="unfinished">На сегодня</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="167"/>
+        <source>Overdue</source>
+        <translation type="unfinished">Просроченные</translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="416"/>
         <source>Create folder</source>
         <translation type="unfinished">Создать папку</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="425"/>
+        <location filename="../assets/main.qml" line="437"/>
         <source>Create task</source>
         <translation type="unfinished">Создать задачу</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="446"/>
+        <location filename="../assets/main.qml" line="458"/>
         <source>Create list</source>
         <translation type="unfinished">Создать список</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="623"/>
+        <location filename="../assets/main.qml" line="635"/>
         <source>Dashboard</source>
         <translation type="unfinished">Рабочий стол</translation>
     </message>
