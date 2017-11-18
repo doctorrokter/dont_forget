@@ -47,27 +47,8 @@ NavigationPane {
         actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
         actionBarVisibility: ChromeVisibility.Overlay
         
-        Container {
-            horizontalAlignment: HorizontalAlignment.Fill
-            verticalAlignment: VerticalAlignment.Center
-            
-            layout: DockLayout {}
-            
-            background: ui.palette.plainBase
-            
-            ImageView {
-                horizontalAlignment: HorizontalAlignment.Fill
-                verticalAlignment: VerticalAlignment.Fill
-                scalingMethod: ScalingMethod.AspectFill
-                imageSource: _ui.backgroundImage
-            }
-            
-            Container {
-                
-                Mover {
-                    taskId: 0
-                }
-                
+        BackgroundContainer {
+            MoverContainer {
                 ListView {
                     id: listView
                     

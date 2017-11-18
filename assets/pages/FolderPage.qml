@@ -29,139 +29,30 @@ Page {
             title: root.path
         }
         
-        Container {
-            layout: DockLayout {}
-            
-            ImageView {
-                horizontalAlignment: HorizontalAlignment.Fill
-                verticalAlignment: VerticalAlignment.Fill
-                scalingMethod: ScalingMethod.AspectFill
-                imageSource: _ui.backgroundImage
-            }
-            
-            Container {
-                Mover {
-                    taskId: root.taskId
-                }
-                
-                ListView {
+        BackgroundContainer {
+            MoverContainer {
+                taskId: root.taskId   
+                UnsortedListView {
                     id: listView
                     
-                    scrollRole: ScrollRole.Main
+                    taskId: root.taskId
                     
-                    dataModel: ArrayDataModel {
-                        id: dataModel
+                    onReload: {
+                        root.reload();
                     }
                     
-                    function itemType(data, indexPath) {
-                        return data.type;
-                    }
-                    
-                    function removeById(taskId) {
-                        var i = root.taskExists(taskId);
-                        if (i !== -1) {
-                            dataModel.removeAt(i);
-                            _tasksService.deleteTask(taskId);
-                        }
-                    }
-                    
-                    function openTask(taskId) {
-                        root.openTask(taskId);
-                    }
-                    
-                    function openFolder(taskId) {
+                    onOpenFolder: {
                         root.openFolder(taskId, root.path);
                     }
                     
-                    function openList(taskId) {
+                    onOpenList: {
                         root.openList(taskId, root.path);
                     }
                     
-                    attachedObjects: [
-                        ListScrollStateHandler {
-                            onAtEndChanged: {
-                                if (atEnd) {
-                                    root.addEmptyItem();
-                                } else {
-                                    root.removeEmptyItem();
-                                }
-                            }
-                        }
-                    ]
-                    
-                    listItemComponents: [
-                        ListItemComponent {
-                            type: Const.TaskTypes.EMPTY
-                            EmptyListItem {}  
-                        },
-                        
-                        ListItemComponent {
-                            type: Const.TaskTypes.DIVIDER
-                            DividerListItem {}    
-                        },
-                        
-                        ListItemComponent {
-                            type: Const.TaskTypes.FOLDER
-                            FolderListItem {
-                                taskId: ListItemData.id
-                                name: ListItemData.name
-                                count: ListItemData.count || 0
-                                color: ListItemData.color
-                                parentId: ListItemData.parent_id
-                                selected: _tasksService.isTaskSelected(ListItemData.id)
-                                
-                                onOpenFolder: {
-                                    ListItem.view.openFolder(taskId);
-                                }
-                            }
-                        },
-                        
-                        ListItemComponent {
-                            type: Const.TaskTypes.LIST
-                            ListListItem {
-                                taskId: ListItemData.id
-                                name: ListItemData.name
-                                count: ListItemData.count || 0
-                                color: ListItemData.color
-                                parentId: ListItemData.parent_id
-                                deadline: ListItemData.deadline
-                                closed: ListItemData.closed
-                                rememberId: parseInt(ListItemData.remember_id)
-                                calendarId: parseInt(ListItemData.calendar_id)
-                                selected: _tasksService.isTaskSelected(ListItemData.id)
-                                
-                                onOpenList: {
-                                    ListItem.view.openList(taskId);
-                                }
-                            }    
-                        },
-                        
-                        ListItemComponent {
-                            type: Const.TaskTypes.TASK
-                            TaskListItem {
-                                taskId: ListItemData.id
-                                name: ListItemData.name
-                                deadline: ListItemData.deadline
-                                important: ListItemData.important
-                                closed: ListItemData.closed
-                                rememberId: parseInt(ListItemData.remember_id)
-                                calendarId: parseInt(ListItemData.calendar_id)
-                                attachments: ListItemData.attachments
-                                parentId: ListItemData.parent_id
-                                description: ListItemData.description
-                                selected: _tasksService.isTaskSelected(ListItemData.id)
-                                
-                                onTaskRemoved: {
-                                    ListItem.view.removeById(taskId);
-                                }
-                                
-                                onOpenTask: {
-                                    ListItem.view.openTask(taskId);
-                                }
-                            }
-                        }
-                    ]
-                }
+                    onOpenTask: {
+                        root.openTask(taskId);
+                    }
+                }             
             }
         }
     }
@@ -175,6 +66,7 @@ Page {
         
         TaskTitleBar {
             id: taskTitleBar
+            taskId: root.taskId
             
             onSubmit: {
                 root.titleBar = defaultTitleBar;
@@ -193,139 +85,14 @@ Page {
         }
     ]
     
-    function firstTaskIndex() {
-        for (var i = 0; i < dataModel.size(); i++) {
-            if (dataModel.value(i).type === Const.TaskTypes.TASK) {
-                return i;
-            }
-        }
-        return -1;
-    }
-    
-    function taskCreated(newTask, parentId, parentParentId) {
-        if (parentId === root.taskId) {
-            root.removeEmptyItem();
-            var i = root.firstTaskIndex();
-            switch (newTask.type) {
-                case Const.TaskTypes.TASK:
-                    if (i !== -1) {
-                        dataModel.insert(i, newTask);
-                    } else {
-                        dataModel.append(newTask); 
-                    }
-                    break;
-                case Const.TaskTypes.FOLDER:
-                    dataModel.insert(0, newTask);
-                    listView.scrollToPosition(ScrollPosition.Beginning, ScrollAnimation.Smooth);
-                    break;
-                case Const.TaskTypes.LIST:
-                    if (i === -1) {
-                        dataModel.append(newTask);
-                    } else {
-                        dataModel.insert(i, newTask);
-                    }
-                    break;
-            }
-        } else if (parentParentId === root.taskId) {
-            root.reload();
-        }
-    }
-    
-    function taskUpdated(activeTask, parentId) {
-        if (parentId === root.taskId) {
-            var i = root.taskExists(activeTask.id);
-            if (i !== -1) {
-                dataModel.replace(i, activeTask);
-            }
-        }
-    }
-    
-    function taskClosedChanged(taskId, closed, parentId) {
-        if (root.taskId === parentId) {
-            var i = root.taskExists(taskId);
-            if (i !== -1 && closed) {
-                var task = Assign.invoke({}, dataModel.value(i));
-                task.closed = closed;
-                dataModel.removeAt(i);
-                if (task.type === Const.TaskTypes.LIST) {
-                    var index = firstTaskIndex();
-                    if (index !== -1) {
-                        dataModel.insert(index, task);
-                        return;
-                    }
-                } else {
-                    root.removeEmptyItem();
-                    dataModel.append(task);
-                    return;
-                }
-            }
-        }
-    }
-    
-    function addEmptyItem() {
-        var data = dataModel.value(dataModel.size() - 1);
-        if (data !== undefined && data.type !== Const.TaskTypes.EMPTY) {
-            dataModel.append({type: Const.TaskTypes.EMPTY});
-        }
-    }
-    
-    function removeEmptyItem() {
-        var data = dataModel.value(dataModel.size() - 1);
-        if (data !== undefined && data.type === Const.TaskTypes.EMPTY) {
-            dataModel.removeAt(dataModel.size() - 1);
-        }
-    }
-    
-    function taskExists(taskId) {
-        for (var i = 0; i < dataModel.size(); i++) {
-            if (dataModel.value(i).id === taskId) {
-                return i;
-            }
-        }
-        return -1;
-    }
-    
-    function taskDeleted(taskId, parentId, parentParentId) {
-        if (parentParentId === root.taskId) {
-            root.reload();
-        }
-    }
-    
     function reload() {
-        root.clearSelection();
-        dataModel.clear();
-        dataModel.append(_tasksService.findSiblings(root.taskId));
-    }
-    
-    function clearSelection() {
-        listView.clearSelection();
-        for (var i = 0; i < dataModel.size(); i++) {
-            var t = dataModel.value(i);
-            t.selected = false;
-            dataModel.replace(i, t);
-        }
-    }
-    
-    function tasksMovedInBulk(parentId) {
-        root.reload();
+        listView.flushSelection();
+        listView.flush();
+        listView.append(_tasksService.findSiblings(root.taskId));
     }
     
     function clear() {
-        _tasksService.taskCreated.disconnect(root.taskCreated);
-        _tasksService.taskUpdated.disconnect(root.taskUpdated);
-        _tasksService.taskClosedChanged.disconnect(root.taskClosedChanged);
-        _tasksService.taskDeleted.disconnect(root.taskDeleted);
-        _tasksService.allTasksDeselected.disconnect(root.clearSelection);
-        _tasksService.taskMovedInBulk.disconnect(root.tasksMovedInBulk);
-    }
-    
-    onCreationCompleted: {
-        _tasksService.taskCreated.connect(root.taskCreated);
-        _tasksService.taskUpdated.connect(root.taskUpdated);
-        _tasksService.taskClosedChanged.connect(root.taskClosedChanged);
-        _tasksService.taskDeleted.connect(root.taskDeleted);
-        _tasksService.allTasksDeselected.connect(root.clearSelection);
-        _tasksService.taskMovedInBulk.connect(root.tasksMovedInBulk);
+        listView.clean();
     }
     
     onTaskIdChanged: {

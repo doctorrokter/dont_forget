@@ -9,7 +9,11 @@ DeleteActionItem {
         var lv = root.listView;
         var indexPath = lv.selected();
         var data = lv.dataModel.data(indexPath);
-        lv.dataModel.removeAt(lv.dataModel.indexOf(data));
+        if (lv.dataModel.objectName === "sorted") {
+            lv.dataModel.removeAt(indexPath);
+        } else {
+            lv.dataModel.removeAt(indexPath[0]);
+        }
         _tasksService.deleteTask(data.id);    
     }
     

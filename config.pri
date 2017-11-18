@@ -43,15 +43,19 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/cards/CreateTaskFromTextCard.qml) \
         $$quote($$BASEDIR/assets/cards/CreateTaskFromUrlCard.qml) \
         $$quote($$BASEDIR/assets/components/AttachmentsContainer.qml) \
+        $$quote($$BASEDIR/assets/components/BackgroundContainer.qml) \
         $$quote($$BASEDIR/assets/components/ColorControl.qml) \
         $$quote($$BASEDIR/assets/components/CustomTitleBar.qml) \
         $$quote($$BASEDIR/assets/components/InputTitleBar.qml) \
+        $$quote($$BASEDIR/assets/components/MoverContainer.qml) \
         $$quote($$BASEDIR/assets/components/Palette.qml) \
+        $$quote($$BASEDIR/assets/components/SortedListView.qml) \
         $$quote($$BASEDIR/assets/components/TaskDeadlineContainer.qml) \
         $$quote($$BASEDIR/assets/components/TaskDescriptionContainer.qml) \
         $$quote($$BASEDIR/assets/components/TaskNameContainer.qml) \
         $$quote($$BASEDIR/assets/components/TaskTitleBar.qml) \
         $$quote($$BASEDIR/assets/components/ToggleBlock.qml) \
+        $$quote($$BASEDIR/assets/components/UnsortedListView.qml) \
         $$quote($$BASEDIR/assets/components/v2/DividerListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/EmptyListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/FolderListItem.qml) \
@@ -65,7 +69,6 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/components/v2/RichLinkPreview.qml) \
         $$quote($$BASEDIR/assets/components/v2/TaskCoverListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/TaskListItem.qml) \
-        $$quote($$BASEDIR/assets/components/v2/TasksListView.qml) \
         $$quote($$BASEDIR/assets/components/v2/TodayListItem.qml) \
         $$quote($$BASEDIR/assets/html/charts.html) \
         $$quote($$BASEDIR/assets/images/apk_icon_big_512x512.png) \

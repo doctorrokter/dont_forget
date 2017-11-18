@@ -25,172 +25,34 @@ Page {
     Container {
         horizontalAlignment: HorizontalAlignment.Fill
         
-        Container {
-            layout: DockLayout {}
-            
-            ImageView {
-                horizontalAlignment: HorizontalAlignment.Fill
-                verticalAlignment: VerticalAlignment.Fill
-                scalingMethod: ScalingMethod.AspectFill
-                imageSource: _ui.backgroundImage
-            }
-            
-            ListView {
+        BackgroundContainer {
+            SortedListView {
                 id: listView
                 
-                scrollRole: ScrollRole.Main
-                
-                dataModel: GroupDataModel {
-                    id: dataModel
-                    
-                    sortingKeys: ["parent_id"]
-                }
-                
-                layout: StackListLayout {
-                    headerMode: ListHeaderMode.Sticky
-                }
-                
-                function removeById(taskId, indexPath) {
-                    dataModel.removeAt(indexPath);
-                    _tasksService.deleteTask(taskId);
-                }
-                
-                function openFolder(taskId) {
+                onOpenFolder: {
                     root.openFolder(taskId);
                 }
                 
-                function openList(taskId) {
+                onOpenList: {
                     root.openList(taskId);
                 }
                 
-                function openTask(taskId) {
+                onOpenTask: {
                     root.openTask(taskId);
                 }
-                
-                function itemType(data, indexPath) {
-                    if (indexPath.length === 1) {
-                        return "header";
-                    }
-                    return "item";
-                }
-                
-                attachedObjects: [
-                    ListScrollStateHandler {
-                        onAtEndChanged: {
-                            if (atEnd) {
-                                listView.margin.bottomOffset = ui.du(13);
-                            } else {
-                                listView.margin.bottomOffset = ui.du(0);
-                            }
-                        }
-                    }
-                ]
-                
-                contextActions: [
-                    ActionSet {
-                        DeleteActionItem {
-                            id: deleteTask
-                            
-                            onTriggered: {
-                                var indexPath = listView.selected();
-                                var data = dataModel.data(indexPath);
-                                dataModel.removeAt(indexPath);
-                                _tasksService.deleteTask(data.id);    
-                            }
-                            
-                            shortcuts: [
-                                Shortcut {
-                                    key: "d"
-                                    
-                                    onTriggered: {
-                                        deleteTask.triggered();
-                                    }
-                                }
-                            ]
-                        }
-                    },
-                    
-                    ActionSet {
-                        title: qsTr("Integration") + Retranslate.onLocaleOrLanguageChanged
-                        ActionItem {
-                            id: openCalendar
-                            title: qsTr("Open in Calendar") + Retranslate.onLocaleOrLanguageChanged
-                            imageSource: "asset:///images/ic_calendar.png"
-                            
-                            onTriggered: {
-                                var indexPath = listView.selected();
-                                var data = dataModel.data(indexPath);
-                                _app.openCalendarEvent(data.calendar_id, data.folder_id, data.account_id);
-                            }
-                        }
-                        
-                        ActionItem {
-                            id: openRemember
-                            title: qsTr("Open in Remember") + Retranslate.onLocaleOrLanguageChanged
-                            imageSource: "asset:///images/ic_notes.png"
-                            
-                            onTriggered: {
-                                var indexPath = listView.selected();
-                                var data = dataModel.data(indexPath);
-                                _app.openRememberNote(data.remember_id);
-                            }
-                        }
-                    }
-                ]
-                
-                listItemComponents: [
-                    ListItemComponent {
-                        type: "header" 
-                        ListItemTaskHeader {
-                            parentId: ListItemData
-                            
-                            onOpenFolder: {
-                                ListItem.view.openFolder(taskId);
-                            }
-                            
-                            onOpenList: {
-                                ListItem.view.openList(taskId);
-                            }
-                        }   
-                    },
-                    
-                    ListItemComponent {
-                        type: "item"
-                        TaskListItem {
-                            taskId: ListItemData.id
-                            name: ListItemData.name
-                            description: ListItemData.description
-                            deadline: ListItemData.deadline
-                            important: ListItemData.important
-                            closed: ListItemData.closed
-                            rememberId: parseInt(ListItemData.remember_id)
-                            calendarId: parseInt(ListItemData.calendar_id)
-                            attachments: ListItemData.attachments
-                            parentId: ListItemData.parent_id || 0
-                            
-                            onTaskRemoved: {
-                                ListItem.view.removeById(taskId, ListItem.indexPath);
-                            }
-                            
-                            onOpenTask: {
-                                ListItem.view.openTask(taskId);
-                            }
-                        }
-                    }
-                ]
             }
         }
     }
     
     function reload() {
-        dataModel.clear();
+        listView.clear();
         var tasks = _tasksService.findImportantTasks().map(function(task) {
             if (task.parent_id === "") {
                 task.parent_id = -1;
             }
             return task;
         });
-        dataModel.insertList(tasks);
+        listView.insertList(tasks);
     }
     
     function clear() {

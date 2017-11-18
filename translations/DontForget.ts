@@ -347,18 +347,6 @@
         <source>Important</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Integration</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open in Calendar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open in Remember</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>ListItemTaskHeader</name>
