@@ -8,8 +8,8 @@ ListView {
     
     property int taskId: 0
     
-    signal openFolder(int taskId)
-    signal openList(int taskId)
+    signal openFolder(int taskId, string name)
+    signal openList(int taskId, string name)
     signal openTask(int taskId)
     signal reload()
     
@@ -53,11 +53,11 @@ ListView {
                 name: ListItemData.name
                 count: ListItemData.count || 0
                 color: ListItemData.color
-                parentId: ListItemData.parent_id
+                parentId: ListItemData.parent_id === "" ? 0 : ListItemData.parent_id
                 selected: _tasksService.isTaskSelected(ListItemData.id)
                 
                 onOpenFolder: {
-                    ListItem.view.openFolder(taskId);
+                    ListItem.view.openFolder(taskId, name);
                 }
             }
         },
@@ -69,7 +69,7 @@ ListView {
                 name: ListItemData.name
                 count: ListItemData.count || 0
                 color: ListItemData.color
-                parentId: ListItemData.parent_id
+                parentId: ListItemData.parent_id === "" ? 0 : ListItemData.parent_id
                 deadline: ListItemData.deadline
                 closed: ListItemData.closed
                 rememberId: parseInt(ListItemData.remember_id)
@@ -77,7 +77,7 @@ ListView {
                 selected: _tasksService.isTaskSelected(ListItemData.id)
                 
                 onOpenList: {
-                    ListItem.view.openList(taskId);
+                    ListItem.view.openList(taskId, name);
                 }
             }    
         },
@@ -93,7 +93,7 @@ ListView {
                 rememberId: parseInt(ListItemData.remember_id)
                 calendarId: parseInt(ListItemData.calendar_id)
                 attachments: ListItemData.attachments
-                parentId: ListItemData.parent_id
+                parentId: ListItemData.parent_id === "" ? 0 : ListItemData.parent_id
                 description: ListItemData.description
                 selected: _tasksService.isTaskSelected(ListItemData.id)
                 

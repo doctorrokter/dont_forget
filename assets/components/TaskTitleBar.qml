@@ -80,7 +80,6 @@ TitleBar {
     
     function reset() {
         root.taskType = "";
-        root.taskId = 0;
         createTaskField.resetText();
     }
 }

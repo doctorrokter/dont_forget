@@ -6,9 +6,8 @@ import "./pages"
 import "./js/Const.js" as Const
 import "./js/assign.js" as Assign
 
-NavigationPane {
-    
-    id: navigationPane
+TabbedPane {
+    id: tabbedPane
     
     Menu.definition: MenuDefinition {
         settingsAction: SettingsActionItem {
@@ -39,652 +38,440 @@ NavigationPane {
         ]
     }
     
-    Page {
-        id: root
+    activePane: NavigationPane {
         
-        titleBar: defaultTitleBar
+        id: navigationPane
         
-        actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
-        actionBarVisibility: ChromeVisibility.Overlay
-        
-        BackgroundContainer {
-            MoverContainer {
-                ListView {
-                    id: listView
-                    
-                    scrollRole: ScrollRole.Main
-                    
-                    dataModel: ArrayDataModel {
-                        id: dataModel
-                    }
-                    
-                    function itemType(data, indexPath) {
-                        return data.type;
-                    }
-                    
-                    function removeById(taskId) {
-                        var i = root.taskExists(taskId);
-                        if (i !== -1) {
-                            dataModel.removeAt(i);
-                            _tasksService.deleteTask(taskId);
+        Page {
+            id: root
+            
+            titleBar: defaultTitleBar
+            
+            actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
+            actionBarVisibility: ChromeVisibility.Overlay
+            
+            BackgroundContainer {
+                MoverContainer {
+                    UnsortedListView {
+                        id: listView
+                        
+                        taskId: 0
+                        scrollRole: ScrollRole.Main
+                        
+                        onReload: {
+                            root.reload();
+                        }
+                        
+                        onOpenFolder: {
+                            var fp = folderPage.createObject();
+                            fp.name = name;
+                            fp.path = "/" + name;
+                            fp.taskId = taskId;
+                            navigationPane.push(fp);
+                        }
+                        
+                        onOpenList: {
+                            var lp = listPage.createObject();
+                            lp.name = name;
+                            lp.path = "/" + name;
+                            lp.taskId = taskId;
+                            navigationPane.push(lp);
+                        }
+                        
+                        onOpenTask: {
+                            navigationPane.openTask(taskId);
                         }
                     }
+                }
+            }
+            
+            function taskUpdated(activeTask, parentId) {
+                navigationPane.pop();
+                recount();
+            }
+            
+            function taskClosedChanged(taskId, closed, parentId) {
+                recount();
+            }
+            
+            function taskDeleted(taskId, parentId, parentParentId) {
+                recount();
+            }
+            
+            function recount() {
+                root.updateTab(todayTab, _tasksService.countTodayTasks());
+                root.updateTab(importantTab, _tasksService.countImportantTasks());
+                root.updateTab(overdueTab, _tasksService.countOverdueTasks());
+            }
+            
+            function updateTab(tab, count) {
+                tab.newContentAvailable = tab.unreadContentCount < count;
+                tab.unreadContentCount = count;
+            }
+            
+            function reload() {
+                root.recount();
+                listView.flush();
+                listView.append(_tasksService.findSiblings());
+            }
+            
+            function tasksMovedInBulk(parentId) {
+                root.reload();
+            }
+            
+            function onThumbnail() {
+                highCover.update();
+                Application.setCover(cover);
+            }
+            
+            onCreationCompleted: {
+                root.reload();
+                
+                _tasksService.taskUpdated.connect(root.taskUpdated);
+                _tasksService.taskClosedChanged.connect(root.taskClosedChanged);
+                _tasksService.taskDeleted.connect(root.taskDeleted);
+                _tasksService.taskMovedInBulk.connect(root.tasksMovedInBulk);
+                Application.thumbnail.connect(root.onThumbnail);
+            }
+            
+            actions: [
+                ActionItem {
+                    id: createFolderActionItem
+                    imageSource: "asset:///images/ic_add_folder.png"
+                    title: qsTr("Create folder") + Retranslate.onLocaleOrLanguageChanged
+                    ActionBar.placement: ActionBarPlacement.OnBar
                     
-                    function openTask(taskId) {
+                    onTriggered: {
+                        taskTitleBar.taskType = Const.TaskTypes.FOLDER;
+                    }
+                    
+                    shortcuts: [
+                        Shortcut {
+                            key: "f"
+                            
+                            onTriggered: {
+                                createFolderActionItem.triggered();
+                            }
+                        }
+                    ]
+                },
+                
+                ActionItem {
+                    id: createTaskActionItem
+                    imageSource: "asset:///images/ic_add.png"
+                    title: qsTr("Create task") + Retranslate.onLocaleOrLanguageChanged
+                    ActionBar.placement: ActionBarPlacement.Signature
+                    
+                    onTriggered: {
+                        taskTitleBar.taskType = Const.TaskTypes.TASK;
+                    }
+                    
+                    shortcuts: [
+                        Shortcut {
+                            key: "c"
+                            
+                            onTriggered: {
+                                createTaskActionItem.triggered();
+                            }
+                        }
+                    ]
+                },
+                
+                ActionItem {
+                    id: createListActionItem
+                    imageSource: "asset:///images/ic_notes.png"
+                    title: qsTr("Create list") + Retranslate.onLocaleOrLanguageChanged
+                    ActionBar.placement: ActionBarPlacement.OnBar
+                    
+                    onTriggered: {
+                        taskTitleBar.taskType = Const.TaskTypes.LIST;
+                    }
+                    
+                    shortcuts: [
+                        Shortcut {
+                            key: "l"
+                            
+                            onTriggered: {
+                                createListActionItem.triggered();
+                            }
+                        }
+                    ]
+                }
+                
+                //            ActionItem {
+                //                id: chartsActionItem
+                //                imageSource: "asset:///images/ic_chart.png"
+                //                title: qsTr("Charts") + Retranslate.onLocaleOrLanguageChanged
+                //                
+                //                onTriggered: {
+                //                    var cp = chartsPage.createObject();
+                //                    navigationPane.push(cp);
+                //                }
+                //            }
+                
+                //            ActionItem {
+                //                id: debugActionItem
+                //                title: "Debug"
+                //                
+                //                onTriggered: {
+                //                    var dp = debugPage.createObject();
+                //                    navigationPane.push(dp);
+                //                }
+                //            }
+            ]
+        }
+        
+        attachedObjects: [
+            SceneCover {
+                id: cover
+                
+                content: HighCover {
+                    id: highCover
+                }    
+            },
+            
+            ComponentDefinition {
+                id: backgroundPage
+                BackgroundPage {
+                    onImageChanged: {
+                        navigationPane.pop();
+                    }
+                }    
+            },
+            
+            ComponentDefinition {
+                id: settingsPage
+                SettingsPage {
+                    onBackgroundPageRequested: {
+                        var bg = backgroundPage.createObject();
+                        navigationPane.push(bg);
+                    }
+                }
+            },
+            
+            ComponentDefinition {
+                id: helpPage
+                HelpPage {}
+            },
+            
+            ComponentDefinition {
+                id: folderPage
+                FolderPage {
+                    onOpenFolder: {
+                        navigationPane.openFolder(taskId, path);
+                    }
+                    
+                    onOpenList: {
+                        navigationPane.openList(taskId, path);
+                    }
+                    
+                    onOpenTask: {
                         navigationPane.openTask(taskId);
                     }
-                    
-                    function openFolder(taskId, taskName) {
-                        var fp = folderPage.createObject();
-                        fp.name = taskName;
-                        fp.path = "/" + taskName;
-                        fp.taskId = taskId;
-                        navigationPane.push(fp);
-                    }
-                    
-                    function openList(taskId, taskName) {
-                        var lp = listPage.createObject();
-                        lp.name = taskName;
-                        lp.path = "/" + taskName;
-                        lp.taskId = taskId;
-                        navigationPane.push(lp);
-                    }
-                    
-                    function openImportant() {
-                        var ip = importantPage.createObject();
-                        navigationPane.push(ip);
-                    }
-                    
-                    function openToday() {
-                        var tp = todayPage.createObject();
-                        navigationPane.push(tp);
-                    }
-                    
-                    function openOverdue() {
-                        var op = overduePage.createObject();
-                        navigationPane.push(op);
-                    }
-                    
-                    attachedObjects: [
-                        ListScrollStateHandler {
-                            onAtEndChanged: {
-                                if (atEnd) {
-                                    root.addEmptyItem();
-                                } else {
-                                    root.removeEmptyItem();
-                                }
-                            }
-                        }
-                    ]
-                    
-                    listItemComponents: [
-                        ListItemComponent {
-                            type: Const.TaskTypes.EMPTY
-                            EmptyListItem {}  
-                        },
-                        
-                        ListItemComponent {
-                            type: Const.TaskTypes.RECEIVED
-                            ServiceListItem {
-                                title: qsTr("Received") + Retranslate.onLocaleOrLanguageChanged
-                                count: ListItemData.count
-                                imageSource: "asset:///images/ic_inbox.png"
-                                color: _ui.color.darkYellow
-                            }
-                        },
-                        
-                        ListItemComponent {
-                            type: Const.TaskTypes.TODAY
-                            ServiceListItem {
-                                title: qsTr("Today") + Retranslate.onLocaleOrLanguageChanged
-                                count: ListItemData.count
-                                imageSource: "asset:///images/calendar.png"
-                                color: _ui.color.lightGreen
-                                
-                                onOpen: {
-                                    ListItem.view.openToday();
-                                }
-                            }
-                        },
-                        
-                        ListItemComponent {
-                            type: Const.TaskTypes.IMPORTANT
-                            ServiceListItem {
-                                title: qsTr("Important") + Retranslate.onLocaleOrLanguageChanged
-                                count: ListItemData.count
-                                imageSource: "asset:///images/ic_important.png"
-                                color: _ui.color.brickRed
-                                
-                                onOpen: {
-                                    ListItem.view.openImportant();
-                                }
-                            }
-                        },
-                        
-                        ListItemComponent {
-                            type: Const.TaskTypes.OVERDUE
-                            ServiceListItem {
-                                title: qsTr("Overdue") + Retranslate.onLocaleOrLanguageChanged
-                                count: ListItemData.count
-                                imageSource: "asset:///images/ic_overdue.png"
-                                color: _ui.color.skyBlue
-                                
-                                onOpen: {
-                                    ListItem.view.openOverdue();
-                                }
-                            }
-                        },
-                        
-                        ListItemComponent {
-                            type: Const.TaskTypes.DIVIDER
-                            DividerListItem {}    
-                        },
-                        
-                        ListItemComponent {
-                            type: Const.TaskTypes.FOLDER
-                            FolderListItem {
-                                taskId: ListItemData.id
-                                name: ListItemData.name
-                                count: ListItemData.count || 0
-                                color: ListItemData.color
-                                parentId: ListItemData.parent_id || 0
-                                
-                                onOpenFolder: {
-                                    ListItem.view.openFolder(taskId, name);
-                                }
-                            }
-                        },
-                        
-                        ListItemComponent {
-                            type: Const.TaskTypes.LIST
-                            ListListItem {
-                                taskId: ListItemData.id
-                                name: ListItemData.name
-                                count: ListItemData.count || 0
-                                color: ListItemData.color
-                                parentId: ListItemData.parent_id || 0
-                                deadline: ListItemData.deadline
-                                closed: ListItemData.closed
-                                rememberId: parseInt(ListItemData.remember_id)
-                                calendarId: parseInt(ListItemData.calendar_id)
-                                
-                                onOpenList: {
-                                    ListItem.view.openList(taskId, name);
-                                }
-                            }    
-                        },
-                        
-                        ListItemComponent {
-                            type: Const.TaskTypes.TASK
-                            TaskListItem {
-                                taskId: ListItemData.id
-                                name: ListItemData.name
-                                deadline: ListItemData.deadline
-                                important: ListItemData.important
-                                closed: ListItemData.closed
-                                rememberId: parseInt(ListItemData.remember_id)
-                                calendarId: parseInt(ListItemData.calendar_id)
-                                attachments: ListItemData.attachments
-                                parentId: ListItemData.parent_id || 0
-                                description: ListItemData.description
-                                
-                                onTaskRemoved: {
-                                    ListItem.view.removeById(taskId);
-                                }
-                                
-                                onOpenTask: {
-                                    ListItem.view.openTask(taskId);
-                                }
-                            }
-                        }
-                    ]
-                }
-            }
-        }
-        
-        function taskExists(taskId) {
-            for (var i = 0; i < dataModel.size(); i++) {
-                if (dataModel.value(i).id === taskId) {
-                    return i;
-                }
-            }
-            return -1;
-        }
-        
-        function firstTaskIndex() {
-            for (var i = 0; i < dataModel.size(); i++) {
-                if (dataModel.value(i).type === Const.TaskTypes.TASK) {
-                    return i;
-                }
-            }
-            return -1;
-        }
-        
-        function taskCreated(newTask, parentId, parentParentId) {
-            if (parentId === 0) {
-                root.removeEmptyItem();
-                var i = root.firstTaskIndex();
-                switch (newTask.type) {
-                    case Const.TaskTypes.TASK:
-                        if (i !== -1) {
-                            dataModel.insert(i, newTask);
-                        } else {
-                            dataModel.append(newTask);                            
-                        }
-                        break;
-                    case Const.TaskTypes.FOLDER:
-                        dataModel.insert(5, newTask);
-                        listView.scrollToPosition(ScrollPosition.Beginning, ScrollAnimation.Smooth);
-                        break;
-                    case Const.TaskTypes.LIST:
-                        if (i === -1) {
-                            dataModel.append(newTask);
-                        } else {
-                            dataModel.insert(i, newTask);
-                        }
-                        break;
-                }
-            } else if (parentParentId === 0) {
-                root.reload();
-            }
-        }
-        
-        function taskUpdated(activeTask, parentId) {
-            navigationPane.pop();
-            if (parentId === 0) {
-                var i = root.taskExists(activeTask.id);
-                if (i !== -1) {
-                    dataModel.replace(i, activeTask);
-                }
-            }
-            
-            recount();
-        }
-        
-        function addEmptyItem() {
-            var data = dataModel.value(dataModel.size() - 1);
-            if (data !== undefined && data.type !== Const.TaskTypes.EMPTY) {
-                dataModel.append({type: Const.TaskTypes.EMPTY});
-            }
-        }
-        
-        function removeEmptyItem() {
-            var data = dataModel.value(dataModel.size() - 1);
-            if (data !== undefined && data.type === Const.TaskTypes.EMPTY) {
-                dataModel.removeAt(dataModel.size() - 1);
-            }
-        }
-        
-        function taskClosedChanged(taskId, closed, parentId) {
-            if (parentId === 0) {
-                var i = root.taskExists(taskId);
-                if (i !== -1 && closed) {
-                    var task = Assign.invoke({}, dataModel.value(i));
-                    task.closed = closed;
-                    dataModel.removeAt(i);
-                    if (task.type === Const.TaskTypes.LIST) {
-                        var index = firstTaskIndex();
-                        if (index !== -1) {
-                            dataModel.insert(index, task);
-                            return;
-                        }
-                    } else {
-                        root.removeEmptyItem();
-                        dataModel.append(task);
-                        return;
-                    }
-                }
-            }
-            recount();
-        }
-        
-        function taskDeleted(taskId, parentId, parentParentId) {
-            if (parentId !== 0) {
-                root.reload();
-            } else {
-                var i = root.taskExists(taskId);
-                if (i !== -1) {
-                    dataModel.removeAt(i);
-                }
-            }
-            
-            recount();
-        }
-        
-        function recount() {
-            var data = dataModel.value(1);
-            data.count = _tasksService.countTodayTasks();
-            dataModel.replace(1, data);
-            
-            data = dataModel.value(2);
-            data.count = _tasksService.countImportantTasks();
-            dataModel.replace(2, data);
-
-            data = dataModel.value(3);
-            data.count = _tasksService.countOverdueTasks();
-            dataModel.replace(3, data);
-        }
-        
-        function reload() {
-            dataModel.clear();
-            var data = [];
-            data.push({count: 0, type: Const.TaskTypes.RECEIVED});
-            data.push({count: _tasksService.countTodayTasks(), type: Const.TaskTypes.TODAY});
-            data.push({count: _tasksService.countImportantTasks(), type: Const.TaskTypes.IMPORTANT});
-            data.push({count: _tasksService.countOverdueTasks(), type: Const.TaskTypes.OVERDUE});
-            data.push({type: "DIVIDER"});
-            dataModel.append(data);
-            dataModel.append(_tasksService.findSiblings());
-        }
-        
-        function tasksMovedInBulk(parentId) {
-            root.reload();
-        }
-        
-        function onThumbnail() {
-            highCover.update();
-            Application.setCover(cover);
-        }
-        
-        function clearSelection() {
-            listView.clearSelection();
-        }
-        
-        function createdFromExternal(newTask) {
-            console.debug(newTask);
-            root.taskCreated(newTask, 0, 0);
-        }
-        
-        onCreationCompleted: {
-            root.reload();
-            
-            _tasksService.taskCreated.connect(root.taskCreated);
-            _tasksService.taskUpdated.connect(root.taskUpdated);
-            _tasksService.taskClosedChanged.connect(root.taskClosedChanged);
-            _tasksService.taskDeleted.connect(root.taskDeleted);
-            _tasksService.allTasksDeselected.connect(root.clearSelection);
-            _tasksService.taskMovedInBulk.connect(root.tasksMovedInBulk);
-            _app.folderPageRequested.connect(root.openFolderPage);
-            _app.taskCreatedFromExternal.connect(root.createdFromExternal);
-            Application.thumbnail.connect(root.onThumbnail);
-        }
-        
-        actions: [
-            ActionItem {
-                id: createFolderActionItem
-                imageSource: "asset:///images/ic_add_folder.png"
-                title: qsTr("Create folder") + Retranslate.onLocaleOrLanguageChanged
-                ActionBar.placement: ActionBarPlacement.OnBar
-                
-                onTriggered: {
-                    taskTitleBar.taskType = Const.TaskTypes.FOLDER;
-                }
-                
-                shortcuts: [
-                    Shortcut {
-                        key: "f"
-                        
-                        onTriggered: {
-                            createFolderActionItem.triggered();
-                        }
-                    }
-                ]
+                }    
             },
             
-            ActionItem {
-                id: createTaskActionItem
-                imageSource: "asset:///images/ic_add.png"
-                title: qsTr("Create task") + Retranslate.onLocaleOrLanguageChanged
-                ActionBar.placement: ActionBarPlacement.Signature
-                
-                onTriggered: {
-                    taskTitleBar.taskType = Const.TaskTypes.TASK;
-                }
-                
-                shortcuts: [
-                    Shortcut {
-                        key: "c"
-                        
-                        onTriggered: {
-                            createTaskActionItem.triggered();
-                        }
+            ComponentDefinition {
+                id: listPage
+                ListPage {
+                    onOpenTask: {
+                        navigationPane.openTask(taskId);
                     }
-                ]
+                }    
             },
             
-            ActionItem {
-                id: createListActionItem
-                imageSource: "asset:///images/ic_notes.png"
-                title: qsTr("Create list") + Retranslate.onLocaleOrLanguageChanged
-                ActionBar.placement: ActionBarPlacement.OnBar
+            ComponentDefinition {
+                id: importantPage
+                ImportantPage {
+                    onOpenFolder: {
+                        navigationPane.openFolder(taskId, "");
+                    }
+                    
+                    onOpenList: {
+                        navigationPane.openList(taskId, "");
+                    }
+                    
+                    onOpenTask: {
+                        navigationPane.openTask(taskId);
+                    }
+                }   
+            },
+            
+            ComponentDefinition {
+                id: todayPage
+                TodayPage {
+                    onOpenFolder: {
+                        navigationPane.openFolder(taskId, "");
+                    }
+                    
+                    onOpenList: {
+                        navigationPane.openList(taskId, "");
+                    }
+                    
+                    onOpenTask: {
+                        navigationPane.openTask(taskId);
+                    }
+                }    
+            },
+            
+            ComponentDefinition {
+                id: overduePage
+                OverduePage {
+                    onOpenFolder: {
+                        navigationPane.openFolder(taskId, "");
+                    }
+                    
+                    onOpenList: {
+                        navigationPane.openList(taskId, "");
+                    }
+                    
+                    onOpenTask: {
+                        navigationPane.openTask(taskId);
+                    }
+                }    
+            },
+            
+            ComponentDefinition {
+                id: taskPage
+                TaskPage {}    
+            },
+            
+            ComponentDefinition {
+                id: chartsPage
+                ChartsPage {}    
+            },
+            
+            ComponentDefinition {
+                id: debugPage
+                DebugPage {}    
+            },
+            
+            Invocation {
+                id: invoke
+                query {
+                    uri: "mailto:dontforget.bbapp@gmail.com?subject=Don't%20Forget:%20Feedback"
+                    invokeActionId: "bb.action.SENDEMAIL"
+                    invokeTargetId: "sys.pim.uib.email.hybridcomposer"
+                }
+            },
+            
+            CustomTitleBar {
+                id: defaultTitleBar
+                title: qsTr("Root") + Retranslate.onLocaleOrLanguageChanged
+                imageSource: "asset:///images/ic_home.png"
+            },
+            
+            TaskTitleBar {
+                id: taskTitleBar
+                taskId: 0
                 
-                onTriggered: {
-                    taskTitleBar.taskType = Const.TaskTypes.LIST;
+                onSubmit: {
+                    root.titleBar = defaultTitleBar;
                 }
                 
-                shortcuts: [
-                    Shortcut {
-                        key: "l"
-                        
-                        onTriggered: {
-                            createListActionItem.triggered();
-                        }
+                onTaskTypeChanged: {
+                    if (taskType !== "") {
+                        root.titleBar = taskTitleBar;
+                        focus();
                     }
-                ]
+                }
+                
+                onCancel: {
+                    root.titleBar = defaultTitleBar;
+                }
             }
-            
-//            ActionItem {
-//                id: chartsActionItem
-//                imageSource: "asset:///images/ic_chart.png"
-//                title: qsTr("Charts") + Retranslate.onLocaleOrLanguageChanged
-//                
-//                onTriggered: {
-//                    var cp = chartsPage.createObject();
-//                    navigationPane.push(cp);
-//                }
-//            }
-            
-//            ActionItem {
-//                id: debugActionItem
-//                title: "Debug"
-//                
-//                onTriggered: {
-//                    var dp = debugPage.createObject();
-//                    navigationPane.push(dp);
-//                }
-//            }
         ]
-    }
-    
-    attachedObjects: [
-        SceneCover {
-            id: cover
-            
-            content: HighCover {
-                id: highCover
-            }    
-        },
         
-        ComponentDefinition {
-            id: backgroundPage
-            BackgroundPage {
-                onImageChanged: {
-                    navigationPane.pop();
-                }
-            }    
-        },
+        function openFolder(taskId, path) {
+            var fp = folderPage.createObject();
+            var folder = _tasksService.findById(taskId);
+            fp.path = path + "/" + folder.name;
+            fp.name = folder.name;
+            fp.taskId = taskId;
+            navigationPane.push(fp);
+        }
         
-        ComponentDefinition {
-            id: settingsPage
-            SettingsPage {
-                onBackgroundPageRequested: {
-                    var bg = backgroundPage.createObject();
-                    navigationPane.push(bg);
-                }
+        function openList(taskId, path) {
+            var list = _tasksService.findById(taskId);
+            var lp = listPage.createObject();
+            lp.name = list.name;
+            lp.path = path + "/" + list.name;
+            lp.taskId = taskId;
+            navigationPane.push(lp);
+        }
+        
+        function openTask(taskId) {
+            _tasksService.setActiveTask(taskId);
+            var tp = taskPage.createObject();
+            navigationPane.push(tp);
+        }
+        
+        onPopTransitionEnded: {
+            Application.menuEnabled = true;
+            if (page.clear) {
+                page.clear();
             }
-        },
-        
-        ComponentDefinition {
-            id: helpPage
-            HelpPage {}
-        },
-        
-        ComponentDefinition {
-            id: folderPage
-            FolderPage {
-                onOpenFolder: {
-                    navigationPane.openFolder(taskId, path);
-                }
-                
-                onOpenList: {
-                    navigationPane.openList(taskId, path);
-                }
-                
-                onOpenTask: {
-                    navigationPane.openTask(taskId);
-                }
-            }    
-        },
-        
-        ComponentDefinition {
-            id: listPage
-            ListPage {
-                onOpenTask: {
-                    navigationPane.openTask(taskId);
-                }
-            }    
-        },
-        
-        ComponentDefinition {
-             id: importantPage
-             ImportantPage {
-                 onOpenFolder: {
-                     navigationPane.openFolder(taskId, "");
-                 }
-                 
-                 onOpenList: {
-                     navigationPane.openList(taskId, "");
-                 }
-                 
-                 onOpenTask: {
-                     navigationPane.openTask(taskId);
-                 }
-             }   
-        },
-        
-        ComponentDefinition {
-            id: todayPage
-            TodayPage {
-                onOpenFolder: {
-                    navigationPane.openFolder(taskId, "");
-                }
-                
-                onOpenList: {
-                    navigationPane.openList(taskId, "");
-                }
-                
-                onOpenTask: {
-                    navigationPane.openTask(taskId);
-                }
-            }    
-        },
-        
-        ComponentDefinition {
-            id: overduePage
-            OverduePage {
-                onOpenFolder: {
-                    navigationPane.openFolder(taskId, "");
-                }
-                
-                onOpenList: {
-                    navigationPane.openList(taskId, "");
-                }
-                
-                onOpenTask: {
-                    navigationPane.openTask(taskId);
-                }
-            }    
-        },
-        
-        ComponentDefinition {
-            id: taskPage
-            TaskPage {}    
-        },
-        
-        ComponentDefinition {
-            id: chartsPage
-            ChartsPage {}    
-        },
-        
-        ComponentDefinition {
-            id: debugPage
-            DebugPage {}    
-        },
-        
-        Invocation {
-            id: invoke
-            query {
-                uri: "mailto:dontforget.bbapp@gmail.com?subject=Don't%20Forget:%20Feedback"
-                invokeActionId: "bb.action.SENDEMAIL"
-                invokeTargetId: "sys.pim.uib.email.hybridcomposer"
-            }
-        },
-        
-        CustomTitleBar {
-            id: defaultTitleBar
-            title: qsTr("Dashboard") + Retranslate.onLocaleOrLanguageChanged
-        },
-        
-        TaskTitleBar {
-            id: taskTitleBar
-            taskId: 0
-            
-            onSubmit: {
-                root.titleBar = defaultTitleBar;
-            }
-            
-            onTaskTypeChanged: {
-                if (taskType !== "") {
-                    root.titleBar = taskTitleBar;
-                    focus();
-                }
-            }
-            
-            onCancel: {
-                root.titleBar = defaultTitleBar;
+            page.destroy();
+            if (tabbedPane.activePane.count() === 1) {
+                tabbedPane.activeTab = mainTab;
             }
         }
-    ]
-    
-    function openFolder(taskId, path) {
-        var fp = folderPage.createObject();
-        var folder = _tasksService.findById(taskId);
-        fp.path = path + "/" + folder.name;
-        fp.name = folder.name;
-        fp.taskId = taskId;
-        navigationPane.push(fp);
     }
     
-    function openList(taskId, path) {
-        var list = _tasksService.findById(taskId);
-        var lp = listPage.createObject();
-        lp.name = list.name;
-        lp.path = path + "/" + list.name;
-        lp.taskId = taskId;
-        navigationPane.push(lp);
+    Tab {
+        id: mainTab
+        
+        title: qsTr("Root") + Retranslate.onLocaleOrLanguageChanged
+        imageSource: "asset:///images/ic_home.png"
     }
     
-    function openTask(taskId) {
-        _tasksService.setActiveTask(taskId);
-        var tp = taskPage.createObject();
-        navigationPane.push(tp);
-    }
-    
-    onPopTransitionEnded: {
-        Application.menuEnabled = true;
-        if (page.clear) {
-            page.clear();
+    Tab {
+        id: receivedTab
+        imageSource: "asset:///images/ic_inbox.png"
+        title: qsTr("Received") + Retranslate.onLocaleOrLanguageChanged
+        unreadContentCount: 0
+        
+        onTriggered: {
+            newContentAvailable = false;
         }
-        page.destroy();
+    }
+    
+    Tab {
+        id: todayTab
+        imageSource: "asset:///images/ic_calendar.png"
+        title: qsTr("Today") + Retranslate.onLocaleOrLanguageChanged
+        unreadContentCount: 0
+        
+        onTriggered: {
+            newContentAvailable = false;
+            var tp = todayPage.createObject();
+            tabbedPane.activePane.push(tp);
+        }
+    }
+    
+    Tab {
+        id: importantTab
+        imageSource: "asset:///images/ic_important.png"
+        title: qsTr("Important") + Retranslate.onLocaleOrLanguageChanged
+        unreadContentCount: 0
+        
+        onTriggered: {
+            newContentAvailable = false;
+            var ip = importantPage.createObject();
+            tabbedPane.activePane.push(ip);
+        }
+    }
+    
+    Tab {
+        id: overdueTab
+        imageSource: "asset:///images/ic_history.png"
+        title: qsTr("Overdue") + Retranslate.onLocaleOrLanguageChanged
+        unreadContentCount: 0
+        
+        onTriggered: {
+            newContentAvailable = false;
+            var op = overduePage.createObject();
+            tabbedPane.activePane.push(op);
+        }
     }
 }

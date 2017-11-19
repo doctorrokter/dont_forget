@@ -1,5 +1,5 @@
 1
-141
+136
 actions/CalendarActionItem.qml
 actions/DeleteTaskActionItem.qml
 actions/MoveActionItem.qml
@@ -23,18 +23,14 @@ components/UnsortedListView.qml
 components/v2/DividerListItem.qml
 components/v2/EmptyListItem.qml
 components/v2/FolderListItem.qml
-components/v2/ImportantListItem.qml
 components/v2/ListCoverListItem.qml
 components/v2/ListItemTaskHeader.qml
 components/v2/ListListItem.qml
 components/v2/Mover.qml
-components/v2/OverdueListItem.qml
-components/v2/ReceivedListItem.qml
 components/v2/RichLinkPreview.qml
 components/v2/ServiceListItem.qml
 components/v2/TaskCoverListItem.qml
 components/v2/TaskListItem.qml
-components/v2/TodayListItem.qml
 html/charts.html
 images/apk_icon_big_512x512.png
 images/audio_icon_big_512x512.png
@@ -54,7 +50,6 @@ images/backgrounds/wall_3.jpg
 images/backgrounds/wall_4.jpg
 images/backgrounds/wall_5.jpg
 images/backgrounds/wall_6.jpg
-images/calendar.png
 images/doc_icon_big_512x512.png
 images/generic_icon_big_512x512.png
 images/grey_pellet.png
@@ -81,12 +76,12 @@ images/ic_feedback.png
 images/ic_folder.png
 images/ic_forward.png
 images/ic_history.png
+images/ic_home.png
 images/ic_important.png
 images/ic_inbox.png
 images/ic_list.png
 images/ic_minus.png
 images/ic_notes.png
-images/ic_overdue.png
 images/ic_plus.png
 images/ic_rename.png
 images/ic_search.png

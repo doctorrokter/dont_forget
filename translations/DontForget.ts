@@ -644,10 +644,6 @@
 <context>
     <name>main</name>
     <message>
-        <source>Send feedback</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Create folder</source>
         <translation type="unfinished"></translation>
     </message>
@@ -660,7 +656,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Dashboard</source>
+        <source>Root</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -677,6 +673,10 @@
     </message>
     <message>
         <source>Overdue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send feedback</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

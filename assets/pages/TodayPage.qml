@@ -16,7 +16,7 @@ Page {
     
     titleBar: CustomTitleBar {
         title: qsTr("Today") + Retranslate.onLocaleOrLanguageChanged
-        imageSource: "asset:///images/calendar.png"
+        imageSource: "asset:///images/ic_calendar.png"
     }
     
     actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll

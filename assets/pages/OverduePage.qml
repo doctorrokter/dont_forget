@@ -16,7 +16,7 @@ Page {
     
     titleBar: CustomTitleBar {
         title: qsTr("Overdue") + Retranslate.onLocaleOrLanguageChanged
-        imageSource: "asset:///images/ic_overdue.png"
+        imageSource: "asset:///images/ic_history.png"
     }
     
     actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll

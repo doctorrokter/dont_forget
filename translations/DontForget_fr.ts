@@ -1052,7 +1052,7 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../assets/main.qml" line="32"/>
+        <location filename="../assets/main.qml" line="31"/>
         <source>Send feedback</source>
         <translation type="unfinished">Envoyer un retour d&apos;information</translation>
     </message>
@@ -1177,7 +1177,7 @@
         <translation type="obsolete">Liste</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="153"/>
+        <location filename="../assets/main.qml" line="455"/>
         <source>Important</source>
         <translation type="unfinished">Important</translation>
     </message>
@@ -1186,38 +1186,39 @@
         <translation type="obsolete">Annuler</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="129"/>
-        <source>Received</source>
-        <translation type="unfinished"></translation>
+        <location filename="../assets/main.qml" line="360"/>
+        <location filename="../assets/main.qml" line="424"/>
+        <source>Root</source>
+        <translation type="unfinished">Racine</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="139"/>
-        <source>Today</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/main.qml" line="167"/>
-        <source>Overdue</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../assets/main.qml" line="416"/>
+        <location filename="../assets/main.qml" line="141"/>
         <source>Create folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="437"/>
+        <location filename="../assets/main.qml" line="162"/>
         <source>Create task</source>
         <translation type="unfinished">Créer tâche</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="458"/>
+        <location filename="../assets/main.qml" line="183"/>
         <source>Create list</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="635"/>
-        <source>Dashboard</source>
+        <location filename="../assets/main.qml" line="431"/>
+        <source>Received</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="442"/>
+        <source>Today</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/main.qml" line="468"/>
+        <source>Overdue</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -86,7 +86,6 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/backgrounds/wall_4.jpg) \
         $$quote($$BASEDIR/assets/images/backgrounds/wall_5.jpg) \
         $$quote($$BASEDIR/assets/images/backgrounds/wall_6.jpg) \
-        $$quote($$BASEDIR/assets/images/calendar.png) \
         $$quote($$BASEDIR/assets/images/doc_icon_big_512x512.png) \
         $$quote($$BASEDIR/assets/images/generic_icon_big_512x512.png) \
         $$quote($$BASEDIR/assets/images/grey_pellet.png) \
@@ -113,12 +112,12 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/ic_folder.png) \
         $$quote($$BASEDIR/assets/images/ic_forward.png) \
         $$quote($$BASEDIR/assets/images/ic_history.png) \
+        $$quote($$BASEDIR/assets/images/ic_home.png) \
         $$quote($$BASEDIR/assets/images/ic_important.png) \
         $$quote($$BASEDIR/assets/images/ic_inbox.png) \
         $$quote($$BASEDIR/assets/images/ic_list.png) \
         $$quote($$BASEDIR/assets/images/ic_minus.png) \
         $$quote($$BASEDIR/assets/images/ic_notes.png) \
-        $$quote($$BASEDIR/assets/images/ic_overdue.png) \
         $$quote($$BASEDIR/assets/images/ic_plus.png) \
         $$quote($$BASEDIR/assets/images/ic_rename.png) \
         $$quote($$BASEDIR/assets/images/ic_search.png) \
