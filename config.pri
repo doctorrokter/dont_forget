@@ -155,6 +155,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/migrations/9_add_column_color_into_tasks.sql) \
         $$quote($$BASEDIR/assets/pages/BackgroundPage.qml) \
         $$quote($$BASEDIR/assets/pages/ChartsPage.qml) \
+        $$quote($$BASEDIR/assets/pages/CompletedPage.qml) \
         $$quote($$BASEDIR/assets/pages/ContactsPage.qml) \
         $$quote($$BASEDIR/assets/pages/DebugPage.qml) \
         $$quote($$BASEDIR/assets/pages/FolderPage.qml) \

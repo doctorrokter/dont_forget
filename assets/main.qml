@@ -102,6 +102,7 @@ TabbedPane {
                 root.updateTab(todayTab, _tasksService.countTodayTasks());
                 root.updateTab(importantTab, _tasksService.countImportantTasks());
                 root.updateTab(overdueTab, _tasksService.countOverdueTasks());
+                completedTab.unreadContentCount = _tasksService.countCompletedTasks();
             }
             
             function updateTab(tab, count) {
@@ -332,6 +333,23 @@ TabbedPane {
             },
             
             ComponentDefinition {
+                id: completedPage
+                CompletedPage {
+                    onOpenFolder: {
+                        navigationPane.openFolder(taskId, "");
+                    }
+                    
+                    onOpenList: {
+                        navigationPane.openList(taskId, "");
+                    }
+                    
+                    onOpenTask: {
+                        navigationPane.openTask(taskId);
+                    }
+                }
+            },
+            
+            ComponentDefinition {
                 id: taskPage
                 TaskPage {}    
             },
@@ -472,6 +490,19 @@ TabbedPane {
             newContentAvailable = false;
             var op = overduePage.createObject();
             tabbedPane.activePane.push(op);
+        }
+    }
+    
+    Tab {
+        id: completedTab
+        imageSource: "asset:///images/ic_done.png"
+        title: qsTr("Completed") + Retranslate.onLocaleOrLanguageChanged
+        unreadContentCount: 0
+        
+        onTriggered: {
+            newContentAvailable = false;
+            var cp = completedPage.createObject();
+            tabbedPane.activePane.push(cp);
         }
     }
 }

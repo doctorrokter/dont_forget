@@ -1,5 +1,5 @@
 1
-136
+137
 actions/CalendarActionItem.qml
 actions/DeleteTaskActionItem.qml
 actions/MoveActionItem.qml
@@ -119,6 +119,7 @@ migrations/8_create_index_type.sql
 migrations/9_add_column_color_into_tasks.sql
 pages/BackgroundPage.qml
 pages/ChartsPage.qml
+pages/CompletedPage.qml
 pages/ContactsPage.qml
 pages/DebugPage.qml
 pages/FolderPage.qml

@@ -95,6 +95,13 @@
     </message>
 </context>
 <context>
+    <name>CompletedPage</name>
+    <message>
+        <source>Completed</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ContactsPage</name>
     <message>
         <source>Edit</source>
@@ -677,6 +684,10 @@
     </message>
     <message>
         <source>Send feedback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Completed</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
