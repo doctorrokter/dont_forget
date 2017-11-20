@@ -127,13 +127,9 @@
 <context>
     <name>CompletedPage</name>
     <message>
-        <source>Overdue</source>
-        <translation type="obsolete">Просроченные</translation>
-    </message>
-    <message>
         <location filename="../assets/pages/CompletedPage.qml" line="17"/>
         <source>Completed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Завершенные</translation>
     </message>
 </context>
 <context>
@@ -525,18 +521,6 @@
         <location filename="../assets/pages/ImportantPage.qml" line="18"/>
         <source>Important</source>
         <translation type="unfinished">Важное</translation>
-    </message>
-    <message>
-        <source>Integration</source>
-        <translation type="obsolete">Интеграции</translation>
-    </message>
-    <message>
-        <source>Open in Calendar</source>
-        <translation type="obsolete">Открыть в Календаре</translation>
-    </message>
-    <message>
-        <source>Open in Remember</source>
-        <translation type="obsolete">Открыть в Remember</translation>
     </message>
 </context>
 <context>
@@ -1041,7 +1025,7 @@
     <message>
         <location filename="../assets/pages/UpcomingPage.qml" line="17"/>
         <source>Upcoming</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Предстоящие</translation>
     </message>
 </context>
 <context>
@@ -1231,12 +1215,12 @@
     <message>
         <location filename="../assets/main.qml" line="491"/>
         <source>Upcoming</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Предстоящие</translation>
     </message>
     <message>
         <location filename="../assets/main.qml" line="530"/>
         <source>Completed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Завершенные</translation>
     </message>
     <message>
         <source>Dashboard</source>
