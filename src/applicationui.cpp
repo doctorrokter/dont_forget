@@ -250,6 +250,7 @@ void ApplicationUI::processReceivedTaskMap(const QVariantMap& taskMap, const int
     Task task;
     task.fromMap(taskMap);
     task.setParentId(parentId);
+    task.setReceived(true);
 
     m_pTasksService->copyTask(task);
     task.fromMap(m_pTasksService->lastCreated());

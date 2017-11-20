@@ -399,6 +399,13 @@
     </message>
 </context>
 <context>
+    <name>ReceivedPage</name>
+    <message>
+        <source>Received</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RememberActionItem</name>
     <message>
         <source>Open in Remember</source>

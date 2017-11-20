@@ -104,6 +104,7 @@ TabbedPane {
                 root.updateTab(overdueTab, _tasksService.countOverdueTasks());
                 root.updateTab(completedTab, _tasksService.countCompletedTasks());
                 root.updateTab(upcomingTab, _tasksService.countUpcomingTasks());
+                root.updateTab(receivedTab, _tasksService.countReceivedTasks());
             }
             
             function updateTab(tab, count) {
@@ -368,6 +369,23 @@ TabbedPane {
             },
             
             ComponentDefinition {
+                id: receivedPage
+                ReceivedPage {
+                    onOpenFolder: {
+                        navigationPane.openFolder(taskId, "");
+                    }
+                    
+                    onOpenList: {
+                        navigationPane.openList(taskId, "");
+                    }
+                    
+                    onOpenTask: {
+                        navigationPane.openTask(taskId);
+                    }
+                }
+            },
+            
+            ComponentDefinition {
                 id: taskPage
                 TaskPage {}    
             },
@@ -469,6 +487,8 @@ TabbedPane {
         
         onTriggered: {
             newContentAvailable = false;
+            var rp = receivedPage.createObject();
+            tabbedPane.activePane.push(rp);
         }
     }
     

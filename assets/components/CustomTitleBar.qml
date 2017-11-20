@@ -7,13 +7,15 @@ TitleBar {
     property ActionItem submitAction
     property bool clearable: false
     property string imageSource: ""
+    property string color: ""
     
     appearance: TitleBarAppearance.Plain
     kind: TitleBarKind.FreeForm
     
     kindProperties: FreeFormTitleBarKindProperties {
+        
         Container {
-            background: Application.themeSupport.theme.colorTheme.primaryBase
+            background: root.color !== "" ? Color.create(root.color) : Application.themeSupport.theme.colorTheme.primaryBase
             leftPadding: ui.du(2)
             rightPadding: ui.du(2)
             layout: DockLayout {}

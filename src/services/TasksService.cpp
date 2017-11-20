@@ -188,6 +188,10 @@ int TasksService::countUpcomingTasks() {
     return m_pDbConfig->execute(QString("SELECT COUNT(*) AS count FROM tasks WHERE type IN ('TASK', 'LIST') AND closed = 0 AND deadline != 0 AND deadline > %1").arg(endOfToday.toTime_t())).toList().at(0).toMap().value("count").toInt();
 }
 
+int TasksService::countReceivedTasks() {
+    return m_pDbConfig->execute("SELECT COUNT(*) AS count FROM tasks WHERE type IN ('TASK', 'LIST') AND received = 1").toList().at(0).toMap().value("count").toInt();
+}
+
 QVariantList TasksService::findImportantTasks() {
     QVariantList tasks = m_pDbConfig->execute(QString("SELECT * FROM tasks WHERE type IN ('TASK', 'LIST') AND important = 1 AND closed = 0 ORDER BY parent_id")).toList();
     countOrAttachments(tasks);
@@ -234,6 +238,12 @@ QVariantList TasksService::findUpcomingTasks() {
     endOfToday.setTime(end);
 
     QVariantList tasks = m_pDbConfig->execute(QString("SELECT COUNT(*) AS count FROM tasks WHERE type IN ('TASK', 'LIST') AND closed = 0 AND deadline != 0 AND deadline > %1 ORDER BY parent_id, type").arg(endOfToday.toTime_t())).toList();
+    countOrAttachments(tasks);
+    return tasks;
+}
+
+QVariantList TasksService::findReceivedTasks() {
+    QVariantList tasks =  m_pDbConfig->execute("SELECT * FROM tasks WHERE type IN ('TASK', 'LIST') AND received = 1 ORDER BY parent_id, type").toList();
     countOrAttachments(tasks);
     return tasks;
 }
@@ -462,8 +472,8 @@ void TasksService::copyTask(const Task& task) {
         calendarEventId = ev.id();
     }
 
-    QString query = "INSERT INTO tasks (name, description, type, deadline, important, parent_id, closed, remember_id, calendar_id, account_id, folder_id, color) "
-                        "VALUES (:name, :description, :type, :deadline, :important, :parent_id, :closed, :remember_id, :calendar_id, :account_id, :folder_id, :color)";
+    QString query = "INSERT INTO tasks (name, description, type, deadline, important, parent_id, closed, remember_id, calendar_id, account_id, folder_id, color, received) "
+                        "VALUES (:name, :description, :type, :deadline, :important, :parent_id, :closed, :remember_id, :calendar_id, :account_id, :folder_id, :color, :received)";
     QVariantMap values;
     values["name"] = task.getName();
     values["description"] = task.getDescription();
@@ -477,6 +487,7 @@ void TasksService::copyTask(const Task& task) {
     values["account_id"] = task.getAccountId();
     values["folder_id"] = task.getFolderId();
     values["color"] = task.getColor();
+    values["received"] = task.isReceived() ? 1 : 0;
 
     m_pDbConfig->execute(query, values);
 }

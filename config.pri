@@ -140,17 +140,19 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/js/assign.js) \
         $$quote($$BASEDIR/assets/main.qml) \
         $$quote($$BASEDIR/assets/main_old.qml) \
-        $$quote($$BASEDIR/assets/migrations/10_alter_table_tasks_add_account_id.sql) \
-        $$quote($$BASEDIR/assets/migrations/11_alter_table_tasks_add_folder_id.sql) \
-        $$quote($$BASEDIR/assets/migrations/1_create_schema_version_table.sql) \
-        $$quote($$BASEDIR/assets/migrations/2_create_table_tasks.sql) \
-        $$quote($$BASEDIR/assets/migrations/3_create_table_df_users.sql) \
-        $$quote($$BASEDIR/assets/migrations/4_create_table_attachments.sql) \
-        $$quote($$BASEDIR/assets/migrations/5_alter_table_tasks_add_calendar_id.sql) \
-        $$quote($$BASEDIR/assets/migrations/6_create_index_parent_id_type.sql) \
-        $$quote($$BASEDIR/assets/migrations/7_create_index_parent_id.sql) \
-        $$quote($$BASEDIR/assets/migrations/8_create_index_type.sql) \
-        $$quote($$BASEDIR/assets/migrations/9_add_column_color_into_tasks.sql) \
+        $$quote($$BASEDIR/assets/migrations/001_create_schema_version_table.sql) \
+        $$quote($$BASEDIR/assets/migrations/002_create_table_tasks.sql) \
+        $$quote($$BASEDIR/assets/migrations/003_create_table_df_users.sql) \
+        $$quote($$BASEDIR/assets/migrations/004_create_table_attachments.sql) \
+        $$quote($$BASEDIR/assets/migrations/005_alter_table_tasks_add_calendar_id.sql) \
+        $$quote($$BASEDIR/assets/migrations/006_create_index_parent_id_type.sql) \
+        $$quote($$BASEDIR/assets/migrations/007_create_index_parent_id.sql) \
+        $$quote($$BASEDIR/assets/migrations/008_create_index_type.sql) \
+        $$quote($$BASEDIR/assets/migrations/009_add_column_color_into_tasks.sql) \
+        $$quote($$BASEDIR/assets/migrations/010_alter_table_tasks_add_account_id.sql) \
+        $$quote($$BASEDIR/assets/migrations/011_alter_table_tasks_add_folder_id.sql) \
+        $$quote($$BASEDIR/assets/migrations/012_alter_table_tasks_add_received.sql) \
+        $$quote($$BASEDIR/assets/migrations/013_create_indexes.sql) \
         $$quote($$BASEDIR/assets/pages/BackgroundPage.qml) \
         $$quote($$BASEDIR/assets/pages/ChartsPage.qml) \
         $$quote($$BASEDIR/assets/pages/CompletedPage.qml) \
@@ -162,6 +164,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/pages/ImportantPage.qml) \
         $$quote($$BASEDIR/assets/pages/ListPage.qml) \
         $$quote($$BASEDIR/assets/pages/OverduePage.qml) \
+        $$quote($$BASEDIR/assets/pages/ReceivedPage.qml) \
         $$quote($$BASEDIR/assets/pages/SettingsPage.qml) \
         $$quote($$BASEDIR/assets/pages/TaskPage.qml) \
         $$quote($$BASEDIR/assets/pages/TodayPage.qml) \

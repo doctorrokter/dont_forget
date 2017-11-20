@@ -51,11 +51,13 @@ public:
     Q_INVOKABLE int countOverdueTasks();
     Q_INVOKABLE int countCompletedTasks();
     Q_INVOKABLE int countUpcomingTasks();
+    Q_INVOKABLE int countReceivedTasks();
     Q_INVOKABLE QVariantList findImportantTasks();
     Q_INVOKABLE QVariantList findTodayTasks();
     Q_INVOKABLE QVariantList findOverdueTasks();
     Q_INVOKABLE QVariantList findCompletedTasks();
     Q_INVOKABLE QVariantList findUpcomingTasks();
+    Q_INVOKABLE QVariantList findReceivedTasks();
 
     Q_INVOKABLE void changeClosed(const int& id, const bool& closed, const int& parentId = 0);
 

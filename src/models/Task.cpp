@@ -10,7 +10,7 @@
 
 Task::Task(QObject* parent) : QObject(parent), m_id(0), m_name(""), m_description(""), m_type("FOLDER"), m_parentId(0),
     m_deadline(0), m_important(false), m_closed(false), m_rememberId(""),
-    m_calendarId(0), m_accountId(1), m_folderId(1), m_color("") {}
+    m_calendarId(0), m_accountId(1), m_folderId(1), m_color(""), m_received(false) {}
 
 Task::Task(const Task& task) : QObject(task.parent()) {
     if (this != &task) {
@@ -111,6 +111,12 @@ void Task::setColor(const QString& color) {
     emit colorChanged(m_color);
 }
 
+bool Task::isReceived() const { return m_received; }
+void Task::setReceived(const bool& received) {
+    m_received = received;
+    emit receivedChanged(m_received);
+}
+
 const QList<Task>& Task::getChildren() const { return m_children; }
 void Task::setChildren(const QList<Task>& children) {
     m_children = children;
@@ -139,6 +145,7 @@ void Task::swap(const Task& task) {
     this->setCalendarId(task.getCalendarId());
     this->setAccountId(task.getAccountId());
     this->setFolderId(task.getFolderId());
+    this->setReceived(task.isReceived());
 
     QList<Task> children = task.getChildren();
     this->setChildren(children);
@@ -159,6 +166,7 @@ QVariantMap Task::toMap() const {
     map.insert("accountId", this->getAccountId());
     map.insert("folderId", this->getFolderId());
     map.insert("color", this->getColor());
+    map.insert("received", this->isReceived());
 
     QVariantList children;
     for (int i = 0; i < m_children.size(); i++) {
@@ -183,6 +191,7 @@ QVariantMap Task::toJson() const {
     map.insert("account_id", this->getAccountId());
     map.insert("folder_id", this->getFolderId());
     map.insert("color", this->getColor());
+    map.insert("received", this->isReceived());
     return map;
 }
 
@@ -200,6 +209,7 @@ void Task::fromMap(const QVariantMap taskMap) {
     this->setAccountId(taskMap.value("account_id", "1").toInt());
     this->setFolderId(taskMap.value("folder_id", "1").toInt());
     this->setColor(taskMap.value("color", "").toString());
+    this->setReceived(taskMap.value("received", "0").toBool());
 }
 
 void Task::addChild(Task& task) {

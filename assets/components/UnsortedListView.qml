@@ -179,7 +179,6 @@ ListView {
                     break;
                 case Const.TaskTypes.FOLDER:
                     dataModel.insert(0, newTask);
-                    listView.scrollToPosition(ScrollPosition.Beginning, ScrollAnimation.Smooth);
                     break;
                 case Const.TaskTypes.LIST:
                     if (i === -1) {
@@ -189,6 +188,7 @@ ListView {
                     }
                     break;
             }
+            listView.scrollToPosition(i, ScrollAnimation.Smooth);
         } else if (parentParentId === listView.taskId) {
             listView.reload();
         }

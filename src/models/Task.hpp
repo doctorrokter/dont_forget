@@ -27,6 +27,7 @@ class Task: public QObject {
     Q_PROPERTY(int accountId READ getAccountId WRITE setAccountId NOTIFY accountIdChanged)
     Q_PROPERTY(int folderId READ getFolderId WRITE setFolderId NOTIFY folderIdChanged)
     Q_PROPERTY(QString color READ getColor WRITE setColor NOTIFY colorChanged)
+    Q_PROPERTY(bool received READ isReceived WRITE setReceived NOTIFY receivedChanged)
     Q_PROPERTY(QList<Task> children READ getChildren WRITE setChildren NOTIFY childrenChanged)
 public:
     Task(QObject* parent = 0);
@@ -76,6 +77,9 @@ public:
     Q_INVOKABLE const QString& getColor() const;
     Q_INVOKABLE void setColor(const QString& color);
 
+    Q_INVOKABLE bool isReceived() const;
+    Q_INVOKABLE void setReceived(const bool& received);
+
     Q_INVOKABLE const QList<Task>& getChildren() const;
     Q_INVOKABLE void setChildren(const QList<Task>& children);
 
@@ -99,6 +103,7 @@ Q_SIGNALS:
     void accountIdChanged(const int accountId);
     void folderIdChanged(const int folderId);
     void colorChanged(const QString& color);
+    void receivedChanged(const bool& received);
     void childrenChanged(const QList<Task>& children);
 
 private:
@@ -115,6 +120,7 @@ private:
     int m_accountId;
     int m_folderId;
     QString m_color;
+    bool m_received;
     QList<Task> m_children;
 
     void swap(const Task& task);

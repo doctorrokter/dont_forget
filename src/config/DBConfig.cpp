@@ -79,7 +79,7 @@ DBConfig::DBConfig(QObject* parent) : QObject(parent) {
          } else {
              logger.info("DB versions matches!");
          }
-         logger.info("Current DB version is: " + getVersion());
+         logger.info(QString("Current DB version is: ").append(QString::number(getVersion())));
      }
 }
 
@@ -90,7 +90,7 @@ DBConfig::~DBConfig() {
 }
 
 QVariant DBConfig::execute(const QString& query) {
-    qDebug() << "===>>> SQL: " << query << endl;
+    logger.info("SQL: " + query);
     return m_pSda->execute(query);
 }
 
