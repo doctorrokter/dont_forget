@@ -115,10 +115,8 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/ic_home.png) \
         $$quote($$BASEDIR/assets/images/ic_important.png) \
         $$quote($$BASEDIR/assets/images/ic_inbox.png) \
-        $$quote($$BASEDIR/assets/images/ic_list.png) \
-        $$quote($$BASEDIR/assets/images/ic_minus.png) \
         $$quote($$BASEDIR/assets/images/ic_notes.png) \
-        $$quote($$BASEDIR/assets/images/ic_plus.png) \
+        $$quote($$BASEDIR/assets/images/ic_reload.png) \
         $$quote($$BASEDIR/assets/images/ic_rename.png) \
         $$quote($$BASEDIR/assets/images/ic_search.png) \
         $$quote($$BASEDIR/assets/images/ic_select_more.png) \
@@ -167,6 +165,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/pages/SettingsPage.qml) \
         $$quote($$BASEDIR/assets/pages/TaskPage.qml) \
         $$quote($$BASEDIR/assets/pages/TodayPage.qml) \
+        $$quote($$BASEDIR/assets/pages/UpcomingPage.qml) \
         $$quote($$BASEDIR/assets/pages/settings_components/BackupAndRecovery.qml) \
         $$quote($$BASEDIR/assets/sheets/AddContactSheet.qml) \
         $$quote($$BASEDIR/assets/sheets/FilePickersSheet.qml) \

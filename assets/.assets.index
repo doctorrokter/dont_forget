@@ -1,5 +1,5 @@
 1
-137
+136
 actions/CalendarActionItem.qml
 actions/DeleteTaskActionItem.qml
 actions/MoveActionItem.qml
@@ -79,10 +79,8 @@ images/ic_history.png
 images/ic_home.png
 images/ic_important.png
 images/ic_inbox.png
-images/ic_list.png
-images/ic_minus.png
 images/ic_notes.png
-images/ic_plus.png
+images/ic_reload.png
 images/ic_rename.png
 images/ic_search.png
 images/ic_select_more.png
@@ -132,6 +130,7 @@ pages/SettingsPage.qml
 pages/settings_components/BackupAndRecovery.qml
 pages/TaskPage.qml
 pages/TodayPage.qml
+pages/UpcomingPage.qml
 sheets/AddContactSheet.qml
 sheets/FilePickersSheet.qml
 sheets/TaskSheet.qml

@@ -14,8 +14,8 @@ Page {
     signal openTask(int taskId)
     
     titleBar: CustomTitleBar {
-        title: qsTr("Completed") + Retranslate.onLocaleOrLanguageChanged
-        imageSource: "asset:///images/ic_done.png"
+        title: qsTr("Upcoming") + Retranslate.onLocaleOrLanguageChanged
+        imageSource: "asset:///images/ic_reload.png"
     }
     
     actionBarAutoHideBehavior: ActionBarAutoHideBehavior.HideOnScroll
@@ -45,13 +45,13 @@ Page {
     
     function reload() {
         listView.clear();
-        var tasks = _tasksService.findCompletedTasks().map(function(task) {
+        var tasks = _tasksService.findUpcomingTasks().map(function(task) {
                 if (task.parent_id === "") {
                     task.parent_id = -1;
                 }
                 return task;
         });
-        listView.insertList(tasks);
+    listView.insertList(tasks);
     }
     
     function clear() {
@@ -65,4 +65,5 @@ Page {
         reload();
     }
 }
+
 

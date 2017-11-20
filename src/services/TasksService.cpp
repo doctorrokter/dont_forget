@@ -179,6 +179,15 @@ int TasksService::countCompletedTasks() {
     return m_pDbConfig->execute("SELECT COUNT(*) AS count FROM tasks WHERE type IN ('TASK', 'LIST') AND closed = 1").toList().at(0).toMap().value("count").toInt();
 }
 
+int TasksService::countUpcomingTasks() {
+    QDateTime endOfToday = QDateTime::currentDateTime();
+    QTime end;
+    end.setHMS(23, 59, 0, 0);
+    endOfToday.setTime(end);
+
+    return m_pDbConfig->execute(QString("SELECT COUNT(*) AS count FROM tasks WHERE type IN ('TASK', 'LIST') AND closed = 0 AND deadline != 0 AND deadline > %1").arg(endOfToday.toTime_t())).toList().at(0).toMap().value("count").toInt();
+}
+
 QVariantList TasksService::findImportantTasks() {
     QVariantList tasks = m_pDbConfig->execute(QString("SELECT * FROM tasks WHERE type IN ('TASK', 'LIST') AND important = 1 AND closed = 0 ORDER BY parent_id")).toList();
     countOrAttachments(tasks);
@@ -213,7 +222,18 @@ QVariantList TasksService::findOverdueTasks() {
 }
 
 QVariantList TasksService::findCompletedTasks() {
-    QVariantList tasks =  m_pDbConfig->execute("SELECT * FROM tasks WHERE type IN ('TASK', 'LIST') AND closed = 1 ORDER BY parent_id").toList();
+    QVariantList tasks =  m_pDbConfig->execute("SELECT * FROM tasks WHERE type IN ('TASK', 'LIST') AND closed = 1 ORDER BY parent_id, type").toList();
+    countOrAttachments(tasks);
+    return tasks;
+}
+
+QVariantList TasksService::findUpcomingTasks() {
+    QDateTime endOfToday = QDateTime::currentDateTime();
+    QTime end;
+    end.setHMS(23, 59, 0, 0);
+    endOfToday.setTime(end);
+
+    QVariantList tasks = m_pDbConfig->execute(QString("SELECT COUNT(*) AS count FROM tasks WHERE type IN ('TASK', 'LIST') AND closed = 0 AND deadline != 0 AND deadline > %1 ORDER BY parent_id, type").arg(endOfToday.toTime_t())).toList();
     countOrAttachments(tasks);
     return tasks;
 }

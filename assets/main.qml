@@ -102,7 +102,8 @@ TabbedPane {
                 root.updateTab(todayTab, _tasksService.countTodayTasks());
                 root.updateTab(importantTab, _tasksService.countImportantTasks());
                 root.updateTab(overdueTab, _tasksService.countOverdueTasks());
-                completedTab.unreadContentCount = _tasksService.countCompletedTasks();
+                root.updateTab(completedTab, _tasksService.countCompletedTasks());
+                root.updateTab(upcomingTab, _tasksService.countUpcomingTasks());
             }
             
             function updateTab(tab, count) {
@@ -350,6 +351,23 @@ TabbedPane {
             },
             
             ComponentDefinition {
+                id: upcomingPage
+                UpcomingPage {
+                    onOpenFolder: {
+                        navigationPane.openFolder(taskId, "");
+                    }
+                    
+                    onOpenList: {
+                        navigationPane.openList(taskId, "");
+                    }
+                    
+                    onOpenTask: {
+                        navigationPane.openTask(taskId);
+                    }
+                }
+            },
+            
+            ComponentDefinition {
                 id: taskPage
                 TaskPage {}    
             },
@@ -464,6 +482,19 @@ TabbedPane {
             newContentAvailable = false;
             var tp = todayPage.createObject();
             tabbedPane.activePane.push(tp);
+        }
+    }
+    
+    Tab {
+        id: upcomingTab
+        imageSource: "asset:///images/ic_reload.png"
+        title: qsTr("Upcoming") + Retranslate.onLocaleOrLanguageChanged
+        unreadContentCount: 0
+        
+        onTriggered: {
+            newContentAvailable = false;
+            var up = upcomingPage.createObject();
+            tabbedPane.activePane.push(up);
         }
     }
     

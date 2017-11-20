@@ -1,7 +1,6 @@
 import bb.cascades 1.4
 import "../components"
 import "../components/v2"
-import "../js/Const.js" as Const
 
 Page {
     id: root

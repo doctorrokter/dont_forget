@@ -649,6 +649,13 @@
     </message>
 </context>
 <context>
+    <name>UpcomingPage</name>
+    <message>
+        <source>Upcoming</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>main</name>
     <message>
         <source>Create folder</source>
@@ -688,6 +695,10 @@
     </message>
     <message>
         <source>Completed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upcoming</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
