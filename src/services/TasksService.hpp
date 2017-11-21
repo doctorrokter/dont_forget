@@ -132,6 +132,7 @@ private:
     void syncCalendarTasks();
     bool equals(Task& task, NotebookEntry& note);
     void countOrAttachments(QVariantList& tasks);
+    void deleteTaskRecursive(const Task& task);
 };
 
 #endif /* TASKSSERVICE_HPP_ */

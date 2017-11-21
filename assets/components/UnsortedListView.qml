@@ -240,7 +240,7 @@ ListView {
         _tasksService.taskUpdated.disconnect(listView.taskUpdated);
         _tasksService.taskClosedChanged.disconnect(listView.taskClosedChanged);
         _tasksService.taskDeleted.disconnect(listView.taskDeleted);
-        _tasksService.allTasksDeselected.disconnect(listView.clearSelection);
+        _tasksService.allTasksDeselected.disconnect(listView.flushSelection);
         _tasksService.taskMovedInBulk.disconnect(listView.tasksMovedInBulk);
     }
     
@@ -249,7 +249,7 @@ ListView {
         _tasksService.taskUpdated.connect(listView.taskUpdated);
         _tasksService.taskClosedChanged.connect(listView.taskClosedChanged);
         _tasksService.taskDeleted.connect(listView.taskDeleted);
-        _tasksService.allTasksDeselected.connect(listView.clearSelection);
+        _tasksService.allTasksDeselected.connect(listView.flushSelection);
         _tasksService.taskMovedInBulk.connect(listView.tasksMovedInBulk);
     }
 }

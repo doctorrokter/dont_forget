@@ -237,7 +237,7 @@ QVariantList TasksService::findUpcomingTasks() {
     end.setHMS(23, 59, 0, 0);
     endOfToday.setTime(end);
 
-    QVariantList tasks = m_pDbConfig->execute(QString("SELECT COUNT(*) AS count FROM tasks WHERE type IN ('TASK', 'LIST') AND closed = 0 AND deadline != 0 AND deadline > %1 ORDER BY parent_id, type").arg(endOfToday.toTime_t())).toList();
+    QVariantList tasks = m_pDbConfig->execute(QString("SELECT * FROM tasks WHERE type IN ('TASK', 'LIST') AND closed = 0 AND deadline != 0 AND deadline > %1 ORDER BY parent_id, type").arg(endOfToday.toTime_t())).toList();
     countOrAttachments(tasks);
     return tasks;
 }
@@ -415,27 +415,32 @@ void TasksService::deleteTask(const int& id) {
             parentParentId = parent.value("parent_id").toInt();
         }
 
-        if (id == task.getId()) {
-            if (!task.getRememberId().isEmpty()) {
-                deleteNotebookEntry(task.getRememberId());
-            }
-            if (task.getCalendarId() != 0) {
-                CalendarUtil calendar;
-                calendar.deleteEvent(task.getCalendarId(), task.getFolderId(), task.getAccountId());
-            }
-            QString query = QString("DELETE FROM tasks WHERE id = %1").arg(id);
-
-            if (hasChildren(id)) {
-                QVariantList children = findSiblings(id);
-                foreach(QVariant taskVar, children) {
-                    deleteTask(taskVar.toMap().value("id").toInt());
-                }
-            }
-            m_pDbConfig->execute("PRAGMA foreign_keys = ON");
-            m_pDbConfig->execute(query);
-        }
+        deleteTaskRecursive(task);
         emit taskDeleted(id, parentId, parentParentId);
     }
+}
+
+void TasksService::deleteTaskRecursive(const Task& task) {
+    if (!task.getRememberId().isEmpty()) {
+        deleteNotebookEntry(task.getRememberId());
+    }
+    if (task.getCalendarId() != 0) {
+        CalendarUtil calendar;
+        calendar.deleteEvent(task.getCalendarId(), task.getFolderId(), task.getAccountId());
+    }
+    QString query = QString("DELETE FROM tasks WHERE id = %1").arg(task.getId());
+
+    if (hasChildren(task.getId())) {
+        QVariantList children = findSiblings(task.getId());
+        foreach(QVariant taskVar, children) {
+            QVariantMap taskMap = findById(taskVar.toMap().value("id").toInt());
+            Task child;
+            child.fromMap(taskMap);
+            deleteTaskRecursive(child);
+        }
+    }
+    m_pDbConfig->execute("PRAGMA foreign_keys = ON");
+    m_pDbConfig->execute(query);
 }
 
 void TasksService::moveTask(const int& parentId) {

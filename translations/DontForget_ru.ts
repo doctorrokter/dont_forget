@@ -632,10 +632,6 @@
 <context>
     <name>ReceivedPage</name>
     <message>
-        <source>Completed</source>
-        <translation type="obsolete">Завершенные</translation>
-    </message>
-    <message>
         <location filename="../assets/pages/ReceivedPage.qml" line="17"/>
         <source>Received</source>
         <translation type="unfinished">Полученные</translation>

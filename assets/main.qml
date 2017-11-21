@@ -108,7 +108,7 @@ TabbedPane {
             }
             
             function updateTab(tab, count) {
-                tab.newContentAvailable = tab.unreadContentCount < count;
+//                tab.newContentAvailable = tab.unreadContentCount < count;
                 tab.unreadContentCount = count;
             }
             
