@@ -72,6 +72,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/audio_icon_big_512x512.png) \
         $$quote($$BASEDIR/assets/images/backgrounds/apple.jpg) \
         $$quote($$BASEDIR/assets/images/backgrounds/coffee.jpg) \
+        $$quote($$BASEDIR/assets/images/backgrounds/df.png) \
         $$quote($$BASEDIR/assets/images/backgrounds/earth.jpg) \
         $$quote($$BASEDIR/assets/images/backgrounds/flower.jpg) \
         $$quote($$BASEDIR/assets/images/backgrounds/forest.jpg) \

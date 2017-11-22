@@ -76,9 +76,11 @@
        <image>icon_90x90.png</image>
     </icon>
     <splashScreens>
-       <image>splash_1440_x_1440.png</image>
-       <image>spplash_768_x_1280.png</image>
+       <image>splash_1440_x_1440_2.png</image>
        <image>splash_720_x_720.png</image>
+       <image>splash_1280_x_768.png</image>
+       <image>splash_1280_x_720.png</image>
+       <image>splash_768_x_1280.png</image>
        <image>splash_720_x_1280.png</image>
     </splashScreens>
     <authorId>gYAAgJBERbiwoSHtjskM8WvopKU</authorId>
@@ -104,16 +106,18 @@
         <include name="*.qm"/>
     </asset>
     <asset path="C:/Users/misha/Pictures/splash.png">splash.png</asset>
-    <asset path="E:/OneDrive/dev/DontForget/splash_1440_x_1440.png">splash_1440_x_1440.png</asset>
-    <asset path="E:/OneDrive/dev/DontForget/spplash_768_x_1280.png">spplash_768_x_1280.png</asset>
-    <asset path="E:/OneDrive/dev/DontForget/splash_720_x_720.png">splash_720_x_720.png</asset>
-    <asset path="E:/OneDrive/dev/DontForget/splash_720_x_1280.png">splash_720_x_1280.png</asset>
     <asset path="E:/OneDrive/dev/DontForget/ic_launcher/icon_144x144.png">icon_144x144.png</asset>
     <asset path="E:/OneDrive/dev/DontForget/ic_launcher/icon_110x110.png">icon_110x110.png</asset>
     <asset path="E:/OneDrive/dev/DontForget/ic_launcher/icon_96x96.png">icon_96x96.png</asset>
     <asset path="E:/OneDrive/dev/DontForget/ic_launcher/icon_90x90.png">icon_90x90.png</asset>
     <asset path="icon_big.png">icon_big.png</asset>
     <asset path="icon_small.png">icon_small.png</asset>
+    <asset path="E:/YandexDisk/Dev/DontForget/splash_1440_x_1440_2.png">splash_1440_x_1440_2.png</asset>
+    <asset path="E:/YandexDisk/Dev/DontForget/splash_720_x_720.png">splash_720_x_720.png</asset>
+    <asset path="E:/YandexDisk/Dev/DontForget/splash_1280_x_768.png">splash_1280_x_768.png</asset>
+    <asset path="E:/YandexDisk/Dev/DontForget/splash_1280_x_720.png">splash_1280_x_720.png</asset>
+    <asset path="E:/YandexDisk/Dev/DontForget/splash_768_x_1280.png">splash_768_x_1280.png</asset>
+    <asset path="E:/YandexDisk/Dev/DontForget/splash_720_x_1280.png">splash_720_x_1280.png</asset>
 
     <!-- Request permission to execute native code.  Required for native applications. -->
     <permission system="true">run_native</permission>

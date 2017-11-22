@@ -13,7 +13,7 @@
 Logger UIManager::logger = Logger::getLogger("UIManager");
 
 UIManager::UIManager(QObject* parent) : QObject(parent) {
-    m_backgroundImage = AppConfig::getStatic("background_image", "earth.jpg").toString();
+    m_backgroundImage = AppConfig::getStatic("background_image", "df.png").toString();
     m_pColor = new Color(this);
     emit colorChanged(m_pColor);
     logger.info("Created");

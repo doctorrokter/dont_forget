@@ -155,6 +155,36 @@ Page {
                             },
                             
                             Option {
+                                id: customFormatOption2
+                                text: "ddd dd, MMM yyyy, hh:mm"
+                                value: "ddd dd, MMM yyyy, hh:mm"
+                            },
+                            
+                            Option {
+                                id: customFormatOption3
+                                text: "MMM dd, hh:mm"
+                                value: "MMM dd, hh:mm"
+                            },
+                            
+                            Option {
+                                id: customFormatOption4
+                                text: "MMM dd, yyyy, hh:mm"
+                                value: "MMM dd, yyyy, hh:mm"
+                            },
+                            
+                            Option {
+                                id: customFormatOption5
+                                text: "MMM dd, ddd yyyy, hh:mm"
+                                value: "MMM dd, ddd yyyy, hh:mm"
+                            },
+                            
+                            Option {
+                                id: customFormatOption6
+                                text: "MMM dd, ddd, hh:mm"
+                                value: "MMM dd, ddd, hh:mm"
+                            },
+                            
+                            Option {
                                 id: localizedFormatOption
                                 text: qsTr("Localized") + Retranslate.onLocaleOrLanguageChanged
                                 value: "localized"
@@ -345,6 +375,11 @@ Page {
     function adjustDateTimeFormat() {
         var df = _appConfig.get("date_format");
         customFormatOption.selected = (df === "" || df === customFormatOption.value);
+        customFormatOption2.selected = (df === "" || df === customFormatOption2.value);
+        customFormatOption3.selected = (df === "" || df === customFormatOption3.value);
+        customFormatOption4.selected = (df === "" || df === customFormatOption4.value);
+        customFormatOption5.selected = (df === "" || df === customFormatOption5.value);
+        customFormatOption6.selected = (df === "" || df === customFormatOption6.value);
         localizedFormatOption.selected = (df === localizedFormatOption.value);
     }
     

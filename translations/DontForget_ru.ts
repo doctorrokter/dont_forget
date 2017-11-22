@@ -723,7 +723,7 @@
         <translation type="unfinished">Формат даты/времени</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="159"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="189"/>
         <source>Localized</source>
         <translation type="unfinished">Локализованный</translation>
     </message>
@@ -736,72 +736,72 @@
         <translation type="obsolete">Вибрация при выборе</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="177"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="207"/>
         <source>Push notification sound</source>
         <translation type="unfinished">Звук push-уведомлений</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="182"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="212"/>
         <source>Standard Theme</source>
         <translation type="unfinished">Стандартная тема</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="192"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="222"/>
         <source>Don&apos;t Forget Theme</source>
         <translation type="unfinished">Тема Don&apos;t Forget</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="217"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="247"/>
         <source>Network</source>
         <translation type="unfinished">Сеть</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="262"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="292"/>
         <source>Check your network connection</source>
         <translation type="unfinished">Проверьте интернет-соединение</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="330"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="360"/>
         <source>Enabled</source>
         <translation type="unfinished">Включено</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="332"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="362"/>
         <source>Disabled</source>
         <translation type="unfinished">Отключено</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="339"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="369"/>
         <source>Disable</source>
         <translation type="unfinished">Отключить</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="341"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="371"/>
         <source>Enable</source>
         <translation type="unfinished">Включить</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="382"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="417"/>
         <source>Failed to enable Push Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="280"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="310"/>
         <source>If this setting is turned on you can send/receive tasks to/from your colleague or someone else using PIN. To achieve this goal app uses BlackBerry Push Service</source>
         <translation type="unfinished">Если эта опция включена, вы можете отправлять/получать задачи кому-либо или от кого-либо, используя PIN. Для достижения этой цели используется Push-сервис BlackBerry</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="364"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="399"/>
         <source>Push Service enabled</source>
         <translation type="unfinished">Push-сервис включен</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="373"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="408"/>
         <source>Push Service disabled</source>
         <translation type="unfinished">Push-сервис отключен</translation>
     </message>
     <message>
-        <location filename="../assets/pages/SettingsPage.qml" line="228"/>
+        <location filename="../assets/pages/SettingsPage.qml" line="258"/>
         <source>Receive push notifications</source>
         <translation type="unfinished">Получение push-нотификаций</translation>
     </message>

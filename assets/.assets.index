@@ -1,5 +1,5 @@
 1
-139
+140
 actions/CalendarActionItem.qml
 actions/DeleteTaskActionItem.qml
 actions/MoveActionItem.qml
@@ -36,6 +36,7 @@ images/apk_icon_big_512x512.png
 images/audio_icon_big_512x512.png
 images/backgrounds/apple.jpg
 images/backgrounds/coffee.jpg
+images/backgrounds/df.png
 images/backgrounds/earth.jpg
 images/backgrounds/flower.jpg
 images/backgrounds/forest.jpg
