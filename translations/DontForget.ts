@@ -290,27 +290,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>In order to create several tasks per one action you can use a special delimeter &lt;strong&gt;;;&lt;/strong&gt; in a &lt;strong&gt;Name&lt;/strong&gt; field during task creation.&lt;br/&gt;&lt;br/&gt;Example:&lt;br/&gt;1. Click by &lt;strong&gt;Create&lt;/strong&gt; button.&lt;br/&gt;2. In a &lt;strong&gt;Name&lt;/strong&gt; field type something like &lt;strong&gt;task1;;task2;;task3&lt;/strong&gt; and click &lt;strong&gt;Save&lt;/strong&gt; button.&lt;br/&gt;3. Result: three separate tasks will be created in a tasks tree.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;strong&gt;Pinch gestures&lt;/strong&gt;&lt;br/&gt;In order to expand or narrow all tasks in a tree you can use pinch gesture.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Bulk creation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Reminders</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Don&apos;t Forget app &lt;strong&gt;does not provide&lt;/strong&gt; own reminder mechanism. Instead of it, app uses Remember as reminder mechanism.&lt;br/&gt;&lt;br/&gt;In order to get notified when task&apos;s deadline is coming you should do the following:&lt;br/&gt;1. Click by &lt;strong&gt;Create&lt;/strong&gt; button.&lt;br/&gt;2. Set &lt;strong&gt;Deadline&lt;/strong&gt;.&lt;br/&gt;3. Set &lt;strong&gt;Create in Remember&lt;/strong&gt;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;strong&gt;Tap gestures&lt;/strong&gt;&lt;br/&gt;1. &lt;strong&gt;Single tap&lt;/strong&gt; by task&apos;s label in a tasks tree will select this task and mark as &lt;strong&gt;active&lt;/strong&gt;. Task will become highlighted.&lt;br/&gt;2. &lt;strong&gt;Double tap&lt;/strong&gt; by task&apos;s label will open task&apos;s details sheet.&lt;br/&gt;3. If task is expandable (has children or has type Folder) you can expand or narrow task by clicking - or + button near task&apos;s icon.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -331,6 +311,22 @@
     </message>
     <message>
         <source>OS version: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1. &lt;strong&gt;Double tap&lt;/strong&gt; by task will expand task&apos;s content with all attachments, description etc without leaving the current page.&lt;br/&gt;2. &lt;strong&gt;Swipe left&lt;/strong&gt; on the task will delete it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In order to create several tasks per one action you can use a special delimeter &lt;strong&gt;;;&lt;/strong&gt; in a &lt;strong&gt;Name&lt;/strong&gt; field during task creation.&lt;br/&gt;&lt;br/&gt;Example:&lt;br/&gt;1. Click by &lt;strong&gt;Create Task&lt;/strong&gt; button.&lt;br/&gt;2. In an input field type something like &lt;strong&gt;task1;;task2;;task3&lt;/strong&gt; and click &lt;strong&gt;Ok&lt;/strong&gt; button.&lt;br/&gt;3. Result: three separate tasks will be created in current folder or list.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reminders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t Forget app &lt;strong&gt;does not provide&lt;/strong&gt; own reminder mechanism. Instead of it, app uses Remember as reminder mechanism.&lt;br/&gt;&lt;br/&gt;In order to get notified when task&apos;s deadline is coming you should do the following:&lt;br/&gt;1. Create a &lt;strong&gt;Task&lt;/strong&gt; or a &lt;strong&gt;List&lt;/strong&gt;.&lt;br/&gt;2. Open edit mode.&lt;br/&gt;3. Set &lt;strong&gt;Deadline&lt;/strong&gt;.&lt;br/&gt;4. Set &lt;strong&gt;Create in Remember&lt;/strong&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
