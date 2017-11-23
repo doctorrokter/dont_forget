@@ -127,7 +127,7 @@
 <context>
     <name>CompletedPage</name>
     <message>
-        <location filename="../assets/pages/CompletedPage.qml" line="17"/>
+        <location filename="../assets/pages/CompletedPage.qml" line="18"/>
         <source>Completed</source>
         <translation type="unfinished">Завершенные</translation>
     </message>
@@ -412,22 +412,22 @@
         <translation type="obsolete">Открыть в Remember</translation>
     </message>
     <message>
-        <location filename="../assets/pages/FolderPage.qml" line="107"/>
+        <location filename="../assets/pages/FolderPage.qml" line="112"/>
         <source>Create folder</source>
         <translation type="unfinished">Создать папку</translation>
     </message>
     <message>
-        <location filename="../assets/pages/FolderPage.qml" line="128"/>
+        <location filename="../assets/pages/FolderPage.qml" line="133"/>
         <source>Create task</source>
         <translation type="unfinished">Создать задачу</translation>
     </message>
     <message>
-        <location filename="../assets/pages/FolderPage.qml" line="149"/>
+        <location filename="../assets/pages/FolderPage.qml" line="154"/>
         <source>Create list</source>
         <translation type="unfinished">Создать список</translation>
     </message>
     <message>
-        <location filename="../assets/pages/FolderPage.qml" line="170"/>
+        <location filename="../assets/pages/FolderPage.qml" line="175"/>
         <source>Edit</source>
         <translation type="unfinished">Изменить</translation>
     </message>
@@ -513,7 +513,7 @@
 <context>
     <name>ImportantPage</name>
     <message>
-        <location filename="../assets/pages/ImportantPage.qml" line="18"/>
+        <location filename="../assets/pages/ImportantPage.qml" line="19"/>
         <source>Important</source>
         <translation type="unfinished">Важное</translation>
     </message>
@@ -563,12 +563,12 @@
         <translation type="obsolete">Открыть в Remember</translation>
     </message>
     <message>
-        <location filename="../assets/pages/ListPage.qml" line="53"/>
+        <location filename="../assets/pages/ListPage.qml" line="59"/>
         <source>Create task</source>
         <translation type="unfinished">Создать задачу</translation>
     </message>
     <message>
-        <location filename="../assets/pages/ListPage.qml" line="74"/>
+        <location filename="../assets/pages/ListPage.qml" line="80"/>
         <source>Edit</source>
         <translation type="unfinished">Изменить</translation>
     </message>
@@ -670,7 +670,7 @@
 <context>
     <name>OverduePage</name>
     <message>
-        <location filename="../assets/pages/OverduePage.qml" line="17"/>
+        <location filename="../assets/pages/OverduePage.qml" line="18"/>
         <source>Overdue</source>
         <translation type="unfinished">Просроченные</translation>
     </message>
@@ -693,7 +693,7 @@
 <context>
     <name>ReceivedPage</name>
     <message>
-        <location filename="../assets/pages/ReceivedPage.qml" line="17"/>
+        <location filename="../assets/pages/ReceivedPage.qml" line="18"/>
         <source>Received</source>
         <translation type="unfinished">Полученные</translation>
     </message>
@@ -704,6 +704,14 @@
         <location filename="../assets/actions/RememberActionItem.qml" line="8"/>
         <source>Open in Remember</source>
         <translation type="unfinished">Открыть в Remember</translation>
+    </message>
+</context>
+<context>
+    <name>SendActionItem</name>
+    <message>
+        <location filename="../assets/actions/SendActionItem.qml" line="9"/>
+        <source>Send</source>
+        <translation type="unfinished">Переслать</translation>
     </message>
 </context>
 <context>
@@ -1084,7 +1092,7 @@
 <context>
     <name>TodayPage</name>
     <message>
-        <location filename="../assets/pages/TodayPage.qml" line="18"/>
+        <location filename="../assets/pages/TodayPage.qml" line="19"/>
         <source>Today</source>
         <translation type="unfinished">На сегодня</translation>
     </message>
@@ -1100,7 +1108,7 @@
 <context>
     <name>UpcomingPage</name>
     <message>
-        <location filename="../assets/pages/UpcomingPage.qml" line="17"/>
+        <location filename="../assets/pages/UpcomingPage.qml" line="18"/>
         <source>Upcoming</source>
         <translation type="unfinished">Предстоящие</translation>
     </message>
@@ -1245,7 +1253,7 @@
         <translation type="obsolete">Список</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="524"/>
+        <location filename="../assets/main.qml" line="570"/>
         <source>Important</source>
         <translation type="unfinished">Важное</translation>
     </message>
@@ -1254,48 +1262,48 @@
         <translation type="obsolete">Отмена</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="485"/>
+        <location filename="../assets/main.qml" line="531"/>
         <source>Received</source>
         <translation type="unfinished">Полученные</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="498"/>
+        <location filename="../assets/main.qml" line="544"/>
         <source>Today</source>
         <translation type="unfinished">На сегодня</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="537"/>
+        <location filename="../assets/main.qml" line="583"/>
         <source>Overdue</source>
         <translation type="unfinished">Просроченные</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="414"/>
-        <location filename="../assets/main.qml" line="478"/>
+        <location filename="../assets/main.qml" line="455"/>
+        <location filename="../assets/main.qml" line="524"/>
         <source>Root</source>
         <translation type="unfinished">Корень</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="144"/>
+        <location filename="../assets/main.qml" line="148"/>
         <source>Create folder</source>
         <translation type="unfinished">Создать папку</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="165"/>
+        <location filename="../assets/main.qml" line="169"/>
         <source>Create task</source>
         <translation type="unfinished">Создать задачу</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="186"/>
+        <location filename="../assets/main.qml" line="190"/>
         <source>Create list</source>
         <translation type="unfinished">Создать список</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="511"/>
+        <location filename="../assets/main.qml" line="557"/>
         <source>Upcoming</source>
         <translation type="unfinished">Предстоящие</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="550"/>
+        <location filename="../assets/main.qml" line="596"/>
         <source>Completed</source>
         <translation type="unfinished">Завершенные</translation>
     </message>

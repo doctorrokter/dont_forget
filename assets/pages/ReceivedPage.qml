@@ -12,6 +12,7 @@ Page {
     signal openFolder(int taskId)
     signal openList(int taskId)
     signal openTask(int taskId)
+    signal openContactsPage()
     
     titleBar: CustomTitleBar {
         title: qsTr("Received") + Retranslate.onLocaleOrLanguageChanged
@@ -38,6 +39,10 @@ Page {
                 
                 onOpenTask: {
                     root.openTask(taskId);
+                }
+                
+                onOpenContactsPage: {
+                    root.openContactsPage();
                 }
             }
         }

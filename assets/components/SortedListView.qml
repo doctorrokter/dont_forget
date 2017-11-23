@@ -8,6 +8,7 @@ ListView {
     signal openFolder(int taskId)
     signal openList(int taskId)
     signal openTask(int taskId)
+    signal openContactsPage()
     
     scrollRole: ScrollRole.Main
     
@@ -93,6 +94,10 @@ ListView {
     
     function insertList(items) {
         dataModel.insertList(items);
+    }
+    
+    function openContacts() {
+        listView.openContactsPage();
     }
     
 }

@@ -328,6 +328,11 @@ CustomListItem {
                 listView: root.listView
             }
             
+            SendActionItem {
+                taskId: root.taskId
+                listView: root.listView
+            }
+            
             RememberActionItem {
                 listView: root.listView
                 enabled: root.rememberId !== 0

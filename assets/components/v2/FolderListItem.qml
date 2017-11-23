@@ -81,6 +81,11 @@ CustomListItem {
             DeleteTaskActionItem {
                 listView: root.listView
             }
+            
+            SendActionItem {
+                taskId: root.taskId
+                listView: root.listView
+            }
         }
     ]
 }

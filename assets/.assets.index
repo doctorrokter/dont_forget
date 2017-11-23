@@ -1,9 +1,10 @@
 1
-150
+151
 actions/CalendarActionItem.qml
 actions/DeleteTaskActionItem.qml
 actions/MoveActionItem.qml
 actions/RememberActionItem.qml
+actions/SendActionItem.qml
 cards/CreateTaskFromTextCard.qml
 cards/CreateTaskFromUrlCard.qml
 components/AttachmentsContainer.qml

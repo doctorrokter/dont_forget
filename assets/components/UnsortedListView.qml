@@ -12,6 +12,7 @@ ListView {
     signal openList(int taskId, string name)
     signal openTask(int taskId)
     signal reload()
+    signal openContactsPage()
     
     scrollRole: ScrollRole.Main
     
@@ -233,6 +234,10 @@ ListView {
     
     function tasksMovedInBulk(parentId) {
         listView.reload();
+    }
+    
+    function openContacts() {
+        listView.openContactsPage();
     }
     
     function clean() {

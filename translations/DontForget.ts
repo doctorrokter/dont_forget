@@ -463,6 +463,13 @@
     </message>
 </context>
 <context>
+    <name>SendActionItem</name>
+    <message>
+        <source>Send</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SettingsPage</name>
     <message>
         <source></source>

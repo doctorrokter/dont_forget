@@ -81,6 +81,10 @@ TabbedPane {
                         onOpenTask: {
                             navigationPane.openTask(taskId);
                         }
+                        
+                        onOpenContactsPage: {
+                            navigationPane.openContactsPage();
+                        }
                     }
                 }
             }
@@ -108,7 +112,6 @@ TabbedPane {
             }
             
             function updateTab(tab, count) {
-//                tab.newContentAvailable = tab.unreadContentCount < count;
                 tab.unreadContentCount = count;
             }
             
@@ -134,6 +137,7 @@ TabbedPane {
                 _tasksService.taskClosedChanged.connect(root.taskClosedChanged);
                 _tasksService.taskDeleted.connect(root.taskDeleted);
                 _tasksService.taskMovedInBulk.connect(root.tasksMovedInBulk);
+                _tasksService.tasksReceived.connect(root.reload);
                 Application.thumbnail.connect(root.onThumbnail);
             }
             
@@ -271,6 +275,10 @@ TabbedPane {
                     onOpenTask: {
                         navigationPane.openTask(taskId);
                     }
+                    
+                    onOpenContactsPage: {
+                        navigationPane.openContactsPage();
+                    }
                 }    
             },
             
@@ -279,6 +287,10 @@ TabbedPane {
                 ListPage {
                     onOpenTask: {
                         navigationPane.openTask(taskId);
+                    }
+                    
+                    onOpenContactsPage: {
+                        navigationPane.openContactsPage();
                     }
                 }    
             },
@@ -297,6 +309,10 @@ TabbedPane {
                     onOpenTask: {
                         navigationPane.openTask(taskId);
                     }
+                    
+                    onOpenContactsPage: {
+                        navigationPane.openContactsPage();
+                    }
                 }   
             },
             
@@ -313,6 +329,10 @@ TabbedPane {
                     
                     onOpenTask: {
                         navigationPane.openTask(taskId);
+                    }
+                    
+                    onOpenContactsPage: {
+                        navigationPane.openContactsPage();
                     }
                 }    
             },
@@ -331,6 +351,10 @@ TabbedPane {
                     onOpenTask: {
                         navigationPane.openTask(taskId);
                     }
+                    
+                    onOpenContactsPage: {
+                        navigationPane.openContactsPage();
+                    }
                 }    
             },
             
@@ -347,6 +371,10 @@ TabbedPane {
                     
                     onOpenTask: {
                         navigationPane.openTask(taskId);
+                    }
+                    
+                    onOpenContactsPage: {
+                        navigationPane.openContactsPage();
                     }
                 }
             },
@@ -365,6 +393,10 @@ TabbedPane {
                     onOpenTask: {
                         navigationPane.openTask(taskId);
                     }
+                    
+                    onOpenContactsPage: {
+                        navigationPane.openContactsPage();
+                    }
                 }
             },
             
@@ -382,7 +414,16 @@ TabbedPane {
                     onOpenTask: {
                         navigationPane.openTask(taskId);
                     }
+                    
+                    onOpenContactsPage: {
+                        navigationPane.openContactsPage();
+                    }
                 }
+            },
+            
+            ComponentDefinition {
+                id: contactsPage
+                ContactsPage {}    
             },
             
             ComponentDefinition {
@@ -458,6 +499,11 @@ TabbedPane {
             _tasksService.setActiveTask(taskId);
             var tp = taskPage.createObject();
             navigationPane.push(tp);
+        }
+        
+        function openContactsPage() {
+            var cp = contactsPage.createObject();
+            navigationPane.push(cp);
         }
         
         onPopTransitionEnded: {

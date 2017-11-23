@@ -40,6 +40,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/actions/DeleteTaskActionItem.qml) \
         $$quote($$BASEDIR/assets/actions/MoveActionItem.qml) \
         $$quote($$BASEDIR/assets/actions/RememberActionItem.qml) \
+        $$quote($$BASEDIR/assets/actions/SendActionItem.qml) \
         $$quote($$BASEDIR/assets/cards/CreateTaskFromTextCard.qml) \
         $$quote($$BASEDIR/assets/cards/CreateTaskFromUrlCard.qml) \
         $$quote($$BASEDIR/assets/components/AttachmentsContainer.qml) \

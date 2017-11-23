@@ -16,6 +16,7 @@ Page {
     signal openFolder(int taskId, string path)
     signal openList(int taskId, string path)
     signal openTask(int taskId)
+    signal openContactsPage()
     
     titleBar: defaultTitleBar
     
@@ -51,6 +52,10 @@ Page {
                     
                     onOpenTask: {
                         root.openTask(taskId);
+                    }
+                    
+                    onOpenContactsPage: {
+                        root.openContactsPage();
                     }
                 }             
             }

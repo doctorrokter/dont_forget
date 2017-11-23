@@ -13,6 +13,7 @@ Page {
     property int taskId: 0
     
     signal openTask(int taskId)
+    signal openContactsPage()
     
     titleBar: defaultTitleBar
     
@@ -40,6 +41,11 @@ Page {
                     
                     onOpenTask: {
                         root.openTask(taskId);
+                    }
+                    
+                    
+                    onOpenContactsPage: {
+                        root.openContactsPage();
                     }
                 }
             }
