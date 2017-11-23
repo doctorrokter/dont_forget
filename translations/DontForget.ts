@@ -392,6 +392,60 @@
     </message>
 </context>
 <context>
+    <name>OnboardingListItem</name>
+    <message>
+        <source>Done!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OnboardingPage</name>
+    <message>
+        <source>Advanced removing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tabs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Now on main screen you have several tabs for quick access to most useful filters.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Let&apos;s check what&apos;s new in Don&apos;t Forget 2.0!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wallpapers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You can set a wallpaper through the Settings page.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Double tap by task will expand the content with all attachments, description etc.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Quick view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Active frames</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>When app is backgrounded it will show today tasks in active frame.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In addition, now you can delete task simply by swiping left.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>OverduePage</name>
     <message>
         <source>Overdue</source>
@@ -508,6 +562,13 @@
     </message>
     <message>
         <source>Change background</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SwipeContainer</name>
+    <message>
+        <source>Swipe left</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

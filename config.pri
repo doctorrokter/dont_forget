@@ -44,12 +44,14 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/cards/CreateTaskFromUrlCard.qml) \
         $$quote($$BASEDIR/assets/components/AttachmentsContainer.qml) \
         $$quote($$BASEDIR/assets/components/BackgroundContainer.qml) \
+        $$quote($$BASEDIR/assets/components/ColorContainer.qml) \
         $$quote($$BASEDIR/assets/components/ColorControl.qml) \
         $$quote($$BASEDIR/assets/components/CustomTitleBar.qml) \
         $$quote($$BASEDIR/assets/components/InputTitleBar.qml) \
         $$quote($$BASEDIR/assets/components/MoverContainer.qml) \
         $$quote($$BASEDIR/assets/components/Palette.qml) \
         $$quote($$BASEDIR/assets/components/SortedListView.qml) \
+        $$quote($$BASEDIR/assets/components/SwipeContainer.qml) \
         $$quote($$BASEDIR/assets/components/TaskDeadlineContainer.qml) \
         $$quote($$BASEDIR/assets/components/TaskDescriptionContainer.qml) \
         $$quote($$BASEDIR/assets/components/TaskNameContainer.qml) \
@@ -63,6 +65,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/components/v2/ListItemTaskHeader.qml) \
         $$quote($$BASEDIR/assets/components/v2/ListListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/Mover.qml) \
+        $$quote($$BASEDIR/assets/components/v2/OnboardingListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/RichLinkPreview.qml) \
         $$quote($$BASEDIR/assets/components/v2/ServiceListItem.qml) \
         $$quote($$BASEDIR/assets/components/v2/TaskCoverListItem.qml) \
@@ -128,10 +131,16 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/images/ic_watch.png) \
         $$quote($$BASEDIR/assets/images/ic_white_pellet.png) \
         $$quote($$BASEDIR/assets/images/js_icon_big_512x512.png) \
+        $$quote($$BASEDIR/assets/images/logo.png) \
         $$quote($$BASEDIR/assets/images/ok_button.png) \
         $$quote($$BASEDIR/assets/images/pdf_icon.png) \
         $$quote($$BASEDIR/assets/images/pdf_icon_big.png) \
         $$quote($$BASEDIR/assets/images/ppt_icon_big_512x512.png) \
+        $$quote($$BASEDIR/assets/images/screenshots/active_frames.png) \
+        $$quote($$BASEDIR/assets/images/screenshots/expandable.png) \
+        $$quote($$BASEDIR/assets/images/screenshots/removing.png) \
+        $$quote($$BASEDIR/assets/images/screenshots/tabs.png) \
+        $$quote($$BASEDIR/assets/images/screenshots/wallpapers.png) \
         $$quote($$BASEDIR/assets/images/video_icon_big_512x512.png) \
         $$quote($$BASEDIR/assets/images/xls_icon_big_512x512.png) \
         $$quote($$BASEDIR/assets/images/yellow_pellet.png) \
@@ -164,6 +173,7 @@ config_pri_assets {
         $$quote($$BASEDIR/assets/pages/HighCover.qml) \
         $$quote($$BASEDIR/assets/pages/ImportantPage.qml) \
         $$quote($$BASEDIR/assets/pages/ListPage.qml) \
+        $$quote($$BASEDIR/assets/pages/OnboardingPage.qml) \
         $$quote($$BASEDIR/assets/pages/OverduePage.qml) \
         $$quote($$BASEDIR/assets/pages/ReceivedPage.qml) \
         $$quote($$BASEDIR/assets/pages/SettingsPage.qml) \
@@ -288,6 +298,9 @@ lupdate_inclusion {
         $$quote($$BASEDIR/../assets/images/backgrounds/*.qml) \
         $$quote($$BASEDIR/../assets/images/backgrounds/*.js) \
         $$quote($$BASEDIR/../assets/images/backgrounds/*.qs) \
+        $$quote($$BASEDIR/../assets/images/screenshots/*.qml) \
+        $$quote($$BASEDIR/../assets/images/screenshots/*.js) \
+        $$quote($$BASEDIR/../assets/images/screenshots/*.qs) \
         $$quote($$BASEDIR/../assets/js/*.qml) \
         $$quote($$BASEDIR/../assets/js/*.js) \
         $$quote($$BASEDIR/../assets/js/*.qs) \

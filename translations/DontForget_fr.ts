@@ -53,7 +53,7 @@
         <translation type="unfinished">Réussite!</translation>
     </message>
     <message>
-        <location filename="../src/applicationui.cpp" line="228"/>
+        <location filename="../src/applicationui.cpp" line="238"/>
         <source>Tasks received!</source>
         <translation type="unfinished">Tâches reçue!</translation>
     </message>
@@ -596,6 +596,72 @@
     </message>
 </context>
 <context>
+    <name>OnboardingListItem</name>
+    <message>
+        <location filename="../assets/components/v2/OnboardingListItem.qml" line="80"/>
+        <source>Done!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OnboardingPage</name>
+    <message>
+        <location filename="../assets/pages/OnboardingPage.qml" line="65"/>
+        <source>Quick view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/OnboardingPage.qml" line="66"/>
+        <source>Double tap by task will expand the content with all attachments, description etc.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/OnboardingPage.qml" line="54"/>
+        <source>Active frames</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/OnboardingPage.qml" line="55"/>
+        <source>When app is backgrounded it will show today tasks in active frame.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/OnboardingPage.qml" line="76"/>
+        <source>Wallpapers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/OnboardingPage.qml" line="77"/>
+        <source>You can set a wallpaper through the Settings page.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/OnboardingPage.qml" line="88"/>
+        <source>Advanced removing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/OnboardingPage.qml" line="89"/>
+        <source>In addition, now you can delete task simply by swiping left.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/OnboardingPage.qml" line="99"/>
+        <source>Tabs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/OnboardingPage.qml" line="100"/>
+        <source>Now on main screen you have several tabs for quick access to most useful filters.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/OnboardingPage.qml" line="138"/>
+        <source>Let&apos;s check what&apos;s new in Don&apos;t Forget 2.0!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>OverduePage</name>
     <message>
         <source>Important</source>
@@ -787,6 +853,14 @@
         <location filename="../assets/pages/SettingsPage.qml" line="258"/>
         <source>Receive push notifications</source>
         <translation type="unfinished">Recevoir des notifications push</translation>
+    </message>
+</context>
+<context>
+    <name>SwipeContainer</name>
+    <message>
+        <location filename="../assets/components/SwipeContainer.qml" line="11"/>
+        <source>Swipe left</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

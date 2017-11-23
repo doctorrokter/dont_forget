@@ -69,6 +69,7 @@ public:
     Q_INVOKABLE QVariant loadHtmlAsObject(const QString& html);
     Q_INVOKABLE void sync();
     Q_INVOKABLE void createFromExternal();
+    Q_INVOKABLE void tutorialDone();
 
     QVariantList getImages() const;
 

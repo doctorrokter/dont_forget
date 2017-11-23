@@ -1,5 +1,5 @@
 1
-140
+150
 actions/CalendarActionItem.qml
 actions/DeleteTaskActionItem.qml
 actions/MoveActionItem.qml
@@ -8,12 +8,14 @@ cards/CreateTaskFromTextCard.qml
 cards/CreateTaskFromUrlCard.qml
 components/AttachmentsContainer.qml
 components/BackgroundContainer.qml
+components/ColorContainer.qml
 components/ColorControl.qml
 components/CustomTitleBar.qml
 components/InputTitleBar.qml
 components/MoverContainer.qml
 components/Palette.qml
 components/SortedListView.qml
+components/SwipeContainer.qml
 components/TaskDeadlineContainer.qml
 components/TaskDescriptionContainer.qml
 components/TaskNameContainer.qml
@@ -27,6 +29,7 @@ components/v2/ListCoverListItem.qml
 components/v2/ListItemTaskHeader.qml
 components/v2/ListListItem.qml
 components/v2/Mover.qml
+components/v2/OnboardingListItem.qml
 components/v2/RichLinkPreview.qml
 components/v2/ServiceListItem.qml
 components/v2/TaskCoverListItem.qml
@@ -92,10 +95,16 @@ images/ic_view_list.png
 images/ic_watch.png
 images/ic_white_pellet.png
 images/js_icon_big_512x512.png
+images/logo.png
 images/ok_button.png
 images/pdf_icon.png
 images/pdf_icon_big.png
 images/ppt_icon_big_512x512.png
+images/screenshots/active_frames.png
+images/screenshots/expandable.png
+images/screenshots/removing.png
+images/screenshots/tabs.png
+images/screenshots/wallpapers.png
 images/video_icon_big_512x512.png
 images/xls_icon_big_512x512.png
 images/yellow_pellet.png
@@ -128,6 +137,7 @@ pages/HelpPage.qml
 pages/HighCover.qml
 pages/ImportantPage.qml
 pages/ListPage.qml
+pages/OnboardingPage.qml
 pages/OverduePage.qml
 pages/ReceivedPage.qml
 pages/SettingsPage.qml

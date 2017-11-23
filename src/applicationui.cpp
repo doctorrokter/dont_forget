@@ -187,7 +187,12 @@ void ApplicationUI::createFromExternal() {
 }
 
 void ApplicationUI::initFullUI() {
-    QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
+    QmlDocument *qml;
+    if (AppConfig::getStatic("tutorial_done", "0").toInt() == 1) {
+        qml = QmlDocument::create("asset:///main.qml").parent(this);
+    } else {
+        qml = QmlDocument::create("asset:///pages/OnboardingPage.qml").parent(this);
+    }
     QDeclarativeEngine* engine = QmlDocument::defaultDeclarativeEngine();
     QDeclarativeContext* rootContext = engine->rootContext();
     configureContext(rootContext);
@@ -195,6 +200,11 @@ void ApplicationUI::initFullUI() {
 
     AbstractPane *root = qml->createRootObject<AbstractPane>();
     Application::instance()->setScene(root);
+}
+
+void ApplicationUI::tutorialDone() {
+    AppConfig::setStatic("tutorial_done", "1");
+    initFullUI();
 }
 
 void ApplicationUI::initComposerUI(const QString& pathToPage, const QString& data, const QString& mimeType) {
