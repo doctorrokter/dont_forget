@@ -1193,8 +1193,9 @@
         <translation type="obsolete">Открыть в Remember</translation>
     </message>
     <message>
+        <location filename="../assets/main.qml" line="232"/>
         <source>Sort</source>
-        <translation type="obsolete">Сортировать</translation>
+        <translation type="unfinished">Сортировать</translation>
     </message>
     <message>
         <source>Permission required</source>
@@ -1221,24 +1222,29 @@
         <translation type="obsolete">Больше не спрашивать</translation>
     </message>
     <message>
+        <location filename="../assets/main.qml" line="283"/>
         <source>Descending order</source>
-        <translation type="obsolete">Нисходящий порядок</translation>
+        <translation type="unfinished">Нисходящий порядок</translation>
     </message>
     <message>
+        <location filename="../assets/main.qml" line="279"/>
         <source>Sort by</source>
-        <translation type="obsolete">Сортировка по</translation>
+        <translation type="unfinished">Сортировка по</translation>
     </message>
     <message>
+        <location filename="../assets/main.qml" line="148"/>
         <source>Creation</source>
-        <translation type="obsolete">Дате создания</translation>
+        <translation type="unfinished">Дате создания</translation>
     </message>
     <message>
+        <location filename="../assets/main.qml" line="149"/>
         <source>Name</source>
-        <translation type="obsolete">Имени</translation>
+        <translation type="unfinished">Имени</translation>
     </message>
     <message>
+        <location filename="../assets/main.qml" line="150"/>
         <source>Deadline</source>
-        <translation type="obsolete">Сроку выполнения</translation>
+        <translation type="unfinished">Сроку выполнения</translation>
     </message>
     <message>
         <source>Folder</source>
@@ -1253,7 +1259,7 @@
         <translation type="obsolete">Список</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="570"/>
+        <location filename="../assets/main.qml" line="643"/>
         <source>Important</source>
         <translation type="unfinished">Важное</translation>
     </message>
@@ -1262,48 +1268,48 @@
         <translation type="obsolete">Отмена</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="531"/>
+        <location filename="../assets/main.qml" line="604"/>
         <source>Received</source>
         <translation type="unfinished">Полученные</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="544"/>
+        <location filename="../assets/main.qml" line="617"/>
         <source>Today</source>
         <translation type="unfinished">На сегодня</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="583"/>
+        <location filename="../assets/main.qml" line="656"/>
         <source>Overdue</source>
         <translation type="unfinished">Просроченные</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="455"/>
-        <location filename="../assets/main.qml" line="524"/>
+        <location filename="../assets/main.qml" line="528"/>
+        <location filename="../assets/main.qml" line="597"/>
         <source>Root</source>
         <translation type="unfinished">Корень</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="148"/>
+        <location filename="../assets/main.qml" line="169"/>
         <source>Create folder</source>
         <translation type="unfinished">Создать папку</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="169"/>
+        <location filename="../assets/main.qml" line="190"/>
         <source>Create task</source>
         <translation type="unfinished">Создать задачу</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="190"/>
+        <location filename="../assets/main.qml" line="211"/>
         <source>Create list</source>
         <translation type="unfinished">Создать список</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="557"/>
+        <location filename="../assets/main.qml" line="630"/>
         <source>Upcoming</source>
         <translation type="unfinished">Предстоящие</translation>
     </message>
     <message>
-        <location filename="../assets/main.qml" line="596"/>
+        <location filename="../assets/main.qml" line="669"/>
         <source>Completed</source>
         <translation type="unfinished">Завершенные</translation>
     </message>

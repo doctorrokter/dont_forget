@@ -772,6 +772,30 @@
         <source>Upcoming</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Sort by</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Descending order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sort</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Creation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deadline</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>main_old</name>

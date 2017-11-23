@@ -117,6 +117,10 @@ TabbedPane {
             
             function reload() {
                 root.recount();
+                root.refresh();
+            }
+            
+            function refresh() {
                 listView.flush();
                 listView.append(_tasksService.findSiblings());
             }
@@ -130,14 +134,31 @@ TabbedPane {
                 Application.setCover(cover);
             }
             
+            function isDescOrder() {
+                var descOrder = _appConfig.get("desc_order");
+                if (descOrder !== "" && descOrder === "true") {
+                    return true;
+                }
+                return false;
+            }
+            
+            function renderSortingItems() {
+                var sortBy = _appConfig.get("sort_by");
+                sortingDialog.clearList();
+                sortingDialog.appendItem(qsTr("Creation") + Retranslate.onLocaleOrLanguageChanged, true, sortBy === "id");
+                sortingDialog.appendItem(qsTr("Name") + Retranslate.onLocaleOrLanguageChanged, true, sortBy === "name");
+                sortingDialog.appendItem(qsTr("Deadline") + Retranslate.onLocaleOrLanguageChanged, true, sortBy === "deadline");
+            }
+            
             onCreationCompleted: {
                 root.reload();
+                root.renderSortingItems();
                 
                 _tasksService.taskUpdated.connect(root.taskUpdated);
                 _tasksService.taskClosedChanged.connect(root.taskClosedChanged);
                 _tasksService.taskDeleted.connect(root.taskDeleted);
                 _tasksService.taskMovedInBulk.connect(root.tasksMovedInBulk);
-                _tasksService.tasksReceived.connect(root.reload);
+                _app.tasksReceived.connect(root.reload);
                 Application.thumbnail.connect(root.onThumbnail);
             }
             
@@ -203,7 +224,30 @@ TabbedPane {
                             }
                         }
                     ]
+                },
+                
+                ActionItem {
+                    id: openSortingDialog
+                    
+                    title: qsTr("Sort") + Retranslate.onLocaleOrLanguageChanged
+                    imageSource: "asset:///images/ic_sort.png"
+                    
+                    onTriggered: {
+                        sortingDialog.show();
+                    }
+                    
+                    shortcuts: [
+                        Shortcut {
+                            key: "s"
+                            
+                            onTriggered: {
+                                openSortingDialog.triggered();
+                            }
+                        }
+                    ]
                 }
+                
+                
                 
                 //            ActionItem {
                 //                id: chartsActionItem
@@ -229,6 +273,35 @@ TabbedPane {
         }
         
         attachedObjects: [
+            SystemListDialog {
+                id: sortingDialog
+                
+                title: qsTr("Sort by") + Retranslate.onLocaleOrLanguageChanged + ": "
+                autoUpdateEnabled: true
+                
+                includeRememberMe: true
+                rememberMeText: qsTr("Descending order") + Retranslate.onLocaleOrLanguageChanged
+                rememberMeChecked: root.isDescOrder();
+                
+                onFinished: {
+                    if (value === 2) {
+                        var i = sortingDialog.selectedIndices[0];
+                        switch (i) {
+                            case 0: _appConfig.set("sort_by", "id"); break;
+                            case 1: _appConfig.set("sort_by", "name"); break;
+                            case 2: _appConfig.set("sort_by", "deadline"); break;
+                        }
+                        
+                        var descOrder = sortingDialog.rememberMeSelection();
+                        _appConfig.set("desc_order", descOrder + "");
+                        
+                        root.refresh();
+                        sortingDialog.rememberMeChecked = root.isDescOrder();
+                        root.renderSortingItems();
+                    }
+                }                
+            },
+            
             SceneCover {
                 id: cover
                 

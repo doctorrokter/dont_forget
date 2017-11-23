@@ -68,19 +68,7 @@ void TasksService::processCollisions() {
 }
 
 QVariantList TasksService::findAll() const {
-    QString sortBy = AppConfig::getStatic("sort_by").toString();
-    if (sortBy.isEmpty()) {
-        sortBy = "name";
-    }
-
-    QString desc = AppConfig::getStatic("desc_order").toString();
-    if (!desc.isEmpty() && desc.compare("true") == 0) {
-        desc = "DESC";
-    } else {
-        desc = "ASC";
-    }
-
-    QVariantList tasks = m_pDbConfig->execute(QString("SELECT * FROM tasks ORDER BY parent_id, type, %1 %2").arg(sortBy).arg(desc)).toList();
+    QVariantList tasks = m_pDbConfig->execute(QString("SELECT * FROM tasks ORDER BY parent_id, type, %1 %2").arg(getSortBy()).arg(getOrder())).toList();
 
     for (int i = 0; i < tasks.size(); i++) {
         QVariantMap taskMap = tasks.at(i).toMap();
@@ -95,7 +83,7 @@ QVariantMap TasksService::findById(const int& id) {
 }
 
 QVariantList TasksService::findByType(const QString& type) {
-    return m_pDbConfig->execute(QString("SELECT * FROM tasks WHERE type = '%1'").arg(type)).toList();
+    return m_pDbConfig->execute(QString("SELECT * FROM tasks WHERE type = '%1' ORDER BY %2 %3").arg(type).arg(getSortBy()).arg(getOrder())).toList();
 }
 
 QVariantList TasksService::findByType(const QString& type, const int& parentId) {
@@ -108,7 +96,7 @@ QVariantList TasksService::findByType(const QString& type, const int& parentId) 
         query = query.append(" parent_id = :parent_id");
         values["parent_id"] = parentId;
     }
-    query = query.append(" AND type = :type ORDER BY closed");
+    query = query.append(" AND type = :type ORDER BY closed, %1 %2").arg(getSortBy()).arg(getOrder());
     values["type"] = type;
 
     QVariantList tasks = m_pDbConfig->execute(query, values).toList();
@@ -125,7 +113,7 @@ QVariantList TasksService::findSiblings(const int& parentId) {
         query = query.append(" parent_id = :parent_id");
         values["parent_id"] = parentId;
     }
-    query = query.append(" ORDER BY type, closed");
+    query = query.append(" ORDER BY type, closed, %1 %2").arg(getSortBy()).arg(getOrder());
 
     QVariantList tasks = m_pDbConfig->execute(query, values).toList();
     countOrAttachments(tasks);
@@ -193,7 +181,7 @@ int TasksService::countReceivedTasks() {
 }
 
 QVariantList TasksService::findImportantTasks() {
-    QVariantList tasks = m_pDbConfig->execute(QString("SELECT * FROM tasks WHERE type IN ('TASK', 'LIST') AND important = 1 AND closed = 0 ORDER BY parent_id")).toList();
+    QVariantList tasks = m_pDbConfig->execute(QString("SELECT * FROM tasks WHERE type IN ('TASK', 'LIST') AND important = 1 AND closed = 0 ORDER BY parent_id, %1 %2").arg(getSortBy()).arg(getOrder())).toList();
     countOrAttachments(tasks);
     return tasks;
 }
@@ -209,7 +197,13 @@ QVariantList TasksService::findTodayTasks() {
     end.setHMS(23, 59, 0, 0);
     endOfToday.setTime(end);
 
-    QVariantList tasks = m_pDbConfig->execute(QString("SELECT * FROM tasks WHERE type IN ('TASK', 'LIST') AND closed = 0 AND deadline BETWEEN %1 AND %2 ORDER BY parent_id, type").arg(startOfToday.toTime_t()).arg(endOfToday.toTime_t())).toList();
+    QVariantList tasks = m_pDbConfig->execute(
+            QString("SELECT * FROM tasks WHERE type IN ('TASK', 'LIST') AND closed = 0 AND deadline BETWEEN %1 AND %2 ORDER BY parent_id, type, %3 %4")
+                .arg(startOfToday.toTime_t())
+                .arg(endOfToday.toTime_t())
+                .arg(getSortBy())
+                .arg(getOrder()))
+                        .toList();
     countOrAttachments(tasks);
     return tasks;
 }
@@ -220,13 +214,22 @@ QVariantList TasksService::findOverdueTasks() {
     beginning.setHMS(0, 0, 0, 0);
     startOfToday.setTime(beginning);
 
-    QVariantList tasks = m_pDbConfig->execute(QString("SELECT * FROM tasks WHERE type IN ('TASK', 'LIST') AND closed = 0 AND deadline != 0 AND deadline < %1 ORDER BY parent_id, type").arg(startOfToday.toTime_t())).toList();
+    QVariantList tasks = m_pDbConfig->execute(
+            QString("SELECT * FROM tasks WHERE type IN ('TASK', 'LIST') AND closed = 0 AND deadline != 0 AND deadline < %1 ORDER BY parent_id, type, %2 %3")
+                .arg(startOfToday.toTime_t())
+                .arg(getSortBy())
+                .arg(getOrder()))
+                        .toList();
     countOrAttachments(tasks);
     return tasks;
 }
 
 QVariantList TasksService::findCompletedTasks() {
-    QVariantList tasks =  m_pDbConfig->execute("SELECT * FROM tasks WHERE type IN ('TASK', 'LIST') AND closed = 1 ORDER BY parent_id, type").toList();
+    QVariantList tasks =  m_pDbConfig->execute(
+            QString("SELECT * FROM tasks WHERE type IN ('TASK', 'LIST') AND closed = 1 ORDER BY parent_id, type, %1 %2")
+                .arg(getSortBy())
+                .arg(getOrder()))
+                        .toList();
     countOrAttachments(tasks);
     return tasks;
 }
@@ -237,13 +240,21 @@ QVariantList TasksService::findUpcomingTasks() {
     end.setHMS(23, 59, 0, 0);
     endOfToday.setTime(end);
 
-    QVariantList tasks = m_pDbConfig->execute(QString("SELECT * FROM tasks WHERE type IN ('TASK', 'LIST') AND closed = 0 AND deadline != 0 AND deadline > %1 ORDER BY parent_id, type").arg(endOfToday.toTime_t())).toList();
+    QVariantList tasks = m_pDbConfig->execute(
+            QString("SELECT * FROM tasks WHERE type IN ('TASK', 'LIST') AND closed = 0 AND deadline != 0 AND deadline > %1 ORDER BY parent_id, type, %2 %3")
+                .arg(endOfToday.toTime_t())
+                .arg(getSortBy())
+                .arg(getOrder()))
+                        .toList();
     countOrAttachments(tasks);
     return tasks;
 }
 
 QVariantList TasksService::findReceivedTasks() {
-    QVariantList tasks =  m_pDbConfig->execute("SELECT * FROM tasks WHERE type IN ('TASK', 'LIST') AND received = 1 ORDER BY parent_id, type").toList();
+    QVariantList tasks =  m_pDbConfig->execute(
+            QString("SELECT * FROM tasks WHERE type IN ('TASK', 'LIST') AND received = 1 ORDER BY parent_id, type, %1 %2")
+                .arg(getSortBy())
+                .arg(getOrder())).toList();
     countOrAttachments(tasks);
     return tasks;
 }
@@ -753,5 +764,22 @@ void TasksService::countOrAttachments(QVariantList& tasks) {
             taskMap["count"] = countChildren(taskMap.value("id").toInt());
         }
         *iter = taskMap;
+    }
+}
+
+QString TasksService::getSortBy() const {
+    QString sortBy = AppConfig::getStatic("sort_by").toString();
+    if (sortBy.isEmpty()) {
+        return "name";
+    }
+    return sortBy;
+}
+
+QString TasksService::getOrder() const {
+    QString desc = AppConfig::getStatic("desc_order").toString();
+    if (!desc.isEmpty() && desc.compare("true") == 0) {
+        return "DESC";
+    } else {
+        return "ASC";
     }
 }

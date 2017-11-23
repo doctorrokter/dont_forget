@@ -133,6 +133,8 @@ private:
     bool equals(Task& task, NotebookEntry& note);
     void countOrAttachments(QVariantList& tasks);
     void deleteTaskRecursive(const Task& task);
+    QString getSortBy() const;
+    QString getOrder() const;
 };
 
 #endif /* TASKSSERVICE_HPP_ */
