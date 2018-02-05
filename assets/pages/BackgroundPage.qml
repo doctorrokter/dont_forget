@@ -75,6 +75,19 @@ Page {
                 _ui.backgroundImage = img;
                 root.imageChanged(img);
             }
+        },
+        
+        ActionItem {
+            id: clearAction
+            imageSource: "asset:///images/ic_clear.png"
+            ActionBar.placement: ActionBarPlacement.OnBar
+            title: qsTr("No wallpaper") + Retranslate.onLocaleOrLanguageChanged
+            
+            onTriggered: {
+                _appConfig.set("background_image", "");
+                _ui.backgroundImage = "";
+                root.imageChanged("");
+            }
         }
     ]
     

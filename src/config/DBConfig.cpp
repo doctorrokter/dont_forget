@@ -90,17 +90,17 @@ DBConfig::~DBConfig() {
 }
 
 QVariant DBConfig::execute(const QString& query) {
-    logger.info("SQL: " + query);
+//    logger.info("SQL: " + query);
     return m_pSda->execute(query);
 }
 
 QVariant DBConfig::execute(const QString& query, const QVariantMap& data) {
-    qDebug() << "===>>> SQL: " << query << ", DATA: " << data << endl;
+//    qDebug() << "===>>> SQL: " << query << ", DATA: " << data << endl;
     return m_pSda->execute(query, data);
 }
 
 QVariant DBConfig::execute(const QString& query, const QVariantList& data) {
-    qDebug() << "===>>> SQL: " << query << ", DATA: " << data << endl;
+//    qDebug() << "===>>> SQL: " << query << ", DATA: " << data << endl;
     return m_pSda->execute(query, data);
 }
 

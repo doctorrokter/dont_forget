@@ -60,6 +60,10 @@
         <source>Choose a background</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>No wallpaper</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BackupAndRecovery</name>

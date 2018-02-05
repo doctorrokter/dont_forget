@@ -59,7 +59,12 @@ CustomListItem {
         horizontalAlignment: HorizontalAlignment.Fill
         verticalAlignment: VerticalAlignment.Fill
         
-        background: ui.palette.background
+        background: {
+            if (Application.themeSupport.theme.colorTheme.style == VisualStyle.Bright) {
+                return ui.palette.background;
+            }
+            return ui.palette.plain;
+        }
         
 //        leftPadding: ui.du(2)
 //        topPadding: ui.du(1.5)
@@ -79,7 +84,12 @@ CustomListItem {
                 orientation: LayoutOrientation.LeftToRight
             }
             
-            background: ui.palette.background
+            background: {
+                if (Application.themeSupport.theme.colorTheme.style == VisualStyle.Bright) {
+                    return ui.palette.background;
+                }
+                return ui.palette.plain;
+            }
             
             ImageView {
                 verticalAlignment: VerticalAlignment.Center

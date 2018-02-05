@@ -118,7 +118,14 @@ CustomListItem {
                 orientation: LayoutOrientation.LeftToRight
             }
             
-            background: ui.palette.background
+//            background: ui.palette.background
+//            background: Color.Red
+            background: {
+                if (Application.themeSupport.theme.colorTheme.style == VisualStyle.Bright) {
+                    return ui.palette.background;
+                }
+                return ui.palette.plain;
+            }
             
             leftPadding: ui.du(2)
             topPadding: ui.du(2)
@@ -155,7 +162,12 @@ CustomListItem {
             visible: root.isAdditionalContainerVisible()
             horizontalAlignment: HorizontalAlignment.Fill
             
-            background: ui.palette.background
+            background: {
+                if (Application.themeSupport.theme.colorTheme.style == VisualStyle.Bright) {
+                    return ui.palette.background;
+                }
+                return ui.palette.plain;
+            }
             
             layout: StackLayout {
                 orientation: LayoutOrientation.LeftToRight
@@ -270,7 +282,12 @@ CustomListItem {
             
             visible: root.description !== "" && root.expanded
             horizontalAlignment: HorizontalAlignment.Fill
-            background: ui.palette.background
+            background: {
+                if (Application.themeSupport.theme.colorTheme.style == VisualStyle.Bright) {
+                    return ui.palette.background;
+                }
+                return ui.palette.plain;
+            }
             
             leftPadding: ui.du(2)
             rightPadding: ui.du(1)
@@ -291,7 +308,12 @@ CustomListItem {
         AttachmentsContainer {
             id: attachmentsContainer
             attachments: root.attachments
-            background: ui.palette.background
+            background: {
+                if (Application.themeSupport.theme.colorTheme.style == VisualStyle.Bright) {
+                    return ui.palette.background;
+                }
+                return ui.palette.plain;
+            }
             fromListItem: true
             visible: root.attachments.length > 0 && root.expanded
         }

@@ -215,8 +215,10 @@ ListView {
                     var index = listView.firstTaskIndex();
                     if (index !== -1) {
                         dataModel.insert(index, task);
-                        return;
+                    } else {
+                        dataModel.append(task);
                     }
+                    return;
                 } else {
                     listView.removeEmptyItem();
                     dataModel.append(task);

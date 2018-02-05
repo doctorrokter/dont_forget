@@ -4,14 +4,29 @@ Container {
     id: root
     
     property bool fromListItem: false
-    property variant attachments: []
+    property variant attachments: [{}]
     
     visible: false
     horizontalAlignment: HorizontalAlignment.Fill
     
-    Header {
-        title: qsTr("Attachments") + Retranslate.onLocaleOrLanguageChanged
+    background: {
+        if (Application.themeSupport.theme.colorTheme.style == VisualStyle.Bright) {
+            return ui.palette.background;
+        }
+        return ui.palette.plain;
     }
+    
+    Container {
+        Label {
+            margin.leftOffset: ui.du(2)
+            margin.topOffset: ui.du(1.5)
+            text: qsTr("Attachments") + Retranslate.onLocaleOrLanguageChanged
+            textStyle.color: ui.palette.secondaryTextOnPlain
+        }
+        
+        Divider {}
+    }
+    
     
     ListView {
         id: attachmentsListView

@@ -36,7 +36,12 @@ CustomListItem {
             orientation: LayoutOrientation.LeftToRight
         }
         
-        background: ui.palette.background
+        background: {
+            if (Application.themeSupport.theme.colorTheme.style == VisualStyle.Bright) {
+                return ui.palette.background;
+            }
+            return ui.palette.plain;
+        }
         
         leftPadding: ui.du(2)
         rightPadding: ui.du(2)

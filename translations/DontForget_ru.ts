@@ -72,7 +72,7 @@
 <context>
     <name>AttachmentsContainer</name>
     <message>
-        <location filename="../assets/components/AttachmentsContainer.qml" line="13"/>
+        <location filename="../assets/components/AttachmentsContainer.qml" line="23"/>
         <source>Attachments</source>
         <translation type="unfinished">Вложения</translation>
     </message>
@@ -83,6 +83,11 @@
         <location filename="../assets/pages/BackgroundPage.qml" line="10"/>
         <source>Choose a background</source>
         <translation type="unfinished">Выберите обои</translation>
+    </message>
+    <message>
+        <location filename="../assets/pages/BackgroundPage.qml" line="84"/>
+        <source>No wallpaper</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -547,7 +552,7 @@
 <context>
     <name>ListListItem</name>
     <message>
-        <location filename="../assets/components/v2/ListListItem.qml" line="182"/>
+        <location filename="../assets/components/v2/ListListItem.qml" line="192"/>
         <source>Actions</source>
         <translation type="unfinished">Действия</translation>
     </message>
@@ -910,7 +915,7 @@
 <context>
     <name>TaskListItem</name>
     <message>
-        <location filename="../assets/components/v2/TaskListItem.qml" line="322"/>
+        <location filename="../assets/components/v2/TaskListItem.qml" line="344"/>
         <source>Actions</source>
         <translation type="unfinished">Действия</translation>
     </message>
