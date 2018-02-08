@@ -87,7 +87,7 @@
     <message>
         <location filename="../assets/pages/BackgroundPage.qml" line="84"/>
         <source>No wallpaper</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Без обоев</translation>
     </message>
 </context>
 <context>
